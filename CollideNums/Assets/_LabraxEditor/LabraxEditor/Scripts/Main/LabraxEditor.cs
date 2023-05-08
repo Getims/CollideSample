@@ -25,7 +25,6 @@ namespace LabraxEditor
         [NonSerialized] private bool isDirty;
 
         private object _trySelectObject;
-        private EditorTimeHelper timeHelper;
         private string _panelTitle = LabraxEditorConstants.BlankPanelTitle;
         private OdinMenuTree _customTree;
         private EditorSettings _settings = null;
@@ -294,12 +293,7 @@ namespace LabraxEditor
             EditorGUILayout.BeginVertical("box");
 
             #region Vertical
-
-            if (timeHelper == null)
-                timeHelper = new EditorTimeHelper();
-
-            EditorTimeHelper time = EditorTimeHelper.Time;
-            EditorTimeHelper.Time = timeHelper;
+            
             EditorTimeHelper.Time.Update();
             try
             {
@@ -362,7 +356,7 @@ namespace LabraxEditor
             }
             finally
             {
-                EditorTimeHelper.Time = time;
+                EditorTimeHelper.Time.Update();
             }
 
             #endregion
