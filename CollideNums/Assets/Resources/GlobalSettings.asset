@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce225552078879d43bf6586c934309f8, type: 3}
+  m_Name: GlobalSettings
+  m_EditorClassIdentifier: 
+  FileName: GlobalSettings
+  _usesUnityLogs: 1
+  _gameSettings: {fileID: 11400000, guid: 0cc82fb4b509ced46b9662e5c788022a, type: 2}
+  _soundMeta: {fileID: 11400000, guid: 0ccf9f3cd842e5644835d127650c3ec5, type: 2}
+  _labraxAnalyticsSettings: {fileID: 11400000, guid: 322910b3664cbb84d933385534158de5,
+    type: 2}
