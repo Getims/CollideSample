@@ -6,7 +6,7 @@
         Bootstrap = 0,
         MainMenu = 1,
         Game = 2,
-        DRAFT_1 = 100,
+        DRAFT_1 = 100
     }
 
     public enum GameplaySounds

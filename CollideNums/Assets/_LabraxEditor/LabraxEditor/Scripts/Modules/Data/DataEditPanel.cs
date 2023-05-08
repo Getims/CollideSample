@@ -16,10 +16,10 @@ namespace LabraxEditor.Data
         // PUBLIC METHODS: ------------------------------------------------------------------------
 
         public void LoadData() =>
-            gameData = DataManagerBase.LoadGameData();
+            gameData = DataManager.LoadGameData();
 
         public void SaveData() =>
-            DataManagerBase.SaveGameData(gameData);
+            DataManager.SaveGameData(gameData);
 
         public void ClearData()
         {
@@ -31,11 +31,11 @@ namespace LabraxEditor.Data
         [TitleGroup("Game Data")]
         [BoxGroup("Game Data/In", showLabel: false)]
         [LabelText("Data")]
-        public GameDataBase gameData = new GameDataBase();
+        public GameData gameData = new GameData();
 
         private void OnEnable()
         {
-            gameData = new GameDataBase();
+            gameData = new GameData();
             LoadData();
         }
         

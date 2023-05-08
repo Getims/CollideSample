@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 8c9cfa26abfee488c85f1582747f6a02
+    path: Assets/_LabraxStudio/Scenes/Bootstrap.unity
+    guid: 52145c621190b5141b92042f2c24aed7
+  - enabled: 1
+    path: Assets/_LabraxStudio/Scenes/MainMenu.unity
+    guid: 5b35d53c1e162e9458c1af67e3bcb4be
+  - enabled: 1
+    path: Assets/_LabraxStudio/Scenes/Game.unity
+    guid: e0dd68d9a6452ac4ebd5b432bdf733b0
   m_configObjects: {}

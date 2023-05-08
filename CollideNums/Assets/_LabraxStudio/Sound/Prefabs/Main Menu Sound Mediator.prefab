@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5752707933430769453
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5752707933430769452}
+  - component: {fileID: 5752707933430769455}
+  m_Layer: 0
+  m_Name: Main Menu Sound Mediator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5752707933430769452
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5752707933430769453}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5752707933430769455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5752707933430769453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29edc6b720d5b2b4baa05a26054fa4bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _histoMagicAttackSFX: {fileID: 11400000, guid: 8002ea1941ca9c541bf20a308f94d71b,
+    type: 2}
+  _wizardMagicAttackSFX: {fileID: 11400000, guid: 018317dc159567a49aeeee99afe484f0,
+    type: 2}
+  _platformCorrectPlaceSFX: {fileID: 11400000, guid: ba466cdf66c95dc4482613cdab4d2b28,
+    type: 2}
+  _platformUncorrectPlaceSFX: {fileID: 11400000, guid: e8094460080995b4bb5b1a9128b2958c,
+    type: 2}
+  _evilPlantSFX: {fileID: 11400000, guid: 023f70400a4c17b419cd9ca39376688b, type: 2}
+  _sandTornadoSFX: {fileID: 11400000, guid: 4e38404f566f42342994d3c20198734d, type: 2}
+  _portalSFX: {fileID: 11400000, guid: 2c9cea9b38067db44a005e8d14247700, type: 2}
+  _coinsFlyFinishSFX: {fileID: 11400000, guid: 61c74d16b90b7124d8a6837494e7e214, type: 2}
+  _mapTipSFX: {fileID: 11400000, guid: 2d6ed0293dc8dfc48b12c8356b56378f, type: 2}
+  _inventoryItemSound: {fileID: 11400000, guid: e3450f14e73ef8749a8aebe19dd1637d,
+    type: 2}
+  _platformProgressbarCircleFillSFX: {fileID: 11400000, guid: 49e0e7ad302c2274eb702d3eec0b9dc1,
+    type: 2}
+  _platformFalldownSFX: {fileID: 11400000, guid: 55224e7f61ffa5c4f9e209a2217d4c6b,
+    type: 2}
+  _longtermActionCompleteSFX: {fileID: 11400000, guid: 63d40b162a2abe946a26718269a86a2b,
+    type: 2}
+  _spesialOfferOpenedSFX: {fileID: 11400000, guid: b561a1760ea0ae04ba1f63890c278901,
+    type: 2}

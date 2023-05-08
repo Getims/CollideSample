@@ -13,12 +13,24 @@ MonoBehaviour:
   m_Name: EditorSettings
   m_EditorClassIdentifier: 
   _useScrollBarInTabs: 1
-  _settingsTabs: []
-  _metasTabs: []
-  _tabMeta: 
-  _objectMeta: -1
-  _metaToolBar: -1
-  _tabSettings: 
-  _objectSettings: -1
-  _settingsToolBar: -1
-  _menuType: 1
+  _settingsTabs:
+  - MetaName: All Global Settings
+    Show: 1
+  - MetaName: Game Settings
+    Show: 1
+  - MetaName: Localization Settings Meta
+    Show: 1
+  - MetaName: Sound Settings
+    Show: 1
+  _metasTabs:
+  - MetaName: Level Meta
+    Show: 1
+  - MetaName: SFXMeta
+    Show: 1
+  _tabMeta: LabraxStudio.Meta.SFXMeta
+  _objectMeta: -187816
+  _metaToolBar: 1
+  _tabSettings: LabraxStudio.Meta.LocalizationSettingsMeta
+  _objectSettings: -187438
+  _settingsToolBar: 2
+  _menuType: 2

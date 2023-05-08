@@ -14,7 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FileName: GlobalSettings
   _usesUnityLogs: 1
-  _gameSettings: {fileID: 11400000, guid: 0cc82fb4b509ced46b9662e5c788022a, type: 2}
-  _soundMeta: {fileID: 11400000, guid: 0ccf9f3cd842e5644835d127650c3ec5, type: 2}
-  _labraxAnalyticsSettings: {fileID: 11400000, guid: 322910b3664cbb84d933385534158de5,
-    type: 2}
+  _gameSettings: {fileID: 11400000, guid: ee78a6f546df74740b591007b16083c1, type: 2}
+  _soundSettings: {fileID: 11400000, guid: 8854b9002b2db7f40974ced0ba854d93, type: 2}
