@@ -67,13 +67,34 @@ SpriteAtlas:
       enableAlphaDilation: 0
     secondaryTextureSettings: {}
     variantMultiplier: 1
-    packables: []
+    packables:
+    - {fileID: 102900000, guid: 640dcf160f828ef429042910e156941c, type: 3}
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
   m_MasterAtlas: {fileID: 0}
-  m_PackedSprites: []
-  m_PackedSpriteNamesToIndex: []
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 06c705509e1634b4094d7478e2a6f8c4, type: 3}
+  - {fileID: 21300000, guid: 13df7423e35a7ea4abe210275300fcb5, type: 3}
+  - {fileID: 21300000, guid: 9f90b6c39a786944c86f0deaf82d3d0f, type: 3}
+  - {fileID: 21300000, guid: c27989d3646c9674497da1c4ea718337, type: 3}
+  - {fileID: 21300000, guid: a6b1b5e6556573f42869bcff86efcf48, type: 3}
+  - {fileID: 21300000, guid: a9c648d83d0a7254fb39da0f1a0b7d9f, type: 3}
+  - {fileID: 21300000, guid: b05005b98a8fd064aba96ceb660c6590, type: 3}
+  - {fileID: 21300000, guid: 87d0c59bbb0f49e4b9db90898d2f9a89, type: 3}
+  - {fileID: 21300000, guid: d796c72ecc823454aa6bd5fe9b3f0099, type: 3}
+  - {fileID: 21300000, guid: a65572bed620561408697af096db259f, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - Unlocked_left
+  - Unlocked_top
+  - Unlocked_right_top
+  - Unlocked_right_bottom
+  - Unlocked_left_top
+  - Unlocked
+  - Unlocked_right
+  - Unlocked_left_bottom
+  - Locked
+  - Unlocked_bottom
   m_RenderDataMap: {}
   m_Tag: Game
   m_IsVariant: 0
