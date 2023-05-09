@@ -12,8 +12,8 @@ namespace LabraxEditor
 
         // FIELDS: --------------------------------------------------------------------------------
 
-        private const string MetaPath = "Assets/_LabraxStudio/Meta/Resources/";
-        private const string SETTINGS_PATH = "Assets/_LabraxStudio/Meta/Settings/";
+        private const string MetaPath = "Assets/_LabraxStudio/Meta/Meta assets/";
+        private const string SETTINGS_PATH = "Assets/_LabraxStudio/Meta/Settings assets/";
         private const string EDITOR_SETTINGS_PATH = "Assets/_LabraxEditor/LabraxEditor/Temp/EditorSettings.asset";
         private const string ResourcesPath = "Assets/Resources/";
         private const string ResourcesGameDataPath = "Assets/Resources/Game Data/";

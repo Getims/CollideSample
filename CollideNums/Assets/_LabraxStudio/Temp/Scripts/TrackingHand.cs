@@ -1,16 +1,18 @@
 using DG.Tweening;
 using LabraxStudio.UI;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace LabraxStudio.Creatives
 {
     public class TrackingHand : MonoBehaviour
     {
-        [SerializeField] private Image _sprite;
+        // MEMBERS: -------------------------------------------------------------------------------
+        
         [SerializeField] private float _scalePower = 0.1f;
         [SerializeField] private float _punchDuration = 0.15f;
         [SerializeField] private UIPanel _uiPanel;
+
+        // GAME ENGINE METHODS: -------------------------------------------------------------------
         
         private void Update()
         {
@@ -21,6 +23,8 @@ namespace LabraxStudio.Creatives
                 SwitchHandState();
         }
 
+        // PRIVATE METHODS: -----------------------------------------------------------------------
+        
         private void OnClick()
         {
             transform.DOPunchScale(-Vector3.one * _scalePower, _punchDuration, 0, 0);

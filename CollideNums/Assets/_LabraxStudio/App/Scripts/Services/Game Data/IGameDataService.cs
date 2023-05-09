@@ -1,4 +1,4 @@
-using LabraxEditor.Data;
+using LabraxStudio.Data;
 
 namespace LabraxStudio.App.Services
 {

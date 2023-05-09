@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using LabraxStudio.App.Services;
 using LabraxStudio.Base;
 using LabraxStudio.Managers;
 using LabraxStudio.Meta;
@@ -46,16 +47,14 @@ namespace LabraxStudio.Sound
         public void Setup()
         {
             _interfaceSoundList.Clear(); 
-            //_soundK = _isSoundOn ? 1 : 0;
-            //_musicK = _isMusicOn ? 1 : 0;
-            _isSoundOn = PlayerManager.IsSoundOn;
-            _isMusicOn = PlayerManager.IsMusicOn;
+            _isSoundOn = PlayerDataService.IsSoundOn;
+            _isMusicOn = PlayerDataService.IsMusicOn;
         }
         
         public float GetCustomGameplaySoundVolume(GameplaySound meta) =>
             meta == null
                 ? SoundMeta.GameplaySoundsVolume * _soundK
-                : SoundMeta.GameplaySoundsVolume * _soundK * meta.SoundPrecent;
+                : SoundMeta.GameplaySoundsVolume * _soundK * meta.SoundPercent;
 
         public float GetCustomGameplaySoundVolume(SFXMeta meta) =>
             meta == null
@@ -70,7 +69,7 @@ namespace LabraxStudio.Sound
             _isSoundOn = !_isSoundOn;
             if(_isSoundOn)
                 ResetMusicFast();
-            PlayerManager.SetSoundState(_isSoundOn);
+            PlayerDataService.SetSoundState(_isSoundOn);
         }
 
         public void SwitchMusic()
@@ -84,7 +83,7 @@ namespace LabraxStudio.Sound
             else
                 _musicAS.Stop();
             
-            PlayerManager.SetMusicState(_isMusicOn);
+            PlayerDataService.SetMusicState(_isMusicOn);
         }
 
         public void SetAllMusicOff()
@@ -128,39 +127,6 @@ namespace LabraxStudio.Sound
 #endif
         }
         
-        //public void PlaySound(GameplaySounds soundEnum, bool ignoreTime = true, float pauseTime = 1.0f)
-        //{
-        //    if (!_isSoundOn)
-        //        return;
-
-        //    _canPlay = true;
-
-        //    if (!ignoreTime)
-        //    {
-        //        var gsound = _interfaceSoundList.Find(s => s.SoundType == soundEnum);
-        //        _timeNow = UnixTime.Now;
-
-        //        if (gsound == null)
-        //        {
-        //            GSound gSound = new(soundEnum, _timeNow);
-        //            _interfaceSoundList.Add(gSound);
-        //        }
-        //        else
-        //        {
-        //            _canPlay = (_timeNow - gsound.LastPlayTime) >= pauseTime;
-        //            if (_canPlay)
-        //                gsound.SetLatPlayTime(_timeNow);
-        //        }
-        //    }
-
-        //    if (!_canPlay)
-        //        return;
-
-        //    var meta = SoundMeta.GetGameplaySound(soundEnum);
-        //    _gameplayAS.pitch = Random.Range(SoundMeta.GameplayMinPitch, SoundMeta.GameplayMaxPitch);
-        //    _gameplayAS.PlayOneShot(meta.Clip, GetCustomGameplaySoundVolume(meta));
-        //}
-
         public void PlaySound(SFXMeta SFXMeta, bool ignoreTime = true, float pauseTime = 1.0f)
         {
             if (!_isSoundOn)
@@ -216,21 +182,6 @@ namespace LabraxStudio.Sound
 
             Destroy(audioSource, 5);
         }
-
-        //public void PlaySoundAndCreateAudioSource(GameplaySounds sound)
-        //{
-        //    if (!_isSoundOn)
-        //        return;
-
-        //    AudioSource audioSource = gameObject.AddComponent<AudioSource>();
-        //    GameplaySound meta = SoundMeta.GetGameplaySound(sound);
-
-        //    audioSource.pitch = Random.Range(0.95f, 1.01f);
-        //    audioSource.priority = 100;
-        //    audioSource.PlayOneShot(meta.Clip, GetCustomGameplaySoundVolume(meta));
-
-        //    Destroy(audioSource, 5);
-        //}
 
         public void PlaySoundNoRandomPitch(GameplaySounds sound)
         {
@@ -354,44 +305,6 @@ namespace LabraxStudio.Sound
             }
 
             _musicAS.volume = SoundMeta.BackgroundMusicVolume * _musicK * _lastBgPercent;
-        }
-    }
-
-    public class GSound
-    {
-        // CONSTRUCTORS: --------------------------------------------------------------------------
-
-        public GSound(GameplaySounds soundTyme, long time = 0)
-        {
-            _soundType = soundTyme;
-            _lastPlayTime = time;
-        }
-
-        public GSound(string id, long time = 0)
-        {
-            _id = id;
-            _lastPlayTime = time;
-        }
-
-        // PROPERTIES: ----------------------------------------------------------------------------
-
-        public GameplaySounds SoundType => _soundType;
-        public string Id => _id;
-        public long LastPlayTime => _lastPlayTime;
-
-        // FIELDS: --------------------------------------------------------------------------------
-
-        private readonly GameplaySounds _soundType;
-        private readonly string _id;
-
-        private long _lastPlayTime;
-
-        // PUBLIC METHODS: ------------------------------------------------------------------------
-
-        public void SetLatPlayTime(long time)
-        {
-            time = System.Math.Max(time, 0);
-            _lastPlayTime = time;
         }
     }
 }

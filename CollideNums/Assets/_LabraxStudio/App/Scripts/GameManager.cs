@@ -1,10 +1,12 @@
-﻿using LabraxStudio.Base;
-using LabraxStudio.UI;
+﻿using LabraxStudio.App.Services;
+using LabraxStudio.Base;
+using LabraxStudio.Loadscreen;
+using LabraxStudio.Managers;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace LabraxStudio.Managers
+namespace LabraxStudio.App
 {
     public class GameManager : SharedManager<GameManager>
     {
@@ -20,7 +22,6 @@ namespace LabraxStudio.Managers
         
         // FIELDS: -------------------------------------------------------------------
         
-        private Scenes _lastScene = Scenes.NULL;
         private int _sessionStartTime;
         private static GameManager _gameManager;
         private static bool _isLoadingUieNotNull;
@@ -35,7 +36,6 @@ namespace LabraxStudio.Managers
         public void Initialize()
         {
             _sessionStartTime = UnixTime.Now;
-            PlayerManager.Initialize();
             _isLoadingUieNotNull = _loadingUIE != null;
         }
 

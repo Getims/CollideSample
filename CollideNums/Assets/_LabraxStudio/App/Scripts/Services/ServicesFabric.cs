@@ -10,6 +10,7 @@ namespace LabraxStudio.App
         public static GameSettingsService GameSettingsService => _gameSettingsService;
 
         // FIELDS: -------------------------------------------------------------------
+        
         private static GameDataService _gameDataService = new GameDataService();
         private static GameSettingsService _gameSettingsService = new GameSettingsService();
     }

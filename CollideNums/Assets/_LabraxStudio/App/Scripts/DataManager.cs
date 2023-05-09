@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Globalization;
-using LabraxStudio.App;
+using LabraxStudio.Data;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace LabraxEditor.Data
+namespace LabraxStudio.App
 {
     [Serializable]
     public class DataManager

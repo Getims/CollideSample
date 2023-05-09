@@ -7,11 +7,11 @@ using LabraxStudio.Base;
 using Sirenix.OdinInspector;
 using UnityEngine.Events;
 
-namespace LabraxStudio.UI
+namespace LabraxStudio.Loadscreen
 {
     public class LoadingUIE : MonoBehaviour
     {
-        #region MEMBERS
+        // MEMBERS: -------------------------------------------------------------------------------
 
         [SerializeField]
         private float _fadeTime = 0.5f;
@@ -51,23 +51,7 @@ namespace LabraxStudio.UI
         [SerializeField]
         private UnityEvent _onLoadFinished;
 
-        #endregion
-
-        //-------------------------------------------------------------------------------
-        
-        #region FIELDS
-
-        private string _loadScene;
-        private Tweener _fadeTwnr;
-        private Tweener _moveTwnr;
-        private CanvasGroup _canvasGroup;
-        private float _nextX = 0;
-
-        #endregion
-
-        //-------------------------------------------------------------------------------
-
-        #region PROPERTIES
+        // PROPERTIES: ----------------------------------------------------------------------------
 
         public float FadeTime => _fadeTime;
 
@@ -82,11 +66,54 @@ namespace LabraxStudio.UI
             }
         }
 
-        #endregion
+        // FIELDS: -------------------------------------------------------------------
 
-        //-------------------------------------------------------------------------------
+        private string _loadScene;
+        private Tweener _fadeTwnr;
+        private Tweener _moveTwnr;
+        private CanvasGroup _canvasGroup;
+        private float _nextX = 0;
 
-        #region PRIVATE_METHODS
+
+        // GAME ENGINE METHODS: -------------------------------------------------------------------
+
+        public void Start()
+        {
+            //DontDestroyOnLoad(this.gameObject);
+
+            if (!_loadOnStart)
+                return;
+
+            DontDestroyOnLoad(this.gameObject);
+            CanvasGroup.DOFade(1, 0);
+            MoveSlider(0, 0);
+
+            if (!_autoLoad)
+                return;
+
+            _loadScene = _startScene.ToString();
+            StartCoroutine(LoadAsynchronously());
+        }
+
+        // PUBLIC METHODS: -----------------------------------------------------------------------
+
+        public void LoadScene(Scenes sceneName)
+        {
+            _fadeTwnr.Complete();
+            _loadScene = sceneName.ToString();
+            MoveSlider(0, 0);
+            StartCoroutine(LoadAsynchronously());
+        }
+
+        public void LoadScene(string _sceneName)
+        {
+            _fadeTwnr.Complete();
+            _loadScene = _sceneName;
+            MoveSlider(0, 0);
+            StartCoroutine(LoadAsynchronously());
+        }
+
+        // PRIVATE METHODS: -----------------------------------------------------------------------
 
         private IEnumerator LoadAsynchronously()
         {
@@ -103,7 +130,7 @@ namespace LabraxStudio.UI
                 _fadeTwnr = CanvasGroup.DOFade(1, 0);
 
             AsyncOperation loading = SceneManager.LoadSceneAsync(_loadScene);
-            
+
             while (!loading.isDone || elapsedTime <= _onScreenMinTime)
             {
                 float progress = loading.progress / 0.925f;
@@ -165,49 +192,5 @@ namespace LabraxStudio.UI
 
             _canvas.enabled = enabled;
         }
-
-        #endregion
-
-        //-------------------------------------------------------------------------------
-
-        #region PUBLIC_METHODS
-
-        public void Start()
-        {
-            //DontDestroyOnLoad(this.gameObject);
-            
-            if (!_loadOnStart)
-                return;
-            
-            DontDestroyOnLoad(this.gameObject);
-            CanvasGroup.DOFade(1, 0);
-            MoveSlider(0, 0);
-
-            if (!_autoLoad)
-                return;
-            
-            _loadScene = _startScene.ToString();
-            StartCoroutine(LoadAsynchronously());
-        }
-
-        public void LoadScene(Scenes sceneName)
-        {
-            _fadeTwnr.Complete();
-            _loadScene = sceneName.ToString();
-            MoveSlider(0, 0);
-            StartCoroutine(LoadAsynchronously());
-        }
-
-        public void LoadScene(string _sceneName)
-        {
-            _fadeTwnr.Complete();
-            _loadScene = _sceneName;
-            MoveSlider(0, 0);
-            StartCoroutine(LoadAsynchronously());
-        }
-
-        #endregion
-
-        //-------------------------------------------------------------------------------
     }
 }

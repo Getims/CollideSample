@@ -1,7 +1,8 @@
 using System;
 using DG.Tweening;
+using LabraxStudio.App;
+using LabraxStudio.App.Services;
 using LabraxStudio.Events;
-using LabraxStudio.Managers;
 using LabraxStudio.UI;
 using UnityEngine;
 
@@ -71,7 +72,7 @@ namespace LabraxStudio.MainMenu.Camera
 
         public void Setup(bool lastSceneIsGame, Action onMoveComplete)
         {
-            int openedLevels = LevelManager.UnlockedLevelsCount;
+            int openedLevels = LevelDataService.UnlockedLevelsCount;
             _onMoveComplete = onMoveComplete;
             _cameraRotateScript.SetRotateEffector(openedLevels > 5 ? 1 : 0.5f);
 

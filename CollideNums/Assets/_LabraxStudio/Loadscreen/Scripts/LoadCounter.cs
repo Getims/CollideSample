@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace LabraxStudio.UI
+namespace LabraxStudio.Loadscreen
 {
     public class LoadCounter : MonoBehaviour
     {

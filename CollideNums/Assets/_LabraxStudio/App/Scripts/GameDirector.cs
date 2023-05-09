@@ -1,5 +1,5 @@
 ﻿using System;
-using LabraxStudio.Managers;
+using LabraxStudio.App.Services;
 using LabraxStudio.Sound;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -9,7 +9,6 @@ namespace LabraxStudio.App
     public class GameDirector : AppDirector
     {
         // FIELDS: --------------------------------------------------------------------------------
-
         public static GameDirector Instance { get; private set; }
 
         // GAME ENGINE METHODS: -------------------------------------------------------------------
@@ -51,18 +50,21 @@ namespace LabraxStudio.App
 
         private void SetupManagers()
         {
-            var _gameSettings = ServicesFabric.GameSettingsService.GetGameSettings();
+            var gameSettings = ServicesFabric.GameSettingsService.GetGameSettings();
+            PlayerDataService.Initialize();
+            LevelDataService.Initialize();
+            //LevelMetaService.Initialize(gameSettings.LaunchSettings);
             GameManager.Instance.Initialize();
 
-            if (!_gameSettings.LaunchSettings.EnableTutorial)
-                PlayerManager.SetTutorialState(true);
+            if (!gameSettings.LaunchSettings.EnableTutorial)
+                PlayerDataService.SetTutorialState(true);
 
-            ScreenManager.Instance.Setup();
+            ScreenManager.Instance.Initialize();
             SoundManager.Instance.Setup();
 
-            if (PlayerManager.IsFirstStart)
+            if (PlayerDataService.IsFirstStart)
             {
-                PlayerManager.SetFirstStartState(false);
+                PlayerDataService.SetFirstStartState(false);
                 ServicesFabric.GameDataService.SaveGameData();
             }
 

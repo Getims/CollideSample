@@ -1,12 +1,9 @@
-﻿using LabraxEditor.Data;
-using LabraxStudio.App;
-using LabraxStudio.Data;
-using LabraxStudio.App.Services;
+﻿using LabraxStudio.Data;
 using UnityEngine;
 
-namespace LabraxStudio.Managers
+namespace LabraxStudio.App.Services
 {
-    public static class PlayerManager
+    public static class PlayerDataService
     {
         // PROPERTIES: -----------------------------------------------------------------------------
 
@@ -18,7 +15,6 @@ namespace LabraxStudio.Managers
         // FIELDS: --------------------------------------------------------------------------------
 
         private static IGameDataService _gameDataService;
-        private static GameManager _gameManager;
         private static GameData _gameData;
         private static PlayerData _playerData;
         private static bool _isInitialized;
@@ -31,7 +27,6 @@ namespace LabraxStudio.Managers
                 return;
 
             _isInitialized = true;
-            _gameManager = GameManager.Instance;
             _gameDataService = ServicesFabric.GameDataService;
             _gameData = _gameDataService.GetGameData();
             _playerData = _gameData.PlayerData;
@@ -69,7 +64,7 @@ namespace LabraxStudio.Managers
         
         public static void SetLevel(int levelIndex)
         {
-            levelIndex = Mathf.Min(levelIndex, LevelManager.LevelsCount - 1);
+            levelIndex = Mathf.Min(levelIndex, LevelMetaService.LevelsCount - 1);
             _playerData.SetCurrentLevel(levelIndex);
             _gameDataService.SaveGameData();
         }
@@ -77,7 +72,7 @@ namespace LabraxStudio.Managers
         public static void SwitchToNextLevel()
         {
             int newLevel = _playerData.CurrentLevel + 1;
-            if (newLevel >= LevelManager.LevelsCount)
+            if (newLevel >= LevelMetaService.LevelsCount)
                 newLevel = 0;
 
             _playerData.SetCurrentLevel(newLevel);
@@ -86,7 +81,7 @@ namespace LabraxStudio.Managers
 
         public static void SwitchToNextLevelNoReset()
         {
-            int newLevel = Mathf.Min(_playerData.CurrentLevel + 1, LevelManager.LevelsCount - 1);
+            int newLevel = Mathf.Min(_playerData.CurrentLevel + 1, LevelMetaService.LevelsCount - 1);
             _playerData.SetCurrentLevel(newLevel);
             _gameDataService.SaveGameData();
         }

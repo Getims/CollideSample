@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Lean.Touch;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -9,18 +6,16 @@ namespace LabraxStudio.MainMenu.Camera
 {
     public class CameraZoom : MonoBehaviour
     {
-        #region MEMBERS
+        // MEMBERS: -------------------------------------------------------------------------------
 
-        [SerializeField] private LeanPinchScale _leanPinchScale;
+        [SerializeField]
+        private LeanPinchScale _leanPinchScale;
 
-        [Space(10)] [SerializeField, MinMaxSlider(1, 3,true)]
+        [Space(10)]
+        [SerializeField, MinMaxSlider(1, 3, true)]
         private Vector2 _zoomRange = Vector2.one;
 
-        #endregion
-
-        //-------------------------------------------------------------------------------
-
-        #region FIELDS
+        // FIELDS: -------------------------------------------------------------------
 
         private const float START_SIZE = 5.5f;
         private CameraController _cameraController;
@@ -29,23 +24,7 @@ namespace LabraxStudio.MainMenu.Camera
         private bool _isZooming = false;
         private bool _isSetuped = false;
 
-        #endregion
-
-        //-------------------------------------------------------------------------------
-
-        #region PRIVATE_METHODS
-
-        private void SetZoom(bool enabled)
-        {
-            _isZooming = enabled && _cameraController.State.CanZoom;
-            _cameraController.State.SetZoomTrigger(_isZooming);
-        }
-
-        #endregion
-
-        //-------------------------------------------------------------------------------
-
-        #region GAME_ENGINE_METHODS
+        // GAME ENGINE METHODS: -------------------------------------------------------------------
 
         private void LateUpdate()
         {
@@ -60,35 +39,7 @@ namespace LabraxStudio.MainMenu.Camera
             }
         }
 
-        #endregion
-
-        //-------------------------------------------------------------------------------
-
-        #region EVENTS_RECIEVERS
-
-        public void OnFingerDown(LeanFinger finger)
-        {
-            if(!_isSetuped)
-                return;
-            
-            if (LeanTouch.Fingers.Count >= 2)
-                SetZoom(true);
-        }
-
-        public void OnFingerUp(LeanFinger finger)
-        {
-            if(!_isSetuped)
-                return;
-            
-            if (LeanTouch.Fingers.Count <= 2)
-                SetZoom(false);
-        }
-
-        #endregion
-
-        //-------------------------------------------------------------------------------
-
-        #region PUBLIC_METHODS
+        // PUBLIC METHODS: -----------------------------------------------------------------------
 
         public void Setup(CameraController cameraController)
         {
@@ -98,9 +49,9 @@ namespace LabraxStudio.MainMenu.Camera
 
         public void SetSize(float screenFactor)
         {
-            if(!_isSetuped)
+            if (!_isSetuped)
                 return;
-            
+
             _baseSize = START_SIZE;
             _baseSize = _baseSize * screenFactor;
             _currentSize = _baseSize;
@@ -109,15 +60,39 @@ namespace LabraxStudio.MainMenu.Camera
 
         public void CheckState()
         {
-            if(!_isSetuped)
+            if (!_isSetuped)
                 return;
-            
+
             _isZooming = _isZooming && _cameraController.State.CanZoom;
             _leanPinchScale.enabled = _isZooming;
         }
 
-        #endregion
+        // PRIVATE METHODS: -----------------------------------------------------------------------
 
-        //-------------------------------------------------------------------------------
+        private void SetZoom(bool enabled)
+        {
+            _isZooming = enabled && _cameraController.State.CanZoom;
+            _cameraController.State.SetZoomTrigger(_isZooming);
+        }
+
+        // EVENTS RECEIVERS: ----------------------------------------------------------------------
+
+        public void OnFingerDown(LeanFinger finger)
+        {
+            if (!_isSetuped)
+                return;
+
+            if (LeanTouch.Fingers.Count >= 2)
+                SetZoom(true);
+        }
+
+        public void OnFingerUp(LeanFinger finger)
+        {
+            if (!_isSetuped)
+                return;
+
+            if (LeanTouch.Fingers.Count <= 2)
+                SetZoom(false);
+        }
     }
 }

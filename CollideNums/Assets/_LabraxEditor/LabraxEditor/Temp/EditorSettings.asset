@@ -27,10 +27,10 @@ MonoBehaviour:
     Show: 1
   - MetaName: SFXMeta
     Show: 1
-  _tabMeta: LabraxStudio.Meta.SFXMeta
-  _objectMeta: -187816
-  _metaToolBar: 1
+  _tabMeta: LabraxStudio.Meta.LevelMeta
+  _objectMeta: 29354
+  _metaToolBar: 0
   _tabSettings: LabraxStudio.Meta.LocalizationSettingsMeta
-  _objectSettings: -187438
+  _objectSettings: 29370
   _settingsToolBar: 2
-  _menuType: 2
+  _menuType: 1

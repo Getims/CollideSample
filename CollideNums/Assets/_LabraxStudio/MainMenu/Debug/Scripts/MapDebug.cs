@@ -1,5 +1,4 @@
 using LabraxStudio.App.Services;
-using LabraxStudio.Managers;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -24,10 +23,10 @@ namespace LabraxStudio.MainMenu
         [TabGroup("All levels control"), Button(ButtonHeight = 25)]
         public void UnlockAllLevels()
         {
-            var level = LevelManager.LevelsCount - 1;
-            LevelManager.LockAllLevels();
-            PlayerManager.SetLevel(0);
-            LevelManager.CalculateUnlockedLevels();
+            var level = LevelMetaService.LevelsCount - 1;
+            LevelDataService.LockAllLevels();
+            PlayerDataService.SetLevel(0);
+            LevelDataService.CalculateUnlockedLevels();
         }
 
         [TabGroup("All levels control"), Button(ButtonHeight = 25)]
@@ -36,9 +35,9 @@ namespace LabraxStudio.MainMenu
             if (!Application.isPlaying)
                 return;
 
-            LevelManager.LockAllLevels();
-            PlayerManager.SetLevel(0);
-            LevelManager.CalculateUnlockedLevels();
+            LevelDataService.LockAllLevels();
+            PlayerDataService.SetLevel(0);
+            LevelDataService.CalculateUnlockedLevels();
         }
         
     }

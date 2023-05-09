@@ -2,7 +2,7 @@
 using System.Text.RegularExpressions;
 using UnityEngine;
 
-namespace LabraxStudio
+namespace LabraxEditor
 {
     public static class Extensions
     {

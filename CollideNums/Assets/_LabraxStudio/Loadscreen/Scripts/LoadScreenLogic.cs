@@ -1,10 +1,10 @@
 using System.Collections;
+using LabraxStudio.App;
+using LabraxStudio.App.Services;
 using LabraxStudio.Base;
-using LabraxStudio.Managers;
-using LabraxStudio.UI;
 using UnityEngine;
 
-namespace LabraxStudio.App
+namespace LabraxStudio.Loadscreen
 {
     public class LoadScreenLogic : MonoBehaviour
     {
@@ -45,7 +45,7 @@ namespace LabraxStudio.App
 
         private void SelectScene()
         {
-            int levelsCount = LevelManager.LevelsCount;
+            int levelsCount = LevelMetaService.LevelsCount;
 
             if (levelsCount <= 1)
             {
@@ -53,7 +53,7 @@ namespace LabraxStudio.App
                 return;
             }
 
-            bool loadMainMenuScene = LevelManager.GetLevelData(1).IsUnlocked;
+            bool loadMainMenuScene = LevelDataService.GetLevelData(1).IsUnlocked;
             Scenes scene = loadMainMenuScene ? Scenes.MainMenu : Scenes.Game;
             _loading.LoadScene(scene);
         }

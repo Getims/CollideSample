@@ -1,15 +1,16 @@
-﻿using LabraxStudio.Meta;
-using LabraxStudio.Sound;
+﻿using LabraxStudio.Managers;
+using LabraxStudio.Meta;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace LabraxStudio.Managers
+namespace LabraxStudio.Sound
 {
     public class GlobalSoundMediator : SharedManager<GlobalSoundMediator>
     {
         // MEMBERS: -------------------------------------------------------------------------------
 
-        [SerializeField, Required, AssetsOnly] private SFXMeta _uiClickSFX;
+        [SerializeField, Required, AssetsOnly]
+        private SFXMeta _uiClickSFX;
 
         // FIELDS: --------------------------------------------------------------------------------
 
@@ -23,6 +24,7 @@ namespace LabraxStudio.Managers
         // PUBLIC METHODS: ------------------------------------------------------------------------
 
         [Title("Buttons")]
-        [Button, DisableInEditorMode] public void PlayUIClick() => _soundManager.PlaySound(_uiClickSFX);
+        [Button, DisableInEditorMode]
+        public void PlayUIClick() => _soundManager.PlaySound(_uiClickSFX);
     }
 }

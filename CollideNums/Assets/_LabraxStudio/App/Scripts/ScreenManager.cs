@@ -1,29 +1,26 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using LabraxStudio.App;
-using LabraxStudio.Base;
 using LabraxStudio.Managers;
 using UnityEngine;
 
-namespace LabraxStudio
+namespace LabraxStudio.App
 {
-    public class ScreenManager :SharedManager<ScreenManager>
+    public class ScreenManager : SharedManager<ScreenManager>
     {
-        [SerializeField] 
+        // MEMBERS: -------------------------------------------------------------------------------
+
+        [SerializeField]
         private int _baseWidth = 1080;
-        [SerializeField] 
+
+        [SerializeField]
         private int _baseHeight = 1920;
-        [SerializeField] 
+
+        [SerializeField]
         private int _currentWidth = 1080;
-        [SerializeField] 
+
+        [SerializeField]
         private int _currentHeight = 1920;
 
-        private bool _isPhone = true;
-        private float _baseAspectRatio = 1;
-        private float _currentAspectRatio = 1;
-        private float _widthPercent = 1;
-        private float _heightPercent = 1;
+        // PROPERTIES: ----------------------------------------------------------------------------
 
         public int BaseWidth => _baseWidth;
         public int BaseHeight => _baseHeight;
@@ -35,7 +32,17 @@ namespace LabraxStudio
         public float BaseAspectRatio => _baseAspectRatio;
         public float CurrentAspectRatio => _currentAspectRatio;
 
-        public void Setup()
+        // FIELDS: -------------------------------------------------------------------
+
+        private bool _isPhone = true;
+        private float _baseAspectRatio = 1;
+        private float _currentAspectRatio = 1;
+        private float _widthPercent = 1;
+        private float _heightPercent = 1;
+
+        // PUBLIC METHODS: -----------------------------------------------------------------------
+
+        public void Initialize()
         {
 #if UNITY_EDITOR
             _isPhone = true;
@@ -55,12 +62,14 @@ namespace LabraxStudio
             CalculateAspectRatio();
         }
 
+        // PRIVATE METHODS: -----------------------------------------------------------------------
+
         private void CalculatePercents()
         {
-            _widthPercent = 1.0f*_currentWidth / _baseWidth;
-            _widthPercent = (float) Math.Round( _widthPercent, 2);
-            _heightPercent = 1.0f*_currentHeight / _baseHeight;
-            _heightPercent = (float) Math.Round( _heightPercent, 2);
+            _widthPercent = 1.0f * _currentWidth / _baseWidth;
+            _widthPercent = (float) Math.Round(_widthPercent, 2);
+            _heightPercent = 1.0f * _currentHeight / _baseHeight;
+            _heightPercent = (float) Math.Round(_heightPercent, 2);
         }
 
         private void CalculateAspectRatio()

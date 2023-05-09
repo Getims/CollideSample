@@ -1,9 +1,8 @@
 ﻿using System;
-using LabraxStudio.Data;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace LabraxEditor.Data
+namespace LabraxStudio.Data
 {
     [Serializable]
     public class GameData

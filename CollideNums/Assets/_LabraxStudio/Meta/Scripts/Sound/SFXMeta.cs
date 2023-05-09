@@ -11,7 +11,7 @@ namespace LabraxStudio.Meta
         [TitleGroup(Settings)]
         [BoxGroup(SettingsGroup, showLabel: false), SerializeField]
         private bool _isDisabled;
-        
+
         [BoxGroup(SettingsGroup), SerializeField, Required, AssetsOnly]
         [HideIf(nameof(_isDisabled))]
         private AudioClip _audioClip;
@@ -23,15 +23,15 @@ namespace LabraxStudio.Meta
         [BoxGroup(SettingsGroup), SerializeField, HideLabel, TextArea(1, 4), Space(4)]
         private string _description = "Description...";
 
-        // FIELDS: --------------------------------------------------------------------------------
-        
-        private const string Settings = "Settings";
-        private const string SettingsGroup = Settings + "/Box";
-        
         // PROPERTIES: ----------------------------------------------------------------------------
 
         public bool IsDisabled => _isDisabled;
         public AudioClip AudioClip => _audioClip;
         public float SoundPercent => _soundPrecent;
+
+        // FIELDS: --------------------------------------------------------------------------------
+
+        private const string Settings = "Settings";
+        private const string SettingsGroup = Settings + "/Box";
     }
 }

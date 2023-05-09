@@ -1,17 +1,24 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
+using LabraxStudio.UI;
 using UnityEngine;
 
-namespace LabraxStudio.UI
+namespace LabraxStudio.Loadscreen
 {
     public class DotsAnimation : MonoBehaviour
     {
-        [SerializeField] private List<UIPanel> _dots = new List<UIPanel>();
+        // MEMBERS: -------------------------------------------------------------------------------
+
+        [SerializeField]
+        private List<UIPanel> _dots = new List<UIPanel>();
+
+        // FIELDS: -------------------------------------------------------------------
 
         private int lastDot = 0;
         private int currentDot = 0;
         private Coroutine _animationCO;
+
+        // GAME ENGINE METHODS: -------------------------------------------------------------------
 
         private void Start()
         {
@@ -20,6 +27,14 @@ namespace LabraxStudio.UI
 
             _animationCO = StartCoroutine(Animation());
         }
+
+        private void OnDestroy()
+        {
+            if (_animationCO != null)
+                StopCoroutine(_animationCO);
+        }
+
+        // PRIVATE METHODS: -----------------------------------------------------------------------
 
         private IEnumerator Animation()
         {
@@ -38,12 +53,6 @@ namespace LabraxStudio.UI
                     currentDot = 0;
                 yield return new WaitForSeconds(time);
             }
-        }
-
-        private void OnDestroy()
-        {
-            if (_animationCO != null)
-                StopCoroutine(_animationCO);
         }
     }
 }

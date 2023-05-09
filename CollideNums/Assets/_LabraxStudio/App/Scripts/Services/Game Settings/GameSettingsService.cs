@@ -14,11 +14,10 @@ namespace LabraxStudio.App.Services
         
         private readonly AllGlobalSettings _allGlobalSettings;
 
-        // PUBLIC METHODS: ------------------------------------------------------------------------
+        // PROPERTIES: ----------------------------------------------------------------------------
 
         public AllGlobalSettings GetGlobalSettings() => _allGlobalSettings;
 
-        public GameSettings GetGameSettings() =>
-            _allGlobalSettings.GameSettings;
+        public GameSettings GetGameSettings() => _allGlobalSettings.GameSettings;
     }
 }

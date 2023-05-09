@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using LabraxEditor;
@@ -10,6 +9,8 @@ namespace LabraxStudio.Meta
     [CreateAssetMenu(fileName = "Sound Settings", menuName = "🕹 Labrax Studio/Settings/Sound Settings")]
     public class SoundSettings : ScriptableSettings
     {
+        // MEMBERS: -------------------------------------------------------------------------------
+
         [Title("Settings")]
         [SerializeField]
         private float _musicFadeTime = 0.5f;
@@ -31,7 +32,6 @@ namespace LabraxStudio.Meta
         private float _backgroundMusicVolume = 0.7f;
 
         [Space(10)]
-
         [SerializeField, HideInInspector]
         [ListDrawerSettings(ListElementLabelName = "_soundType")]
         private List<GameplaySound> _gameplaySounds;
@@ -39,14 +39,17 @@ namespace LabraxStudio.Meta
         [SerializeField]
         private List<BackgroundMusic> _backgroundMusic;
 
+        // PROPERTIES: ----------------------------------------------------------------------------
+
         public List<GameplaySound> GameplaySounds => _gameplaySounds;
         public List<BackgroundMusic> BackgroundMusics => _backgroundMusic;
-
         public float MusicFadeTime => _musicFadeTime;
         public float GameplayMinPitch => _gameplayMinPitch;
         public float GameplayMaxPitch => _gameplayMaxPitch;
         public float GameplaySoundsVolume => _gameplaySoundsVolume;
         public float BackgroundMusicVolume => _backgroundMusicVolume;
+
+        // PUBLIC METHODS: -----------------------------------------------------------------------
 
         public GameplaySound GetGameplaySound(GameplaySounds sound)
         {
@@ -71,41 +74,5 @@ namespace LabraxStudio.Meta
 
             return null;
         }
-    }
-
-    [System.Serializable]
-    public class GameplaySound
-    {
-        [SerializeField]
-        private GameplaySounds _soundType;
-
-        [SerializeField]
-        private AudioClip _clip;
-
-        [SerializeField]
-        [Range(0f, 1f)]
-        private float _soundPrecent = 1;
-
-        public GameplaySounds SoundType => _soundType;
-        public AudioClip Clip => _clip;
-        public float SoundPrecent { get => _soundPrecent; }
-    }
-
-    [System.Serializable]
-    public class BackgroundMusic
-    {
-        [SerializeField]
-        private BackgroundMusics _musicType;
-
-        [SerializeField]
-        private AudioClip _clip;
-
-        [SerializeField]
-        [Range(0f, 1f)]
-        private float _soundPrecent = 1;
-
-        public BackgroundMusics MusicType => _musicType;
-        public AudioClip Clip => _clip;
-        public float SoundPrecent { get => _soundPrecent; }
     }
 }

@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using LabraxStudio.Managers;
 using Lean.Touch;
 using UnityEngine;
 
@@ -9,9 +7,10 @@ namespace LabraxStudio.MainMenu.Camera
     public class CameraMove : MonoBehaviour
     {
         // MEMBERS: -------------------------------------------------------------------------------
+
         [SerializeField]
         private LeanDragCamera _leanDragCamera;
-        
+
         // FIELDS: -------------------------------------------------------------------
 
         private CameraController _cameraController;
@@ -52,7 +51,6 @@ namespace LabraxStudio.MainMenu.Camera
 
         private void CalculateMinMaxBorders()
         {
-           
         }
 
         private void SetBlockedSetDefaultSensitivity()

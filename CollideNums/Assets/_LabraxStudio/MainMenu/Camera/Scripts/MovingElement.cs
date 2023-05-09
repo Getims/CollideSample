@@ -6,7 +6,7 @@ namespace LabraxStudio.MainMenu.Camera
 {
     public class MovingElement : MonoBehaviour
     {
-        #region MEMBERS
+        // MEMBERS: -------------------------------------------------------------------------------
 
         [SerializeField]
         private int _id = 0;
@@ -39,11 +39,7 @@ namespace LabraxStudio.MainMenu.Camera
         [SerializeField]
         private UnityEvent _onMoveReturn;
 
-        #endregion
-
-        //-------------------------------------------------------------------------------
-
-        #region FIELDS
+        // FIELDS: -------------------------------------------------------------------
 
         private bool _isSetuped = false;
         private bool _isUp = false;
@@ -51,20 +47,12 @@ namespace LabraxStudio.MainMenu.Camera
         private Tweener _moveTW;
         private float _moveEffector = 1;
 
-        #endregion
-
-        //-------------------------------------------------------------------------------
-
-        #region PROPERTIES
+        // PROPERTIES: ----------------------------------------------------------------------------
 
         public int Id => _id;
         public float MoveTime => _moveTime;
 
-        #endregion
-
-        //-------------------------------------------------------------------------------
-
-        #region GAME_ENGINE_METHODS
+        // GAME ENGINE METHODS: -------------------------------------------------------------------
 
         private void Start()
         {
@@ -80,11 +68,7 @@ namespace LabraxStudio.MainMenu.Camera
             _moveTW.Kill();
         }
 
-        #endregion
-
-        //-------------------------------------------------------------------------------
-
-        #region PUBLIC_METHODS
+        // PUBLIC METHODS: -----------------------------------------------------------------------
 
         public void ResetStartPosition()
         {
@@ -161,11 +145,7 @@ namespace LabraxStudio.MainMenu.Camera
         {
             _moveEffector = moveEffector;
         }
-
-        #endregion
-
-        //-------------------------------------------------------------------------------
-
+        
         private enum MoveType
         {
             SetPosition,

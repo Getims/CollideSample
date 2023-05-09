@@ -1,8 +1,6 @@
-using System;
 using System.Collections.Generic;
 using I2.Loc;
 using LabraxStudio.Meta;
-using Unity.VisualScripting;
 
 namespace LabraxStudio.Localization
 {
