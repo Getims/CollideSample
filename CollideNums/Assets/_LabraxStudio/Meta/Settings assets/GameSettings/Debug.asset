@@ -13,15 +13,13 @@ MonoBehaviour:
   m_Name: Debug
   m_EditorClassIdentifier: 
   FileName: Debug
-  _launchStaticData:
-    _levelBuildIterations: 1
+  _launchSettings:
     _enableDebug: 0
-    _botAutoplay: 0
     _enableTutorial: 1
-    _enableStoryline: 1
-    _enableSpecialOfferAndChests: 0
-    _enableFlags: 0
-    _enableCurrencyShopFreePurchases: 0
-    _loadRemoteConfiguration: 1
-  _balanceStaticData:
+  _balanceSettings:
     _startMoney: 0
+  _gameGameFieldSettings: {fileID: 11400000, guid: b6bc31775dbdf2842a216ba923c0d3a2, type: 2}
+  _levelsList:
+  - {fileID: 11400000, guid: f879f37c1ccf8c645acb275d75d9a03f, type: 2}
+  - {fileID: 11400000, guid: 0a485882299d07440ace4609abac5b1c, type: 2}
+  - {fileID: 11400000, guid: e63e3d33da7ef9d48be54bab006124ce, type: 2}
