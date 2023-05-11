@@ -100,8 +100,8 @@ namespace LabraxStudio.Game.Tiles
             newPosition.x = matrixToPosition.x;
             newPosition.y = matrixToPosition.y;
 
-            Ease ease = Ease.OutSine;
-            float time = CalculateTime(0.155f, tile.Position - newPosition);
+            Ease ease = _gameFieldSettings.MoveEase;
+            float time = CalculateTime(_gameFieldSettings.OneCellTime, tile.Position - newPosition);
 
             ServicesFabric.TouchService.SetTouchState(false);
             tile.transform.DOMove(newPosition, time)
@@ -172,7 +172,7 @@ namespace LabraxStudio.Game.Tiles
             if (y > 0)
                 n = y;
 
-            float time =  oneCellTime + (n - 1) * oneCellTime/ (n - n  * 0.35f);
+            float time =  oneCellTime + (n - 1) * oneCellTime/ (n - n  * _gameFieldSettings.MoveSlowing);
             Utils.ReworkPoint("Time: " + time);
             return time;
         }
