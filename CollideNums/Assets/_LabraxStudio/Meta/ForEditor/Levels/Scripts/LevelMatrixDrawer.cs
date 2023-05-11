@@ -8,8 +8,10 @@ namespace LabraxStudio.Editor
 {
     public static class LevelMatrixDrawer
     {
+        
+#if UNITY_EDITOR
         public static int ColorsCount => MatrixHelper.SpritesCount;
-
+#endif
         public static int DrawColoredEnumElement(Rect rect, int value, bool brushMode, int brushSize,
             int rightClickSize)
         {
@@ -134,6 +136,8 @@ namespace LabraxStudio.Editor
             return value;
         }
 
+                    
+#if UNITY_EDITOR
         private static bool IsClickSuccessful(Event currentEvent, Rect rect)
         {
             if (currentEvent.type != EventType.MouseDown)
@@ -159,5 +163,6 @@ namespace LabraxStudio.Editor
 
         private static ColorPalette GetColorEditorPalette() =>
             ColorPaletteManager.Instance.ColorPalettes[0];
+        #endif
     }
 }

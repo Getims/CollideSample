@@ -92,16 +92,21 @@ namespace LabraxStudio.Meta
 
         // PRIVATE METHODS: -----------------------------------------------------------------------
 
-#if UNITY_EDITOR
+
         private int DrawLevelEnumElement(Rect rect, int value)
         {
+#if UNITY_EDITOR
             value = LevelMatrixDrawer.DrawLevelEnumElement(rect, value, _brushMode, _brushSize, _rightClickSize);
+#endif
             return value;
         }
 
         private static int DrawTilesEnumElement(Rect rect, int value)
         {
+            
+#if UNITY_EDITOR
             value = LevelMatrixDrawer.DrawTilesEnumElement(rect, value);
+#endif
             return value;
         }
 
@@ -156,8 +161,6 @@ namespace LabraxStudio.Meta
                 }
             }
         }
-
-#endif
 
         // EVENTS RECEIVERS: ----------------------------------------------------------------------
 

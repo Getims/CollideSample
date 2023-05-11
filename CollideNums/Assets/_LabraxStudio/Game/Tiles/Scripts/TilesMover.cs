@@ -72,8 +72,8 @@ namespace LabraxStudio.Game.Tiles
 
         private void AnimateMove(Tile tile, Vector2Int moveTo)
         {
-            float time = 0.7f;
-            Ease ease = Ease.InSine;
+            float time = Random.Range(0.3f, 0.4f);
+            Ease ease = Ease.InOutCubic;
 
             Vector2 matrixToPosition =
                 GameTypesConverter.MatrixPositionToGamePosition(moveTo, _gameFieldSettings.CellSize);
