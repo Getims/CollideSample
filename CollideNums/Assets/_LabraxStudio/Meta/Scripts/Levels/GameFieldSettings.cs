@@ -28,6 +28,7 @@ namespace LabraxStudio.Meta
         private Vector2 _shortSwipeDelta;
 
         [SerializeField]
+        [LabelText("Middle Swipe Delta")]
         private Vector2 _longSwipeDelta;
 
         // PROPERTIES: ----------------------------------------------------------------------------

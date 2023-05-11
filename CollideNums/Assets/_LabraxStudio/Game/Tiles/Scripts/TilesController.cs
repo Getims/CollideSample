@@ -11,8 +11,7 @@ namespace LabraxStudio.Game.Tiles
         [SerializeField]
         private TilesGenerator _tilesGenerator = new TilesGenerator();
 
-        // FIELDS: -------------------------------------------------------------------
-        
+        [SerializeField]
         private TilesMover _tilesMover = new TilesMover();
 
         // PUBLIC METHODS: -----------------------------------------------------------------------

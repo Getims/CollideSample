@@ -12,6 +12,9 @@ namespace LabraxStudio.Game.Tiles
         // PROPERTIES: ----------------------------------------------------------------------------
 
         public Vector2Int Cell => _cell;
+
+        public int Value => _value;
+
         public Vector3 Position
         {
             get => transform.position;

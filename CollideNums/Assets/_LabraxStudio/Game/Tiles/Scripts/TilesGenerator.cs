@@ -57,7 +57,7 @@ namespace LabraxStudio.Game.Tiles
             int value = GameTypesConverter.MatrixValueToTile(matrixValue);
             newTile.Initialize("Tile "+ value, GetSprite(matrixValue));
             newTile.SetCell(new Vector2Int(x, y));
-            newTile.SetValue(value);
+            newTile.SetValue(matrixValue);
         }
 
         private Sprite GetSprite(int spriteIndex)
