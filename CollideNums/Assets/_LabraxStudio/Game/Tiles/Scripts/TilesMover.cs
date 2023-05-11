@@ -1,7 +1,4 @@
 using System;
-using DG.Tweening;
-using LabraxStudio.App.Services;
-using LabraxStudio.Meta;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -12,9 +9,9 @@ namespace LabraxStudio.Game.Tiles
     {
         // FIELDS: -------------------------------------------------------------------
 
-        private GameFieldSettings _gameFieldSettings;
         [ShowInInspector]
         private int[,] _tilesMatrix;
+
         private int[,] _levelMatrix;
         private int _width;
         private int _height;
@@ -25,13 +22,12 @@ namespace LabraxStudio.Game.Tiles
         {
             _levelMatrix = (int[,]) levelMatrix.Clone();
             _tilesMatrix = (int[,]) tilesMatrix.Clone();
-            _gameFieldSettings = ServicesFabric.GameSettingsService.GetGameSettings().GameFieldSettings;
 
             _width = _levelMatrix.GetLength(0);
             _height = _levelMatrix.GetLength(1);
         }
 
-        public void MoveTile(Tile tile, Direction direction, Swipe swipe)
+        public MoveAction MoveTile(Tile tile, Direction direction, Swipe swipe)
         {
             int moves = 0;
             int path = 0;
@@ -74,40 +70,19 @@ namespace LabraxStudio.Game.Tiles
                 if (IsPlayableCell(tempPoint.x, tempPoint.y))
                 {
                     if (HasTile(tempPoint.x, tempPoint.y))
-                    {
                         break;
-                    }
                     else
-                    {
                         movePoint = tempPoint;
-                    }
                 }
             }
 
             RemoveTileFromMatrix(tile.Cell.x, tile.Cell.y);
-            SetTileToMatrix(movePoint.x, movePoint.y, tile.Value+1);
+            SetTileToMatrix(movePoint.x, movePoint.y, tile.Value + 1);
             tile.SetCell(movePoint);
-            AnimateMove(tile, movePoint);
+            return new MoveAction(tile, movePoint);
         }
 
         // PRIVATE METHODS: -----------------------------------------------------------------------
-
-        private void AnimateMove(Tile tile, Vector2Int moveTo)
-        {
-            Vector2 matrixToPosition =
-                GameTypesConverter.MatrixPositionToGamePosition(moveTo, _gameFieldSettings.CellSize);
-            Vector3 newPosition = tile.Position;
-            newPosition.x = matrixToPosition.x;
-            newPosition.y = matrixToPosition.y;
-
-            Ease ease = _gameFieldSettings.MoveEase;
-            float time = CalculateTime(_gameFieldSettings.OneCellTime, tile.Position - newPosition);
-
-            ServicesFabric.TouchService.SetTouchState(false);
-            tile.transform.DOMove(newPosition, time)
-                .SetEase(ease)
-                .OnComplete(() => ServicesFabric.TouchService.SetTouchState(true));
-        }
 
         private bool IsPlayableCell(int x, int y)
         {
@@ -158,23 +133,6 @@ namespace LabraxStudio.Game.Tiles
         private void SetTileToMatrix(int x, int y, int value)
         {
             _tilesMatrix[x, y] = value;
-        }
-
-        private float CalculateTime(float oneCellTime, Vector3 moveDelta)
-        {
-            float x = Math.Abs(moveDelta.x);
-            float y = Math.Abs(moveDelta.y);
-            float n = 0;
-            
-            if (x > 0)
-                n = x;
-
-            if (y > 0)
-                n = y;
-
-            float time =  oneCellTime + (n - 1) * oneCellTime/ (n - n  * _gameFieldSettings.MoveSlowing);
-            Utils.ReworkPoint("Time: " + time);
-            return time;
         }
     }
 }

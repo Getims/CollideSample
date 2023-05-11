@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using LabraxStudio.Managers;
 using LabraxStudio.Meta;
 using UnityEngine;
@@ -23,7 +24,14 @@ namespace LabraxStudio.Game.Tiles
             _tilesMover.Initialize(levelMeta.LevelMatrix, levelMeta.TilesMatrix);
         }
 
-        public void MoveTile(Tile tile, Direction direction, Swipe swipe) =>
-            _tilesMover.MoveTile(tile, direction, swipe);
+        public void MoveTile(Tile tile, Direction direction, Swipe swipe)
+        {
+            TilesAnimator tilesAnimator = new TilesAnimator();
+            List<AnimationAction> actions = new List<AnimationAction>();
+            var moveAction = _tilesMover.MoveTile(tile, direction, swipe);
+            actions.Add(moveAction);
+            
+            tilesAnimator.Play(actions);
+        }
     }
 }

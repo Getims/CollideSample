@@ -14,8 +14,9 @@ namespace LabraxStudio.Game.Tiles
         private Tile _tile;
         private GameFieldSettings _gameFieldSettings;
         private Vector2 _mouseDownPos;
+        private float _mouseDownTime;
         private Action<Direction, Swipe> _onSwipe;
-        
+
         // PUBLIC METHODS: -----------------------------------------------------------------------
 
         public void Initialize(Tile tile, UnityEngine.Camera camera, Action<Direction, Swipe> onSwipe)
@@ -33,6 +34,7 @@ namespace LabraxStudio.Game.Tiles
 
             _isSelected = true;
             _mouseDownPos = GetMousePosition();
+            _mouseDownTime = Time.realtimeSinceStartup;
         }
 
         public void OnDeselect()
@@ -43,13 +45,15 @@ namespace LabraxStudio.Game.Tiles
             _isSelected = false;
             
             Vector2 _mouseUpPos = GetMousePosition();
+            float _mouseUpTime = Time.realtimeSinceStartup;
             //_mouseDownPos = GetObjectPosition();
             Vector2 inputDelta = _mouseUpPos - _mouseDownPos;
+
+            float swipeTime = _mouseUpTime - _mouseDownTime;
             
             Direction _moveDirection = CalculateDirection(inputDelta);
-            Swipe _swipe = CalculateSwipe(inputDelta, _moveDirection);
+            Swipe _swipe = CalculateSwipe(inputDelta, _moveDirection, swipeTime);
             
-            Utils.ReworkPoint(_moveDirection + " " + _swipe);
             if(_swipe== Swipe.Null)
                 return;
             
@@ -62,14 +66,6 @@ namespace LabraxStudio.Game.Tiles
         private Vector2 GetMousePosition()
         {
             var position = Input.mousePosition;
-            position.z = 30;
-            position = _camera.ScreenToWorldPoint(position);
-            return position;
-        }
-
-        private Vector2 GetObjectPosition()
-        {
-            var position = _camera.WorldToScreenPoint(_tile.transform.position);
             position.z = 30;
             position = _camera.ScreenToWorldPoint(position);
             return position;
@@ -90,7 +86,7 @@ namespace LabraxStudio.Game.Tiles
             return _result;
         }
         
-        private Swipe CalculateSwipe(Vector2 inputDelta, Direction direction)
+        private Swipe CalculateSwipe(Vector2 inputDelta, Direction direction, float swipeTime)
         {
             float delta = 0;
             if (direction == Direction.Up || direction == Direction.Down)
@@ -98,6 +94,11 @@ namespace LabraxStudio.Game.Tiles
             else
                 delta = Math.Abs(inputDelta.x);
 
+
+            float swipeSpeed = delta / swipeTime;
+            Utils.ReworkPoint("swipe Time " + swipeTime);
+            Utils.ReworkPoint("swipe speed " + swipeSpeed);
+            
             if (delta < _gameFieldSettings.ShortSwipeDelta.x)
                 return Swipe.Null;
 
