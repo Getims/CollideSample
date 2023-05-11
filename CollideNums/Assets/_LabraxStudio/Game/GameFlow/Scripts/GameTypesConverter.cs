@@ -1,8 +1,11 @@
+using System;
+using UnityEngine;
+
 namespace LabraxStudio.Game
 {
-    public static class CellTypeConverter
+    public static class GameTypesConverter
     {
-        public static GameCellType ConvertToType(int cellValue)
+        public static GameCellType MatrixValueToCellType(int cellValue)
         {
             if (cellValue <= 1)
                 return GameCellType.Locked;
@@ -27,6 +30,23 @@ namespace LabraxStudio.Game
             }
 
             return GameCellType.Locked;
+        }
+
+        public static int MatrixValueToTile(int matrixValue)
+        {
+            int powValue = matrixValue + 1;
+            int tileValue = (int) Math.Pow(2, powValue);
+            return tileValue;
+        }
+
+        public static Vector2 MatrixPositionToGamePosition(Vector2 matrixPosition, float cellSize)
+        {
+            Vector2 result = Vector2.zero;
+
+            result.x = cellSize * matrixPosition.x;
+            result.y = -cellSize * matrixPosition.y;
+
+            return result;
         }
     }
 }

@@ -40,19 +40,24 @@ namespace LabraxStudio.Game.Tiles
 
         // PRIVATE METHODS: -----------------------------------------------------------------------
 
-        private void CreateTile(int x, int y, int spriteIndex)
+        private void CreateTile(int x, int y, int matrixValue)
         {
-            if(spriteIndex==-1)
+            if (matrixValue == -1)
                 return;
-            
-            Tile newCell = Object.Instantiate(_tilePrefab, _tilesContainer);
 
+            Tile newTile = Object.Instantiate(_tilePrefab, _tilesContainer);
+
+            Vector2 matrixToPosition =
+                GameTypesConverter.MatrixPositionToGamePosition(new Vector2(x, y), _gameFieldSettings.CellSize);
             Vector3 position = Vector3.zero;
-            position.x = _gameFieldSettings.CellSize * x;
-            position.y = _gameFieldSettings.CellSize * (-y);
-
-            newCell.transform.localPosition = position;
-            newCell.SetSprite(GetSprite(spriteIndex));
+            position.x = matrixToPosition.x;
+            position.y = matrixToPosition.y; 
+            newTile.transform.localPosition = position;
+            
+            int value = GameTypesConverter.MatrixValueToTile(matrixValue);
+            newTile.Initialize("Tile "+ value, GetSprite(matrixValue));
+            newTile.SetCell(new Vector2Int(x, y));
+            newTile.SetValue(value);
         }
 
         private Sprite GetSprite(int spriteIndex)

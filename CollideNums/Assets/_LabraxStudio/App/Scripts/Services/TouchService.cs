@@ -4,17 +4,17 @@ namespace LabraxStudio.App.Services
     {
         // PROPERTIES: ----------------------------------------------------------------------------
         
-        public bool IsTouchEnebled => _isTouchEnebled;
+        public bool IsTouchEnabled => _isTouchEnabled;
         
         // FIELDS: -------------------------------------------------------------------
         
-        private bool _isTouchEnebled = false;
+        private bool _isTouchEnabled = false;
 
         // PUBLIC METHODS: -----------------------------------------------------------------------
 
         public void SetTouchState(bool enabled)
         {
-            _isTouchEnebled = enabled;
+            _isTouchEnabled = enabled;
         }
     }
 }

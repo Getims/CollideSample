@@ -36,7 +36,7 @@ namespace LabraxStudio.Game.GameField
             {
                 for (int j = 0; j < levelHeight; j++)
                 {
-                    gamefield[i, j] = CellTypeConverter.ConvertToType(levelMatrix[i, j]);
+                    gamefield[i, j] = GameTypesConverter.MatrixValueToCellType(levelMatrix[i, j]);
                 }
             }
 

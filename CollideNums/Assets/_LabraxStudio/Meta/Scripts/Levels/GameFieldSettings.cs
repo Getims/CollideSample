@@ -18,14 +18,25 @@ namespace LabraxStudio.Meta
 
         [SerializeField]
         private List<Sprite> _fieldCellSprites = new List<Sprite>();
-        
+
         [Space(10)]
         [SerializeField]
         private List<Sprite> _tilesSprites = new List<Sprite>();
 
+        [Title("Swipe settings")]
+        [SerializeField]
+        private Vector2 _shortSwipeDelta;
+
+        [SerializeField]
+        private Vector2 _longSwipeDelta;
+
         // PROPERTIES: ----------------------------------------------------------------------------
 
         public float CellSize => _cellSize;
+
+        public Vector2 ShortSwipeDelta => _shortSwipeDelta;
+
+        public Vector2 LongSwipeDelta => _longSwipeDelta;
 
         // PUBLIC METHODS: -----------------------------------------------------------------------
 
@@ -40,7 +51,7 @@ namespace LabraxStudio.Meta
 
             return sprite;
         }
-        
+
         public Sprite GetTileSprite(int spriteIndex)
         {
             if (spriteIndex >= _tilesSprites.Count)
