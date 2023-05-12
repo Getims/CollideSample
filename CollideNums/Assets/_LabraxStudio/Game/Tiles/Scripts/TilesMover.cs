@@ -27,7 +27,7 @@ namespace LabraxStudio.Game.Tiles
             _height = _levelMatrix.GetLength(1);
         }
 
-        public MoveAction MoveTile(Tile tile, Direction direction, Swipe swipe)
+        public MoveAction CalculateMoveAction(Tile tile, Direction direction, Swipe swipe)
         {
             int moves = 0;
             int path = 0;
@@ -36,14 +36,14 @@ namespace LabraxStudio.Game.Tiles
 
             switch (swipe)
             {
-                case Swipe.Short:
+                case Swipe.OneTile:
                     moves = 1;
                     break;
-                case Swipe.Long:
+                case Swipe.TwoTiles:
                     moves = 2;
                     break;
                 case Swipe.Infinite:
-                    moves = 10;
+                    moves = 8;
                     break;
             }
 
@@ -79,7 +79,7 @@ namespace LabraxStudio.Game.Tiles
             RemoveTileFromMatrix(tile.Cell.x, tile.Cell.y);
             SetTileToMatrix(movePoint.x, movePoint.y, tile.Value + 1);
             tile.SetCell(movePoint);
-            return new MoveAction(tile, movePoint);
+            return new MoveAction(tile, movePoint, swipe);
         }
 
         // PRIVATE METHODS: -----------------------------------------------------------------------

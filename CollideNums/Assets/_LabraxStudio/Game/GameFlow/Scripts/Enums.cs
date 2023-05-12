@@ -24,8 +24,8 @@ namespace LabraxStudio.Game
     public enum Swipe
     {
         Null = 0,
-        Short = 1,
-        Long = 2,
+        OneTile = 1,
+        TwoTiles = 2,
         Infinite = 3
     }
 }

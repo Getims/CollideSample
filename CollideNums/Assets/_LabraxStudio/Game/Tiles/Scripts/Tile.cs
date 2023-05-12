@@ -51,9 +51,9 @@ namespace LabraxStudio.Game.Tiles
         public void OnSelecet() => _swipeChecker.OnSelect();
         public void OnDeselect() => _swipeChecker.OnDeselect();
 
-        private void OnSwipe(Direction direction, Swipe swipe)
+        private void OnSwipe(Direction direction, Swipe swipe, float swipeSpeed)
         {
-            TilesController.Instance.MoveTile(this, direction, swipe);
+            TilesController.Instance.MoveTile(this, direction, swipe, swipeSpeed);
         }
     }
 }

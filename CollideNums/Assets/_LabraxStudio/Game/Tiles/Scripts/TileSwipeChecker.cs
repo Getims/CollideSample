@@ -1,5 +1,6 @@
 using System;
 using LabraxStudio.App.Services;
+using LabraxStudio.Game.Debug;
 using LabraxStudio.Meta;
 using UnityEngine;
 
@@ -11,25 +12,23 @@ namespace LabraxStudio.Game.Tiles
 
         private bool _isSelected = false;
         private UnityEngine.Camera _camera;
-        private Tile _tile;
         private GameFieldSettings _gameFieldSettings;
         private Vector2 _mouseDownPos;
         private float _mouseDownTime;
-        private Action<Direction, Swipe> _onSwipe;
+        private Action<Direction, Swipe, float> _onSwipe;
 
         // PUBLIC METHODS: -----------------------------------------------------------------------
 
-        public void Initialize(Tile tile, UnityEngine.Camera camera, Action<Direction, Swipe> onSwipe)
+        public void Initialize(Tile tile, UnityEngine.Camera camera, Action<Direction, Swipe, float> onSwipe)
         {
-            _tile = tile;
             _camera = camera;
             _gameFieldSettings = ServicesFabric.GameSettingsService.GetGameSettings().GameFieldSettings;
             _onSwipe = onSwipe;
         }
-        
+
         public void OnSelect()
         {
-            if(!ServicesFabric.TouchService.IsTouchEnabled)
+            if (!ServicesFabric.TouchService.IsTouchEnabled)
                 return;
 
             _isSelected = true;
@@ -39,30 +38,29 @@ namespace LabraxStudio.Game.Tiles
 
         public void OnDeselect()
         {
-            if(!_isSelected)
+            if (!_isSelected)
                 return;
-            
+
             _isSelected = false;
-            
+
             Vector2 _mouseUpPos = GetMousePosition();
             float _mouseUpTime = Time.realtimeSinceStartup;
-            //_mouseDownPos = GetObjectPosition();
             Vector2 inputDelta = _mouseUpPos - _mouseDownPos;
-
+            Direction moveDirection = CalculateDirection(inputDelta);
+            
             float swipeTime = _mouseUpTime - _mouseDownTime;
-            
-            Direction _moveDirection = CalculateDirection(inputDelta);
-            Swipe _swipe = CalculateSwipe(inputDelta, _moveDirection, swipeTime);
-            
-            if(_swipe== Swipe.Null)
+            float swipeSpeed = CalculateSwipeSpeed(inputDelta, moveDirection, swipeTime);
+            Swipe swipe = CalculateSwipe(swipeSpeed);
+
+            if (swipe == Swipe.Null)
                 return;
-            
-            if(_onSwipe!=null)
-                _onSwipe.Invoke(_moveDirection, _swipe);
+
+            if (_onSwipe != null)
+                _onSwipe.Invoke(moveDirection, swipe, swipeSpeed);
         }
 
         // PRIVATE METHODS: -----------------------------------------------------------------------
-        
+
         private Vector2 GetMousePosition()
         {
             var position = Input.mousePosition;
@@ -70,7 +68,7 @@ namespace LabraxStudio.Game.Tiles
             position = _camera.ScreenToWorldPoint(position);
             return position;
         }
-        
+
         private Direction CalculateDirection(Vector2 inputDelta)
         {
             Direction _result = Direction.Null;
@@ -85,8 +83,8 @@ namespace LabraxStudio.Game.Tiles
 
             return _result;
         }
-        
-        private Swipe CalculateSwipe(Vector2 inputDelta, Direction direction, float swipeTime)
+
+        private float CalculateSwipeSpeed(Vector2 inputDelta, Direction direction, float swipeTime)
         {
             float delta = 0;
             if (direction == Direction.Up || direction == Direction.Down)
@@ -94,19 +92,21 @@ namespace LabraxStudio.Game.Tiles
             else
                 delta = Math.Abs(inputDelta.x);
 
-
             float swipeSpeed = delta / swipeTime;
-            Utils.ReworkPoint("swipe Time " + swipeTime);
-            Utils.ReworkPoint("swipe speed " + swipeSpeed);
-            
-            if (delta < _gameFieldSettings.ShortSwipeDelta.x)
+            DebugMenu.Instance.UpdateSpeed(swipeSpeed);
+            return swipeSpeed;
+        }
+
+        private Swipe CalculateSwipe(float swipeSpeed)
+        {
+            if (swipeSpeed < _gameFieldSettings.MinSwipeSpeed)
                 return Swipe.Null;
 
-            if (delta <= _gameFieldSettings.ShortSwipeDelta.y)
-                return Swipe.Short;
+            if (swipeSpeed <= _gameFieldSettings.MinSwipeSpeed + _gameFieldSettings.OneTileSpeed)
+                return Swipe.OneTile;
 
-            if (delta >= _gameFieldSettings.LongSwipeDelta.x && delta <= _gameFieldSettings.LongSwipeDelta.y)
-                return Swipe.Long;
+            if (swipeSpeed <= _gameFieldSettings.MinSwipeSpeed + _gameFieldSettings.OneTileSpeed * 2)
+                return Swipe.TwoTiles;
 
             return Swipe.Infinite;
         }

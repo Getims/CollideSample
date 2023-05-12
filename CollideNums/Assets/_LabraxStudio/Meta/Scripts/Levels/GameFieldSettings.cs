@@ -26,54 +26,63 @@ namespace LabraxStudio.Meta
 
         [Title("Swipe settings")]
         [SerializeField]
-        private Vector2 _shortSwipeDelta;
+        private float _minSwipeSpeed = 2;
 
         [SerializeField]
-        [LabelText("Middle Swipe Delta")]
-        private Vector2 _longSwipeDelta;
+        private float _oneTileSpeed = 4.5f;
 
         [Title("Animation settings")]
         [SerializeField]
-        private float _oneCellTime = 0.15f;
+        private float _oneTileMoveTime = 0.2f;
 
         [SerializeField]
-        private float _moveSlowing = 0.25f;
+        [Range(0.0f, 1)]
+        private float _tileMoveSlowing = 0.15f;
 
         [SerializeField]
-        private Ease _moveEase = Ease.OutSine;
+        private Ease _shortMoveEase = Ease.OutCubic;
+
+        [SerializeField]
+        private Ease _longMoveEase = Ease.InSine;
 
         // PROPERTIES: ----------------------------------------------------------------------------
 
         public float CellSize => _cellSize;
 
-        public Vector2 ShortSwipeDelta
+        public float OneTileMoveTime
         {
-            get => _shortSwipeDelta;
-            set => _shortSwipeDelta = value;
-        }
-
-        public Vector2 LongSwipeDelta
-        {
-            get => _longSwipeDelta;
-            set => _longSwipeDelta = value;
-        }
-
-        public float OneCellTime
-        {
-            get => _oneCellTime;
-            set => _oneCellTime = value;
+            get => _oneTileMoveTime;
+            set => _oneTileMoveTime = value;
         }
 
         public float MoveSlowing
         {
-            get => _moveSlowing;
-            set => _moveSlowing = value;
+            get => _tileMoveSlowing;
+            set => _tileMoveSlowing = value;
         }
 
-        public Ease MoveEase
+        public Ease ShortMoveEase
         {
-            get => _moveEase;
-            set => _moveEase = value;
+            get => _shortMoveEase;
+            set => _shortMoveEase = value;
+        }
+
+        public float MinSwipeSpeed
+        {
+            get => _minSwipeSpeed;
+            set => _minSwipeSpeed = value;
+        }
+
+        public float OneTileSpeed
+        {
+            get => _oneTileSpeed;
+            set => _oneTileSpeed = value;
+        }
+
+        public Ease LongMoveEase
+        {
+            get => _longMoveEase;
+            set => _longMoveEase = value;
         }
 
         // PUBLIC METHODS: -----------------------------------------------------------------------

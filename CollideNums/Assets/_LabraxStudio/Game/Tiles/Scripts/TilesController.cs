@@ -24,11 +24,12 @@ namespace LabraxStudio.Game.Tiles
             _tilesMover.Initialize(levelMeta.LevelMatrix, levelMeta.TilesMatrix);
         }
 
-        public void MoveTile(Tile tile, Direction direction, Swipe swipe)
+        public void MoveTile(Tile tile, Direction direction, Swipe swipe, float swipeSpeed)
         {
             TilesAnimator tilesAnimator = new TilesAnimator();
             List<AnimationAction> actions = new List<AnimationAction>();
-            var moveAction = _tilesMover.MoveTile(tile, direction, swipe);
+            var moveAction = _tilesMover.CalculateMoveAction(tile, direction, swipe);
+            moveAction.SetSwipeSpeed(swipeSpeed);
             actions.Add(moveAction);
             
             tilesAnimator.Play(actions);

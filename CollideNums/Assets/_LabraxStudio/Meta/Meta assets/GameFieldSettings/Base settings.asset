@@ -39,8 +39,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 797423b7686616448ac111575757aa6c, type: 3}
   - {fileID: 21300000, guid: 68df3043b32a2f947a327d002a22bd9d, type: 3}
   - {fileID: 21300000, guid: ddd0b1e59a70fc74abe69996afdf2a8e, type: 3}
-  _shortSwipeDelta: {x: 0.075, y: 0.55}
-  _longSwipeDelta: {x: 0.55, y: 1}
-  _oneCellTime: 0.185
-  _moveSlowing: 0.15
-  _moveEase: 9
+  _minSwipeSpeed: 2
+  _oneTileSpeed: 4.5
+  _oneTileMoveTime: 0.165
+  _tileMoveSlowing: 0.6
+  _shortMoveEase: 9
+  _longMoveEase: 2
