@@ -26,39 +26,38 @@ namespace LabraxStudio.Meta
 
         [Title("Swipe settings")]
         [SerializeField]
-        private float _minSwipeSpeed = 2;
-
-        [SerializeField]
-        private float _oneTileSpeed = 4.5f;
+        private float _baseSwipeForce = 5.5f;
 
         [Title("Animation settings")]
         [SerializeField]
-        private float _oneTileMoveTime = 0.2f;
+        private float _tileSpeed = 6f;
 
         [SerializeField]
-        [Range(0.0f, 1)]
-        private float _tileMoveSlowing = 0.15f;
+        private float _tileAcceleration = 0.5f;
 
         [SerializeField]
         private Ease _shortMoveEase = Ease.OutCubic;
-
-        [SerializeField]
-        private Ease _longMoveEase = Ease.InSine;
 
         // PROPERTIES: ----------------------------------------------------------------------------
 
         public float CellSize => _cellSize;
 
-        public float OneTileMoveTime
+        public float BaseSwipeForce
         {
-            get => _oneTileMoveTime;
-            set => _oneTileMoveTime = value;
+            get => _baseSwipeForce;
+            set => _baseSwipeForce = value;
+        }
+        
+        public float TileSpeed
+        {
+            get => _tileSpeed;
+            set => _tileSpeed = value;
         }
 
-        public float MoveSlowing
+        public float TileAcceleration
         {
-            get => _tileMoveSlowing;
-            set => _tileMoveSlowing = value;
+            get => _tileAcceleration;
+            set => _tileAcceleration = value;
         }
 
         public Ease ShortMoveEase
@@ -66,25 +65,7 @@ namespace LabraxStudio.Meta
             get => _shortMoveEase;
             set => _shortMoveEase = value;
         }
-
-        public float MinSwipeSpeed
-        {
-            get => _minSwipeSpeed;
-            set => _minSwipeSpeed = value;
-        }
-
-        public float OneTileSpeed
-        {
-            get => _oneTileSpeed;
-            set => _oneTileSpeed = value;
-        }
-
-        public Ease LongMoveEase
-        {
-            get => _longMoveEase;
-            set => _longMoveEase = value;
-        }
-
+        
         // PUBLIC METHODS: -----------------------------------------------------------------------
 
         public Sprite GetFieldSprite(int spriteIndex)

@@ -14,22 +14,16 @@ namespace LabraxStudio.Game.Debug
         // MEMBERS: -------------------------------------------------------------------------------
 
         [SerializeField]
-        private TMP_InputField _minSwipeSpeed;
+        private TMP_InputField _baseSwipeForce;
 
         [SerializeField]
-        private TMP_InputField _oneTileSpeed;
+        private TMP_InputField _tileSpeed;
 
         [SerializeField]
-        private TMP_InputField _oneTileMoveTime;
-
-        [SerializeField]
-        private TMP_InputField _moveSlowing;
+        private TMP_InputField _tileAcceleration;
 
         [SerializeField]
         private TMP_Dropdown _shortMoveEase;
-
-        [SerializeField]
-        private TMP_Dropdown _longMoveEase;
 
         [SerializeField]
         private TextMeshProUGUI _speedCounter;
@@ -45,42 +39,34 @@ namespace LabraxStudio.Game.Debug
             base.InitManager();
             _gameFieldSettings = ServicesFabric.GameSettingsService.GetGameSettings().GameFieldSettings;
 
-            _minSwipeSpeed.SetTextWithoutNotify(_gameFieldSettings.MinSwipeSpeed.ToString());
-            _oneTileSpeed.SetTextWithoutNotify(_gameFieldSettings.OneTileSpeed.ToString());
-
-            _oneTileMoveTime.SetTextWithoutNotify(_gameFieldSettings.OneTileMoveTime.ToString());
-            _moveSlowing.SetTextWithoutNotify((1-_gameFieldSettings.MoveSlowing).ToString());
+            _baseSwipeForce.SetTextWithoutNotify(_gameFieldSettings.BaseSwipeForce.ToString());
+            _tileSpeed.SetTextWithoutNotify(_gameFieldSettings.TileSpeed.ToString());
+            _tileAcceleration.SetTextWithoutNotify(_gameFieldSettings.TileAcceleration.ToString());
 
             PrepareEaseOptions();
             SetOption(_shortMoveEase, _gameFieldSettings.ShortMoveEase);
-            SetOption(_longMoveEase, _gameFieldSettings.LongMoveEase);
         }
 
         // PUBLIC METHODS: -----------------------------------------------------------------------
 
         public void ApplySwipes()
         {
-            _gameFieldSettings.MinSwipeSpeed = float.Parse(_minSwipeSpeed.text);
-            _gameFieldSettings.OneTileSpeed = float.Parse(_oneTileSpeed.text);
+            _gameFieldSettings.BaseSwipeForce = float.Parse(_baseSwipeForce.text);
         }
 
         public void ApplyAnimation()
         {
-            _gameFieldSettings.OneTileMoveTime = float.Parse(_oneTileMoveTime.text);
+            _gameFieldSettings.TileSpeed = float.Parse(_tileSpeed.text);
 
-            float moveSlowing = float.Parse(_moveSlowing.text);
-            if (moveSlowing < 0)
-                moveSlowing = 0.0f;
-            if (moveSlowing > 1)
-                moveSlowing = 1.0f;
-            _gameFieldSettings.MoveSlowing = 1-moveSlowing;
-            _moveSlowing.SetTextWithoutNotify((1-_gameFieldSettings.MoveSlowing).ToString());
+            float acceleration = float.Parse(_tileAcceleration.text);
+            if (acceleration < 0)
+                acceleration = 0.0f;
+            _gameFieldSettings.TileAcceleration = acceleration;
+            _tileAcceleration.SetTextWithoutNotify(_gameFieldSettings.TileAcceleration.ToString());
 
             _gameFieldSettings.ShortMoveEase = GetEase(_shortMoveEase, _gameFieldSettings.ShortMoveEase);
             SetOption(_shortMoveEase, _gameFieldSettings.ShortMoveEase);
 
-            _gameFieldSettings.LongMoveEase = GetEase(_longMoveEase, _gameFieldSettings.LongMoveEase);
-            SetOption(_longMoveEase, _gameFieldSettings.LongMoveEase);
         }
 
         public void UpdateSpeed(float speed)
@@ -107,7 +93,6 @@ namespace LabraxStudio.Game.Debug
             }
 
             _shortMoveEase.options = optionsData;
-            _longMoveEase.options = optionsData;
         }
 
         private void SetOption(TMP_Dropdown dropdown, Ease option)

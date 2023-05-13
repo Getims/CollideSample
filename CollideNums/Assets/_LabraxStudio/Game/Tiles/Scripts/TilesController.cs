@@ -29,7 +29,6 @@ namespace LabraxStudio.Game.Tiles
             TilesAnimator tilesAnimator = new TilesAnimator();
             List<AnimationAction> actions = new List<AnimationAction>();
             var moveAction = _tilesMover.CalculateMoveAction(tile, direction, swipe);
-            moveAction.SetSwipeSpeed(swipeSpeed);
             actions.Add(moveAction);
             
             tilesAnimator.Play(actions);

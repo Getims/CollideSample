@@ -99,13 +99,14 @@ namespace LabraxStudio.Game.Tiles
 
         private Swipe CalculateSwipe(float swipeSpeed)
         {
-            if (swipeSpeed < _gameFieldSettings.MinSwipeSpeed)
+            int tilesCount =(int) (swipeSpeed / _gameFieldSettings.BaseSwipeForce);
+            if (tilesCount<1)
                 return Swipe.Null;
 
-            if (swipeSpeed <= _gameFieldSettings.MinSwipeSpeed + _gameFieldSettings.OneTileSpeed)
+            if (tilesCount<2)
                 return Swipe.OneTile;
 
-            if (swipeSpeed <= _gameFieldSettings.MinSwipeSpeed + _gameFieldSettings.OneTileSpeed * 2)
+            if (tilesCount<3)
                 return Swipe.TwoTiles;
 
             return Swipe.Infinite;
