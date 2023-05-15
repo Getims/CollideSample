@@ -1,5 +1,4 @@
 using System;
-using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace LabraxStudio.Game.Tiles
@@ -9,9 +8,7 @@ namespace LabraxStudio.Game.Tiles
     {
         // FIELDS: -------------------------------------------------------------------
 
-        [ShowInInspector]
         private int[,] _tilesMatrix;
-
         private int[,] _levelMatrix;
         private int _width;
         private int _height;
@@ -20,8 +17,8 @@ namespace LabraxStudio.Game.Tiles
 
         public void Initialize(int[,] levelMatrix, int[,] tilesMatrix)
         {
-            _levelMatrix = (int[,]) levelMatrix.Clone();
-            _tilesMatrix = (int[,]) tilesMatrix.Clone();
+            _levelMatrix = levelMatrix;
+            _tilesMatrix = tilesMatrix;
 
             _width = _levelMatrix.GetLength(0);
             _height = _levelMatrix.GetLength(1);
@@ -77,7 +74,7 @@ namespace LabraxStudio.Game.Tiles
             }
 
             RemoveTileFromMatrix(tile.Cell.x, tile.Cell.y);
-            SetTileToMatrix(movePoint.x, movePoint.y, tile.Value + 1);
+            SetTileToMatrix(movePoint.x, movePoint.y, tile.Value);
             tile.SetCell(movePoint);
             return new MoveAction(tile, movePoint, swipe);
         }

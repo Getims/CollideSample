@@ -34,7 +34,7 @@ namespace LabraxStudio.Game
 
         public static int MatrixValueToTile(int matrixValue)
         {
-            int powValue = matrixValue + 1;
+            int powValue = matrixValue;
             int tileValue = (int) Math.Pow(2, powValue);
             return tileValue;
         }

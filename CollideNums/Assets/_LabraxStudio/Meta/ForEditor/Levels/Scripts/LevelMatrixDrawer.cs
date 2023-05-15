@@ -115,7 +115,7 @@ namespace LabraxStudio.Editor
                 bool increaseHeight = currentEvent.button == 0;
 
                 if (increaseHeight)
-                    value = Mathf.Min(value + 1, 5);
+                    value = Mathf.Min(value + 1, 6);
                 else
                     value = currentEvent.control ? 0 : Mathf.Max(value - 1, 0);
 

@@ -21,18 +21,20 @@ namespace LabraxStudio.Game.Tiles
             set => transform.position = value;
         }
 
+        public bool IsMerging => _isMerging;
+
         // FIELDS: -------------------------------------------------------------------
 
         private Vector2Int _cell = Vector2Int.zero;
         private int _value;
         private TileSwipeChecker _swipeChecker = new TileSwipeChecker();
+        private bool _isMerging = false;
 
         // PUBLIC METHODS: -----------------------------------------------------------------------
 
-        public void Initialize(string name, Sprite sprite)
+        public void Initialize(string name)
         {
             gameObject.name = name;
-            _spriteRenderer.sprite = sprite;
             _swipeChecker.Initialize(this, UnityEngine.Camera.main, OnSwipe);
         }
 
@@ -41,9 +43,15 @@ namespace LabraxStudio.Game.Tiles
             _cell = cell;
         }
 
-        public void SetValue(int value)
+        public void SetValue(int value, Sprite sprite)
         {
             _value = value;
+            _spriteRenderer.sprite = sprite;
+        }
+
+        public void SetMergeFlag(bool isMerging)
+        {
+            _isMerging = isMerging;
         }
 
         // EVENTS RECEIVERS: ----------------------------------------------------------------------
@@ -54,6 +62,12 @@ namespace LabraxStudio.Game.Tiles
         private void OnSwipe(Direction direction, Swipe swipe, float swipeSpeed)
         {
             TilesController.Instance.MoveTile(this, direction, swipe, swipeSpeed);
+        }
+
+        public void DestroySelf()
+        {
+            Utils.ReworkPoint(gameObject.name+": I destroyed");
+            Destroy(gameObject);
         }
     }
 }

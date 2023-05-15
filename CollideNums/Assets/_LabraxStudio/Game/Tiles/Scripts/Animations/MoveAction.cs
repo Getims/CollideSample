@@ -28,7 +28,7 @@ namespace LabraxStudio.Game.Tiles
 
         // PUBLIC METHODS: -----------------------------------------------------------------------
 
-        public override void Play()
+        public override void Play(Action onComplete)
         {
             Vector2 matrixToPosition =
                 GameTypesConverter.MatrixPositionToGamePosition(_moveTo, _gameFieldSettings.CellSize);
@@ -41,9 +41,18 @@ namespace LabraxStudio.Game.Tiles
             float time = CalculateTime(_gameFieldSettings.TileSpeed, _swipe);
 
             if (_swipe != Swipe.Infinite)
-                _tile.transform.DOMove(newPosition, time).SetEase(ease);
+            {
+                _tile.transform.DOMove(newPosition, time)
+                    .SetEase(ease)
+                    .OnComplete(() => onComplete.Invoke());
+            }
             else
-                TilesController.Instance.StartCoroutine(Moving(_tile.transform, _tile.Position, newPosition));
+            {
+                TilesController.Instance.StartCoroutine(Moving(_tile.transform, 
+                    _tile.Position, 
+                    newPosition, 
+                    onComplete));
+            }
         }
 
         // PRIVATE METHODS: -----------------------------------------------------------------------
@@ -76,7 +85,7 @@ namespace LabraxStudio.Game.Tiles
             return time;
         }
 
-        private IEnumerator Moving(Transform tile, Vector3 startPosition, Vector3 endPosition)
+        private IEnumerator Moving(Transform tile, Vector3 startPosition, Vector3 endPosition, Action onComplete)
         {
             float testTime = 0;
             float timeStep = 0.01f;
@@ -105,6 +114,7 @@ namespace LabraxStudio.Game.Tiles
             }
 
             Utils.ReworkPoint("TestTime: " + testTime);
+            onComplete.Invoke();
         }
 
     }

@@ -36,7 +36,8 @@ namespace LabraxStudio.Meta
 
         public Sprite GetTileSprite(int spriteIndex)
         {
-            if (spriteIndex >= _tilesSprites.Count)
+            spriteIndex -= 1;
+            if (spriteIndex >= _tilesSprites.Count || spriteIndex < 0)
                 return _errorSprite;
 
             Sprite sprite = _tilesSprites[spriteIndex];

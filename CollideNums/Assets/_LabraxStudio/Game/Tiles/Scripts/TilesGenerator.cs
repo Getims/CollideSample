@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using LabraxStudio.App.Services;
 using LabraxStudio.Meta;
 using UnityEngine;
@@ -18,53 +19,62 @@ namespace LabraxStudio.Game.Tiles
 
         // FIELDS: -------------------------------------------------------------------
 
-        private GameFieldSettings _gameFieldSettings;
+        private float _cellSize;
         private GameFieldSprites _gameFieldSprites;
 
         // PUBLIC METHODS: -----------------------------------------------------------------------
 
         public void Initialize()
         {
-            _gameFieldSettings = ServicesFabric.GameSettingsService.GetGameSettings().GameFieldSettings;
+            var _gameFieldSettings = ServicesFabric.GameSettingsService.GetGameSettings().GameFieldSettings;
+            _cellSize = _gameFieldSettings.CellSize;
             _gameFieldSprites = ServicesFabric.GameSettingsService.GetGameSettings().GameFieldSprites;
         }
 
-        public void GenerateTiles(int levelWidth, int levelHeight, int[,] tilesMatrix)
+        public List<Tile> GenerateTiles(int levelWidth, int levelHeight, int[,] tilesMatrix)
         {
+            List<Tile> generatedTiles = new List<Tile>();
+
             for (int i = 0; i < levelWidth; i++)
             {
                 for (int j = 0; j < levelHeight; j++)
                 {
-                    CreateTile(i, j, tilesMatrix[i, j] - 1);
+                    var tile = CreateTile(i, j, tilesMatrix[i, j]);
+                    if (tile != null)
+                        generatedTiles.Add(tile);
                 }
             }
+
+            return generatedTiles;
+        }
+
+        public Sprite GetSprite(int spriteIndex)
+        {
+            return _gameFieldSprites.GetTileSprite(spriteIndex);
         }
 
         // PRIVATE METHODS: -----------------------------------------------------------------------
 
-        private void CreateTile(int x, int y, int matrixValue)
+        private Tile CreateTile(int x, int y, int matrixValue)
         {
-            if (matrixValue == -1)
-                return;
+            if (matrixValue == 0)
+                return null;
 
             Tile newTile = Object.Instantiate(_tilePrefab, _tilesContainer);
 
             Vector2 matrixToPosition =
-                GameTypesConverter.MatrixPositionToGamePosition(new Vector2(x, y), _gameFieldSettings.CellSize);
+                GameTypesConverter.MatrixPositionToGamePosition(new Vector2(x, y), _cellSize);
             Vector3 position = Vector3.zero;
             position.x = matrixToPosition.x;
             position.y = matrixToPosition.y;
             newTile.transform.localPosition = position;
 
             int value = GameTypesConverter.MatrixValueToTile(matrixValue);
-            newTile.Initialize("Tile " + value, GetSprite(matrixValue));
+            newTile.Initialize("Tile " + value);
             newTile.SetCell(new Vector2Int(x, y));
-            newTile.SetValue(matrixValue);
-        }
+            newTile.SetValue(matrixValue, GetSprite(matrixValue));
 
-        private Sprite GetSprite(int spriteIndex)
-        {
-            return _gameFieldSprites.GetTileSprite(spriteIndex);
+            return newTile;
         }
     }
 }
