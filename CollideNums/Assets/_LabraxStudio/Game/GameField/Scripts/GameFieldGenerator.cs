@@ -20,12 +20,14 @@ namespace LabraxStudio.Game.GameField
         // FIELDS: -------------------------------------------------------------------
 
         private GameFieldSettings _gameFieldSettings;
+        private GameFieldSprites _gameFieldSprites;
 
         // PUBLIC METHODS: -----------------------------------------------------------------------
 
         public void Initialize()
         {
             _gameFieldSettings = ServicesFabric.GameSettingsService.GetGameSettings().GameFieldSettings;
+            _gameFieldSprites = ServicesFabric.GameSettingsService.GetGameSettings().GameFieldSprites;
         }
 
         public GameCellType[,] GenerateGameField(int levelWidth, int levelHeight, int[,] levelMatrix)
@@ -71,7 +73,7 @@ namespace LabraxStudio.Game.GameField
 
         private Sprite GetSprite(int spriteIndex)
         {
-            return _gameFieldSettings.GetFieldSprite(spriteIndex);
+            return _gameFieldSprites.GetFieldSprite(spriteIndex);
         }
 
         private string GenerateName(int x, int y)

@@ -19,7 +19,10 @@ namespace LabraxStudio.Meta
 
         [TitleGroup("Game level settings")]
         [BoxGroup("Game level settings/In", showLabel: false), SerializeField]
-        private GameFieldSettings _gameGameFieldSettings;
+        private GameFieldSprites gameGameFieldSprites;
+        
+        [BoxGroup("Game level settings/In", showLabel: false), SerializeField]
+        private GameFieldSettings gameGameFieldSettings;
         
         [BoxGroup("Game level settings/In", showLabel: false), SerializeField]
         private List<LevelMeta> _levelsList = new List<LevelMeta>();
@@ -28,7 +31,8 @@ namespace LabraxStudio.Meta
 
         public LaunchSettings LaunchSettings => _launchSettings;
         public BalanceSettings BalanceSettings => _balanceSettings;
-        public GameFieldSettings GameFieldSettings => _gameGameFieldSettings;
+        public GameFieldSprites GameFieldSprites => gameGameFieldSprites;
+        public GameFieldSettings GameFieldSettings => gameGameFieldSettings;
         public List<LevelMeta> LevelsList => _levelsList;
     }
 }

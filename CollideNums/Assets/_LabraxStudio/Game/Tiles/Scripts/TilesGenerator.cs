@@ -19,12 +19,14 @@ namespace LabraxStudio.Game.Tiles
         // FIELDS: -------------------------------------------------------------------
 
         private GameFieldSettings _gameFieldSettings;
+        private GameFieldSprites _gameFieldSprites;
 
         // PUBLIC METHODS: -----------------------------------------------------------------------
 
         public void Initialize()
         {
             _gameFieldSettings = ServicesFabric.GameSettingsService.GetGameSettings().GameFieldSettings;
+            _gameFieldSprites = ServicesFabric.GameSettingsService.GetGameSettings().GameFieldSprites;
         }
 
         public void GenerateTiles(int levelWidth, int levelHeight, int[,] tilesMatrix)
@@ -51,18 +53,18 @@ namespace LabraxStudio.Game.Tiles
                 GameTypesConverter.MatrixPositionToGamePosition(new Vector2(x, y), _gameFieldSettings.CellSize);
             Vector3 position = Vector3.zero;
             position.x = matrixToPosition.x;
-            position.y = matrixToPosition.y; 
+            position.y = matrixToPosition.y;
             newTile.transform.localPosition = position;
-            
+
             int value = GameTypesConverter.MatrixValueToTile(matrixValue);
-            newTile.Initialize("Tile "+ value, GetSprite(matrixValue));
+            newTile.Initialize("Tile " + value, GetSprite(matrixValue));
             newTile.SetCell(new Vector2Int(x, y));
             newTile.SetValue(matrixValue);
         }
 
         private Sprite GetSprite(int spriteIndex)
         {
-            return _gameFieldSettings.GetTileSprite(spriteIndex);
+            return _gameFieldSprites.GetTileSprite(spriteIndex);
         }
     }
 }
