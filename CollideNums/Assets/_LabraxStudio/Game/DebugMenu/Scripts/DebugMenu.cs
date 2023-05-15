@@ -14,6 +14,9 @@ namespace LabraxStudio.Game.Debug
         // MEMBERS: -------------------------------------------------------------------------------
 
         [SerializeField]
+        private GameObject _menuPanel;
+
+        [SerializeField]
         private TMP_InputField _baseSwipeForce;
 
         [SerializeField]
@@ -23,10 +26,10 @@ namespace LabraxStudio.Game.Debug
         private TMP_InputField _tileAcceleration;
 
         [SerializeField]
-        private TMP_Dropdown _shortMoveEase;
+        private TextMeshProUGUI _speedCounter;
 
         [SerializeField]
-        private TextMeshProUGUI _speedCounter;
+        private GameObject _speedCounterPanel;
 
         // FIELDS: -------------------------------------------------------------------
 
@@ -44,18 +47,13 @@ namespace LabraxStudio.Game.Debug
             _tileAcceleration.SetTextWithoutNotify(_gameFieldSettings.TileAcceleration.ToString());
 
             PrepareEaseOptions();
-            SetOption(_shortMoveEase, _gameFieldSettings.ShortMoveEase);
         }
 
         // PUBLIC METHODS: -----------------------------------------------------------------------
 
-        public void ApplySwipes()
+        public void ApplySettings()
         {
             _gameFieldSettings.BaseSwipeForce = float.Parse(_baseSwipeForce.text);
-        }
-
-        public void ApplyAnimation()
-        {
             _gameFieldSettings.TileSpeed = float.Parse(_tileSpeed.text);
 
             float acceleration = float.Parse(_tileAcceleration.text);
@@ -63,15 +61,26 @@ namespace LabraxStudio.Game.Debug
                 acceleration = 0.0f;
             _gameFieldSettings.TileAcceleration = acceleration;
             _tileAcceleration.SetTextWithoutNotify(_gameFieldSettings.TileAcceleration.ToString());
-
-            _gameFieldSettings.ShortMoveEase = GetEase(_shortMoveEase, _gameFieldSettings.ShortMoveEase);
-            SetOption(_shortMoveEase, _gameFieldSettings.ShortMoveEase);
-
         }
 
         public void UpdateSpeed(float speed)
         {
             _speedCounter.text = string.Format("Speed: {0:F1} m/s", speed);
+        }
+
+        public void ShowMenu()
+        {
+            _menuPanel.SetActive(true);
+        }
+
+        public void HideMenu()
+        {
+            _menuPanel.SetActive(false);
+        }
+
+        public void SwitchSpeedCounter()
+        {
+            _speedCounterPanel.SetActive(!_speedCounter.IsActive());
         }
 
         // PRIVATE METHODS: -----------------------------------------------------------------------
@@ -92,7 +101,7 @@ namespace LabraxStudio.Game.Debug
                 optionsData.Add(new TMP_Dropdown.OptionData(option));
             }
 
-            _shortMoveEase.options = optionsData;
+            //_shortMoveEase.options = optionsData;
         }
 
         private void SetOption(TMP_Dropdown dropdown, Ease option)

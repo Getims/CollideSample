@@ -36,7 +36,7 @@ namespace LabraxStudio.Game.Tiles
             newPosition.x = matrixToPosition.x;
             newPosition.y = matrixToPosition.y;
 
-            Ease ease = _gameFieldSettings.ShortMoveEase;
+            Ease ease = Ease.Linear;
 
             float time = CalculateTime(_gameFieldSettings.TileSpeed, _swipe);
 
@@ -76,38 +76,6 @@ namespace LabraxStudio.Game.Tiles
             return time;
         }
 
-        /*
-        private async void Moving(Transform tile, Vector3 startPosition, Vector3 endPosition)
-        {
-            var moveDelta = endPosition - startPosition;
-            float n = 0;
-            float x = Math.Abs(moveDelta.x);
-            float y = Math.Abs(moveDelta.y);
-            
-            if (x > 0)
-                n = x;
-
-            if (y > 0)
-                n = y;
-            
-            var testTime = Time.realtimeSinceStartup;
-            float speed = 0.1f;
-            float step = 0;//0.015f;
-            float t = 0;
-
-            while (t<1)
-            {
-                t += speed;
-                tile.position = Vector3.Lerp(startPosition, endPosition, t);
-                speed += step;
-                await Task.Delay(1);
-            }
-
-            var testEnd = Time.realtimeSinceStartup;
-            
-            Utils.ReworkPoint("TestTime: " + (testEnd-testTime));
-        }*/
-
         private IEnumerator Moving(Transform tile, Vector3 startPosition, Vector3 endPosition)
         {
             float testTime = 0;
@@ -119,21 +87,19 @@ namespace LabraxStudio.Game.Tiles
             float startSpeed = _gameFieldSettings.TileSpeed;
             
             float timeToMaxCoord = maxCoord / startSpeed;
-            
-            float acceleration = _gameFieldSettings.TileAcceleration;
+            float cylcesPerTile = 1 / startSpeed / timeStep;
+            float acceleration = _gameFieldSettings.TileAcceleration * timeStep / cylcesPerTile;
 
             float currentTime = 0;
             float currentAcceleration = 0;
 
             while (currentTime < timeToMaxCoord)
             {
-                currentTime += Time.deltaTime + currentAcceleration;
-                
-                currentAcceleration += acceleration*timeStep*timeStep/2;
-                
+                currentTime += timeStep + currentAcceleration;
+                currentAcceleration += acceleration;
                 tile.position = Vector3.Lerp(startPosition, endPosition, currentTime / timeToMaxCoord);
 
-                testTime += Time.deltaTime;
+                testTime += timeStep;
                 
                 yield return new WaitForSeconds(timeStep);
             }
@@ -141,35 +107,5 @@ namespace LabraxStudio.Game.Tiles
             Utils.ReworkPoint("TestTime: " + testTime);
         }
 
-        /*
-           private IEnumerator Moving(Transform tile, Vector3 startPosition, Vector3 endPosition)
-        {
-            float testTime = 0;
-            
-            var moveDelta = endPosition - startPosition;
-            float maxCoord = Mathf.Max(Mathf.Abs(moveDelta.x), Mathf.Abs(moveDelta.y));
-            float startSpeed = _gameFieldSettings.TileSpeed;
-            float timeToMaxCoord = maxCoord / startSpeed;
-            float acceleration = _gameFieldSettings.TileAcceleration;
-
-            float step = 0.01f;
-            startSpeed = step;
-            float currentTime = 0;
-            float currentSpeed = 0;
-
-            while (currentTime < timeToMaxCoord)
-            {
-                currentTime += step + currentSpeed;
-                currentSpeed += startSpeed*acceleration * Time.deltaTime;
-                tile.position = Vector3.Lerp(startPosition, endPosition, currentTime / timeToMaxCoord);
-
-                testTime += step;
-                // Ждем шаг времени
-                yield return new WaitForSeconds(step);
-            }
-
-            Utils.ReworkPoint("TestTime: " + testTime);
-        }
-         */
     }
 }

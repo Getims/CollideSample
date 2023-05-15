@@ -35,9 +35,6 @@ namespace LabraxStudio.Meta
         [SerializeField]
         private float _tileAcceleration = 0.5f;
 
-        [SerializeField]
-        private Ease _shortMoveEase = Ease.OutCubic;
-
         // PROPERTIES: ----------------------------------------------------------------------------
 
         public float CellSize => _cellSize;
@@ -58,12 +55,6 @@ namespace LabraxStudio.Meta
         {
             get => _tileAcceleration;
             set => _tileAcceleration = value;
-        }
-
-        public Ease ShortMoveEase
-        {
-            get => _shortMoveEase;
-            set => _shortMoveEase = value;
         }
         
         // PUBLIC METHODS: -----------------------------------------------------------------------
