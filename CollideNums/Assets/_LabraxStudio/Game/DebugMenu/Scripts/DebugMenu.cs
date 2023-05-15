@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using DG.Tweening;
+using LabraxStudio.App;
 using LabraxStudio.App.Services;
 using LabraxStudio.Managers;
 using LabraxStudio.Meta;
@@ -81,6 +82,23 @@ namespace LabraxStudio.Game.Debug
         public void SwitchSpeedCounter()
         {
             _speedCounterPanel.SetActive(!_speedCounter.IsActive());
+        }
+
+        public void RestartLevel()
+        {
+            GameManager.ReloadScene();
+        }
+
+        public void NextLevel()
+        {
+            PlayerDataService.SwitchToNextLevel();
+            GameManager.ReloadScene();
+        }
+        
+        public void PreviousLevel()
+        {
+            PlayerDataService.SwitchToPreviousLevel();
+            GameManager.ReloadScene();
         }
 
         // PRIVATE METHODS: -----------------------------------------------------------------------

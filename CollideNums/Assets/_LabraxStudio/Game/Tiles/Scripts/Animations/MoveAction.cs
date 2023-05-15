@@ -81,7 +81,6 @@ namespace LabraxStudio.Game.Tiles
             }
 
             time = n / tileSpeed;
-            Utils.ReworkPoint("Time: " + time);
             return time;
         }
 
@@ -113,7 +112,7 @@ namespace LabraxStudio.Game.Tiles
                 yield return new WaitForSeconds(timeStep);
             }
 
-            Utils.ReworkPoint("TestTime: " + testTime);
+            //WUtils.ReworkPoint("TestTime: " + testTime);
             onComplete.Invoke();
         }
 
