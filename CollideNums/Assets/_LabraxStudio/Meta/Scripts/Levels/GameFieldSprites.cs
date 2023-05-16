@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using LabraxEditor;
 using Sirenix.OdinInspector;
@@ -5,34 +6,47 @@ using UnityEngine;
 
 namespace LabraxStudio.Meta
 {
+    [Serializable]
     public class GameFieldSprites : ScriptableMeta
     {
         // MEMBERS: -------------------------------------------------------------------------------
 
-        [Title("Sprites settings")]
+        [SerializeField]
+        private Color _backgroundColor = Color.white;
+        
         [SerializeField]
         private Sprite _errorSprite;
 
+        [Space(10)]
         [SerializeField]
-        private List<Sprite> _fieldCellSprites = new List<Sprite>();
+        private PlayableSprites _playableSprites;
 
+        [Space(10)]
+        [SerializeField]
+        private NotPlayableSprites _notPlayableSprites;
+        
+        [Space(10)]
+        [SerializeField]
+        private GatesSprites _gatesSprites;
+        
         [Space(10)]
         [SerializeField]
         private List<Sprite> _tilesSprites = new List<Sprite>();
 
+        // PROPERTIES: ----------------------------------------------------------------------------
+        
+        public Color BackgroundColor => _backgroundColor;
+        
+        public Sprite ErrorSprite => _errorSprite;
+        
+        public PlayableSprites PlayableSprites => _playableSprites;
+
+        public NotPlayableSprites NotPlayableSprites => _notPlayableSprites;
+
+        public GatesSprites GateSprites => _gatesSprites;
+
+
         // PUBLIC METHODS: -----------------------------------------------------------------------
-
-        public Sprite GetFieldSprite(int spriteIndex)
-        {
-            if (spriteIndex >= _fieldCellSprites.Count)
-                return _errorSprite;
-
-            Sprite sprite = _fieldCellSprites[spriteIndex];
-            if (sprite == null)
-                return _errorSprite;
-
-            return sprite;
-        }
 
         public Sprite GetTileSprite(int spriteIndex)
         {

@@ -34,20 +34,28 @@ namespace LabraxStudio.Meta
         }
 
         [FoldoutGroup("LevelTemplate/Brush", Expanded = true)]
-        [FoldoutGroup("LevelTemplate/Brush")]
+        [HorizontalGroup("LevelTemplate/Brush/Horizontal")]
+        [VerticalGroup("LevelTemplate/Brush/Horizontal/One")]
         [SerializeField]
         private bool _brushMode = false;
-
-        [FoldoutGroup("LevelTemplate/Brush")]
-        [ShowIf(nameof(_brushMode))]
-        [SerializeField, Range(0, 20)]
-        private int _brushSize = 1;
-
-        [FoldoutGroup("LevelTemplate/Brush")]
+        
+        [VerticalGroup("LevelTemplate/Brush/Horizontal/One")]
         [ShowIf(nameof(_brushMode))]
         [SerializeField, Min(0)]
         private int _rightClickSize = 1;
-
+        
+        [VerticalGroup("LevelTemplate/Brush/Horizontal/One")]
+        [ShowIf(nameof(_brushMode))]
+        [SerializeField, Range(0, 10), OnValueChanged(nameof(UpdateBrushSprite))]
+        private int _brushSize = 1;
+        
+        [HorizontalGroup("LevelTemplate/Brush/Horizontal", Width = 80)]
+        [VerticalGroup("LevelTemplate/Brush/Horizontal/Two")]
+        [ShowIf(nameof(_brushMode))]
+        [SerializeField]
+        [ReadOnly, PreviewField(ObjectFieldAlignment.Left, Height = 80), HideLabel]
+        private Texture _brushSprite;
+        
         [FoldoutGroup("LevelTemplate")]
         [Space(20), InfoBox(LevelDrawTip)]
         [OdinSerialize]
@@ -170,6 +178,11 @@ namespace LabraxStudio.Meta
             height = _levelMatrix.GetLength(1);
 
             ResizeSecondMatrix();
+        }
+
+        private void UpdateBrushSprite()
+        {
+            _brushSprite = LevelMatrixDrawer.GetBrushTexture(_brushSize);
         }
 
         // SAVE FIX: ------------------------------------------------------------------------

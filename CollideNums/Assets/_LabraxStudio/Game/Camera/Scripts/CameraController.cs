@@ -6,11 +6,20 @@ namespace LabraxStudio.Game.Camera
 {
     public class CameraController : MonoBehaviour
     {
+        // MEMBERS: -------------------------------------------------------------------------------
+
+        [SerializeField]
+        private UnityEngine.Camera _camera;
+
         // PUBLIC METHODS: -----------------------------------------------------------------------
 
         public void Initialize(int levelWidth, int levelHeight)
         {
             SetPosition(levelWidth, levelHeight);
+
+            GameFieldSprites gameFieldSprites =
+                ServicesFabric.GameSettingsService.GetGameSettings().GameFieldSprites;
+            _camera.backgroundColor = gameFieldSprites.BackgroundColor;
         }
 
         // PRIVATE METHODS: -----------------------------------------------------------------------
