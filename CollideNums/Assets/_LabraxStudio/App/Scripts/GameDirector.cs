@@ -53,7 +53,7 @@ namespace LabraxStudio.App
             var gameSettings = ServicesFabric.GameSettingsService.GetGameSettings();
             PlayerDataService.Initialize();
             LevelDataService.Initialize();
-            //LevelMetaService.Initialize(gameSettings.LaunchSettings);
+            LevelMetaService.Initialize(gameSettings.LevelsList);
             GameManager.Instance.Initialize();
 
             if (!gameSettings.LaunchSettings.EnableTutorial)

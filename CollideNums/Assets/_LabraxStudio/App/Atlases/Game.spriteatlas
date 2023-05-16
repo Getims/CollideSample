@@ -67,13 +67,64 @@ SpriteAtlas:
       enableAlphaDilation: 0
     secondaryTextureSettings: {}
     variantMultiplier: 1
-    packables: []
+    packables:
+    - {fileID: 102900000, guid: 640dcf160f828ef429042910e156941c, type: 3}
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
   m_MasterAtlas: {fileID: 0}
-  m_PackedSprites: []
-  m_PackedSpriteNamesToIndex: []
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 06c705509e1634b4094d7478e2a6f8c4, type: 3}
+  - {fileID: 21300000, guid: b67fec71e2c96c54d97dd8d2c9509586, type: 3}
+  - {fileID: 21300000, guid: 15b142b12b5edce4aadb294194638785, type: 3}
+  - {fileID: 21300000, guid: 13df7423e35a7ea4abe210275300fcb5, type: 3}
+  - {fileID: 21300000, guid: 68df3043b32a2f947a327d002a22bd9d, type: 3}
+  - {fileID: 21300000, guid: bdb9d763e52986c4d88b1ed1f15cb509, type: 3}
+  - {fileID: 21300000, guid: 549d4bb3bfb20df41b90e9e8e7f19999, type: 3}
+  - {fileID: 21300000, guid: 9f90b6c39a786944c86f0deaf82d3d0f, type: 3}
+  - {fileID: 21300000, guid: c27989d3646c9674497da1c4ea718337, type: 3}
+  - {fileID: 21300000, guid: 7c8724c5f5d65404b984c8abec4d7666, type: 3}
+  - {fileID: 21300000, guid: ddd0b1e59a70fc74abe69996afdf2a8e, type: 3}
+  - {fileID: 21300000, guid: a6b1b5e6556573f42869bcff86efcf48, type: 3}
+  - {fileID: 21300000, guid: 8f6b2ee648663e948b0c56909b7ee25e, type: 3}
+  - {fileID: 21300000, guid: 64c1b4579bc53b743befa4ac43c48621, type: 3}
+  - {fileID: 21300000, guid: 797423b7686616448ac111575757aa6c, type: 3}
+  - {fileID: 21300000, guid: e8eb3888a4ea93142bac423239783647, type: 3}
+  - {fileID: 21300000, guid: be9473b8f4d5e144090bbd7a1888e1e2, type: 3}
+  - {fileID: 21300000, guid: a9c648d83d0a7254fb39da0f1a0b7d9f, type: 3}
+  - {fileID: 21300000, guid: 327dd8d85faccc046ab06cb69538878a, type: 3}
+  - {fileID: 21300000, guid: 07e32e7915591db49b410ace18cd8331, type: 3}
+  - {fileID: 21300000, guid: b05005b98a8fd064aba96ceb660c6590, type: 3}
+  - {fileID: 21300000, guid: 87d0c59bbb0f49e4b9db90898d2f9a89, type: 3}
+  - {fileID: 21300000, guid: d796c72ecc823454aa6bd5fe9b3f0099, type: 3}
+  - {fileID: 21300000, guid: a65572bed620561408697af096db259f, type: 3}
+  - {fileID: 21300000, guid: 1c3523af39edf7942add1c3ed9684c64, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - Left
+  - Gate_32
+  - Gate_16
+  - Top
+  - Tile_32
+  - Tile_4
+  - arrow
+  - Right_top
+  - Right_bottom
+  - Gate_4
+  - Tile_64
+  - Left_top
+  - Tile_2
+  - Error
+  - Tile_16
+  - Gate_64
+  - Tile_8
+  - Unlocked
+  - restart arrow
+  - Gate_2
+  - Right
+  - Left_bottom
+  - Locked
+  - Bottom
+  - Gate_8
   m_RenderDataMap: {}
   m_Tag: Game
   m_IsVariant: 0

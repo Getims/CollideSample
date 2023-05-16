@@ -89,6 +89,8 @@ namespace LabraxStudio.App.Services
         public static void SwitchToPreviousLevel()
         {
             int newLevel = _playerData.CurrentLevel - 1;
+            if (newLevel < 0)
+                newLevel = 0;
             _playerData.SetCurrentLevel(newLevel);
             _gameDataService.SaveGameData();
         }

@@ -28,7 +28,7 @@ namespace LabraxStudio.Loadscreen
         private void Start()
         {
 #if !UNITY_EDITOR
-            LoadGameDirectorAsynchronously();
+            OnSupersonicWisdomReady();
             //SupersonicWisdom.Api.AddOnReadyListener(OnSupersonicWisdomReady);
             //SupersonicWisdom.Api.Initialize();
 #else
@@ -45,6 +45,7 @@ namespace LabraxStudio.Loadscreen
 
         private void SelectScene()
         {
+            /*
             int levelsCount = LevelMetaService.LevelsCount;
 
             if (levelsCount <= 1)
@@ -55,6 +56,8 @@ namespace LabraxStudio.Loadscreen
 
             bool loadMainMenuScene = LevelDataService.GetLevelData(1).IsUnlocked;
             Scenes scene = loadMainMenuScene ? Scenes.MainMenu : Scenes.Game;
+            */
+            Scenes scene = Scenes.Game;
             _loading.LoadScene(scene);
         }
 

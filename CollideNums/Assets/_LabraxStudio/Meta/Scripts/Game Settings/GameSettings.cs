@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using LabraxEditor;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -16,10 +17,22 @@ namespace LabraxStudio.Meta
         [BoxGroup("Balance Settings/In", showLabel: false), SerializeField]
         private BalanceSettings _balanceSettings;
 
+        [TitleGroup("Game level settings")]
+        [BoxGroup("Game level settings/In", showLabel: false), SerializeField]
+        private GameFieldSprites gameGameFieldSprites;
+        
+        [BoxGroup("Game level settings/In", showLabel: false), SerializeField]
+        private GameFieldSettings gameGameFieldSettings;
+        
+        [BoxGroup("Game level settings/In", showLabel: false), SerializeField]
+        private List<LevelMeta> _levelsList = new List<LevelMeta>();
+
         // PROPERTIES: ----------------------------------------------------------------------------
 
         public LaunchSettings LaunchSettings => _launchSettings;
         public BalanceSettings BalanceSettings => _balanceSettings;
-
+        public GameFieldSprites GameFieldSprites => gameGameFieldSprites;
+        public GameFieldSettings GameFieldSettings => gameGameFieldSettings;
+        public List<LevelMeta> LevelsList => _levelsList;
     }
 }

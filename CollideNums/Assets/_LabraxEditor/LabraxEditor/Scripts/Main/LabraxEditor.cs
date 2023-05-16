@@ -1,6 +1,6 @@
+#if UNITY_EDITOR
 using LabraxEditor.Data;
 
-#if UNITY_EDITOR
 namespace LabraxEditor
 {
     using System;
@@ -293,7 +293,7 @@ namespace LabraxEditor
             EditorGUILayout.BeginVertical("box");
 
             #region Vertical
-            
+
             EditorTimeHelper.Time.Update();
             try
             {
