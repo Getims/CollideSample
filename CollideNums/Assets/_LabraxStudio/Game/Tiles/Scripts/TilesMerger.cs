@@ -21,24 +21,19 @@ namespace LabraxStudio.Game.Tiles
             _height = tilesMatrix.GetLength(1);
         }
 
-        public MergeAction CheckMerge(Tile tile)
+        public MergeAction CheckMerge(Tile tile, Direction direction = Direction.Null)
         {
             Tile otherTile = null;
 
-            otherTile = CanMerge(tile, Direction.Left);
-            if (otherTile != null)
+            if (direction != Direction.Null)
             {
-                tile.SetMergeFlag(true);
-                otherTile.SetMergeFlag(true);
-                return new MergeAction(tile, otherTile);
-            }
-            
-            otherTile = CanMerge(tile, Direction.Up);
-            if (otherTile != null)
-            {
-                tile.SetMergeFlag(true);
-                otherTile.SetMergeFlag(true);
-                return new MergeAction(tile, otherTile);
+                otherTile = CanMerge(tile, direction);
+                if (otherTile != null)
+                {
+                    tile.SetMergeFlag(true);
+                    otherTile.SetMergeFlag(true);
+                    return new MergeAction(tile, otherTile);
+                }
             }
             
             otherTile = CanMerge(tile, Direction.Right);
@@ -50,6 +45,22 @@ namespace LabraxStudio.Game.Tiles
             }
             
             otherTile = CanMerge(tile, Direction.Down);
+            if (otherTile != null)
+            {
+                tile.SetMergeFlag(true);
+                otherTile.SetMergeFlag(true);
+                return new MergeAction(tile, otherTile);
+            }
+            
+            otherTile = CanMerge(tile, Direction.Left);
+            if (otherTile != null)
+            {
+                tile.SetMergeFlag(true);
+                otherTile.SetMergeFlag(true);
+                return new MergeAction(tile, otherTile);
+            }
+            
+            otherTile = CanMerge(tile, Direction.Up);
             if (otherTile != null)
             {
                 tile.SetMergeFlag(true);

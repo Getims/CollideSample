@@ -47,7 +47,7 @@ namespace LabraxStudio.Game.Tiles
             List<AnimationAction> actions = new List<AnimationAction>();
             var moveAction = _tilesMover.CalculateMoveAction(tile, direction, swipe);
             actions.Add(moveAction);
-            var mergeAction = _tilesMerger.CheckMerge(tile);
+            var mergeAction = _tilesMerger.CheckMerge(tile, direction);
 
             if (mergeAction == null)
                 tilesAnimator.Play(actions, CheckAllMerges);
