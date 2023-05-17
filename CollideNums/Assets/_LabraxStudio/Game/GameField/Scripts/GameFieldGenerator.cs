@@ -142,19 +142,21 @@ namespace LabraxStudio.Game.GameField
             int checkLeftBottom = x - 1 >= 0 && y + 1 < height ? _levelMatrix[x - 1, y + 1] : 0;
 
             int type = 0;
-            type += checkLeft == 2 ? 1 : 0;
-            type += checkLeftTop == 2 ? 2 : 0;
-            type += checkTop == 2 ? 4 : 0;
-            type += checkRightTop == 2 ? 8 : 0;
-            type += checkRight == 2 ? 16 : 0;
-            type += checkRightBottom == 2 ? 32 : 0;
-            type += checkBottom == 2 ? 64 : 0;
-            type += checkLeftBottom == 2 ? 128 : 0;
+            type += checkLeft >= 2 ? 1 : 0;
+            type += checkLeftTop >= 2 ? 2 : 0;
+            type += checkTop >= 2 ? 4 : 0;
+            type += checkRightTop >= 2 ? 8 : 0;
+            type += checkRight >= 2 ? 16 : 0;
+            type += checkRightBottom >= 2 ? 32 : 0;
+            type += checkBottom >= 2 ? 64 : 0;
+            type += checkLeftBottom >= 2 ? 128 : 0;
 
+            /*
             type += checkBottom > 2 ? 256 : 0;
             type += checkRight > 2 ? 256 : 0;
             type += checkLeft > 2 ? 512 : 0;
             type += checkBottom > 2 ? 512 : 0;
+            */
 
             switch (type)
             {
@@ -196,11 +198,12 @@ namespace LabraxStudio.Game.GameField
                 case 244:
                 case 246:
                 case 248:
-                case 560:
+                //case 560:
                     return _gameFieldSprites.NotPlayableSprites.NotPlayable2;
                 case 225:
                 case 227:
-                case 385:
+                case 237:
+               // case 385:
                     return _gameFieldSprites.NotPlayableSprites.NotPlayable3;
                 case 241:
                 case 243:
@@ -267,15 +270,20 @@ namespace LabraxStudio.Game.GameField
                 case 115:
                 case 116:
                 case 120:
+                case 121:
                 case 122:
+                case 123:
                     return _gameFieldSprites.NotPlayableSprites.NotPlayable9;
                 case 124:
                 case 125:
                 case 127:
+                case 252://New sprite
                 case 254://New sprite
                     return _gameFieldSprites.NotPlayableSprites.NotPlayable10;
                 case 199:
                 case 207:
+                case 223:
+                case 231://New sprite
                 case 239://New sprite
                     return _gameFieldSprites.NotPlayableSprites.NotPlayable11;
                 case 0:
