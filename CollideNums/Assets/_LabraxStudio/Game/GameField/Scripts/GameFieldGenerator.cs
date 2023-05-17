@@ -207,7 +207,6 @@ namespace LabraxStudio.Game.GameField
                     return _gameFieldSprites.NotPlayableSprites.NotPlayable3;
                 case 241:
                 case 243:
-                case 247: //New sprite
                 case 249:
                 case 251:
                     return _gameFieldSprites.NotPlayableSprites.NotPlayable4;
@@ -252,7 +251,6 @@ namespace LabraxStudio.Game.GameField
                 case 86:
                 case 88:
                 case 92:
-                case 95:
                     return _gameFieldSprites.NotPlayableSprites.NotPlayable7;
                 case 193:
                 case 195:
@@ -277,15 +275,25 @@ namespace LabraxStudio.Game.GameField
                 case 124:
                 case 125:
                 case 127:
-                case 252://New sprite
-                case 254://New sprite
                     return _gameFieldSprites.NotPlayableSprites.NotPlayable10;
                 case 199:
                 case 207:
                 case 223:
-                case 231://New sprite
-                case 239://New sprite
                     return _gameFieldSprites.NotPlayableSprites.NotPlayable11;
+                case 231:
+                case 239:
+                    return _gameFieldSprites.NotPlayableSprites.NotPlayable12;
+                case 252:
+                case 254:
+                    return _gameFieldSprites.NotPlayableSprites.NotPlayable13;
+                case 255:
+                    return _gameFieldSprites.NotPlayableSprites.NotPlayable14;
+                case 247:
+                    return _gameFieldSprites.NotPlayableSprites.NotPlayable15;
+                case 253:
+                    return _gameFieldSprites.NotPlayableSprites.NotPlayable16;
+                case 95:
+                    return _gameFieldSprites.NotPlayableSprites.NotPlayable17;
                 case 0:
                     return _gameFieldSprites.NotPlayableSprites.Background;
             }

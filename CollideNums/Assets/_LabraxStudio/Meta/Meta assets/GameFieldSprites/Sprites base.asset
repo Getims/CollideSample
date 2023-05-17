@@ -49,6 +49,12 @@ MonoBehaviour:
     _notPlayable9: {fileID: 21300000, guid: 662e5ede969cc554dbf506ac6ac4ac14, type: 3}
     _notPlayable10: {fileID: 21300000, guid: d671d9846030942409eadf18cf8f091e, type: 3}
     _notPlayable11: {fileID: 21300000, guid: fa191be7928b73c42b2549aa33b82013, type: 3}
+    _notPlayable12: {fileID: 21300000, guid: 0e5a2480b1b045b4ca1fa077aebc486a, type: 3}
+    _notPlayable13: {fileID: 21300000, guid: 9e5f384ca2758dd44a103a349d6fb15d, type: 3}
+    _notPlayable14: {fileID: 21300000, guid: c19d7c8aaf601e04e9695489b9407023, type: 3}
+    _notPlayable15: {fileID: 21300000, guid: 5cbf54b2c90aa1a4792c493e6b608570, type: 3}
+    _notPlayable16: {fileID: 21300000, guid: 9f57ce13fad99c84e9e305c0c8d1ba1d, type: 3}
+    _notPlayable17: {fileID: 21300000, guid: 9729e4f5d63dc6b4e8c1ed2262916010, type: 3}
   _gatesSprites:
     _gateHorizontalUnlocked: {fileID: 21300000, guid: 4a893752d0767d44999377d883980463, type: 3}
     _gateHorizontalLocked: {fileID: 21300000, guid: 14b6842caf697f847be728ccd5801a09, type: 3}

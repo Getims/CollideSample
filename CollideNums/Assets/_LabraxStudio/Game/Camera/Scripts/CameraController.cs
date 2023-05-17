@@ -1,3 +1,4 @@
+using LabraxStudio.App;
 using LabraxStudio.App.Services;
 using LabraxStudio.Meta;
 using UnityEngine;
@@ -11,11 +12,19 @@ namespace LabraxStudio.Game.Camera
         [SerializeField]
         private UnityEngine.Camera _camera;
 
+        [SerializeField]
+        private CameraZoom _cameraZoom;
+
+        // PROPERTIES: ----------------------------------------------------------------------------
+
+        public UnityEngine.Camera Camera => _camera;
+
         // PUBLIC METHODS: -----------------------------------------------------------------------
 
         public void Initialize(int levelWidth, int levelHeight)
         {
             SetPosition(levelWidth, levelHeight);
+            SetupCameraSize();
 
             GameFieldSprites gameFieldSprites =
                 ServicesFabric.GameSettingsService.GetGameSettings().GameFieldSprites;
@@ -23,6 +32,7 @@ namespace LabraxStudio.Game.Camera
         }
 
         // PRIVATE METHODS: -----------------------------------------------------------------------
+
         private void SetPosition(int levelWidth, int levelHeight)
         {
             GameFieldSettings gameFieldSettings =
@@ -36,6 +46,22 @@ namespace LabraxStudio.Game.Camera
             newPosition.x = offsetX;
             newPosition.y = offsetY;
             transform.localPosition = newPosition;
+        }
+
+        private void SetupCameraSize()
+        {
+            _cameraZoom.Setup(this);
+            float screenFactor = 1;
+
+            if (ScreenManager.Instance.IsPhone)
+            {
+                if (ScreenManager.Instance.CurrentAspectRatio < ScreenManager.Instance.BaseAspectRatio)
+                    screenFactor = ScreenManager.Instance.BaseAspectRatio / ScreenManager.Instance.CurrentAspectRatio;
+
+                _cameraZoom.SetSize(screenFactor);
+            }
+            else
+                _cameraZoom.SetSize(screenFactor);
         }
     }
 }

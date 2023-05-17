@@ -52,6 +52,24 @@ namespace LabraxStudio.Meta
 
         [SerializeField]
         private Sprite _notPlayable11;
+        
+        [SerializeField]
+        private Sprite _notPlayable12;
+        
+        [SerializeField]
+        private Sprite _notPlayable13;
+        
+        [SerializeField]
+        private Sprite _notPlayable14;
+        
+        [SerializeField]
+        private Sprite _notPlayable15;
+        
+        [SerializeField]
+        private Sprite _notPlayable16;
+        
+        [SerializeField]
+        private Sprite _notPlayable17;
 
         // PROPERTIES: ----------------------------------------------------------------------------
 
@@ -70,5 +88,11 @@ namespace LabraxStudio.Meta
         public Sprite NotPlayable9 => _notPlayable9;
         public Sprite NotPlayable10 => _notPlayable10;
         public Sprite NotPlayable11 => _notPlayable11;
+        public Sprite NotPlayable12 => _notPlayable12;
+        public Sprite NotPlayable13 => _notPlayable13;
+        public Sprite NotPlayable14 => _notPlayable14;
+        public Sprite NotPlayable15 => _notPlayable15;
+        public Sprite NotPlayable16 => _notPlayable16;
+        public Sprite NotPlayable17 => _notPlayable17;
     }
 }
