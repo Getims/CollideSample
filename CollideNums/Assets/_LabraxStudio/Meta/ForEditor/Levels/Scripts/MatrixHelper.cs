@@ -1,4 +1,5 @@
 #if UNITY_EDITOR
+using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -16,6 +17,8 @@ namespace LabraxStudio.Editor
         // FIELDS: --------------------------------------------------------------------------------
 
         private const string SpritesPath = "Assets/_LabraxStudio/Meta/ForEditor/Levels/Sprites/";
+        private const string GatesPath = "Assets/_LabraxStudio/Meta/ForEditor/Levels/Sprites/Gates/";
+        private const string TilesPath = "Assets/_LabraxStudio/Meta/ForEditor/Levels/Sprites/Tiles/";
 
         private static bool _isInitialized;
 
@@ -39,10 +42,6 @@ namespace LabraxStudio.Editor
             int idCount = 0;
             LoadLockedTypes(ref idCount);
             LoadUnlockedTypes(ref idCount);
-            LoadTopTypes(ref idCount);
-            LoadBottomTypes(ref idCount);
-            LoadLeftTypes(ref idCount);
-            LoadRightTypes(ref idCount);
             LoadGatesTypes(ref idCount);
             LoadTiles();
         }
@@ -59,65 +58,26 @@ namespace LabraxStudio.Editor
             idCount++;
         }
 
-        private static void LoadLeftTypes(ref int idCount)
-        {
-            AddKeyAndValue(idCount, "Left");
-            idCount++;
-            AddKeyAndValue(idCount, "Left_bottom");
-            idCount++;
-            AddKeyAndValue(idCount, "Left_top");
-            idCount++;
-        }
-
-        private static void LoadTopTypes(ref int idCount)
-        {
-            AddKeyAndValue(idCount, "Top");
-            idCount++;
-        }
-
-        private static void LoadRightTypes(ref int idCount)
-        {
-            AddKeyAndValue(idCount, "Right");
-            idCount++;
-            AddKeyAndValue(idCount, "Right_bottom");
-            idCount++;
-            AddKeyAndValue(idCount, "Right_top");
-            idCount++;
-        }
-
-        private static void LoadBottomTypes(ref int idCount)
-        {
-            AddKeyAndValue(idCount, "Bottom");
-            idCount++;
-        }
-
         private static void LoadGatesTypes(ref int idCount)
         {
-            AddKeyAndValue(idCount, "Gate_2");
-            idCount++;
-            AddKeyAndValue(idCount, "Gate_4");
-            idCount++;
-            AddKeyAndValue(idCount, "Gate_8");
-            idCount++;
-            AddKeyAndValue(idCount, "Gate_16");
-            idCount++;
-            AddKeyAndValue(idCount, "Gate_32");
-            idCount++;
-            AddKeyAndValue(idCount, "Gate_64");
-            idCount++;
+            for (int i = 0; i < 9; i++)
+            {
+                AddKeyAndValue(idCount, "Gate_" + i, false, GatesPath);
+                idCount++;
+            }
         }
         
         private static void LoadTiles()
         {
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < 9; i++)
             {
-                AddKeyAndValue(i, "Tile_" + i, true);
+                AddKeyAndValue(i, "Tile_" + i, true, TilesPath);
             }
         }
 
-        private static void AddKeyAndValue(int key, string textureName, bool isTile = false)
+        private static void AddKeyAndValue(int key, string textureName, bool isTile = false, string customPath="")
         {
-            Texture texture = LoadTexture(textureName);
+            Texture texture = LoadTexture(textureName, customPath);
 
             if (isTile)
                 TilesDictionary.Add(key, texture);
@@ -125,14 +85,16 @@ namespace LabraxStudio.Editor
                 TexturesDictionary.Add(key, texture);
         }
 
-        private static Texture LoadTexture(string fileName)
+        private static Texture LoadTexture(string fileName, string customPath = "")
         {
+            string path = customPath == "" ? SpritesPath : customPath;
+            
             var jpg = ".jpg";
             var png = ".png";
-            var texture = EditorGUIUtility.Load(SpritesPath + fileName + jpg) as Texture2D;
+            var texture = EditorGUIUtility.Load(path + fileName + jpg) as Texture2D;
 
             if (texture == null)
-                texture = EditorGUIUtility.Load(SpritesPath + fileName + png) as Texture2D;
+                texture = EditorGUIUtility.Load(path + fileName + png) as Texture2D;
 
             return texture;
         }
