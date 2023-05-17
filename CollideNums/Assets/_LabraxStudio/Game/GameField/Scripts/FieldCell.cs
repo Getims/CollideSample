@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace LabraxStudio.Game.GameField
 {
-    public class FieldCell :MonoBehaviour
+    public class FieldCell : MonoBehaviour
     {
         // MEMBERS: -------------------------------------------------------------------------------
 

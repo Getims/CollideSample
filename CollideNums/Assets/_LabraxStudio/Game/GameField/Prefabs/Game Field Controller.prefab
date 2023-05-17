@@ -79,3 +79,4 @@ MonoBehaviour:
   _gameFieldGenerator:
     _cellsContainer: {fileID: 3452244103290160918}
     _fieldCellPrefab: {fileID: 5464420599947067472, guid: 4c9ab04497a0a3249b75d89da86cc60a, type: 3}
+    _gateCellPrefab: {fileID: 5464420599947067472, guid: de4e40784e0911d4c8b86da900e31206, type: 3}
