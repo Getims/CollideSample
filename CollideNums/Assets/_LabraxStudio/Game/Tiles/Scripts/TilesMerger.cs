@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace LabraxStudio.Game.Tiles
@@ -78,23 +79,9 @@ namespace LabraxStudio.Game.Tiles
             int x = tile.Cell.x;
             int y = tile.Cell.y;
 
-            switch (direction)
-            {
-                case Direction.Null:
-                    return null;
-                case Direction.Left:
-                    x -= 1;
-                    break;
-                case Direction.Right:
-                    x += 1;
-                    break;
-                case Direction.Up:
-                    y -= 1;
-                    break;
-                case Direction.Down:
-                    y += 1;
-                    break;
-            }
+            Vector2Int mergeVector = GameTypesConverter.DirectionToVector2Int(direction);
+            x += mergeVector.x;
+            y += mergeVector.y;
             
             if (x<0 || x>=_width ||
                 y<0 || y>= _height)

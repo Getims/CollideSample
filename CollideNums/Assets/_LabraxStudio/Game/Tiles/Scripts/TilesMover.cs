@@ -30,6 +30,7 @@ namespace LabraxStudio.Game.Tiles
             int path = 0;
             Vector2Int startPoint = tile.Cell;
             Vector2Int movePoint = startPoint;
+            Vector2Int moveVector = GameTypesConverter.DirectionToVector2Int(direction);
 
             switch (swipe)
             {
@@ -47,29 +48,14 @@ namespace LabraxStudio.Game.Tiles
             for (int i = 0; i < moves; i++)
             {
                 var tempPoint = movePoint;
+                tempPoint += moveVector;
 
-                switch (direction)
-                {
-                    case Direction.Down:
-                        tempPoint.y = tempPoint.y + 1;
-                        break;
-                    case Direction.Up:
-                        tempPoint.y = tempPoint.y - 1;
-                        break;
-                    case Direction.Left:
-                        tempPoint.x = tempPoint.x - 1;
-                        break;
-                    case Direction.Right:
-                        tempPoint.x = tempPoint.x + 1;
-                        break;
-                }
-
-                if (IsPlayableCell(tempPoint.x, tempPoint.y))
+                if (IsPlayableCell(tempPoint.x, tempPoint.y, tile.Value))
                 {
                     if (HasTile(tempPoint.x, tempPoint.y))
                         break;
-                    else
-                        movePoint = tempPoint;
+
+                    movePoint = tempPoint;
                 }
             }
 
@@ -81,7 +67,7 @@ namespace LabraxStudio.Game.Tiles
 
         // PRIVATE METHODS: -----------------------------------------------------------------------
 
-        private bool IsPlayableCell(int x, int y)
+        private bool IsPlayableCell(int x, int y, int tileValue)
         {
             if (x < 0 || y < 0)
                 return false;
@@ -90,22 +76,17 @@ namespace LabraxStudio.Game.Tiles
                 return false;
 
             GameCellType gameCellType = GameTypesConverter.MatrixValueToCellType(_levelMatrix[x, y]);
+
             switch (gameCellType)
             {
                 case GameCellType.Locked:
                     return false;
                 case GameCellType.Unlocked:
                     return true;
-                case GameCellType.Gate2:
-                case GameCellType.Gate4:
-                case GameCellType.Gate8:
-                case GameCellType.Gate16:
-                case GameCellType.Gate32:
-                case GameCellType.Gate64:
-                    return true;
+                default:
+                    GameCellType tileGate = GameTypesConverter.TileValueToGateType(tileValue);
+                    return tileGate == gameCellType;
             }
-
-            return false;
         }
 
         private bool HasTile(int x, int y)

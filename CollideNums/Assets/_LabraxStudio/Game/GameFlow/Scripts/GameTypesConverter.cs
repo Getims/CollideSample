@@ -10,26 +10,19 @@ namespace LabraxStudio.Game
             if (cellValue <= 1)
                 return GameCellType.Locked;
 
-            if (cellValue <= 10)
+            if (cellValue == 2)
                 return GameCellType.Unlocked;
 
-            switch (cellValue)
-            {
-                case 11:
-                    return GameCellType.Gate2;
-                case 12:
-                    return GameCellType.Gate4;
-                case 13:
-                    return GameCellType.Gate8;
-                case 14:
-                    return GameCellType.Gate16;
-                case 15:
-                    return GameCellType.Gate32;
-                case 16:
-                    return GameCellType.Gate64;
-            }
+            int gateInt = cellValue - 1;
 
-            return GameCellType.Locked;
+            return (GameCellType) gateInt;
+        }
+        
+        public static GameCellType TileValueToGateType(int tileValue)
+        {
+            int gateInt = tileValue + 1;
+            
+            return (GameCellType) gateInt;
         }
 
         public static int MatrixValueToTile(int matrixValue)
@@ -47,6 +40,23 @@ namespace LabraxStudio.Game
             result.y = -cellSize * matrixPosition.y;
 
             return result;
+        }
+        
+        public static Vector2Int DirectionToVector2Int(Direction direction)
+        {
+            switch (direction)
+            {
+                case Direction.Down:
+                    return new Vector2Int(0, 1);
+                case Direction.Up:
+                    return new Vector2Int(0, -1);
+                case Direction.Left:
+                    return new Vector2Int(-1, 0);
+                case Direction.Right:
+                    return new Vector2Int(1, 0);
+                default:
+                    return new Vector2Int(0, 0);
+            }
         }
     }
 }

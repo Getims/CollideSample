@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using LabraxStudio.App.Services;
+using LabraxStudio.Events;
 using LabraxStudio.Managers;
 using LabraxStudio.Meta;
 using Sirenix.OdinInspector;
@@ -19,6 +19,10 @@ namespace LabraxStudio.Game.Tiles
 
         [SerializeField]
         private TilesMerger _tilesMerger = new TilesMerger();
+
+        // PROPERTIES: ----------------------------------------------------------------------------
+
+        public int[,] TilesMatrix => _tilesMatrix;
 
         // FIELDS: -------------------------------------------------------------------
 
@@ -56,6 +60,8 @@ namespace LabraxStudio.Game.Tiles
                 actions.Add(mergeAction);
                 tilesAnimator.Play(actions, () => CheckChainMerges(mergeAction.MergeTo));
             }
+
+            GameEvents.SendTileAction();
         }
 
         public Tile GetTile(Vector2 cell)
@@ -94,6 +100,8 @@ namespace LabraxStudio.Game.Tiles
                 TilesAnimator tilesAnimator = new TilesAnimator();
                 tilesAnimator.Play(mergeAction, () => CheckChainMerges(mergeAction.MergeTo));
             }
+
+            GameEvents.SendTileAction();
         }
 
         private void CheckAllMerges()
@@ -101,10 +109,10 @@ namespace LabraxStudio.Game.Tiles
             _animations--;
             if (_animations < 0)
                 _animations = 0;
-            
-            if(_animations>0)
+
+            if (_animations > 0)
                 return;
-            
+
             ResetMergeFlag();
             List<AnimationAction> actions = new List<AnimationAction>();
             MergeAction mergeAction = null;
@@ -123,6 +131,8 @@ namespace LabraxStudio.Game.Tiles
 
             TilesAnimator tilesAnimator = new TilesAnimator();
             tilesAnimator.Play(actions, CheckAllMerges);
+
+            GameEvents.SendTileAction();
         }
 
         private void ResetMergeFlag()

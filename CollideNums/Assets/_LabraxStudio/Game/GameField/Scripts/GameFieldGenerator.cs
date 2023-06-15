@@ -17,9 +17,6 @@ namespace LabraxStudio.Game.GameField
         [SerializeField]
         private FieldCell _fieldCellPrefab;
 
-        [SerializeField]
-        private GateCell _gateCellPrefab;
-
         // FIELDS: -------------------------------------------------------------------
 
         private GameFieldSettings _gameFieldSettings;
@@ -32,21 +29,6 @@ namespace LabraxStudio.Game.GameField
         {
             _gameFieldSettings = ServicesFabric.GameSettingsService.GetGameSettings().GameFieldSettings;
             _gameFieldSprites = ServicesFabric.GameSettingsService.GetGameSettings().GameFieldSprites;
-        }
-
-        public GameCellType[,] GenerateGameField(int levelWidth, int levelHeight, int[,] levelMatrix)
-        {
-            GameCellType[,] gamefield = new GameCellType[levelWidth, levelHeight];
-
-            for (int i = 0; i < levelWidth; i++)
-            {
-                for (int j = 0; j < levelHeight; j++)
-                {
-                    gamefield[i, j] = GameTypesConverter.MatrixValueToCellType(levelMatrix[i, j]);
-                }
-            }
-
-            return gamefield;
         }
 
         public void GenerateFieldSprites(int levelWidth, int levelHeight, int[,] levelMatrix)
@@ -73,39 +55,20 @@ namespace LabraxStudio.Game.GameField
             else if (spriteIndex == 1)
                 sprite = GetPlayableSprite(x, y);
             else
-            {
-                sprite = _gameFieldSprites.ErrorSprite;
-                isGate = true;
-            }
+                return;
 
             if (sprite == null)
                 sprite = _gameFieldSprites.ErrorSprite;
 
-            if (isGate)
-            {
-                GateCell gateCell = Object.Instantiate(_gateCellPrefab, _cellsContainer);
-                Vector3 position = Vector3.zero;
-                position.x = _gameFieldSettings.CellSize * x;
-                position.y = _gameFieldSettings.CellSize * (-y);
+            FieldCell newCell = Object.Instantiate(_fieldCellPrefab, _cellsContainer);
 
-                gateCell.transform.localPosition = position;
-                
-                int gateType = 0;
-                var gateDirection = GetGateDirection(x, y, ref gateType);
-                gateCell.SetupGate(spriteIndex - 2, _gameFieldSprites.GateSprites, gateDirection, gateType);
-            }
-            else
-            {
-                FieldCell newCell = Object.Instantiate(_fieldCellPrefab, _cellsContainer);
+            Vector3 position = Vector3.zero;
+            position.x = _gameFieldSettings.CellSize * x;
+            position.y = _gameFieldSettings.CellSize * (-y);
 
-                Vector3 position = Vector3.zero;
-                position.x = _gameFieldSettings.CellSize * x;
-                position.y = _gameFieldSettings.CellSize * (-y);
-
-                newCell.transform.localPosition = position;
-                newCell.SetName(GenerateName(x, y));
-                newCell.SetSprite(sprite);
-            }
+            newCell.transform.localPosition = position;
+            newCell.SetName(GenerateName(x, y));
+            newCell.SetSprite(sprite);
         }
 
         private Sprite GetPlayableSprite(int x, int y)
@@ -309,59 +272,6 @@ namespace LabraxStudio.Game.GameField
             }
 
             return _gameFieldSprites.NotPlayableSprites.Background;
-        }
-
-        private Direction GetGateDirection(int x, int y, ref int type)
-        {
-            int width = _levelMatrix.GetLength(0);
-            int height = _levelMatrix.GetLength(1);
-
-            int checkLeft = x - 1 > 0 ? _levelMatrix[x - 1, y] : 0;
-            int checkLeftTop = x - 1 >= 0 && y - 1 >= 0 ? _levelMatrix[x - 1, y - 1] : 0;
-            int checkTop = y - 1 >= 0 ? _levelMatrix[x, y - 1] : 0;
-            int checkRightTop = x + 1 < width && y - 1 >= 0 ? _levelMatrix[x + 1, y - 1] : 0;
-            int checkRight = x + 1 < width ? _levelMatrix[x + 1, y] : 0;
-            int checkRightBottom = x + 1 < width && y + 1 < height ? _levelMatrix[x + 1, y + 1] : 0;
-            int checkBottom = y + 1 < height ? _levelMatrix[x, y + 1] : 0;
-            int checkLeftBottom = x - 1 >= 0 && y + 1 < height ? _levelMatrix[x - 1, y + 1] : 0;
-
-            if (checkLeft == 2)
-            {
-                if (checkLeftTop == 2 && checkLeftBottom != 2)
-                    type = 1;
-                
-                if (checkLeftTop != 2 && checkLeftBottom == 2)
-                    type = 2;
-                
-                return Direction.Left;
-            }
-
-            if (checkTop == 2)
-            {
-                if (checkLeftTop == 2 && checkRightTop != 2)
-                    type = 1;
-                
-                if (checkLeftTop != 2 && checkRightTop == 2)
-                    type = 2;
-                
-                return Direction.Up;
-            }
-
-            if (checkRight == 2)
-            {
-                if (checkRightTop == 2 && checkRightBottom != 2)
-                    type = 1;
-                
-                if (checkRightTop != 2 && checkRightBottom == 2)
-                    type = 2;
-                
-                return Direction.Right;
-            }
-
-            if (checkBottom == 2)
-                return Direction.Down;
-
-            return Direction.Null;
         }
 
         private string GenerateName(int x, int y)

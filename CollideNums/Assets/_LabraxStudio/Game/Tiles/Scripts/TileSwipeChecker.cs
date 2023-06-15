@@ -73,13 +73,9 @@ namespace LabraxStudio.Game.Tiles
         {
             Direction _result = Direction.Null;
             if (Math.Abs(inputDelta.x) > Math.Abs(inputDelta.y))
-            {
                 _result = inputDelta.x > 0 ? Direction.Right : Direction.Left;
-            }
             else
-            {
                 _result = inputDelta.y > 0 ? Direction.Up : Direction.Down;
-            }
 
             return _result;
         }
