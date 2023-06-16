@@ -31,11 +31,13 @@ namespace LabraxStudio.Game.Tiles
 
         private List<Tile> _tiles = new List<Tile>();
         private int _animations = 0;
+        private int _biggestGateNumber = 0;
 
         // PUBLIC METHODS: -----------------------------------------------------------------------
 
-        public void Initialize(LevelMeta levelMeta)
+        public void Initialize(LevelMeta levelMeta, int biggestGateNumber)
         {
+            _biggestGateNumber = biggestGateNumber;
             _tilesMatrix = (int[,]) levelMeta.TilesMatrix.Clone();
             _tilesGenerator.Initialize();
             _tiles = _tilesGenerator.GenerateTiles(levelMeta.Width, levelMeta.Height, _tilesMatrix);
@@ -133,16 +135,32 @@ namespace LabraxStudio.Game.Tiles
                     continue;
 
                 actions.Add(mergeAction);
-                mergeAction = null;
             }
 
             if (actions.Count == 0)
+            {
+                CheckForFail();
                 return;
+            }
 
             TilesAnimator tilesAnimator = new TilesAnimator();
             tilesAnimator.Play(actions, CheckAllMerges);
 
             GameEvents.SendTileAction();
+        }
+
+        private void CheckForFail()
+        {
+            foreach (var tile in _tiles)
+            {
+                int tileValue = tile.Value;
+                int tileGate = (int) GameTypesConverter.TileValueToGateType(tileValue);
+                if (tileGate > _biggestGateNumber)
+                {
+                    GameEvents.SendLevelFail();
+                    break;
+                }
+            }
         }
 
         private void DestroyTileInGate(Tile tile)

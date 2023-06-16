@@ -57,7 +57,8 @@ namespace LabraxStudio.Game
 
             _gameFieldController.Initialize(levelMeta);
             _gatesController.Initialize(levelMeta);
-            _tilesController.Initialize(levelMeta);
+            int biggestGateNumber = _gatesController.GetBiggestGateNumber();
+            _tilesController.Initialize(levelMeta, biggestGateNumber);
             _cameraController.Initialize(levelMeta.Width, levelMeta.Height);
 
             _gatesController.CheckGatesState();

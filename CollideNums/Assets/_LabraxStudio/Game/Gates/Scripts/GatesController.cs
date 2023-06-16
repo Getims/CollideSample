@@ -45,6 +45,19 @@ namespace LabraxStudio.Game.Gates
                 gate.SetState(NeedLock(gate));
         }
 
+        public int GetBiggestGateNumber()
+        {
+            int maxValue = 0;
+            foreach (var gateCell in _gates)
+            {
+                int gateValue = (int) gateCell.GateType;
+                if (gateValue > maxValue)
+                    maxValue = gateValue;
+            }
+
+            return maxValue;
+        }
+
         // PRIVATE METHODS: -----------------------------------------------------------------------
 
         private bool NeedLock(GateCell gate)
