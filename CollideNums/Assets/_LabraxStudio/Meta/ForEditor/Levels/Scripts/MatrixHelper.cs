@@ -60,7 +60,7 @@ namespace LabraxStudio.Editor
 
         private static void LoadGatesTypes(ref int idCount)
         {
-            for (int i = 0; i < 9; i++)
+            for (int i = 0; i < 16; i++)
             {
                 AddKeyAndValue(idCount, "Gate_" + i, false, GatesPath);
                 idCount++;
@@ -69,7 +69,7 @@ namespace LabraxStudio.Editor
         
         private static void LoadTiles()
         {
-            for (int i = 0; i < 9; i++)
+            for (int i = 0; i < 16; i++)
             {
                 AddKeyAndValue(i, "Tile_" + i, true, TilesPath);
             }

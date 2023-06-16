@@ -79,6 +79,9 @@ namespace LabraxStudio.Game.Tiles
             int x = tile.Cell.x;
             int y = tile.Cell.y;
 
+            if (tile.Value == 16)
+                return null;
+            
             Vector2Int mergeVector = GameTypesConverter.DirectionToVector2Int(direction);
             x += mergeVector.x;
             y += mergeVector.y;

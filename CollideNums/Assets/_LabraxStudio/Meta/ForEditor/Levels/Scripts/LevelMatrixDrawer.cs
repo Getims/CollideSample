@@ -68,13 +68,14 @@ namespace LabraxStudio.Editor
 
             Event currentEvent = Event.current;
             bool isClickSuccessful = IsClickSuccessful(currentEvent, rect);
-
+            int maxCount = MatrixHelper.TilesDictionary.Count;
+            
             if (isClickSuccessful)
             {
                 bool increaseHeight = currentEvent.button == 0;
 
                 if (increaseHeight)
-                    value = Mathf.Min(value + 1, 9);
+                    value = Mathf.Min(value + 1, maxCount);
                 else
                     value = currentEvent.control ? 0 : Mathf.Max(value - 1, 0);
 

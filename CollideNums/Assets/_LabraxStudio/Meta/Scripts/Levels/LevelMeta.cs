@@ -46,7 +46,7 @@ namespace LabraxStudio.Meta
         
         [VerticalGroup("LevelTemplate/Brush/Horizontal/One")]
         [ShowIf(nameof(_brushMode))]
-        [SerializeField, Range(0, 10), OnValueChanged(nameof(UpdateBrushSprite))]
+        [SerializeField, Range(0, 17), OnValueChanged(nameof(UpdateBrushSprite))]
         private int _brushSize = 1;
         
         [HorizontalGroup("LevelTemplate/Brush/Horizontal", Width = 80)]

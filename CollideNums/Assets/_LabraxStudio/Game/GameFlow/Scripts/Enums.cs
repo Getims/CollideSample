@@ -9,7 +9,17 @@ namespace LabraxStudio.Game
         Gate8 = 4,
         Gate16 = 5,
         Gate32 = 6,
-        Gate64 = 7
+        Gate64 = 7,
+        Gate128 = 8,
+        Gate256 = 9,
+        Gate512 = 10,
+        Gate1K = 11,
+        Gate2K = 12,
+        Gate4K = 13,
+        Gate8K = 14,
+        Gate16K = 15,
+        Gate32K = 16,
+        Gate64K = 17
     }
     
     public enum Direction
