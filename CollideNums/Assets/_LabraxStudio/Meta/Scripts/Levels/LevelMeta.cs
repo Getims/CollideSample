@@ -57,6 +57,7 @@ namespace LabraxStudio.Meta
         private Texture _brushSprite;
         
         [FoldoutGroup("LevelTemplate")]
+        [VerticalGroup("LevelTemplate/Matrix1", PaddingBottom = 20)]
         [Space(20), InfoBox(LevelDrawTip)]
         [OdinSerialize]
         [ShowInInspector]
@@ -64,6 +65,24 @@ namespace LabraxStudio.Meta
         [TableMatrix(DrawElementMethod = nameof(DrawLevelEnumElement), ResizableColumns = false, SquareCells = true)]
         private int[,] _levelMatrix = new int[3, 3];
 
+        [FoldoutGroup("LevelTemplate/TilesBrush", Expanded = true)]
+        [HorizontalGroup("LevelTemplate/TilesBrush/Horizontal")]
+        [VerticalGroup("LevelTemplate/TilesBrush/Horizontal/One", PaddingTop = 20)]
+        [SerializeField]
+        private bool _tilesBrushMode = false;
+        
+        [VerticalGroup("LevelTemplate/TilesBrush/Horizontal/One")]
+        [ShowIf(nameof(_tilesBrushMode))]
+        [SerializeField, Range(0, 15), OnValueChanged(nameof(UpdateTilesBrushSprite))]
+        private int _tilesBrushSize = 1;
+        
+        [HorizontalGroup("LevelTemplate/TilesBrush/Horizontal", Width = 80)]
+        [VerticalGroup("LevelTemplate/TilesBrush/Horizontal/Two")]
+        [ShowIf(nameof(_tilesBrushMode))]
+        [SerializeField]
+        [ReadOnly, PreviewField(ObjectFieldAlignment.Left, Height = 80), HideLabel]
+        private Texture _tilesBrushSprite;
+        
         [FoldoutGroup("LevelTemplate")]
         [Space(20)]
         [OdinSerialize]
@@ -107,11 +126,11 @@ namespace LabraxStudio.Meta
             return value;
         }
 
-        private static int DrawTilesEnumElement(Rect rect, int value)
+        private int DrawTilesEnumElement(Rect rect, int value)
         {
             
 #if UNITY_EDITOR
-            value = LevelMatrixDrawer.DrawTilesEnumElement(rect, value);
+            value = LevelMatrixDrawer.DrawTilesEnumElement(rect, value,_tilesBrushMode, _tilesBrushSize);
 #endif
             return value;
         }
@@ -181,6 +200,11 @@ namespace LabraxStudio.Meta
         private void UpdateBrushSprite()
         {
             _brushSprite = LevelMatrixDrawer.GetBrushTexture(_brushSize);
+        }
+        
+        private void UpdateTilesBrushSprite()
+        {
+            _tilesBrushSprite = LevelMatrixDrawer.GetTilesBrushTexture(_tilesBrushSize);
         }
 
         // SAVE FIX: ------------------------------------------------------------------------

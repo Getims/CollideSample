@@ -60,7 +60,7 @@ namespace LabraxStudio.Editor
             return value;
         }
 
-        public static int DrawTilesEnumElement(Rect rect, int value)
+        public static int DrawTilesEnumElement(Rect rect, int value, bool brushMode, int brushSize)
         {
 #if UNITY_EDITOR
 
@@ -75,7 +75,12 @@ namespace LabraxStudio.Editor
                 bool increaseHeight = currentEvent.button == 0;
 
                 if (increaseHeight)
-                    value = Mathf.Min(value + 1, maxCount);
+                {
+                    if (brushMode)
+                        value = Mathf.Min(brushSize + 1, maxCount);
+                    else
+                        value = Mathf.Min(value + 1, maxCount);
+                }
                 else
                     value = currentEvent.control ? 0 : Mathf.Max(value - 1, 0);
 
@@ -107,6 +112,16 @@ namespace LabraxStudio.Editor
             return texture;
         }
 
+        public static Texture GetTilesBrushTexture(int index)
+        {
+            Texture texture = new Texture2D(0, 0);
+#if UNITY_EDITOR
+            if (index >= 0)
+                texture = MatrixHelper.TilesDictionary[index];
+#endif
+            return texture;
+        }
+        
 #if UNITY_EDITOR
         private static bool IsClickSuccessful(Event currentEvent, Rect rect)
         {
