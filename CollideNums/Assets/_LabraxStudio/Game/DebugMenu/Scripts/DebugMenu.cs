@@ -32,6 +32,10 @@ namespace LabraxStudio.Game.Debug
         [SerializeField]
         private GameObject _speedCounterPanel;
 
+        [SerializeField]
+        private TMP_Dropdown _dropdown;
+
+
         // FIELDS: -------------------------------------------------------------------
 
         private GameFieldSettings _gameFieldSettings;
@@ -48,6 +52,23 @@ namespace LabraxStudio.Game.Debug
             _tileAcceleration.SetTextWithoutNotify(_gameFieldSettings.TileAcceleration.ToString());
 
             PrepareEaseOptions();
+
+            _dropdown.options.Clear();
+
+            List<TMP_Dropdown.OptionData> options = new List<TMP_Dropdown.OptionData>();
+            var selectableLevels = ServicesFabric.GameSettingsService.GetGlobalSettings().GameSettings.LevelsList;
+            int currentIndex = PlayerDataService.CurrentLevel;
+            if (selectableLevels == null)
+                return;
+
+            int i = 1;
+            foreach (var levelMeta in selectableLevels)
+            {
+                _dropdown.options.Add(new TMP_Dropdown.OptionData($"{i}. {levelMeta.FileName}"));
+                i++;
+            }
+
+            _dropdown.SetValueWithoutNotify(currentIndex);
         }
 
         // PUBLIC METHODS: -----------------------------------------------------------------------
@@ -94,10 +115,21 @@ namespace LabraxStudio.Game.Debug
             PlayerDataService.SwitchToNextLevel();
             GameManager.ReloadScene();
         }
-        
+
         public void PreviousLevel()
         {
             PlayerDataService.SwitchToPreviousLevel();
+            GameManager.ReloadScene();
+        }
+
+        public void OnDropDownChange(int value)
+        {
+            /*
+            var name = _dropdown.options[value].text;
+            var levelsList = ServicesFabric.GameSettingsService.GetGameSettings().LevelsList;
+            LevelMeta levelMeta = LevelMetaService.GetLevelMeta(name);
+            int levelIndex = levelsList.IndexOf(levelMeta);*/
+            PlayerDataService.SetLevel(value);
             GameManager.ReloadScene();
         }
 
