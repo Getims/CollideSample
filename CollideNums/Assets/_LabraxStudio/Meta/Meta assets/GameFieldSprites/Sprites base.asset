@@ -16,15 +16,13 @@ MonoBehaviour:
   _backgroundColor: {r: 0.6, g: 0.89019614, b: 0.9568628, a: 1}
   _errorSprite: {fileID: 21300000, guid: 64c1b4579bc53b743befa4ac43c48621, type: 3}
   _playableSprites:
-    _playableCells:
-    - {fileID: 21300000, guid: 1822b031f64efa441bf03ca9eaa7190e, type: 3}
-    - {fileID: 21300000, guid: a7c668b43230e404096a8df1b54a0afb, type: 3}
-    - {fileID: 21300000, guid: 19089b8210ad36648ad344a6fac49097, type: 3}
-    - {fileID: 21300000, guid: 4e09cdb617135e9449b5eb22948b1dfd, type: 3}
-    - {fileID: 21300000, guid: a9d98007ef32516438add0f29240e026, type: 3}
-    - {fileID: 21300000, guid: d8d68ec75d827d94bb874a487e89626d, type: 3}
-    - {fileID: 21300000, guid: 4093fb70ebeffa745b2e6b00e3ed4480, type: 3}
-    - {fileID: 21300000, guid: e9ff35611ff3c1549ac7d0c2f0a4a8da, type: 3}
+    _baseBackground: {fileID: 21300000, guid: 1822b031f64efa441bf03ca9eaa7190e, type: 3}
+    _topBackground: {fileID: 21300000, guid: 19089b8210ad36648ad344a6fac49097, type: 3}
+    _leftBackground: {fileID: 21300000, guid: a7c668b43230e404096a8df1b54a0afb, type: 3}
+    _rightBackground: {fileID: 21300000, guid: 4e09cdb617135e9449b5eb22948b1dfd, type: 3}
+    _bottomBackground: {fileID: 21300000, guid: a9d98007ef32516438add0f29240e026, type: 3}
+    _topBottomBackground: {fileID: 21300000, guid: 38216c6d74a911f42aed8c3e9d19caf7, type: 3}
+    _leftRightBackground: {fileID: 21300000, guid: b84ce839fb2b8d8479f4c5879b1c641c, type: 3}
     _topLeftCorner: {fileID: 21300000, guid: d1498bc337fa6d3419992c532ee562c5, type: 3}
     _topRightCorner: {fileID: 21300000, guid: 404a7637d31d11644a81d43faddc4397, type: 3}
     _bottomRightCorner: {fileID: 21300000, guid: ffdf2c344a600324cb079227bb941f95, type: 3}

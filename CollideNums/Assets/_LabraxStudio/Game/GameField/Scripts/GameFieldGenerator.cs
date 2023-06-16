@@ -86,14 +86,26 @@ namespace LabraxStudio.Game.GameField
 
             switch (type)
             {
+                case 1:
+                    return _gameFieldSprites.PlayableSprites.LeftBackground;
+                case 2:
+                    return _gameFieldSprites.PlayableSprites.TopBackground;
                 case 3:
                     return _gameFieldSprites.PlayableSprites.TopLeftCorner;
+                case 4:
+                    return _gameFieldSprites.PlayableSprites.RightBackground;
+                case 5:
+                    return _gameFieldSprites.PlayableSprites.LeftRightBackground;
                 case 6:
                     return _gameFieldSprites.PlayableSprites.TopRightCorner;
                 case 7:
                     return _gameFieldSprites.PlayableSprites.FullTopCorner;
+                case 8:
+                    return _gameFieldSprites.PlayableSprites.BottomBackground;
                 case 9:
                     return _gameFieldSprites.PlayableSprites.BottomLeftCorner;
+                case 10:
+                    return _gameFieldSprites.PlayableSprites.TopBottomBackground;
                 case 11:
                     return _gameFieldSprites.PlayableSprites.FullLeftCorner;
                 case 12:
@@ -104,7 +116,7 @@ namespace LabraxStudio.Game.GameField
                     return _gameFieldSprites.PlayableSprites.FullRightCorner;
             }
 
-            return _gameFieldSprites.PlayableSprites.GetRandomBackground();
+            return _gameFieldSprites.PlayableSprites.BaseBackground;
         }
 
         private Sprite GetNotPlayableSprite(int x, int y)
