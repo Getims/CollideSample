@@ -71,6 +71,7 @@ SpriteAtlas:
     - {fileID: 102900000, guid: bc3034e5b50e0c04283beb01de10c407, type: 3}
     - {fileID: 102900000, guid: 1b7ffe514ccae324b8e7339d7cef436e, type: 3}
     - {fileID: 102900000, guid: 4588afdfe9722f345809f7ef3c89143b, type: 3}
+    - {fileID: 2800000, guid: 64c1b4579bc53b743befa4ac43c48621, type: 3}
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
@@ -107,6 +108,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: a9d98007ef32516438add0f29240e026, type: 3}
   - {fileID: 21300000, guid: 404a7637d31d11644a81d43faddc4397, type: 3}
   - {fileID: 21300000, guid: a4bfb2577691845449089f88bd59b11b, type: 3}
+  - {fileID: 21300000, guid: 64c1b4579bc53b743befa4ac43c48621, type: 3}
   - {fileID: 21300000, guid: fa191be7928b73c42b2549aa33b82013, type: 3}
   - {fileID: 21300000, guid: a53fa41886410894da0c1a07915094bf, type: 3}
   - {fileID: 21300000, guid: 327dd8d85faccc046ab06cb69538878a, type: 3}
@@ -164,6 +166,7 @@ SpriteAtlas:
   - playable_background_5
   - top_right_corner
   - not_playable_3
+  - Error
   - not_playable_11
   - horizontal_gate_2
   - restart arrow

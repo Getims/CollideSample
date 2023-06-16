@@ -6,7 +6,7 @@ SpriteAtlas:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: GameUI
+  m_Name: CommonUI
   m_EditorData:
     serializedVersion: 2
     textureSettings:
@@ -68,43 +68,23 @@ SpriteAtlas:
     secondaryTextureSettings: {}
     variantMultiplier: 1
     packables:
-    - {fileID: 102900000, guid: d750791d25ba2c348ab9a0ca6c1a11e5, type: 3}
+    - {fileID: 102900000, guid: 6e084afe77b93c14fba2737417dbaa45, type: 3}
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
-  - {fileID: 21300000, guid: 2ace32d0ab569f643a787c5db51491ee, type: 3}
-  - {fileID: 21300000, guid: 4b9a2441f1c69fd4e832ee9fa83669b4, type: 3}
-  - {fileID: 21300000, guid: 0937b2362ad39ac4286e1644b3ccc4ce, type: 3}
-  - {fileID: 21300000, guid: 00991e47e3dcd004385c6056b3c07ef0, type: 3}
-  - {fileID: 21300000, guid: d18414977d2c1724ea1406adb2f038c2, type: 3}
-  - {fileID: 21300000, guid: 8762a33890491354481622dc45ade361, type: 3}
-  - {fileID: 21300000, guid: 1423787801e40e24c8bd756a186a2636, type: 3}
-  - {fileID: 21300000, guid: f8f501b831e0437489e10d9972fee90a, type: 3}
-  - {fileID: 21300000, guid: af4f259959e11a24a928194aa584468e, type: 3}
-  - {fileID: 21300000, guid: c62c7faaea9e4f54aa1d779bbb245e46, type: 3}
-  - {fileID: 21300000, guid: a245fcda02f685540a31ec85b9698fe9, type: 3}
-  - {fileID: 21300000, guid: 8ab7a01c7e773524a9dad39109348522, type: 3}
-  - {fileID: 21300000, guid: 2399cadc77837ce4284822ab0b09eadc, type: 3}
-  - {fileID: 21300000, guid: 6385e13dbceae584c9b600d5ec684eb0, type: 3}
-  - {fileID: 21300000, guid: 633290bffd198814d873b089357304a5, type: 3}
+  - {fileID: 21300000, guid: e8362b93e84eb8741a0ba69116921302, type: 3}
+  - {fileID: 21300000, guid: d01f06759c08c3943b7067ed1daa001b, type: 3}
+  - {fileID: 21300000, guid: da097048554c360498dfd21410e1ab61, type: 3}
+  - {fileID: 21300000, guid: 7e4d1f885ebfc2e49b3b4f06f6626ad5, type: 3}
+  - {fileID: 21300000, guid: fcbe756e33c9f084bab8b67954b55f82, type: 3}
   m_PackedSpriteNamesToIndex:
-  - tile_icon16
-  - booster_back
-  - tile_icon8
-  - booster_icon_reset
-  - tile_icon128
-  - tile_icon4
-  - tile_icon2
-  - booster_back_coinplate
-  - tile_icon64
-  - tile_icon512
-  - tile_icon32
-  - tile_icon256
-  - booster_icon_devide
-  - checkmark
-  - booster_icon_multiply
+  - ad_icon_yellow2
+  - white_plate2
+  - white_plate
+  - coin
+  - white_plate3
   m_RenderDataMap: {}
-  m_Tag: GameUI
+  m_Tag: CommonUI
   m_IsVariant: 0

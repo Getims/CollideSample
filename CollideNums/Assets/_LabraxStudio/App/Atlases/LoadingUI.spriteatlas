@@ -6,7 +6,7 @@ SpriteAtlas:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MainMenu
+  m_Name: LoadingUI
   m_EditorData:
     serializedVersion: 2
     textureSettings:
@@ -67,13 +67,30 @@ SpriteAtlas:
       enableAlphaDilation: 0
     secondaryTextureSettings: {}
     variantMultiplier: 1
-    packables: []
+    packables:
+    - {fileID: 102900000, guid: a8db17f8424cb4d4bb43e8836e88bbe3, type: 3}
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
   m_MasterAtlas: {fileID: 0}
-  m_PackedSprites: []
-  m_PackedSpriteNamesToIndex: []
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 37424f03394fb3d49b34b00617daa7e2, type: 3}
+  - {fileID: 21300000, guid: 27949054938283942ae010396cdc498b, type: 3}
+  - {fileID: 21300000, guid: 6f6baf257533bd743a5c0b5d6cf6d55a, type: 3}
+  - {fileID: 21300000, guid: 34c68e17504e86e46bce700d21cf2470, type: 3}
+  - {fileID: 21300000, guid: 1408dada4fbb6bb48b1829239b31cf13, type: 3}
+  - {fileID: 21300000, guid: 227c005b517131744b85e28799ec9901, type: 3}
+  - {fileID: 21300000, guid: 562136ccb6c60ef41bcc792fddee4de6, type: 3}
+  - {fileID: 21300000, guid: c2974b2d73301c541a13d7ac603c8e73, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - LOGO_final
+  - loading_back
+  - splash_loading_fill
+  - splash_loading_back
+  - splash_labrax_logo
+  - splash-bar-fill_old
+  - splash-dot-loading_old
+  - splash-bar-back_old
   m_RenderDataMap: {}
-  m_Tag: MainMenu
+  m_Tag: Loading
   m_IsVariant: 0
