@@ -52,13 +52,20 @@ namespace LabraxStudio.Game.Tiles
             var moveAction = _tilesMover.CalculateMoveAction(tile, direction, swipe);
             actions.Add(moveAction);
             var mergeAction = _tilesMerger.CheckMerge(tile, direction);
+            if (tile.MovedToGate)
+            {
+                mergeAction = null;
+                var moveInGateAction = new MoveInGateAction(tile, direction, DestroyTileInGate);
+                actions.Add(moveInGateAction);
+            }
 
             if (mergeAction == null)
-                tilesAnimator.Play(actions, CheckAllMerges);
+                tilesAnimator.Play(actions, onComplete: CheckAllMerges);
             else
             {
                 actions.Add(mergeAction);
-                tilesAnimator.Play(actions, () => CheckChainMerges(mergeAction.MergeTo));
+                tilesAnimator.Play(actions, () =>
+                    CheckChainMerges(mergeAction.MergeTo));
             }
 
             GameEvents.SendTileAction();
@@ -75,16 +82,19 @@ namespace LabraxStudio.Game.Tiles
             return null;
         }
 
-        public void DestroyTile(Tile tile)
-        {
-            _tiles.Remove(tile);
-            tile.DestroySelf();
-        }
-
         public void CheckTileValue(Tile tile)
         {
             int newValue = _tilesMatrix[tile.Cell.x, tile.Cell.y];
             tile.SetValue(newValue, _tilesGenerator.GetSprite(newValue));
+        }
+
+        public void DestroyTile(Tile tile)
+        {
+            _tiles.Remove(tile);
+            tile.DestroySelf();
+            
+            if(_tiles.Count == 0)
+                GameEvents.SendLevelComplete();
         }
 
         // PRIVATE METHODS: -----------------------------------------------------------------------
@@ -133,6 +143,15 @@ namespace LabraxStudio.Game.Tiles
             tilesAnimator.Play(actions, CheckAllMerges);
 
             GameEvents.SendTileAction();
+        }
+
+        private void DestroyTileInGate(Tile tile)
+        {
+            if (tile == null)
+                return;
+
+            _tilesMatrix[tile.Cell.x, tile.Cell.y] = 0;
+            DestroyTile(tile);
         }
 
         private void ResetMergeFlag()

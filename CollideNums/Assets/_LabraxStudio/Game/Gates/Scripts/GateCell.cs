@@ -10,7 +10,7 @@ namespace LabraxStudio.Game.Gates
         // MEMBERS: -------------------------------------------------------------------------------
 
         [SerializeField]
-        private SpriteRenderer _background;
+        private GateBackground _gateBackground;
 
         [Title("Numbers")]
         [SerializeField]
@@ -50,16 +50,15 @@ namespace LabraxStudio.Game.Gates
 
         // PUBLIC METHODS: -----------------------------------------------------------------------
 
-        public void SetupGate(int spriteIndex, GatesSprites gatesSprites, Direction direction, int gateType)
+        public void SetupGate(int spriteIndex, GameFieldSprites gameFieldSprites, Direction direction, int gateType)
         {
+            var gatesSprites = gameFieldSprites.GateSprites;
             var numberSprite = GetNumberSprite(spriteIndex, gatesSprites.GatesNumbers);
             SetNumber(numberSprite, direction);
 
-            if (direction == Direction.Left || direction == Direction.Right)
-                _background.sprite = gatesSprites.GateHorizontalBackground;
-            else
-                _background.sprite = gatesSprites.GateVerticalBackground;
-
+            _gateBackground.SetBackground(gatesSprites.GateVerticalBackground, gatesSprites.GateHorizontalBackground,
+                gameFieldSprites.NotPlayableSprites.NotPlayable1,
+                direction);
             SetGateLine(gatesSprites, direction, gateType);
         }
 

@@ -26,6 +26,7 @@ namespace LabraxStudio.Game.Tiles
 
         public MoveAction CalculateMoveAction(Tile tile, Direction direction, Swipe swipe)
         {
+            bool needMoveToGate = false;
             int moves = 0;
             int path = 0;
             Vector2Int startPoint = tile.Cell;
@@ -50,7 +51,7 @@ namespace LabraxStudio.Game.Tiles
                 var tempPoint = movePoint;
                 tempPoint += moveVector;
 
-                if (IsPlayableCell(tempPoint.x, tempPoint.y, tile.Value))
+                if (IsPlayableCell(tempPoint.x, tempPoint.y, tile.Value, ref needMoveToGate))
                 {
                     if (HasTile(tempPoint.x, tempPoint.y))
                         break;
@@ -62,12 +63,15 @@ namespace LabraxStudio.Game.Tiles
             RemoveTileFromMatrix(tile.Cell.x, tile.Cell.y);
             SetTileToMatrix(movePoint.x, movePoint.y, tile.Value);
             tile.SetCell(movePoint);
+            if (needMoveToGate)
+                tile.SetGateFlag();
+
             return new MoveAction(tile, movePoint, swipe);
         }
 
         // PRIVATE METHODS: -----------------------------------------------------------------------
 
-        private bool IsPlayableCell(int x, int y, int tileValue)
+        private bool IsPlayableCell(int x, int y, int tileValue, ref bool isGate)
         {
             if (x < 0 || y < 0)
                 return false;
@@ -85,7 +89,10 @@ namespace LabraxStudio.Game.Tiles
                     return true;
                 default:
                     GameCellType tileGate = GameTypesConverter.TileValueToGateType(tileValue);
-                    return tileGate == gameCellType;
+                    bool isEqualType = tileGate == gameCellType;
+                    if (isEqualType)
+                        isGate = true;
+                    return isEqualType;
             }
         }
 

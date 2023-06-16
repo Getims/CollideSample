@@ -12,7 +12,6 @@ namespace LabraxStudio.Game.Tiles
         // PROPERTIES: ----------------------------------------------------------------------------
 
         public Vector2Int Cell => _cell;
-
         public int Value => _value;
 
         public Vector3 Position
@@ -22,6 +21,7 @@ namespace LabraxStudio.Game.Tiles
         }
 
         public bool IsMerging => _isMerging;
+        public bool MovedToGate => _movedToGate;
 
         // FIELDS: -------------------------------------------------------------------
 
@@ -29,6 +29,7 @@ namespace LabraxStudio.Game.Tiles
         private int _value;
         private TileSwipeChecker _swipeChecker = new TileSwipeChecker();
         private bool _isMerging = false;
+        private bool _movedToGate = false;
 
         // PUBLIC METHODS: -----------------------------------------------------------------------
 
@@ -54,6 +55,11 @@ namespace LabraxStudio.Game.Tiles
             _isMerging = isMerging;
         }
 
+        public void SetGateFlag()
+        {
+            _movedToGate = true;
+        }
+
         // EVENTS RECEIVERS: ----------------------------------------------------------------------
 
         public void OnSelecet() => _swipeChecker.OnSelect();
@@ -66,7 +72,7 @@ namespace LabraxStudio.Game.Tiles
 
         public void DestroySelf()
         {
-            Utils.ReworkPoint(gameObject.name+": I destroyed");
+            Utils.ReworkPoint(gameObject.name + ": I destroyed");
             Destroy(gameObject);
         }
     }

@@ -1,4 +1,7 @@
+using System;
+using LabraxStudio.App;
 using LabraxStudio.App.Services;
+using LabraxStudio.Events;
 using LabraxStudio.Game.Camera;
 using LabraxStudio.Game.GameField;
 using LabraxStudio.Game.Gates;
@@ -11,7 +14,7 @@ namespace LabraxStudio.Game
     public class GameFlowManager : MonoBehaviour
     {
         // MEMBERS: -------------------------------------------------------------------------------
-        
+
         [SerializeField]
         private GameFieldController _gameFieldController;
 
@@ -25,10 +28,22 @@ namespace LabraxStudio.Game
         private GatesController _gatesController;
 
         // GAME ENGINE METHODS: -------------------------------------------------------------------
-        
+
+        private void Awake()
+        {
+            GameEvents.OnLevelComplete.AddListener(OnLevelComplete);
+            GameEvents.OnLevelFail.AddListener(OnLevelFail);
+        }
+
         private void Start()
         {
             Initialize();
+        }
+
+        private void OnDestroy()
+        {
+            GameEvents.OnLevelComplete.RemoveListener(OnLevelComplete);
+            GameEvents.OnLevelFail.RemoveListener(OnLevelFail);
         }
 
         // PRIVATE METHODS: -----------------------------------------------------------------------
@@ -36,10 +51,10 @@ namespace LabraxStudio.Game
         private void Initialize()
         {
             ServicesFabric.TouchService.SetTouchState(false);
-            
+
             int currentLevel = PlayerDataService.CurrentLevel;
             LevelMeta levelMeta = LevelMetaService.GetLevelMeta(currentLevel);
-            
+
             _gameFieldController.Initialize(levelMeta);
             _gatesController.Initialize(levelMeta);
             _tilesController.Initialize(levelMeta);
@@ -48,5 +63,21 @@ namespace LabraxStudio.Game
             _gatesController.CheckGatesState();
             ServicesFabric.TouchService.SetTouchState(true);
         }
+
+        private void SwitchLevel()
+        {
+            PlayerDataService.SwitchToNextLevel();
+            GameManager.ReloadScene();
+        }
+
+        private void ReloadLevel()
+        {
+            GameManager.ReloadScene();
+        }
+
+        // EVENTS RECEIVERS: ----------------------------------------------------------------------
+
+        private void OnLevelComplete() => SwitchLevel();
+        private void OnLevelFail() => ReloadLevel();
     }
 }

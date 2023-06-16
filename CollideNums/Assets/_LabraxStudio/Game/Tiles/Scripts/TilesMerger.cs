@@ -36,7 +36,7 @@ namespace LabraxStudio.Game.Tiles
                     return new MergeAction(tile, otherTile);
                 }
             }
-            
+
             otherTile = CanMerge(tile, Direction.Right);
             if (otherTile != null)
             {
@@ -44,7 +44,7 @@ namespace LabraxStudio.Game.Tiles
                 otherTile.SetMergeFlag(true);
                 return new MergeAction(tile, otherTile);
             }
-            
+
             otherTile = CanMerge(tile, Direction.Down);
             if (otherTile != null)
             {
@@ -52,7 +52,7 @@ namespace LabraxStudio.Game.Tiles
                 otherTile.SetMergeFlag(true);
                 return new MergeAction(tile, otherTile);
             }
-            
+
             otherTile = CanMerge(tile, Direction.Left);
             if (otherTile != null)
             {
@@ -60,7 +60,7 @@ namespace LabraxStudio.Game.Tiles
                 otherTile.SetMergeFlag(true);
                 return new MergeAction(tile, otherTile);
             }
-            
+
             otherTile = CanMerge(tile, Direction.Up);
             if (otherTile != null)
             {
@@ -82,9 +82,9 @@ namespace LabraxStudio.Game.Tiles
             Vector2Int mergeVector = GameTypesConverter.DirectionToVector2Int(direction);
             x += mergeVector.x;
             y += mergeVector.y;
-            
-            if (x<0 || x>=_width ||
-                y<0 || y>= _height)
+
+            if (x < 0 || x >= _width ||
+                y < 0 || y >= _height)
                 return null;
 
             int otherValue = _tilesMatrix[x, y];
@@ -92,11 +92,11 @@ namespace LabraxStudio.Game.Tiles
                 return null;
 
             Tile otherTile = TilesController.Instance.GetTile(new Vector2(x, y));
-            if (otherTile.IsMerging)
+            if (otherTile == null || otherTile.IsMerging)
                 return null;
-            
+
             _tilesMatrix[x, y] = tile.Value + 1;
-            _tilesMatrix[tile.Cell.x,tile.Cell.y] = 0;
+            _tilesMatrix[tile.Cell.x, tile.Cell.y] = 0;
             return otherTile;
         }
     }

@@ -71,7 +71,7 @@ namespace LabraxStudio.Game.Gates
 
             int gateType = 0;
             var gateDirection = GetGateDirection(x, y, ref gateType);
-            gateCell.SetupGate(spriteIndex - 2, _gameFieldSprites.GateSprites, gateDirection, gateType);
+            gateCell.SetupGate(spriteIndex - 2, _gameFieldSprites, gateDirection, gateType);
             gateCell.SetCell(new Vector2Int(x, y));
             gateCell.SetType((GameCellType) spriteIndex);
 
