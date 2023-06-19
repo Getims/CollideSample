@@ -3,7 +3,9 @@
     public enum MenuType
     {
         None = 0,
-        CurrenciesBase = 1,
-        BoostersPanel = 2,
+        LevelIndexPanel = 1,
+        CurrenciesBase = 2,
+        MainMenuOverlay = 3,
+        BoostersPanel = 4,
     }
 }

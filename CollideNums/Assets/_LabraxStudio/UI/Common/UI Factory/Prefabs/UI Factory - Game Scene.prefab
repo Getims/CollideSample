@@ -45,9 +45,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _uiMenuSettings:
-  - _menuType: 1
+  - _menuType: 2
     _menuPrefab: {fileID: 2550539036770599281, guid: cc9485a5f6eff68448c08e92f75d02c6, type: 3}
     _parent: {fileID: 0}
-  - _menuType: 2
+  - _menuType: 4
     _menuPrefab: {fileID: 2520032765139034479, guid: c2e22986596483f4183177f84d7b9c30, type: 3}
+    _parent: {fileID: 0}
+  - _menuType: 1
+    _menuPrefab: {fileID: 9134360182052063232, guid: cfaba6c35a309f743bc6bcca43b8fad4, type: 3}
     _parent: {fileID: 0}

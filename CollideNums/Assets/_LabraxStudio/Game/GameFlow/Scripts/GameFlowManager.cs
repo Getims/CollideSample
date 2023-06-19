@@ -5,13 +5,13 @@ using LabraxStudio.Game.Camera;
 using LabraxStudio.Game.GameField;
 using LabraxStudio.Game.Gates;
 using LabraxStudio.Game.Tiles;
+using LabraxStudio.Managers;
 using LabraxStudio.Meta;
-using LabraxStudio.UI;
 using UnityEngine;
 
 namespace LabraxStudio.Game
 {
-    public class GameFlowManager : MonoBehaviour
+    public class GameFlowManager : SharedManager<GameFlowManager>
     {
         // MEMBERS: -------------------------------------------------------------------------------
 
@@ -34,20 +34,14 @@ namespace LabraxStudio.Game
             GameEvents.OnGameOver.AddListener(OnGameOver);
         }
 
-        private void Start()
-        {
-            UIManager.Instance.InitializeGameUI();
-            Initialize();
-        }
-
         private void OnDestroy()
         {
             GameEvents.OnGameOver.RemoveListener(OnGameOver);
         }
 
-        // PRIVATE METHODS: -----------------------------------------------------------------------
+        // PUBLIC METHODS: -----------------------------------------------------------------------
 
-        private void Initialize()
+        public void Initialize()
         {
             ServicesAccess.TouchService.SetTouchState(false);
 
@@ -65,6 +59,8 @@ namespace LabraxStudio.Game
             GameEvents.SendLevelGenerated();
         }
 
+        // PRIVATE METHODS: -----------------------------------------------------------------------
+        
         private void SwitchLevel()
         {
             ServicesAccess.PlayerDataService.SwitchToNextLevel();

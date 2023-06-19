@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1020788128839848142}
   - component: {fileID: 1020788128839848137}
   m_Layer: 0
-  m_Name: UI Factory - Map Scene
+  m_Name: UI Factory - Main menu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,4 +44,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1425e0b3f54e40c6857f81d3151fba8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _uiMenuSettings: []
+  _uiMenuSettings:
+  - _menuType: 1
+    _menuPrefab: {fileID: 6614319334562318242, guid: cb3667a80ee2f4440b77667dd4d9a9c1, type: 3}
+    _parent: {fileID: 0}
+  - _menuType: 2
+    _menuPrefab: {fileID: 2550539036770599281, guid: cc9485a5f6eff68448c08e92f75d02c6, type: 3}
+    _parent: {fileID: 0}
+  - _menuType: 3
+    _menuPrefab: {fileID: 7863215000266818888, guid: fa075f892cbed2e4ea22cc47f55dbfbb, type: 3}
+    _parent: {fileID: 0}

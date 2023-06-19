@@ -36,7 +36,6 @@ namespace LabraxStudio.UI.GameScene.Boosters
         protected override void OnDestroy()
         {
             base.OnDestroy();
-            CancelInvoke(nameof(DestroySelf));
             GameEvents.OnGenerateLevel.RemoveListener(OnLevelGenerate);
             GameEvents.OnGameOver.RemoveListener(OnGameOver);
             CommonEvents.AllCurrencyChanged.RemoveListener(OnAllCurrencyChanged);
@@ -113,17 +112,12 @@ namespace LabraxStudio.UI.GameScene.Boosters
             _boostersHandler.UseBooster(meta);
         }
 
-        private void DestroySelf()
-        {
-            Destroy(gameObject);
-        }
-
         // EVENTS RECEIVERS: ----------------------------------------------------------------------
 
         private void OnGameOver(bool arg0)
         {
             Hide();
-            Invoke(nameof(DestroySelf), FadeTime);
+            DestroySelfDelayed();
         }
 
         private void OnLevelGenerate()

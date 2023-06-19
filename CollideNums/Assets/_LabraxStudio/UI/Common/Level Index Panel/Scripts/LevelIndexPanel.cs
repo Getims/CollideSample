@@ -1,6 +1,5 @@
 using LabraxStudio.App.Services;
 using LabraxStudio.Events;
-using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
 
@@ -33,6 +32,13 @@ namespace LabraxStudio.UI.Common
             GameEvents.OnGameOver.RemoveListener(OnGameOver);
         }
 
+        // PUBLIC METHODS: -----------------------------------------------------------------------
+        public void HideAndDestroy()
+        {
+            base.Hide();
+            DestroySelfDelayed();
+        }
+
         // PRIVATE METHODS: -----------------------------------------------------------------------
 
         private void UpdateInfo()
@@ -52,6 +58,7 @@ namespace LabraxStudio.UI.Common
         private void OnGameOver(bool arg0)
         {
             Hide();
+            DestroySelfDelayed();
         }
     }
 }
