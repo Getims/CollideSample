@@ -44,4 +44,10 @@ namespace LabraxStudio.Game
         None = 0,
         Money = 1
     }
+
+    public enum BoosterType
+    {
+        LevelRestart = 0,
+        Split = 1
+    }
 }

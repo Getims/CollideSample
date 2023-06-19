@@ -1,4 +1,5 @@
-﻿using LabraxEditor;
+﻿using System.Collections.Generic;
+using LabraxEditor;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 using UnityEngine;
@@ -15,6 +16,8 @@ namespace LabraxStudio.Meta
 
         [SerializeField]
         private string _levelName = "Level";
+        
+        #region LevelTemplate
 
         [FoldoutGroup("LevelTemplate", Expanded = true)]
         [FoldoutGroup("LevelTemplate/Size", Expanded = true)]
@@ -92,6 +95,11 @@ namespace LabraxStudio.Meta
             IsReadOnly = true)]
         private int[,] _tilesMatrix = new int[3, 3];
 
+        #endregion
+
+        [SerializeField]
+        private List<BoostersSettings> _boostersSettings = new List<BoostersSettings>();
+        
         // PROPERTIES: ----------------------------------------------------------------------------
 
         public string LevelName => _levelName;
@@ -99,6 +107,8 @@ namespace LabraxStudio.Meta
         public int Height => height;
         public int[,] LevelMatrix => _levelMatrix;
         public int[,] TilesMatrix => _tilesMatrix;
+
+        public  List<BoostersSettings> BoostersSettings => _boostersSettings;
 
         // FIELDS: --------------------------------------------------------------------------------
 

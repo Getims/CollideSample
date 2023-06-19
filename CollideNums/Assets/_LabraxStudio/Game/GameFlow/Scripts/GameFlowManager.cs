@@ -6,6 +6,7 @@ using LabraxStudio.Game.GameField;
 using LabraxStudio.Game.Gates;
 using LabraxStudio.Game.Tiles;
 using LabraxStudio.Meta;
+using LabraxStudio.UI;
 using UnityEngine;
 
 namespace LabraxStudio.Game
@@ -35,6 +36,7 @@ namespace LabraxStudio.Game
 
         private void Start()
         {
+            UIManager.Instance.InitializeGameUI();
             Initialize();
         }
 
@@ -60,7 +62,7 @@ namespace LabraxStudio.Game
             _gatesController.CheckGatesState();
             
             ServicesAccess.TouchService.SetTouchState(true);
-            GameEvents.OnGenerateLevel.Invoke();
+            GameEvents.SendLevelGenerated();
         }
 
         private void SwitchLevel()

@@ -20,6 +20,11 @@ MonoBehaviour:
   _rightClickSize: 1
   _brushSize: 7
   _brushSprite: {fileID: 2800000, guid: 0c3abd7ad1a7e664fafbf761b4e27d73, type: 3}
+  _tilesBrushMode: 0
+  _tilesBrushSize: 1
+  _tilesBrushSprite: {fileID: 0}
+  _boostersSettings:
+  - _boosterMeta: {fileID: 11400000, guid: f16bdf654cbd6214a8e90b9210e05d2f, type: 2}
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
