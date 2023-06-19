@@ -8,6 +8,7 @@ namespace LabraxStudio.Events
         // EVENTS RECEIVERS: ----------------------------------------------------------------------
 
         public static UnityEvent OnMainMenuTapToPlay = new UnityEvent();
+        public static UnityEvent OnWinScreenClaimClicked = new UnityEvent();
         public static UnityEvent OnUISelect = new UnityEvent();
         public static UnityEvent OnUIDeselect = new UnityEvent();
 
@@ -16,5 +17,6 @@ namespace LabraxStudio.Events
         public static void SendUISelect() => OnUISelect?.Invoke();
         public static void SendUIDeselect() => OnUIDeselect?.Invoke();
         public static void SendMainMenuTapToPlay() => OnMainMenuTapToPlay?.Invoke();
+        public static void SendWinScreenClaimClicked() => OnWinScreenClaimClicked?.Invoke();
     }
 }

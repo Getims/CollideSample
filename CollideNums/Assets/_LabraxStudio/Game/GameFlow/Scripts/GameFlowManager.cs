@@ -32,11 +32,13 @@ namespace LabraxStudio.Game
         private void Awake()
         {
             GameEvents.OnGameOver.AddListener(OnGameOver);
+            UIEvents.OnWinScreenClaimClicked.AddListener(SwitchLevel);
         }
 
         private void OnDestroy()
         {
             GameEvents.OnGameOver.RemoveListener(OnGameOver);
+            UIEvents.OnWinScreenClaimClicked.AddListener(SwitchLevel);
         }
 
         // PUBLIC METHODS: -----------------------------------------------------------------------
@@ -61,11 +63,6 @@ namespace LabraxStudio.Game
 
         // PRIVATE METHODS: -----------------------------------------------------------------------
         
-        private void SwitchLevel()
-        {
-            ServicesAccess.PlayerDataService.SwitchToNextLevel();
-            GameManager.ReloadScene();
-        }
 
         private void ReloadLevel()
         {
@@ -77,13 +74,13 @@ namespace LabraxStudio.Game
 
         private void OnGameOver(bool isWin)
         {
-            if (isWin)
-                OnLevelComplete();
-            else
-                OnLevelFail();
+            if(!isWin)
+                ReloadLevel();
         }
 
-        private void OnLevelComplete() => SwitchLevel();
-        private void OnLevelFail() => ReloadLevel();
+        private void SwitchLevel()
+        {
+            Initialize();
+        }
     }
 }

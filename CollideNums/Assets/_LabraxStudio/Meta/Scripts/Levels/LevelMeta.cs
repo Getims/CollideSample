@@ -16,6 +16,9 @@ namespace LabraxStudio.Meta
 
         [SerializeField]
         private string _levelName = "Level";
+
+        [SerializeField, Min(0)]
+        private int _reward = 0;
         
         #region LevelTemplate
 
@@ -119,6 +122,8 @@ namespace LabraxStudio.Meta
             "\nНеигровая ячейка - 0.    Игровая ячейка - 1.     Ворота - 2-10";
 
         private string ElementName => $"{_levelNumber}";
+
+        public int Reward => _reward;
 
         // PUBLIC METHODS: ------------------------------------------------------------------------
 

@@ -1,4 +1,5 @@
 using LabraxStudio.App.Services;
+using LabraxStudio.Events;
 using LabraxStudio.Game;
 using LabraxStudio.Meta;
 
@@ -21,6 +22,7 @@ namespace LabraxStudio.UI.GameScene.Boosters
             if (isEnoughMoney)
             {
                 ServicesAccess.PlayerDataService.SpendMoney(boosterMeta.MoneyPrice);
+                CommonEvents.SendAllCurrencyChanged();
                 UseBooster(boosterMeta.BoosterType);
             }
         }

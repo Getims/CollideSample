@@ -7,5 +7,7 @@
         CurrenciesBase = 2,
         MainMenuOverlay = 3,
         BoostersPanel = 4,
+        WinScreen = 5,
+        FailScreen = 6
     }
 }

@@ -29,6 +29,7 @@ namespace LabraxStudio.UI
         {
             base.Awake();
             UIEvents.OnMainMenuTapToPlay.AddListener(OnMainMenuTapToPlay);
+            UIEvents.OnWinScreenClaimClicked.AddListener(OnWinScreenClaimClicked);
             GameEvents.OnGameOver.AddListener(OnGameOver);
         }
 
@@ -36,6 +37,7 @@ namespace LabraxStudio.UI
         {
             UIEvents.OnMainMenuTapToPlay.RemoveListener(OnMainMenuTapToPlay);
             GameEvents.OnGameOver.RemoveListener(OnGameOver);
+            UIEvents.OnWinScreenClaimClicked.RemoveListener(OnWinScreenClaimClicked);
         }
 
         // PUBLIC METHODS: -----------------------------------------------------------------------
@@ -57,11 +59,6 @@ namespace LabraxStudio.UI
                 _menuUIFactory.Create(MenuType.CurrenciesBase, out _currencies);
         }
 
-        public void InitializeGameOverUI()
-        {
-            
-        }
-
         // PRIVATE METHODS: -----------------------------------------------------------------------
 
         private void OnMainMenuTapToPlay()
@@ -71,11 +68,21 @@ namespace LabraxStudio.UI
 
             InitializeGameUI();
         }
+        
+        
+        private void OnWinScreenClaimClicked()
+        {
+            InitializeMenuUI();
+        }
 
         private void OnGameOver(bool isWin)
         {
+            /*
             if (isWin)
                 InitializeMenuUI();
+            */
+            
+            _menuUIFactory.Create(MenuType.WinScreen);
         }
     }
 }
