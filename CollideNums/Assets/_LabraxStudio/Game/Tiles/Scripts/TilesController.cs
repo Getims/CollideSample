@@ -96,7 +96,7 @@ namespace LabraxStudio.Game.Tiles
             tile.DestroySelf();
             
             if(_tiles.Count == 0)
-                GameEvents.SendLevelComplete();
+                GameEvents.SendGameOver(true);
         }
 
         // PRIVATE METHODS: -----------------------------------------------------------------------
@@ -157,7 +157,7 @@ namespace LabraxStudio.Game.Tiles
                 int tileGate = (int) GameTypesConverter.TileValueToGateType(tileValue);
                 if (tileGate > _biggestGateNumber)
                 {
-                    GameEvents.SendLevelFail();
+                    GameEvents.SendGameOver(false);
                     break;
                 }
             }

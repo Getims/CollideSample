@@ -92,5 +92,5 @@ SpriteAtlas:
   - splash-dot-loading_old
   - splash-bar-back_old
   m_RenderDataMap: {}
-  m_Tag: Loading
+  m_Tag: LoadingUI
   m_IsVariant: 0

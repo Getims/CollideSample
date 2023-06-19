@@ -45,7 +45,7 @@ namespace LabraxStudio.Game.Debug
         private void Start()
         {
             base.InitManager();
-            _gameFieldSettings = ServicesFabric.GameSettingsService.GetGameSettings().GameFieldSettings;
+            _gameFieldSettings = ServicesAccess.GameSettingsService.GetGameSettings().GameFieldSettings;
 
             _baseSwipeForce.SetTextWithoutNotify(_gameFieldSettings.BaseSwipeForce.ToString());
             _tileSpeed.SetTextWithoutNotify(_gameFieldSettings.TileSpeed.ToString());
@@ -56,8 +56,8 @@ namespace LabraxStudio.Game.Debug
             _dropdown.options.Clear();
 
             List<TMP_Dropdown.OptionData> options = new List<TMP_Dropdown.OptionData>();
-            var selectableLevels = ServicesFabric.GameSettingsService.GetGlobalSettings().GameSettings.LevelsList;
-            int currentIndex = PlayerDataService.CurrentLevel;
+            var selectableLevels = ServicesAccess.GameSettingsService.GetGlobalSettings().GameSettings.LevelsList;
+            int currentIndex = ServicesAccess.PlayerDataService.CurrentLevel;
             if (selectableLevels == null)
                 return;
 
@@ -112,24 +112,19 @@ namespace LabraxStudio.Game.Debug
 
         public void NextLevel()
         {
-            PlayerDataService.SwitchToNextLevel();
+            ServicesAccess.PlayerDataService.SwitchToNextLevel();
             GameManager.ReloadScene();
         }
 
         public void PreviousLevel()
         {
-            PlayerDataService.SwitchToPreviousLevel();
+            ServicesAccess.PlayerDataService.SwitchToPreviousLevel();
             GameManager.ReloadScene();
         }
 
         public void OnDropDownChange(int value)
         {
-            /*
-            var name = _dropdown.options[value].text;
-            var levelsList = ServicesFabric.GameSettingsService.GetGameSettings().LevelsList;
-            LevelMeta levelMeta = LevelMetaService.GetLevelMeta(name);
-            int levelIndex = levelsList.IndexOf(levelMeta);*/
-            PlayerDataService.SetLevel(value);
+            ServicesAccess.PlayerDataService.SetLevel(value);
             GameManager.ReloadScene();
         }
 

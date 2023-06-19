@@ -27,9 +27,9 @@ namespace LabraxStudio.Game.Tiles
 
         public void Initialize()
         {
-            var _gameFieldSettings = ServicesFabric.GameSettingsService.GetGameSettings().GameFieldSettings;
+            var _gameFieldSettings = ServicesAccess.GameSettingsService.GetGameSettings().GameFieldSettings;
             _cellSize = _gameFieldSettings.CellSize;
-            _gameFieldSprites = ServicesFabric.GameSettingsService.GetGameSettings().GameFieldSprites;
+            _gameFieldSprites = ServicesAccess.GameSettingsService.GetGameSettings().GameFieldSprites;
             _isInitialized = true;
         }
 

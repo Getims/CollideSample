@@ -1,4 +1,3 @@
-using System;
 using LabraxStudio.App;
 using LabraxStudio.App.Services;
 using LabraxStudio.Events;
@@ -31,8 +30,7 @@ namespace LabraxStudio.Game
 
         private void Awake()
         {
-            GameEvents.OnLevelComplete.AddListener(OnLevelComplete);
-            GameEvents.OnLevelFail.AddListener(OnLevelFail);
+            GameEvents.OnGameOver.AddListener(OnGameOver);
         }
 
         private void Start()
@@ -42,32 +40,32 @@ namespace LabraxStudio.Game
 
         private void OnDestroy()
         {
-            GameEvents.OnLevelComplete.RemoveListener(OnLevelComplete);
-            GameEvents.OnLevelFail.RemoveListener(OnLevelFail);
+            GameEvents.OnGameOver.RemoveListener(OnGameOver);
         }
 
         // PRIVATE METHODS: -----------------------------------------------------------------------
 
         private void Initialize()
         {
-            ServicesFabric.TouchService.SetTouchState(false);
+            ServicesAccess.TouchService.SetTouchState(false);
 
-            int currentLevel = PlayerDataService.CurrentLevel;
-            LevelMeta levelMeta = LevelMetaService.GetLevelMeta(currentLevel);
+            int currentLevel = ServicesAccess.PlayerDataService.CurrentLevel;
+            LevelMeta levelMeta = ServicesAccess.LevelMetaService.GetLevelMeta(currentLevel);
 
             _gameFieldController.Initialize(levelMeta);
             _gatesController.Initialize(levelMeta);
             int biggestGateNumber = _gatesController.GetBiggestGateNumber();
             _tilesController.Initialize(levelMeta, biggestGateNumber);
             _cameraController.Initialize(levelMeta.Width, levelMeta.Height);
-
             _gatesController.CheckGatesState();
-            ServicesFabric.TouchService.SetTouchState(true);
+            
+            ServicesAccess.TouchService.SetTouchState(true);
+            GameEvents.OnGenerateLevel.Invoke();
         }
 
         private void SwitchLevel()
         {
-            PlayerDataService.SwitchToNextLevel();
+            ServicesAccess.PlayerDataService.SwitchToNextLevel();
             GameManager.ReloadScene();
         }
 
@@ -77,6 +75,15 @@ namespace LabraxStudio.Game
         }
 
         // EVENTS RECEIVERS: ----------------------------------------------------------------------
+
+
+        private void OnGameOver(bool isWin)
+        {
+            if (isWin)
+                OnLevelComplete();
+            else
+                OnLevelFail();
+        }
 
         private void OnLevelComplete() => SwitchLevel();
         private void OnLevelFail() => ReloadLevel();

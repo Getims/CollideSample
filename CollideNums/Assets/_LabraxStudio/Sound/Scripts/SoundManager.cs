@@ -20,12 +20,9 @@ namespace LabraxStudio.Sound
         [SerializeField]
         private AudioSource _musicAS;
 
-        [SerializeField]
-        private AllGlobalSettings _allGlobalSettings;
-
         // PROPERTIES: ----------------------------------------------------------------------------
 
-        private SoundSettings SoundMeta => _allGlobalSettings.SoundSettings;
+        private SoundSettings SoundMeta => ServicesAccess.GameSettingsService.GetSoundSettings;
         public bool IsSoundOn => _isSoundOn;
         public bool IsMusicOn => _isMusicOn;
 
@@ -46,11 +43,11 @@ namespace LabraxStudio.Sound
 
         public void Setup()
         {
-            _interfaceSoundList.Clear(); 
-            _isSoundOn = PlayerDataService.IsSoundOn;
-            _isMusicOn = PlayerDataService.IsMusicOn;
+            _interfaceSoundList.Clear();
+            _isSoundOn = ServicesAccess.PlayerDataService.IsSoundOn;
+            _isMusicOn = ServicesAccess.PlayerDataService.IsMusicOn;
         }
-        
+
         public float GetCustomGameplaySoundVolume(GameplaySound meta) =>
             meta == null
                 ? SoundMeta.GameplaySoundsVolume * _soundK
@@ -67,23 +64,23 @@ namespace LabraxStudio.Sound
         public void SwitchSound()
         {
             _isSoundOn = !_isSoundOn;
-            if(_isSoundOn)
+            if (_isSoundOn)
                 ResetMusicFast();
-            PlayerDataService.SetSoundState(_isSoundOn);
+            ServicesAccess.PlayerDataService.SetSoundState(_isSoundOn);
         }
 
         public void SwitchMusic()
         {
             _isMusicOn = !_isMusicOn;
-            if(_isMusicOn)
+            if (_isMusicOn)
                 ResetMusicFast();
-            
-            if (_isMusicOn &&  _musicAS.enabled)
+
+            if (_isMusicOn && _musicAS.enabled)
                 _musicAS.Play();
             else
                 _musicAS.Stop();
-            
-            PlayerDataService.SetMusicState(_isMusicOn);
+
+            ServicesAccess.PlayerDataService.SetMusicState(_isMusicOn);
         }
 
         public void SetAllMusicOff()
@@ -93,7 +90,7 @@ namespace LabraxStudio.Sound
             _gameplayAS.enabled = false;
 #endif
         }
-        
+
         public void ResetMusic()
         {
 #if UNITY_IPHONE && !UNITY_EDITOR
@@ -126,7 +123,7 @@ namespace LabraxStudio.Sound
             AudioListener.volume = 1;
 #endif
         }
-        
+
         public void PlaySound(SFXMeta SFXMeta, bool ignoreTime = true, float pauseTime = 1.0f)
         {
             if (!_isSoundOn)
@@ -134,8 +131,8 @@ namespace LabraxStudio.Sound
 
             if (SFXMeta.IsDisabled)
                 return;
-            
-            if(_gameplayAS.enabled == false)
+
+            if (_gameplayAS.enabled == false)
                 return;
 
             _canPlay = true;
@@ -187,8 +184,8 @@ namespace LabraxStudio.Sound
         {
             if (!_isSoundOn)
                 return;
-             
-            if(_gameplayAS.enabled == false)
+
+            if (_gameplayAS.enabled == false)
                 return;
 
             _canPlay = true;
@@ -201,8 +198,8 @@ namespace LabraxStudio.Sound
         {
             if (!_isSoundOn || source == null)
                 return;
-             
-            if(source.enabled == false)
+
+            if (source.enabled == false)
                 return;
 
             var meta = SoundMeta.GetGameplaySound(sound);
@@ -224,8 +221,8 @@ namespace LabraxStudio.Sound
         {
             if (!_isSoundOn)
                 return;
-             
-            if(_gameplayAS.enabled == false)
+
+            if (_gameplayAS.enabled == false)
                 return;
 
             _gameplayAS.pitch = Random.Range(SoundMeta.GameplayMinPitch, SoundMeta.GameplayMaxPitch);
@@ -290,8 +287,8 @@ namespace LabraxStudio.Sound
             _musicAS.volume = 0;
             _musicAS.Stop();
             _musicAS.clip = clip;
-            
-            if(_isMusicOn && _musicAS.enabled)
+
+            if (_isMusicOn && _musicAS.enabled)
                 _musicAS.Play();
 
             _lastBgPercent = newPercent;

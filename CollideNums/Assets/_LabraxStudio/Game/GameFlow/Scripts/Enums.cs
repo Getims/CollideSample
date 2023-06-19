@@ -38,4 +38,10 @@ namespace LabraxStudio.Game
         TwoTiles = 2,
         Infinite = 3
     }
+    
+    public enum CurrencyType
+    {
+        None = 0,
+        Money = 1
+    }
 }
