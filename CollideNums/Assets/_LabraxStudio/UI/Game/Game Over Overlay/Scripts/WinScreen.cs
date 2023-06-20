@@ -1,3 +1,4 @@
+using System.Collections;
 using LabraxStudio.App.Services;
 using LabraxStudio.Events;
 using LabraxStudio.Meta;
@@ -19,6 +20,7 @@ namespace LabraxStudio.UI.GameScene.GameOver
         // FIELDS: -------------------------------------------------------------------
 
         private int _reward;
+        private Coroutine _closeAnimationCO;
 
         // GAME ENGINE METHODS: -------------------------------------------------------------------
 
@@ -32,6 +34,8 @@ namespace LabraxStudio.UI.GameScene.GameOver
         protected override void OnDestroy()
         {
             _claimButton.onClick.RemoveListener(OnClaimClicked);
+            if (_closeAnimationCO != null)
+                StopCoroutine(_closeAnimationCO);
             base.OnDestroy();
         }
 
@@ -50,16 +54,35 @@ namespace LabraxStudio.UI.GameScene.GameOver
             CommonEvents.SendAllCurrencyChanged();
         }
 
+        private IEnumerator CloseAnimation()
+        {
+            GameMediator.Instance.StartCoinsFlyAnimation(_rewardPanel.CoinCenter);
+            yield return new WaitForSeconds(0.5f);
+            ApplyReward();
+            ServicesAccess.PlayerDataService.SwitchToNextLevel();
+            UIEvents.SendWinScreenClaimClicked();
+
+            Hide();
+            DestroySelfDelayed();
+        }
+
         // EVENTS RECEIVERS: ----------------------------------------------------------------------
 
         private void OnClaimClicked()
         {
+            if (_closeAnimationCO != null)
+                StopCoroutine(_closeAnimationCO);
+
+            _closeAnimationCO = StartCoroutine(CloseAnimation());
+            /*
             ApplyReward();
             ServicesAccess.PlayerDataService.SwitchToNextLevel();
             UIEvents.SendWinScreenClaimClicked();
-            
+            GameMediator.Instance.StartCoinsFlyAnimation(_rewardPanel.CoinCenter);
+
             Hide();
             DestroySelfDelayed();
+            */
         }
     }
 }

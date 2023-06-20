@@ -1,0 +1,157 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5535915021323567477
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5535915021323567474}
+  - component: {fileID: 7524951280828306907}
+  - component: {fileID: 8649356368930812264}
+  m_Layer: 0
+  m_Name: FlyIconSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &5535915021323567474
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5535915021323567477}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4293852154802606740}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &7524951280828306907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5535915021323567477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72d3ec55dd849224fa1e00a7993336bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _iconsPool: {fileID: 2275026267482391021}
+  _defaultSettings:
+    _moveTime: 1
+    _moveEase: 7
+    _changeScale: 1
+    _startScale: 1
+    _endScale: 2
+    _scaleTime: 0.25
+    _scaleEase: 6
+    _scaleDelay: 0.85
+    _scaleFromZeroTime: 0
+    _useFade: 1
+    _showTime: 0
+    _showDelay: 0
+    _hideTime: 0.25
+    _hideDelay: 1
+--- !u!114 &8649356368930812264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5535915021323567477}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0ea9d18f247dd645acfe36297859296, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _icon: {fileID: 21300000, guid: b970658126729874ca827cb1bfaf552c, type: 3}
+  _customSettings: 0
+  _flySettings:
+    _moveTime: 0
+    _moveEase: 0
+    _changeScale: 0
+    _startScale: 0.5
+    _endScale: 0.5
+    _scaleTime: 0
+    _scaleEase: 0
+    _scaleDelay: 0.5
+    _scaleFromZeroTime: 0
+    _useFade: 0
+    _showTime: 0
+    _showDelay: 0
+    _hideTime: 0
+    _hideDelay: 0
+  _target: {fileID: 0}
+  _reactToMouseClicks: 0
+--- !u!1 &8845657485566735381
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4293852154802606740}
+  - component: {fileID: 2275026267482391021}
+  m_Layer: 0
+  m_Name: FlyIconsPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4293852154802606740
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8845657485566735381}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5535915021323567474}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2275026267482391021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8845657485566735381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eea08375da243a441b88d1e6b0713006, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 4659368363230394176, guid: 4069af05a8eb0464dbc1d1d422083509, type: 3}
+  notification: 3
+  strategy: 1
+  preload: 20
+  capacity: 100
+  recycle: 1
+  persist: 0
+  stamp: 0
+  warnings: 1
+  spawnedClonesList: []
+  despawnedClones: []
+  delays: []
+  deactivatedChild: {fileID: 0}

@@ -15,6 +15,13 @@ namespace LabraxStudio.UI.GameScene.GameOver
         [SerializeField]
         private Image _coinIcon;
 
+        [SerializeField]
+        private Transform _coinCenter;
+
+        // PROPERTIES: ----------------------------------------------------------------------------
+
+        public Transform CoinCenter => _coinCenter;
+
         // PUBLIC METHODS: -----------------------------------------------------------------------
 
         [Button]

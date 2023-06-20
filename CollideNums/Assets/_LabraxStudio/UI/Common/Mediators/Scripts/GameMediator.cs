@@ -11,7 +11,6 @@ namespace LabraxStudio.UI.GameScene
         // MEMBERS: -------------------------------------------------------------------------------
 
         [Title(References)]
-        [SerializeField, Required, SceneObjectsOnly] private LevelIndexPanel _levelIndexPanel;
         [SerializeField, Required, SceneObjectsOnly] private IconsFlyAnimationHandler _coinsFlyAnimation;
         
         // FIELDS: --------------------------------------------------------------------------------
@@ -22,8 +21,8 @@ namespace LabraxStudio.UI.GameScene
         // PUBLIC METHODS: ------------------------------------------------------------------------
 
         [Title(Buttons)]
-        [Button, DisableInEditorMode] public void HideLevelIndexPanel() => _levelIndexPanel.Hide();
         [Button, DisableInEditorMode] public void StartCoinsFlyAnimation() => _coinsFlyAnimation.StartAnimation();
+        [Button, DisableInEditorMode] public void StartCoinsFlyAnimation(Transform startPosition) => _coinsFlyAnimation.StartAnimation(startPosition);
 
     }
 }
