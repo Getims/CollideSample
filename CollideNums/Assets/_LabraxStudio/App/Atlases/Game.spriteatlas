@@ -79,6 +79,7 @@ SpriteAtlas:
   m_PackedSprites:
   - {fileID: 21300000, guid: 642ef5203d7408d429c39086832ed4fb, type: 3}
   - {fileID: 21300000, guid: 0e5a2480b1b045b4ca1fa077aebc486a, type: 3}
+  - {fileID: 21300000, guid: 30ec75f0ab3732c4f815ebfd17ba693e, type: 3}
   - {fileID: 21300000, guid: 54c3baf0ba197c74caea9f3e63a80dd7, type: 3}
   - {fileID: 21300000, guid: 1822b031f64efa441bf03ca9eaa7190e, type: 3}
   - {fileID: 21300000, guid: c100dbd1e70416e4dbb81f0634e86037, type: 3}
@@ -98,12 +99,14 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 3c09a394592f11a4588cbcbdec8a5afa, type: 3}
   - {fileID: 21300000, guid: a7c668b43230e404096a8df1b54a0afb, type: 3}
   - {fileID: 21300000, guid: 378ea7f419bab2c4995cdd56c762dc31, type: 3}
+  - {fileID: 21300000, guid: 9843af0574e9f61479e7ee653468e61a, type: 3}
   - {fileID: 21300000, guid: 870c4165db44d624f8faffeef064b067, type: 3}
   - {fileID: 21300000, guid: ae5714653bb532e498cd474437e22311, type: 3}
   - {fileID: 21300000, guid: 71f9299542fc2a84099a81d7da0405de, type: 3}
   - {fileID: 21300000, guid: 01c283e57888e094c901350aac5d2199, type: 3}
   - {fileID: 21300000, guid: 9729e4f5d63dc6b4e8c1ed2262916010, type: 3}
   - {fileID: 21300000, guid: f7f55506eebfd6b49928fac8af698a99, type: 3}
+  - {fileID: 21300000, guid: 57a64a668cdc77d4ca58eb68cf0e24dc, type: 3}
   - {fileID: 21300000, guid: 4e09cdb617135e9449b5eb22948b1dfd, type: 3}
   - {fileID: 21300000, guid: a9d98007ef32516438add0f29240e026, type: 3}
   - {fileID: 21300000, guid: 404a7637d31d11644a81d43faddc4397, type: 3}
@@ -111,11 +114,13 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 64c1b4579bc53b743befa4ac43c48621, type: 3}
   - {fileID: 21300000, guid: fa191be7928b73c42b2549aa33b82013, type: 3}
   - {fileID: 21300000, guid: a53fa41886410894da0c1a07915094bf, type: 3}
+  - {fileID: 21300000, guid: 08bc0388d7ef5984bba23e938bb6106b, type: 3}
   - {fileID: 21300000, guid: 327dd8d85faccc046ab06cb69538878a, type: 3}
   - {fileID: 21300000, guid: 897a6239fe4be5142b8b6345d6fe51ff, type: 3}
   - {fileID: 21300000, guid: b84ce839fb2b8d8479f4c5879b1c641c, type: 3}
   - {fileID: 21300000, guid: c19d7c8aaf601e04e9695489b9407023, type: 3}
   - {fileID: 21300000, guid: a6eb37baed5549b4dbd727e848fadc93, type: 3}
+  - {fileID: 21300000, guid: 58a22a0b961c902498438c888146c0db, type: 3}
   - {fileID: 21300000, guid: 53bc4e1ba9fc57d45861193fbf113c51, type: 3}
   - {fileID: 21300000, guid: dcfe538bee2507b4e821dcd53a56d90e, type: 3}
   - {fileID: 21300000, guid: b1ec999b4e26f0c408aa4213c567e571, type: 3}
@@ -123,6 +128,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: cc19091cf87692943948903183f6dc86, type: 3}
   - {fileID: 21300000, guid: 31b00f1cd0ba0ad44be14e679e7f259b, type: 3}
   - {fileID: 21300000, guid: 9e5f384ca2758dd44a103a349d6fb15d, type: 3}
+  - {fileID: 21300000, guid: e33a1e9cf110d1240b327294787e06a3, type: 3}
   - {fileID: 21300000, guid: a13903cc9e9570c40abbda7535062263, type: 3}
   - {fileID: 21300000, guid: 3920f1ec4b92769488bd622c7f4be86d, type: 3}
   - {fileID: 21300000, guid: bb35191ddff3038438ae79e7da92b4ae, type: 3}
@@ -134,9 +140,11 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 85be510fb71b8c944a181c0b9a7c4d35, type: 3}
   - {fileID: 21300000, guid: efb3350f4606a29409f8f7c153ba8a7d, type: 3}
   - {fileID: 21300000, guid: 7931261fe730ab447a38e027afc8b747, type: 3}
+  - {fileID: 21300000, guid: b48ab84fdacfcd9419d808fb0b6bd9a6, type: 3}
   m_PackedSpriteNamesToIndex:
   - vertical_gate2
   - not_playable_12
+  - gate_n_8k
   - horizontal_gate_bottom
   - playable_background_1
   - gate_n_32
@@ -156,12 +164,14 @@ SpriteAtlas:
   - vertical_gate1
   - playable_background_2
   - full_top_corner
+  - gate_n_16k
   - gate_n_256
   - not_playable_1
   - not_playable_8
   - full_down_corner
   - not_playable_17
   - gate_n_512
+  - gate_n_64k
   - playable_background_4
   - playable_background_5
   - top_right_corner
@@ -169,11 +179,13 @@ SpriteAtlas:
   - Error
   - not_playable_11
   - horizontal_gate_2
+  - gate_n_32k
   - restart arrow
   - gate_n_4
   - playable_background_7
   - not_playable_14
   - not_playable_2
+  - gate_n_4k
   - vertical_gate
   - background_horizontal_gate
   - horizontal_gate_top
@@ -181,6 +193,7 @@ SpriteAtlas:
   - full_right_corner
   - not_playable_5
   - not_playable_13
+  - gate_n_1k
   - top_left_corner
   - horizontal_gate_1
   - not_playable_background
@@ -192,6 +205,7 @@ SpriteAtlas:
   - not_playable_7
   - not_playable_4
   - gate_n_16
+  - gate_n_2k
   m_RenderDataMap: {}
   m_Tag: Game
   m_IsVariant: 0

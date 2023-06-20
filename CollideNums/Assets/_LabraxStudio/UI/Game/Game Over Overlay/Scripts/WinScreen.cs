@@ -1,4 +1,5 @@
 using System.Collections;
+using Coffee.UIExtensions;
 using LabraxStudio.App.Services;
 using LabraxStudio.Events;
 using LabraxStudio.Meta;
@@ -17,6 +18,9 @@ namespace LabraxStudio.UI.GameScene.GameOver
         [SerializeField]
         private RewardPanel _rewardPanel;
 
+        [SerializeField]
+        private UIParticle _confettiPS;
+
         // FIELDS: -------------------------------------------------------------------
 
         private int _reward;
@@ -29,14 +33,22 @@ namespace LabraxStudio.UI.GameScene.GameOver
             base.Awake();
             _claimButton.onClick.AddListener(OnClaimClicked);
             Setup();
+            Show();
         }
 
         protected override void OnDestroy()
         {
             _claimButton.onClick.RemoveListener(OnClaimClicked);
+            CancelInvoke(nameof(ShowParticles));
             if (_closeAnimationCO != null)
                 StopCoroutine(_closeAnimationCO);
             base.OnDestroy();
+        }
+
+        public override void Show()
+        {
+            base.Show();
+            Invoke(nameof(ShowParticles), FadeTime*0.8f);
         }
 
         // PRIVATE METHODS: -----------------------------------------------------------------------
@@ -84,5 +96,7 @@ namespace LabraxStudio.UI.GameScene.GameOver
             DestroySelfDelayed();
             */
         }
+
+        private void ShowParticles() => _confettiPS?.Play();
     }
 }

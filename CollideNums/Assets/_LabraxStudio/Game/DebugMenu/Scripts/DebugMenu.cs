@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using LabraxStudio.App;
 using LabraxStudio.App.Services;
+using LabraxStudio.Events;
 using LabraxStudio.Managers;
 using LabraxStudio.Meta;
 using TMPro;
@@ -42,6 +43,18 @@ namespace LabraxStudio.Game.Debug
         private List<string> _easeOptions;
 
         // GAME ENGINE METHODS: -------------------------------------------------------------------
+
+        protected override void Awake()
+        {
+            base.Awake();
+            GameEvents.OnGenerateLevel.AddListener(OnLevelGenerated);
+        }
+
+        private void OnDestroy()
+        {
+            GameEvents.OnGenerateLevel.RemoveListener(OnLevelGenerated);
+        }
+
         private void Start()
         {
             base.InitManager();
@@ -52,23 +65,7 @@ namespace LabraxStudio.Game.Debug
             _tileAcceleration.SetTextWithoutNotify(_gameFieldSettings.TileAcceleration.ToString());
 
             PrepareEaseOptions();
-
-            _dropdown.options.Clear();
-
-            List<TMP_Dropdown.OptionData> options = new List<TMP_Dropdown.OptionData>();
-            var selectableLevels = ServicesAccess.GameSettingsService.GetGlobalSettings().GameSettings.LevelsList;
-            int currentIndex = ServicesAccess.PlayerDataService.CurrentLevel;
-            if (selectableLevels == null)
-                return;
-
-            int i = 1;
-            foreach (var levelMeta in selectableLevels)
-            {
-                _dropdown.options.Add(new TMP_Dropdown.OptionData($"{i}. {levelMeta.FileName}"));
-                i++;
-            }
-
-            _dropdown.SetValueWithoutNotify(currentIndex);
+            PrepareLevelsDropDown();
         }
 
         // PUBLIC METHODS: -----------------------------------------------------------------------
@@ -155,6 +152,26 @@ namespace LabraxStudio.Game.Debug
             dropdown.SetValueWithoutNotify(index);
         }
 
+        private void PrepareLevelsDropDown()
+        {
+            _dropdown.options.Clear();
+
+            List<TMP_Dropdown.OptionData> options = new List<TMP_Dropdown.OptionData>();
+            var selectableLevels = ServicesAccess.GameSettingsService.GetGlobalSettings().GameSettings.LevelsList;
+            int currentIndex = ServicesAccess.PlayerDataService.CurrentLevel;
+            if (selectableLevels == null)
+                return;
+
+            int i = 1;
+            foreach (var levelMeta in selectableLevels)
+            {
+                _dropdown.options.Add(new TMP_Dropdown.OptionData($"{i}. {levelMeta.FileName}"));
+                i++;
+            }
+
+            _dropdown.SetValueWithoutNotify(currentIndex);
+        }
+
         private Ease GetEase(TMP_Dropdown dropdown, Ease baseEase)
         {
             return ConvertToEase(_easeOptions[dropdown.value], baseEase);
@@ -174,5 +191,9 @@ namespace LabraxStudio.Game.Debug
 
             return result;
         }
+
+        // EVENTS RECEIVERS: ----------------------------------------------------------------------
+
+        private void OnLevelGenerated() => PrepareLevelsDropDown();
     }
 }

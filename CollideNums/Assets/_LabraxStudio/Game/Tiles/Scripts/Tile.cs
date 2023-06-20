@@ -72,7 +72,6 @@ namespace LabraxStudio.Game.Tiles
 
         public void DestroySelf()
         {
-            Utils.ReworkPoint(gameObject.name + ": I destroyed");
             Destroy(gameObject);
         }
     }

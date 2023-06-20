@@ -75,6 +75,13 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 9c585dcee9d639e4abd3de093536a5d8, type: 3}
     - {fileID: 21300000, guid: 870c4165db44d624f8faffeef064b067, type: 3}
     - {fileID: 21300000, guid: f7f55506eebfd6b49928fac8af698a99, type: 3}
+    - {fileID: 21300000, guid: e33a1e9cf110d1240b327294787e06a3, type: 3}
+    - {fileID: 21300000, guid: b48ab84fdacfcd9419d808fb0b6bd9a6, type: 3}
+    - {fileID: 21300000, guid: 58a22a0b961c902498438c888146c0db, type: 3}
+    - {fileID: 21300000, guid: 30ec75f0ab3732c4f815ebfd17ba693e, type: 3}
+    - {fileID: 21300000, guid: 9843af0574e9f61479e7ee653468e61a, type: 3}
+    - {fileID: 21300000, guid: 08bc0388d7ef5984bba23e938bb6106b, type: 3}
+    - {fileID: 21300000, guid: 57a64a668cdc77d4ca58eb68cf0e24dc, type: 3}
   _tilesSprites:
   - {fileID: 21300000, guid: 8f6b2ee648663e948b0c56909b7ee25e, type: 3}
   - {fileID: 21300000, guid: bdb9d763e52986c4d88b1ed1f15cb509, type: 3}
