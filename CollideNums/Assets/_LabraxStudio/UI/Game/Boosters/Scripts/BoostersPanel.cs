@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using LabraxStudio.App.Services;
 using LabraxStudio.Events;
+using LabraxStudio.Game;
 using LabraxStudio.Meta;
 using UnityEngine;
 using UnityEngine.UI;
@@ -41,6 +42,12 @@ namespace LabraxStudio.UI.GameScene.Boosters
             CommonEvents.AllCurrencyChanged.RemoveListener(OnAllCurrencyChanged);
         }
 
+        private void Start()
+        {
+            if(GameFlowManager.IsLevelGenerated)
+                OnLevelGenerate();
+        }
+        
         // PRIVATE METHODS: -----------------------------------------------------------------------
 
         private bool SetupButtons()

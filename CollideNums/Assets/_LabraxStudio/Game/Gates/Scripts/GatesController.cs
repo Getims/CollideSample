@@ -1,5 +1,5 @@
-using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using LabraxStudio.Events;
 using LabraxStudio.Game.Tiles;
 using LabraxStudio.Meta;
@@ -19,7 +19,7 @@ namespace LabraxStudio.Game.Gates
         private GatesGenerator _gatesGenerator = new GatesGenerator();
 
         // GAME ENGINE METHODS: -------------------------------------------------------------------
-       
+
         private void Awake()
         {
             GameEvents.OnTileAction.AddListener(CheckGatesState);
@@ -29,12 +29,16 @@ namespace LabraxStudio.Game.Gates
         {
             GameEvents.OnTileAction.RemoveListener(CheckGatesState);
         }
-        
+
         // PUBLIC METHODS: -----------------------------------------------------------------------
 
-        public void Initialize(LevelMeta levelMeta)
+        public void Initialize()
         {
             _gatesGenerator.Initialize();
+        }
+
+        public void GenerateGates(LevelMeta levelMeta)
+        {
             _gates = _gatesGenerator.GenerateGates(levelMeta.Width, levelMeta.Height, levelMeta.LevelMatrix);
         }
 
@@ -56,6 +60,12 @@ namespace LabraxStudio.Game.Gates
             }
 
             return maxValue;
+        }
+
+        public void ClearGates()
+        {
+            RemoveGameField(new List<GateCell>(_gates));
+            _gates.Clear();
         }
 
         // PRIVATE METHODS: -----------------------------------------------------------------------
@@ -90,6 +100,15 @@ namespace LabraxStudio.Game.Gates
 
             var tileGate = GameTypesConverter.TileValueToGateType(tile.Value);
             return tileGate != gateType;
+        }
+
+        private async void RemoveGameField(List<GateCell> gates)
+        {
+            foreach (var gateCell in gates)
+            {
+                gateCell.DestroySelf();
+                await Task.Delay(1);
+            }
         }
     }
 }

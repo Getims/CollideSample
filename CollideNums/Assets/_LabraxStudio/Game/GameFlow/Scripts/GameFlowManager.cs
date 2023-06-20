@@ -27,18 +27,23 @@ namespace LabraxStudio.Game
         [SerializeField]
         private GatesController _gatesController;
 
+        // FIELDS: -------------------------------------------------------------------
+        public static bool IsLevelGenerated = false;
+
         // GAME ENGINE METHODS: -------------------------------------------------------------------
 
         private void Awake()
         {
             GameEvents.OnGameOver.AddListener(OnGameOver);
-            UIEvents.OnWinScreenClaimClicked.AddListener(SwitchLevel);
+            GameEvents.OnLevelRestartBoosterUse.AddListener(OnLevelRestartBoosterUse);
+            UIEvents.OnWinScreenClaimClicked.AddListener(OnWinScreenClaimClicked);
         }
 
         private void OnDestroy()
         {
             GameEvents.OnGameOver.RemoveListener(OnGameOver);
-            UIEvents.OnWinScreenClaimClicked.AddListener(SwitchLevel);
+            UIEvents.OnWinScreenClaimClicked.AddListener(OnWinScreenClaimClicked);
+            GameEvents.OnLevelRestartBoosterUse.RemoveListener(OnLevelRestartBoosterUse);
         }
 
         // PUBLIC METHODS: -----------------------------------------------------------------------
@@ -50,37 +55,78 @@ namespace LabraxStudio.Game
             int currentLevel = ServicesAccess.PlayerDataService.CurrentLevel;
             LevelMeta levelMeta = ServicesAccess.LevelMetaService.GetLevelMeta(currentLevel);
 
-            _gameFieldController.Initialize(levelMeta);
-            _gatesController.Initialize(levelMeta);
+            _gameFieldController.Initialize();
+            _gameFieldController.GenerateField(levelMeta);
+
+            _gatesController.Initialize();
+            _gatesController.GenerateGates(levelMeta);
             int biggestGateNumber = _gatesController.GetBiggestGateNumber();
+
             _tilesController.Initialize(levelMeta, biggestGateNumber);
             _cameraController.Initialize(levelMeta.Width, levelMeta.Height);
             _gatesController.CheckGatesState();
-            
+
             ServicesAccess.TouchService.SetTouchState(true);
             GameEvents.SendLevelGenerated();
+            IsLevelGenerated = true;
         }
 
         // PRIVATE METHODS: -----------------------------------------------------------------------
-        
+
 
         private void ReloadLevel()
         {
-            GameManager.ReloadScene();
+            // GameManager.ReloadScene();
+
+            ServicesAccess.TouchService.SetTouchState(false);
+
+            int currentLevel = ServicesAccess.PlayerDataService.CurrentLevel;
+            LevelMeta levelMeta = ServicesAccess.LevelMetaService.GetLevelMeta(currentLevel);
+            int biggestGateNumber = _gatesController.GetBiggestGateNumber();
+
+            _tilesController.ClearTiles();
+            _tilesController.Initialize(levelMeta, biggestGateNumber);
+            _gatesController.CheckGatesState();
+
+            ServicesAccess.TouchService.SetTouchState(true);
+            GameEvents.SendLevelGenerated();
+            IsLevelGenerated = true;
+        }
+
+        private void LoadNewLevel()
+        {
+            ServicesAccess.TouchService.SetTouchState(false);
+
+            int currentLevel = ServicesAccess.PlayerDataService.CurrentLevel;
+            LevelMeta levelMeta = ServicesAccess.LevelMetaService.GetLevelMeta(currentLevel);
+
+            _gameFieldController.ClearField();
+            _gameFieldController.GenerateField(levelMeta);
+
+            _gatesController.ClearGates();
+            _gatesController.GenerateGates(levelMeta);
+            int biggestGateNumber = _gatesController.GetBiggestGateNumber();
+
+            _tilesController.ClearTiles();
+            _tilesController.Initialize(levelMeta, biggestGateNumber);
+            _cameraController.Initialize(levelMeta.Width, levelMeta.Height);
+            _gatesController.CheckGatesState();
+
+            ServicesAccess.TouchService.SetTouchState(true);
+            GameEvents.SendLevelGenerated();
+            IsLevelGenerated = true;
         }
 
         // EVENTS RECEIVERS: ----------------------------------------------------------------------
 
-
         private void OnGameOver(bool isWin)
         {
-            if(!isWin)
+            IsLevelGenerated = false;
+            if (!isWin)
                 ReloadLevel();
         }
 
-        private void SwitchLevel()
-        {
-            Initialize();
-        }
+        private void OnWinScreenClaimClicked() => LoadNewLevel();
+        private void OnLevelRestartBoosterUse() => ReloadLevel();
     }
 }

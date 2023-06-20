@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using LabraxStudio.Events;
 using LabraxStudio.Managers;
 using LabraxStudio.Meta;
@@ -99,6 +100,12 @@ namespace LabraxStudio.Game.Tiles
                 GameEvents.SendGameOver(true);
         }
 
+        public void ClearTiles()
+        {
+            RemoveAllTiles(new List<Tile>(_tiles));
+            _tiles.Clear();
+        }
+
         // PRIVATE METHODS: -----------------------------------------------------------------------
 
         private void CheckChainMerges(Tile mergeTo)
@@ -176,6 +183,15 @@ namespace LabraxStudio.Game.Tiles
         {
             foreach (var tile in _tiles)
                 tile.SetMergeFlag(false);
+        }
+        
+        private async void RemoveAllTiles(List<Tile> tiles)
+        {
+            foreach (var tile in tiles)
+            {
+                tile.DestroySelf();
+                await Task.Delay(1);
+            }
         }
     }
 }

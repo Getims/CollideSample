@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using LabraxStudio.App.Services;
 using LabraxStudio.Meta;
 using UnityEngine;
@@ -22,7 +23,7 @@ namespace LabraxStudio.Game.GameField
         private GameFieldSettings _gameFieldSettings;
         private GameFieldSprites _gameFieldSprites;
         private int[,] _levelMatrix;
-
+       
         // PUBLIC METHODS: -----------------------------------------------------------------------
 
         public void Initialize()
@@ -30,23 +31,28 @@ namespace LabraxStudio.Game.GameField
             _gameFieldSettings = ServicesAccess.GameSettingsService.GetGameSettings().GameFieldSettings;
             _gameFieldSprites = ServicesAccess.GameSettingsService.GetGameSettings().GameFieldSprites;
         }
-
-        public void GenerateFieldSprites(int levelWidth, int levelHeight, int[,] levelMatrix)
+        
+        public List<FieldCell> GenerateFieldSprites(int levelWidth, int levelHeight, int[,] levelMatrix)
         {
+            List<FieldCell> gameField = new List<FieldCell>();
             _levelMatrix = levelMatrix;
 
             for (int i = 0; i < levelWidth; i++)
             {
                 for (int j = 0; j < levelHeight; j++)
                 {
-                    CreateCell(i, j, levelMatrix[i, j] - 1);
+                    var fieldCell = CreateCell(i, j, levelMatrix[i, j] - 1);
+                    if(fieldCell!=null)
+                        gameField.Add(fieldCell);
                 }
             }
+
+            return gameField;
         }
 
         // PRIVATE METHODS: -----------------------------------------------------------------------
 
-        private void CreateCell(int x, int y, int spriteIndex)
+        private FieldCell CreateCell(int x, int y, int spriteIndex)
         {
             Sprite sprite = null;
             bool isGate = false;
@@ -55,7 +61,7 @@ namespace LabraxStudio.Game.GameField
             else if (spriteIndex == 1)
                 sprite = GetPlayableSprite(x, y);
             else
-                return;
+                return null;
 
             if (sprite == null)
                 sprite = _gameFieldSprites.ErrorSprite;
@@ -69,6 +75,7 @@ namespace LabraxStudio.Game.GameField
             newCell.transform.localPosition = position;
             newCell.SetName(GenerateName(x, y));
             newCell.SetSprite(sprite);
+            return newCell;
         }
 
         private Sprite GetPlayableSprite(int x, int y)

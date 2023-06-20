@@ -77,6 +77,12 @@ namespace LabraxStudio.Game.Gates
             var color = _isLocked ? _closedGate : _openedGate;
             _currentGate.color = color;
         }
+        
+        public void DestroySelf()
+        {
+            if(gameObject!=null)
+                Destroy(gameObject);
+        }
 
         // PRIVATE METHODS: -----------------------------------------------------------------------
 

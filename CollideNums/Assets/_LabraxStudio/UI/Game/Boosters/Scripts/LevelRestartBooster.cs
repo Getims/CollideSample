@@ -1,4 +1,4 @@
-using LabraxStudio.App;
+using LabraxStudio.Events;
 
 namespace LabraxStudio.UI.GameScene.Boosters
 {
@@ -6,7 +6,7 @@ namespace LabraxStudio.UI.GameScene.Boosters
     {
         public void UseBooster()
         {
-            GameManager.ReloadScene();
+            GameEvents.SendLevelRestartBoosterUse();
         }
     }
 }

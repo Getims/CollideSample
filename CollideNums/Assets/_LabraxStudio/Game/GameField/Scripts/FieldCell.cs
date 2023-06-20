@@ -20,5 +20,11 @@ namespace LabraxStudio.Game.GameField
         {
             _spriteRenderer.sprite = sprite;
         }
+
+        public void DestroySelf()
+        {
+            if(gameObject!=null)
+                Destroy(gameObject);
+        }
     }
 }

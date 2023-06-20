@@ -48,6 +48,9 @@ namespace LabraxStudio.UI.GameScene.Boosters
 
         public void CheckAdState()
         {
+            if(_boosterMeta==null)
+                return;
+            
             int moneyCount = ServicesAccess.PlayerDataService.Money;
             bool isEnoughMoney = _boosterMeta.MoneyPrice <= moneyCount;
             _buttonVisualizer.SetState(!isEnoughMoney);
