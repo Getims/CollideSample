@@ -15,7 +15,7 @@ namespace LabraxStudio.Game.Tiles
             _tile = tile;
             _direction = direction;
             _destroyAction = destroyAction;
-            _gameFieldSettings = ServicesAccess.GameSettingsService.GetGameSettings().GameFieldSettings;
+            _gameFieldSettings = ServicesProvider.GameSettingsService.GetGameSettings().GameFieldSettings;
         }
 
         // FIELDS: -------------------------------------------------------------------

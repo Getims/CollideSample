@@ -72,7 +72,7 @@ namespace LabraxStudio.MainMenu.Camera
 
         public void Setup(bool lastSceneIsGame, Action onMoveComplete)
         {
-            int openedLevels = ServicesAccess.LevelDataService.UnlockedLevelsCount;
+            int openedLevels = ServicesProvider.LevelDataService.UnlockedLevelsCount;
             _onMoveComplete = onMoveComplete;
             _cameraRotateScript.SetRotateEffector(openedLevels > 5 ? 1 : 0.5f);
 

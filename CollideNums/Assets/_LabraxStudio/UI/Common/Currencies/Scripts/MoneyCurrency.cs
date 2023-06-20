@@ -19,7 +19,7 @@ namespace LabraxStudio.UI.Common.Currency
 
         private void Start()
         {
-            LastCurrency = ServicesAccess.PlayerDataService.Money;
+            LastCurrency = ServicesProvider.PlayerDataService.Money;
 
             UpdateValue(LastCurrency);
             Show();
@@ -44,7 +44,7 @@ namespace LabraxStudio.UI.Common.Currency
             if (!gameObject.activeSelf)
                 return;
 
-            float endValue = ServicesAccess.PlayerDataService.Money;
+            float endValue = ServicesProvider.PlayerDataService.Money;
             int difference = (int) (LastCurrency - endValue);
 
             StopValueUpdater();

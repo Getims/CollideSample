@@ -27,7 +27,7 @@ namespace LabraxStudio.Game.Camera
             SetupCameraSize();
 
             GameFieldSprites gameFieldSprites =
-                ServicesAccess.GameSettingsService.GetGameSettings().GameFieldSprites;
+                ServicesProvider.GameSettingsService.GetGameSettings().GameFieldSprites;
             _camera.backgroundColor = gameFieldSprites.BackgroundColor;
         }
 
@@ -36,7 +36,7 @@ namespace LabraxStudio.Game.Camera
         private void SetPosition(int levelWidth, int levelHeight)
         {
             GameFieldSettings gameFieldSettings =
-                ServicesAccess.GameSettingsService.GetGameSettings().GameFieldSettings;
+                ServicesProvider.GameSettingsService.GetGameSettings().GameFieldSettings;
 
             float cellSize = gameFieldSettings.CellSize;
             float offsetX = levelWidth * 0.5f * cellSize - cellSize * 0.5f;

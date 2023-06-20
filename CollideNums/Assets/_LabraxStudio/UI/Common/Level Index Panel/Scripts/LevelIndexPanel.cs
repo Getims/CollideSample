@@ -43,7 +43,7 @@ namespace LabraxStudio.UI.Common
 
         private void UpdateInfo()
         {
-            int currentLevel = ServicesAccess.PlayerDataService.CurrentLevel;
+            int currentLevel = ServicesProvider.PlayerDataService.CurrentLevel;
             _levelIndexTMP.text = $"Level {currentLevel + 1}";
         }
 

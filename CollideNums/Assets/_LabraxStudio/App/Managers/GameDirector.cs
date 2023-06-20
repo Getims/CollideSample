@@ -23,11 +23,11 @@ namespace LabraxStudio.App
         {
             base.Start();
 
-            if (ServicesAccess.GameSettingsService.GetGameSettings() == null)
+            if (ServicesProvider.GameSettingsService.GetGameSettings() == null)
                 throw new Exception("Не назначен файл настроек в starter");
 
             SetupManagers();
-            Debug.unityLogger.logEnabled = ServicesAccess.GameSettingsService.GetGlobalSettings().UsesUnityLogs;
+            Debug.unityLogger.logEnabled = ServicesProvider.GameSettingsService.GetGlobalSettings().UsesUnityLogs;
         }
 
         protected override void OnDestroy()
@@ -50,22 +50,22 @@ namespace LabraxStudio.App
 
         private void SetupManagers()
         {
-            var gameSettings = ServicesAccess.GameSettingsService.GetGameSettings();
-            ServicesAccess.PlayerDataService.Initialize();
-            ServicesAccess.LevelDataService.Initialize();
-            ServicesAccess.LevelMetaService.Initialize(gameSettings.LevelsList);
+            var gameSettings = ServicesProvider.GameSettingsService.GetGameSettings();
+            ServicesProvider.PlayerDataService.Initialize();
+            ServicesProvider.LevelDataService.Initialize();
+            ServicesProvider.LevelMetaService.Initialize(gameSettings.LevelsList);
             GameManager.Instance.Initialize();
 
             if (!gameSettings.LaunchSettings.EnableTutorial)
-                ServicesAccess.PlayerDataService.SetTutorialState(true);
+                ServicesProvider.PlayerDataService.SetTutorialState(true);
 
             ScreenManager.Instance.Initialize();
             SoundManager.Instance.Setup();
 
-            if (ServicesAccess.PlayerDataService.IsFirstStart)
+            if (ServicesProvider.PlayerDataService.IsFirstStart)
             {
-                ServicesAccess.PlayerDataService.SetFirstStartState(false);
-                ServicesAccess.GameDataService.SaveGameData();
+                ServicesProvider.PlayerDataService.SetFirstStartState(false);
+                ServicesProvider.GameDataService.SaveGameData();
             }
 
             GameManager.Instance.SaveTime();

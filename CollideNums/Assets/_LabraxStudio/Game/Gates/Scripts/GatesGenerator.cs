@@ -29,8 +29,8 @@ namespace LabraxStudio.Game.Gates
 
         public void Initialize()
         {
-            _gameFieldSettings = ServicesAccess.GameSettingsService.GetGameSettings().GameFieldSettings;
-            _gameFieldSprites = ServicesAccess.GameSettingsService.GetGameSettings().GameFieldSprites;
+            _gameFieldSettings = ServicesProvider.GameSettingsService.GetGameSettings().GameFieldSettings;
+            _gameFieldSprites = ServicesProvider.GameSettingsService.GetGameSettings().GameFieldSprites;
             _isInitialized = true;
         }
 

@@ -22,7 +22,7 @@ namespace LabraxStudio.Sound
 
         // PROPERTIES: ----------------------------------------------------------------------------
 
-        private SoundSettings SoundMeta => ServicesAccess.GameSettingsService.GetSoundSettings;
+        private SoundSettings SoundMeta => ServicesProvider.GameSettingsService.GetSoundSettings;
         public bool IsSoundOn => _isSoundOn;
         public bool IsMusicOn => _isMusicOn;
 
@@ -44,8 +44,8 @@ namespace LabraxStudio.Sound
         public void Setup()
         {
             _interfaceSoundList.Clear();
-            _isSoundOn = ServicesAccess.PlayerDataService.IsSoundOn;
-            _isMusicOn = ServicesAccess.PlayerDataService.IsMusicOn;
+            _isSoundOn = ServicesProvider.PlayerDataService.IsSoundOn;
+            _isMusicOn = ServicesProvider.PlayerDataService.IsMusicOn;
         }
 
         public float GetCustomGameplaySoundVolume(GameplaySound meta) =>
@@ -66,7 +66,7 @@ namespace LabraxStudio.Sound
             _isSoundOn = !_isSoundOn;
             if (_isSoundOn)
                 ResetMusicFast();
-            ServicesAccess.PlayerDataService.SetSoundState(_isSoundOn);
+            ServicesProvider.PlayerDataService.SetSoundState(_isSoundOn);
         }
 
         public void SwitchMusic()
@@ -80,7 +80,7 @@ namespace LabraxStudio.Sound
             else
                 _musicAS.Stop();
 
-            ServicesAccess.PlayerDataService.SetMusicState(_isMusicOn);
+            ServicesProvider.PlayerDataService.SetMusicState(_isMusicOn);
         }
 
         public void SetAllMusicOff()

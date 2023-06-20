@@ -18,7 +18,7 @@ namespace LabraxStudio.App.Services
 
         public void Initialize()
         {
-            _gameDataService = ServicesAccess.GameDataService;
+            _gameDataService = ServicesProvider.GameDataService;
         }
 
         public void AddLevelDataToList(LevelData levelData)
@@ -26,7 +26,7 @@ namespace LabraxStudio.App.Services
             _levelsDataList.Add(levelData);
         }
 
-        public LevelData GetCurrentLevelData() => GetLevelData(ServicesAccess.PlayerDataService.CurrentLevel);
+        public LevelData GetCurrentLevelData() => GetLevelData(ServicesProvider.PlayerDataService.CurrentLevel);
 
         public LevelData GetLevelData(string levelName) => _levelsDataList.Find(d => d.LevelName == levelName);
 
@@ -40,8 +40,8 @@ namespace LabraxStudio.App.Services
 
         public void SetCurrentLevel(string levelName)
         {
-            int levelIndex = ServicesAccess.LevelMetaService.GetLevelIndex(levelName);
-            ServicesAccess.PlayerDataService.SetLevel(levelIndex);
+            int levelIndex = ServicesProvider.LevelMetaService.GetLevelIndex(levelName);
+            ServicesProvider.PlayerDataService.SetLevel(levelIndex);
         }
 
         public int CalculateUnlockedLevels()
@@ -66,7 +66,7 @@ namespace LabraxStudio.App.Services
         public void UnlockNextLevel()
         {
             int levelsCount = _levelsDataList.Count;
-            int nextLevelIndex = Mathf.Min(ServicesAccess.PlayerDataService.CurrentLevel + 1, levelsCount - 1);
+            int nextLevelIndex = Mathf.Min(ServicesProvider.PlayerDataService.CurrentLevel + 1, levelsCount - 1);
             var levelData = GetLevelData(nextLevelIndex);
 
             if (levelData.IsUnlocked)

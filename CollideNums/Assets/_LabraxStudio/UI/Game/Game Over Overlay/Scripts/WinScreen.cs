@@ -55,14 +55,14 @@ namespace LabraxStudio.UI.GameScene.GameOver
 
         private void Setup()
         {
-            LevelMeta levelMeta = ServicesAccess.LevelMetaService.GetCurrentLevelMeta();
+            LevelMeta levelMeta = ServicesProvider.LevelMetaService.GetCurrentLevelMeta();
             _reward = levelMeta.Reward;
             _rewardPanel.SetReward(_reward);
         }
 
         private void ApplyReward()
         {
-            ServicesAccess.PlayerDataService.AddMoney(_reward);
+            ServicesProvider.PlayerDataService.AddMoney(_reward);
             CommonEvents.SendAllCurrencyChanged();
         }
 
@@ -71,7 +71,7 @@ namespace LabraxStudio.UI.GameScene.GameOver
             GameMediator.Instance.StartCoinsFlyAnimation(_rewardPanel.CoinCenter);
             yield return new WaitForSeconds(0.5f);
             ApplyReward();
-            ServicesAccess.PlayerDataService.SwitchToNextLevel();
+            ServicesProvider.PlayerDataService.SwitchToNextLevel();
             UIEvents.SendWinScreenClaimClicked();
 
             Hide();

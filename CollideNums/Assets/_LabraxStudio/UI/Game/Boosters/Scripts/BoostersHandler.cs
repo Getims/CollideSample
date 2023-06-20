@@ -17,11 +17,11 @@ namespace LabraxStudio.UI.GameScene.Boosters
         {
             //if (meta.ReceiveForRv)
             //    WatchAd();
-            int moneyCount = ServicesAccess.PlayerDataService.Money;
+            int moneyCount = ServicesProvider.PlayerDataService.Money;
             bool isEnoughMoney = boosterMeta.MoneyPrice <= moneyCount;
             if (isEnoughMoney)
             {
-                ServicesAccess.PlayerDataService.SpendMoney(boosterMeta.MoneyPrice);
+                ServicesProvider.PlayerDataService.SpendMoney(boosterMeta.MoneyPrice);
                 CommonEvents.SendAllCurrencyChanged();
                 UseBooster(boosterMeta.BoosterType);
             }

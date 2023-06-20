@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using LabraxStudio.App.Services;
 using LabraxStudio.Events;
 using LabraxStudio.Game;
+using LabraxStudio.Game.GameField;
 using LabraxStudio.Meta;
 using UnityEngine;
 using UnityEngine.UI;
@@ -44,15 +45,15 @@ namespace LabraxStudio.UI.GameScene.Boosters
 
         private void Start()
         {
-            if(GameFlowManager.IsLevelGenerated)
+            if (GameFlowManager.IsLevelGenerated)
                 OnLevelGenerate();
         }
-        
+
         // PRIVATE METHODS: -----------------------------------------------------------------------
 
         private bool SetupButtons()
         {
-            LevelMeta levelMeta = ServicesAccess.LevelMetaService.GetCurrentLevelMeta();
+            LevelMeta levelMeta = ServicesProvider.LevelMetaService.GetCurrentLevelMeta();
             List<BoostersSettings> boostersSettings = levelMeta.BoostersSettings;
             int boostersCount = boostersSettings.Count;
 
@@ -121,10 +122,34 @@ namespace LabraxStudio.UI.GameScene.Boosters
 
         // EVENTS RECEIVERS: ----------------------------------------------------------------------
 
-        private void OnGameOver(bool arg0)
+        private void OnGameOver(bool isWin)
         {
-            Hide();
-            DestroySelfDelayed();
+            if (isWin)
+            {
+                Hide();
+                DestroySelfDelayed();
+                return;
+            }
+
+            bool hasRestartBooster = false;
+            foreach (var boosterButton in _boosterButtons)
+            {
+                if(boosterButton.BoosterMeta == null)
+                    continue;
+                
+                if (boosterButton.BoosterMeta.BoosterType == BoosterType.LevelRestart)
+                {
+                    boosterButton.StartPulsation();
+                    hasRestartBooster = true;
+                    break;
+                }
+            }
+
+            if (!hasRestartBooster)
+            {
+                Hide();
+                DestroySelfDelayed();
+            }
         }
 
         private void OnLevelGenerate()

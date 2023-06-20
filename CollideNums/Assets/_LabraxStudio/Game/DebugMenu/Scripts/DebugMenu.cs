@@ -58,7 +58,7 @@ namespace LabraxStudio.Game.Debug
         private void Start()
         {
             base.InitManager();
-            _gameFieldSettings = ServicesAccess.GameSettingsService.GetGameSettings().GameFieldSettings;
+            _gameFieldSettings = ServicesProvider.GameSettingsService.GetGameSettings().GameFieldSettings;
 
             _baseSwipeForce.SetTextWithoutNotify(_gameFieldSettings.BaseSwipeForce.ToString());
             _tileSpeed.SetTextWithoutNotify(_gameFieldSettings.TileSpeed.ToString());
@@ -109,19 +109,19 @@ namespace LabraxStudio.Game.Debug
 
         public void NextLevel()
         {
-            ServicesAccess.PlayerDataService.SwitchToNextLevel();
+            ServicesProvider.PlayerDataService.SwitchToNextLevel();
             GameManager.ReloadScene();
         }
 
         public void PreviousLevel()
         {
-            ServicesAccess.PlayerDataService.SwitchToPreviousLevel();
+            ServicesProvider.PlayerDataService.SwitchToPreviousLevel();
             GameManager.ReloadScene();
         }
 
         public void OnDropDownChange(int value)
         {
-            ServicesAccess.PlayerDataService.SetLevel(value);
+            ServicesProvider.PlayerDataService.SetLevel(value);
             GameManager.ReloadScene();
         }
 
@@ -157,8 +157,8 @@ namespace LabraxStudio.Game.Debug
             _dropdown.options.Clear();
 
             List<TMP_Dropdown.OptionData> options = new List<TMP_Dropdown.OptionData>();
-            var selectableLevels = ServicesAccess.GameSettingsService.GetGlobalSettings().GameSettings.LevelsList;
-            int currentIndex = ServicesAccess.PlayerDataService.CurrentLevel;
+            var selectableLevels = ServicesProvider.GameSettingsService.GetGlobalSettings().GameSettings.LevelsList;
+            int currentIndex = ServicesProvider.PlayerDataService.CurrentLevel;
             if (selectableLevels == null)
                 return;
 

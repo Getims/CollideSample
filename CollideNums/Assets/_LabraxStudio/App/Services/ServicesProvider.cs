@@ -1,6 +1,6 @@
 namespace LabraxStudio.App.Services
 {
-    public static class ServicesAccess
+    public static class ServicesProvider
     {
         // PROPERTIES: ----------------------------------------------------------------------------
 
@@ -10,6 +10,7 @@ namespace LabraxStudio.App.Services
         public static LevelDataService LevelDataService => _levelDataService;
         public static LevelMetaService LevelMetaService => _levelMetaService;
         public static PlayerDataService PlayerDataService => _playerDataService;
+        public static GameFlowService GameFlowService => _gameFlowService;
 
         // FIELDS: -------------------------------------------------------------------
 
@@ -19,5 +20,6 @@ namespace LabraxStudio.App.Services
         private static readonly LevelDataService _levelDataService = new LevelDataService();
         private static readonly LevelMetaService _levelMetaService = new LevelMetaService();
         private static readonly PlayerDataService _playerDataService = new PlayerDataService();
+        private static readonly GameFlowService _gameFlowService = new GameFlowService();
     }
 }

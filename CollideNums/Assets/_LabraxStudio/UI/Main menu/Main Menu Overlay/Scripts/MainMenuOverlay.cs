@@ -24,7 +24,7 @@ namespace LabraxStudio.UI.MainMenu
             Show();
             _tapButton.onClick.AddListener(OnTapToStart);
             UIEvents.SendUISelect();
-            ServicesAccess.TouchService.SetTouchState(false);
+            ServicesProvider.TouchService.SetTouchState(false);
         }
 
         // PRIVATE METHODS: -----------------------------------------------------------------------
@@ -38,7 +38,7 @@ namespace LabraxStudio.UI.MainMenu
             Hide();
             DestroySelfDelayed();
 
-            ServicesAccess.TouchService.SetTouchState(true);
+            ServicesProvider.TouchService.SetTouchState(true);
 
             UIEvents.SendUIDeselect();
             UIEvents.SendMainMenuTapToPlay();

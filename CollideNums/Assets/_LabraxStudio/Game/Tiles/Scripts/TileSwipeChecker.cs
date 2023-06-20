@@ -22,13 +22,13 @@ namespace LabraxStudio.Game.Tiles
         public void Initialize(Tile tile, UnityEngine.Camera camera, Action<Direction, Swipe, float> onSwipe)
         {
             _camera = camera;
-            _gameFieldSettings = ServicesAccess.GameSettingsService.GetGameSettings().GameFieldSettings;
+            _gameFieldSettings = ServicesProvider.GameSettingsService.GetGameSettings().GameFieldSettings;
             _onSwipe = onSwipe;
         }
 
         public void OnSelect()
         {
-            if (!ServicesAccess.TouchService.IsTouchEnabled)
+            if (!ServicesProvider.TouchService.IsTouchEnabled)
                 return;
 
             _isSelected = true;

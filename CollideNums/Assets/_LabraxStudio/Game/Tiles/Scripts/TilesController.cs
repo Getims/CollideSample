@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using LabraxStudio.App.Services;
 using LabraxStudio.Events;
 using LabraxStudio.Managers;
 using LabraxStudio.Meta;
@@ -24,6 +25,7 @@ namespace LabraxStudio.Game.Tiles
         // PROPERTIES: ----------------------------------------------------------------------------
 
         public int[,] TilesMatrix => _tilesMatrix;
+        public List<Tile> Tiles => _tiles;
 
         // FIELDS: -------------------------------------------------------------------
 
@@ -32,13 +34,11 @@ namespace LabraxStudio.Game.Tiles
 
         private List<Tile> _tiles = new List<Tile>();
         private int _animations = 0;
-        private int _biggestGateNumber = 0;
 
         // PUBLIC METHODS: -----------------------------------------------------------------------
 
-        public void Initialize(LevelMeta levelMeta, int biggestGateNumber)
+        public void Initialize(LevelMeta levelMeta)
         {
-            _biggestGateNumber = biggestGateNumber;
             _tilesMatrix = (int[,]) levelMeta.TilesMatrix.Clone();
             _tilesGenerator.Initialize();
             _tiles = _tilesGenerator.GenerateTiles(levelMeta.Width, levelMeta.Height, _tilesMatrix);
@@ -95,8 +95,8 @@ namespace LabraxStudio.Game.Tiles
         {
             _tiles.Remove(tile);
             tile.DestroySelf();
-            
-            if(_tiles.Count == 0)
+
+            if (_tiles.Count == 0)
                 GameEvents.SendGameOver(true);
         }
 
@@ -156,19 +156,7 @@ namespace LabraxStudio.Game.Tiles
             GameEvents.SendTileAction();
         }
 
-        private void CheckForFail()
-        {
-            foreach (var tile in _tiles)
-            {
-                int tileValue = tile.Value;
-                int tileGate = (int) GameTypesConverter.TileValueToGateType(tileValue);
-                if (tileGate > _biggestGateNumber)
-                {
-                    GameEvents.SendGameOver(false);
-                    break;
-                }
-            }
-        }
+        private void CheckForFail() => ServicesProvider.GameFlowService.FailTracker.CheckForFail();
 
         private void DestroyTileInGate(Tile tile)
         {
@@ -184,7 +172,7 @@ namespace LabraxStudio.Game.Tiles
             foreach (var tile in _tiles)
                 tile.SetMergeFlag(false);
         }
-        
+
         private async void RemoveAllTiles(List<Tile> tiles)
         {
             foreach (var tile in tiles)

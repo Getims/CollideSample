@@ -1,6 +1,7 @@
 using System;
 using LabraxStudio.App.Services;
 using LabraxStudio.Meta;
+using LabraxStudio.UI.Common;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,8 +15,11 @@ namespace LabraxStudio.UI.GameScene.Boosters
         [SerializeField]
         private BoosterButtonVisualizer _buttonVisualizer;
 
+        [SerializeField]
+        private Pulsation _pulsation;
+
         // PROPERTIES: ----------------------------------------------------------------------------
-        
+
         public BoosterMeta BoosterMeta => _boosterMeta;
 
         // FIELDS: -------------------------------------------------------------------
@@ -48,27 +52,41 @@ namespace LabraxStudio.UI.GameScene.Boosters
 
         public void CheckAdState()
         {
-            if(_boosterMeta==null)
+            if (_boosterMeta == null)
                 return;
-            
-            int moneyCount = ServicesAccess.PlayerDataService.Money;
+
+            int moneyCount = ServicesProvider.PlayerDataService.Money;
             bool isEnoughMoney = _boosterMeta.MoneyPrice <= moneyCount;
             _buttonVisualizer.SetState(!isEnoughMoney);
         }
-        
+
         public void SetActive(bool isActive)
         {
             gameObject.SetActive(isActive);
         }
 
+        public void StartPulsation()
+        {
+            if (!_pulsation.IsPulsing)
+                _pulsation.StartPulse();
+        }
+
+        public void StopPulsation() => _pulsation.StopPulse();
+
+        // PRIVATE METHODS: -----------------------------------------------------------------------
+
         private void UseBooster()
         {
-            if(_onClickAction!=null)
+            if (_onClickAction != null)
                 _onClickAction.Invoke(this);
         }
 
         // EVENTS RECEIVERS: ----------------------------------------------------------------------
 
-        private void OnButtonClick() => UseBooster();
+        private void OnButtonClick()
+        {
+            StopPulsation();
+            UseBooster();
+        }
     }
 }

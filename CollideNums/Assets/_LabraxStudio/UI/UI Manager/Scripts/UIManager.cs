@@ -68,8 +68,8 @@ namespace LabraxStudio.UI
 
             InitializeGameUI();
         }
-        
-        
+
+
         private void OnWinScreenClaimClicked()
         {
             InitializeMenuUI();
@@ -81,8 +81,8 @@ namespace LabraxStudio.UI
             if (isWin)
                 InitializeMenuUI();
             */
-            
-            _menuUIFactory.Create(MenuType.WinScreen);
+            if (isWin)
+                _menuUIFactory.Create(MenuType.WinScreen);
         }
     }
 }

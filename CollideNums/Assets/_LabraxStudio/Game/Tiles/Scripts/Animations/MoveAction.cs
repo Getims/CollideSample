@@ -16,7 +16,7 @@ namespace LabraxStudio.Game.Tiles
             _tile = tile;
             _moveTo = moveTo;
             _swipe = swipe;
-            _gameFieldSettings = ServicesAccess.GameSettingsService.GetGameSettings().GameFieldSettings;
+            _gameFieldSettings = ServicesProvider.GameSettingsService.GetGameSettings().GameFieldSettings;
         }
 
         // FIELDS: -------------------------------------------------------------------

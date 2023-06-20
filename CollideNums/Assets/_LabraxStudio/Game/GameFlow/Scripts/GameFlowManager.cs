@@ -28,6 +28,7 @@ namespace LabraxStudio.Game
         private GatesController _gatesController;
 
         // FIELDS: -------------------------------------------------------------------
+
         public static bool IsLevelGenerated = false;
 
         // GAME ENGINE METHODS: -------------------------------------------------------------------
@@ -50,23 +51,25 @@ namespace LabraxStudio.Game
 
         public void Initialize()
         {
-            ServicesAccess.TouchService.SetTouchState(false);
+            ServicesProvider.GameFlowService.Setup(_gameFieldController,
+                _gatesController, _tilesController, _cameraController);
 
-            int currentLevel = ServicesAccess.PlayerDataService.CurrentLevel;
-            LevelMeta levelMeta = ServicesAccess.LevelMetaService.GetLevelMeta(currentLevel);
+            ServicesProvider.TouchService.SetTouchState(false);
+
+            int currentLevel = ServicesProvider.PlayerDataService.CurrentLevel;
+            LevelMeta levelMeta = ServicesProvider.LevelMetaService.GetLevelMeta(currentLevel);
 
             _gameFieldController.Initialize();
             _gameFieldController.GenerateField(levelMeta);
 
             _gatesController.Initialize();
             _gatesController.GenerateGates(levelMeta);
-            int biggestGateNumber = _gatesController.GetBiggestGateNumber();
 
-            _tilesController.Initialize(levelMeta, biggestGateNumber);
+            _tilesController.Initialize(levelMeta);
             _cameraController.Initialize(levelMeta.Width, levelMeta.Height);
             _gatesController.CheckGatesState();
 
-            ServicesAccess.TouchService.SetTouchState(true);
+            ServicesProvider.TouchService.SetTouchState(true);
             GameEvents.SendLevelGenerated();
             IsLevelGenerated = true;
         }
@@ -78,41 +81,39 @@ namespace LabraxStudio.Game
         {
             // GameManager.ReloadScene();
 
-            ServicesAccess.TouchService.SetTouchState(false);
+            ServicesProvider.TouchService.SetTouchState(false);
 
-            int currentLevel = ServicesAccess.PlayerDataService.CurrentLevel;
-            LevelMeta levelMeta = ServicesAccess.LevelMetaService.GetLevelMeta(currentLevel);
-            int biggestGateNumber = _gatesController.GetBiggestGateNumber();
+            int currentLevel = ServicesProvider.PlayerDataService.CurrentLevel;
+            LevelMeta levelMeta = ServicesProvider.LevelMetaService.GetLevelMeta(currentLevel);
 
             _tilesController.ClearTiles();
-            _tilesController.Initialize(levelMeta, biggestGateNumber);
+            _tilesController.Initialize(levelMeta);
             _gatesController.CheckGatesState();
 
-            ServicesAccess.TouchService.SetTouchState(true);
+            ServicesProvider.TouchService.SetTouchState(true);
             GameEvents.SendLevelGenerated();
             IsLevelGenerated = true;
         }
 
         private void LoadNewLevel()
         {
-            ServicesAccess.TouchService.SetTouchState(false);
+            ServicesProvider.TouchService.SetTouchState(false);
 
-            int currentLevel = ServicesAccess.PlayerDataService.CurrentLevel;
-            LevelMeta levelMeta = ServicesAccess.LevelMetaService.GetLevelMeta(currentLevel);
+            int currentLevel = ServicesProvider.PlayerDataService.CurrentLevel;
+            LevelMeta levelMeta = ServicesProvider.LevelMetaService.GetLevelMeta(currentLevel);
 
             _gameFieldController.ClearField();
             _gameFieldController.GenerateField(levelMeta);
 
             _gatesController.ClearGates();
             _gatesController.GenerateGates(levelMeta);
-            int biggestGateNumber = _gatesController.GetBiggestGateNumber();
 
             _tilesController.ClearTiles();
-            _tilesController.Initialize(levelMeta, biggestGateNumber);
+            _tilesController.Initialize(levelMeta);
             _cameraController.Initialize(levelMeta.Width, levelMeta.Height);
             _gatesController.CheckGatesState();
 
-            ServicesAccess.TouchService.SetTouchState(true);
+            ServicesProvider.TouchService.SetTouchState(true);
             GameEvents.SendLevelGenerated();
             IsLevelGenerated = true;
         }
@@ -122,7 +123,14 @@ namespace LabraxStudio.Game
         private void OnGameOver(bool isWin)
         {
             IsLevelGenerated = false;
-            if (!isWin)
+
+            if (isWin)
+                return;
+
+            int currentLevel = ServicesProvider.PlayerDataService.CurrentLevel;
+            LevelMeta levelMeta = ServicesProvider.LevelMetaService.GetLevelMeta(currentLevel);
+            if (levelMeta.BoostersSettings.Count == 0 ||
+                levelMeta.BoostersSettings.Find(b => b.BoosterMeta.BoosterType == BoosterType.LevelRestart) == null)
                 ReloadLevel();
         }
 

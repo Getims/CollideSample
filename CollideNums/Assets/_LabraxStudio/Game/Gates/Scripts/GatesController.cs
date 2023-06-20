@@ -10,13 +10,17 @@ namespace LabraxStudio.Game.Gates
 {
     public class GatesController : MonoBehaviour
     {
-        // FIELDS: -------------------------------------------------------------------
-        private List<GateCell> _gates = new List<GateCell>();
-
         // MEMBERS: -------------------------------------------------------------------------------
 
         [SerializeField]
         private GatesGenerator _gatesGenerator = new GatesGenerator();
+
+        // PROPERTIES: ----------------------------------------------------------------------------
+        
+        public List<GateCell> Gates => _gates;
+        
+        // FIELDS: -------------------------------------------------------------------
+        private List<GateCell> _gates = new List<GateCell>();
 
         // GAME ENGINE METHODS: -------------------------------------------------------------------
 
@@ -62,6 +66,18 @@ namespace LabraxStudio.Game.Gates
             return maxValue;
         }
 
+        public bool HasGate(int value)
+        {
+            foreach (var gateCell in _gates)
+            {
+                int gateValue = (int) gateCell.GateType;
+                if (gateValue == value)
+                    return true;
+            }
+            
+            return false;
+        }
+        
         public void ClearGates()
         {
             RemoveGameField(new List<GateCell>(_gates));

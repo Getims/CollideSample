@@ -21,7 +21,7 @@ namespace LabraxStudio.App.Services
         public void Initialize(List<LevelMeta> levels)
         {
             _levelsMetaList = levels;
-            var levelsData = ServicesAccess.GameDataService.GetGameData().LevelsData;
+            var levelsData = ServicesProvider.GameDataService.GetGameData().LevelsData;
 
             foreach (var levelMeta in _levelsMetaList)
             {
@@ -32,13 +32,13 @@ namespace LabraxStudio.App.Services
                     levelsData.AddLevelData(levelData);
                 }
 
-                ServicesAccess.LevelDataService.AddLevelDataToList(levelData);
+                ServicesProvider.LevelDataService.AddLevelDataToList(levelData);
             }
 
-            ServicesAccess.LevelDataService.UnlockFirstLevel();
+            ServicesProvider.LevelDataService.UnlockFirstLevel();
 
-            if (ServicesAccess.PlayerDataService.CurrentLevel >= LevelsCount)
-                ServicesAccess.PlayerDataService.SetLevel(0);
+            if (ServicesProvider.PlayerDataService.CurrentLevel >= LevelsCount)
+                ServicesProvider.PlayerDataService.SetLevel(0);
         }
 
         public LevelMeta GetLevelMeta(string levelName) => _levelsMetaList.Find(m => m.LevelName == levelName);
@@ -51,7 +51,7 @@ namespace LabraxStudio.App.Services
             return _levelsMetaList[levelIndex];
         }
 
-        public LevelMeta GetCurrentLevelMeta() => GetLevelMeta(ServicesAccess.PlayerDataService.CurrentLevel);
+        public LevelMeta GetCurrentLevelMeta() => GetLevelMeta(ServicesProvider.PlayerDataService.CurrentLevel);
 
         public int GetLevelIndex(string levelName)
         {

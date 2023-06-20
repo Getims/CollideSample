@@ -452,6 +452,7 @@ GameObject:
   m_Component:
   - component: {fileID: 410401470645882196}
   - component: {fileID: 5670851988195867622}
+  - component: {fileID: 9171525760248660968}
   m_Layer: 0
   m_Name: Booster Button Base
   m_TagString: Untagged
@@ -499,6 +500,24 @@ MonoBehaviour:
     _currencyContainer: {fileID: 3814332533224928786}
     _adIcon: {fileID: 5874083450631958805}
     _currencyTMP: {fileID: 1207362301426576890}
+  _pulsation: {fileID: 9171525760248660968}
+--- !u!114 &9171525760248660968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5571384915726618177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f143e6cd26764bc9942590cfc2c02f13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _element: {fileID: 410401470645882196}
+  _pulseTime: 0.55
+  _pulsePower: 0.25
+  _isLooped: 1
+  _startScale: {x: 1, y: 1, z: 1}
 --- !u!1 &6240232136596681616
 GameObject:
   m_ObjectHideFlags: 0

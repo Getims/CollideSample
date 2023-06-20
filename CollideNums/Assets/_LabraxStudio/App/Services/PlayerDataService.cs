@@ -28,14 +28,14 @@ namespace LabraxStudio.App.Services
                 return;
 
             _isInitialized = true;
-            _gameDataService = ServicesAccess.GameDataService;
+            _gameDataService = ServicesProvider.GameDataService;
             _gameData = _gameDataService.GetGameData();
             _playerData = _gameData.PlayerData;
 
             if (!_gameData.IsFirstStart)
                 return;
 
-            _playerData.SetMoney(ServicesAccess.GameSettingsService.GetGameSettings().BalanceSettings.StartMoney);
+            _playerData.SetMoney(ServicesProvider.GameSettingsService.GetGameSettings().BalanceSettings.StartMoney);
             _gameDataService.SaveGameData();
         }
 
@@ -65,7 +65,7 @@ namespace LabraxStudio.App.Services
 
         public void SetLevel(int levelIndex)
         {
-            levelIndex = Mathf.Min(levelIndex, ServicesAccess.LevelMetaService.LevelsCount - 1);
+            levelIndex = Mathf.Min(levelIndex, ServicesProvider.LevelMetaService.LevelsCount - 1);
             _playerData.SetCurrentLevel(levelIndex);
             _gameDataService.SaveGameData();
         }
@@ -73,7 +73,7 @@ namespace LabraxStudio.App.Services
         public void SwitchToNextLevel()
         {
             int newLevel = _playerData.CurrentLevel + 1;
-            if (newLevel >= ServicesAccess.LevelMetaService.LevelsCount)
+            if (newLevel >= ServicesProvider.LevelMetaService.LevelsCount)
                 newLevel = 0;
 
             _playerData.SetCurrentLevel(newLevel);
@@ -82,7 +82,7 @@ namespace LabraxStudio.App.Services
 
         public void SwitchToNextLevelNoReset()
         {
-            int newLevel = Mathf.Min(_playerData.CurrentLevel + 1, ServicesAccess.LevelMetaService.LevelsCount - 1);
+            int newLevel = Mathf.Min(_playerData.CurrentLevel + 1, ServicesProvider.LevelMetaService.LevelsCount - 1);
             _playerData.SetCurrentLevel(newLevel);
             _gameDataService.SaveGameData();
         }
