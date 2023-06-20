@@ -1,5 +1,6 @@
 using System;
 using DG.Tweening;
+using LabraxStudio.App.Services;
 using UnityEngine;
 
 namespace LabraxStudio.Game.Tiles
@@ -18,6 +19,7 @@ namespace LabraxStudio.Game.Tiles
 
         public Tile MergeFrom => _mergeFrom;
         public Tile MergeTo => _mergeTo;
+        private TilesController TilesController => ServicesProvider.GameFlowService.TilesController;
 
         // FIELDS: -------------------------------------------------------------------
 
@@ -42,8 +44,8 @@ namespace LabraxStudio.Game.Tiles
 
         private void OnComplete()
         {
-            TilesController.Instance.DestroyTile(_mergeFrom);
-            TilesController.Instance.CheckTileValue(_mergeTo);
+            TilesController.DestroyTile(_mergeFrom);
+            TilesController.CheckTileValue(_mergeTo);
 
             if (_onComplete != null)
                 _onComplete.Invoke();

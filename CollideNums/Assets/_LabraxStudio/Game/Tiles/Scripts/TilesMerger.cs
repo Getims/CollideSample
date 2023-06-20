@@ -1,4 +1,5 @@
 using System;
+using LabraxStudio.App.Services;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -7,6 +8,10 @@ namespace LabraxStudio.Game.Tiles
     [Serializable]
     public class TilesMerger
     {
+        // PROPERTIES: ----------------------------------------------------------------------------
+        
+        private TilesController TilesController => ServicesProvider.GameFlowService.TilesController;
+        
         // FIELDS: -------------------------------------------------------------------
 
         private int[,] _tilesMatrix;
@@ -94,7 +99,7 @@ namespace LabraxStudio.Game.Tiles
             if (otherValue != tile.Value)
                 return null;
 
-            Tile otherTile = TilesController.Instance.GetTile(new Vector2(x, y));
+            Tile otherTile = TilesController.GetTile(new Vector2(x, y));
             if (otherTile == null || otherTile.IsMerging)
                 return null;
 

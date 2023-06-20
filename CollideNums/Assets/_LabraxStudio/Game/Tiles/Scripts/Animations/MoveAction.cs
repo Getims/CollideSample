@@ -18,6 +18,10 @@ namespace LabraxStudio.Game.Tiles
             _swipe = swipe;
             _gameFieldSettings = ServicesProvider.GameSettingsService.GetGameSettings().GameFieldSettings;
         }
+        
+        // PROPERTIES: ----------------------------------------------------------------------------
+        
+        private TilesController TilesController => ServicesProvider.GameFlowService.TilesController;
 
         // FIELDS: -------------------------------------------------------------------
 
@@ -50,7 +54,7 @@ namespace LabraxStudio.Game.Tiles
             }
             else
             {
-                TilesController.Instance.StartCoroutine(Moving(_tile.transform,
+                TilesController.StartCoroutine(Moving(_tile.transform,
                     _tile.Position,
                     newPosition));
             }

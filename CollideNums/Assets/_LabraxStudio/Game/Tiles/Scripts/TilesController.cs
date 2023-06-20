@@ -2,14 +2,13 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using LabraxStudio.App.Services;
 using LabraxStudio.Events;
-using LabraxStudio.Managers;
 using LabraxStudio.Meta;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace LabraxStudio.Game.Tiles
 {
-    public class TilesController : SharedManager<TilesController>
+    public class TilesController : MonoBehaviour
     {
         // MEMBERS: -------------------------------------------------------------------------------
 
@@ -26,7 +25,7 @@ namespace LabraxStudio.Game.Tiles
 
         public int[,] TilesMatrix => _tilesMatrix;
         public List<Tile> Tiles => _tiles;
-
+        
         // FIELDS: -------------------------------------------------------------------
 
         [ShowInInspector]

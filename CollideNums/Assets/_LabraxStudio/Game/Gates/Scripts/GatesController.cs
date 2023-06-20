@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using LabraxStudio.App.Services;
 using LabraxStudio.Events;
 using LabraxStudio.Game.Tiles;
 using LabraxStudio.Meta;
@@ -18,6 +19,7 @@ namespace LabraxStudio.Game.Gates
         // PROPERTIES: ----------------------------------------------------------------------------
         
         public List<GateCell> Gates => _gates;
+        private TilesController TilesController => ServicesProvider.GameFlowService.TilesController;
         
         // FIELDS: -------------------------------------------------------------------
         private List<GateCell> _gates = new List<GateCell>();
@@ -110,7 +112,7 @@ namespace LabraxStudio.Game.Gates
         {
             var checkVector = GameTypesConverter.DirectionToVector2Int(direction);
             cell += checkVector;
-            var tile = TilesController.Instance.GetTile(cell);
+            var tile = TilesController.GetTile(cell);
             if (tile == null)
                 return false;
 

@@ -1,3 +1,4 @@
+using LabraxStudio.App.Services;
 using UnityEngine;
 
 namespace LabraxStudio.Game.Tiles
@@ -22,6 +23,8 @@ namespace LabraxStudio.Game.Tiles
 
         public bool IsMerging => _isMerging;
         public bool MovedToGate => _movedToGate;
+        
+        private TilesController TilesController => ServicesProvider.GameFlowService.TilesController;
 
         // FIELDS: -------------------------------------------------------------------
 
@@ -67,7 +70,7 @@ namespace LabraxStudio.Game.Tiles
 
         private void OnSwipe(Direction direction, Swipe swipe, float swipeSpeed)
         {
-            TilesController.Instance.MoveTile(this, direction, swipe, swipeSpeed);
+            TilesController.MoveTile(this, direction, swipe, swipeSpeed);
         }
 
         public void DestroySelf()
