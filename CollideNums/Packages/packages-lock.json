@@ -7,6 +7,22 @@
       "dependencies": {},
       "hash": "a499f0c04670e6e52893799f02a30aa7b5b4db05"
     },
+    "com.esotericsoftware.spine.spine-csharp": {
+      "version": "https://github.com/EsotericSoftware/spine-runtimes.git?path=spine-csharp/src#4.1",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "d75f2d1568a981a9ee8db74dd9626692bf2eb56c"
+    },
+    "com.esotericsoftware.spine.spine-unity": {
+      "version": "https://github.com/EsotericSoftware/spine-runtimes.git?path=spine-unity/Assets/Spine#4.1",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.esotericsoftware.spine.spine-csharp": "4.1.0"
+      },
+      "hash": "d75f2d1568a981a9ee8db74dd9626692bf2eb56c"
+    },
     "com.getims.w-tabs": {
       "version": "https://github.com/Getims/W-Tabs.git",
       "depth": 0,
