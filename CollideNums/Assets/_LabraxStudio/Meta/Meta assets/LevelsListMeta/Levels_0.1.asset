@@ -13,3 +13,9 @@ MonoBehaviour:
   m_Name: Levels_0.1
   m_EditorClassIdentifier: 
   FileName: Levels_0.1
+  _levelsMetaList:
+  - {fileID: 11400000, guid: f879f37c1ccf8c645acb275d75d9a03f, type: 2}
+  - {fileID: 11400000, guid: 0a485882299d07440ace4609abac5b1c, type: 2}
+  - {fileID: 11400000, guid: e63e3d33da7ef9d48be54bab006124ce, type: 2}
+  - {fileID: 11400000, guid: ee5014ace85e67e4e9fdaed48d8bee37, type: 2}
+  - {fileID: 11400000, guid: f59581e89c1dffe4685c70f6349218a9, type: 2}

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using LabraxEditor;
 using Sirenix.OdinInspector;
+using UnityEngine;
 
 namespace LabraxStudio.Meta.Levels
 {
@@ -8,6 +9,7 @@ namespace LabraxStudio.Meta.Levels
     {
         // MEMBERS: -------------------------------------------------------------------------------
 
+        [SerializeField]
         [ListDrawerSettings(ListElementLabelName = "@ElementName", NumberOfItemsPerPage = 10), LabelWidth(50),
          OnValueChanged(nameof(CalculateIndexes)), OnInspectorInit(nameof(CalculateIndexes))]
         private List<LevelMeta> _levelsMetaList = new List<LevelMeta>();
