@@ -115,7 +115,7 @@ MonoBehaviour:
   unscaledTime: 0
   _animationName: 2Tile_merge_inv
   loop: 0
-  timeScale: 1
+  timeScale: 2.8
 --- !u!33 &5934862147234380251
 MeshFilter:
   m_ObjectHideFlags: 0

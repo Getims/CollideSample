@@ -42,12 +42,12 @@ namespace LabraxStudio.Game.Tiles
                 .OnComplete(OnMoveComplete);
             
            
-            Vector3 punch = new Vector3(0, 0.3f, 0);
+            Vector3 punch = new Vector3(0, 0.15f, 0);
 
             _mergeTo.PlayMergeEffect();
-            _mergeTo.transform.DOPunchScale(Vector3.one * 0.1f, 0.5f, 1, 0)
+            _mergeTo.transform.DOPunchScale(Vector3.one * 0.1f, 0.25f, 1, 0)
                 .SetDelay(time*0.8f);
-            _mergeTo.transform.DOPunchPosition(punch, 0.5f, 1, 0f)
+            _mergeTo.transform.DOPunchPosition(punch, 0.25f, 1, 0f)
                 .SetDelay(time*0.8f)
                 .OnComplete(OnComplete);
         }
