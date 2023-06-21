@@ -157,7 +157,7 @@ namespace LabraxStudio.Game.Debug
             _dropdown.options.Clear();
 
             List<TMP_Dropdown.OptionData> options = new List<TMP_Dropdown.OptionData>();
-            var selectableLevels = ServicesProvider.GameSettingsService.GetGlobalSettings().GameSettings.LevelsList;
+            var selectableLevels = ServicesProvider.GameSettingsService.GetGlobalSettings().GameSettings.LevelsList.List;
             int currentIndex = ServicesProvider.PlayerDataService.CurrentLevel;
             if (selectableLevels == null)
                 return;

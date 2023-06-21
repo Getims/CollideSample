@@ -4,8 +4,8 @@ using System.Threading.Tasks;
 using LabraxStudio.App.Services;
 using LabraxStudio.Events;
 using LabraxStudio.Game;
-using LabraxStudio.Game.GameField;
 using LabraxStudio.Meta;
+using LabraxStudio.Meta.Levels;
 using UnityEngine;
 using UnityEngine.UI;
 

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using LabraxStudio.App.Services;
 using LabraxStudio.Events;
-using LabraxStudio.Meta;
+using LabraxStudio.Meta.Levels;
 using Sirenix.OdinInspector;
 using UnityEngine;
 

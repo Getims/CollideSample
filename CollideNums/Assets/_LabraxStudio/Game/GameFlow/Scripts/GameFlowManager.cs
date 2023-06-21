@@ -1,4 +1,3 @@
-using LabraxStudio.App;
 using LabraxStudio.App.Services;
 using LabraxStudio.Events;
 using LabraxStudio.Game.Camera;
@@ -6,7 +5,7 @@ using LabraxStudio.Game.GameField;
 using LabraxStudio.Game.Gates;
 using LabraxStudio.Game.Tiles;
 using LabraxStudio.Managers;
-using LabraxStudio.Meta;
+using LabraxStudio.Meta.Levels;
 using UnityEngine;
 
 namespace LabraxStudio.Game

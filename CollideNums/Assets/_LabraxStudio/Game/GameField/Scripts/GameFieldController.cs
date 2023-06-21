@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using LabraxStudio.Meta;
+using LabraxStudio.Meta.Levels;
 using UnityEngine;
 
 namespace LabraxStudio.Game.GameField

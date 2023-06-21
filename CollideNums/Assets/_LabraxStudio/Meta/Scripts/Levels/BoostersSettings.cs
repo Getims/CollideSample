@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace LabraxStudio.Meta
+namespace LabraxStudio.Meta.Levels
 {
     [Serializable]
     public class BoostersSettings

@@ -8,7 +8,7 @@ using LabraxStudio.Editor;
 
 #endif
 
-namespace LabraxStudio.Meta
+namespace LabraxStudio.Meta.Levels
 {
     public class LevelMeta : ScriptableMeta, ISerializationCallbackReceiver
     {

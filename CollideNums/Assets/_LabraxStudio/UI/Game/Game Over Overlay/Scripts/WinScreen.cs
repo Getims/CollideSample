@@ -2,7 +2,7 @@ using System.Collections;
 using Coffee.UIExtensions;
 using LabraxStudio.App.Services;
 using LabraxStudio.Events;
-using LabraxStudio.Meta;
+using LabraxStudio.Meta.Levels;
 using UnityEngine;
 using UnityEngine.UI;
 
