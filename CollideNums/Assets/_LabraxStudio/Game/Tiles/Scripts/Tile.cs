@@ -10,6 +10,9 @@ namespace LabraxStudio.Game.Tiles
         [SerializeField]
         private SpriteRenderer _spriteRenderer;
 
+        [SerializeField]
+        private TileEffectsController _tileEffectsController;
+
         // PROPERTIES: ----------------------------------------------------------------------------
 
         public Vector2Int Cell => _cell;
@@ -23,7 +26,7 @@ namespace LabraxStudio.Game.Tiles
 
         public bool IsMerging => _isMerging;
         public bool MovedToGate => _movedToGate;
-        
+
         private TilesController TilesController => ServicesProvider.GameFlowService.TilesController;
 
         // FIELDS: -------------------------------------------------------------------
@@ -62,6 +65,10 @@ namespace LabraxStudio.Game.Tiles
         {
             _movedToGate = true;
         }
+
+        public void PlayMoveEffect(Direction direction) => _tileEffectsController.PlayMoveEffect(direction);
+        public void PlayMergeEffect() => _tileEffectsController.PlayMergeEffect();
+        public void StopMoveEffect() => _tileEffectsController.StopMoveEffect();
 
         // EVENTS RECEIVERS: ----------------------------------------------------------------------
 

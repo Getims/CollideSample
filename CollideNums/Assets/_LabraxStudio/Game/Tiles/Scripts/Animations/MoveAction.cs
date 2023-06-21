@@ -11,11 +11,12 @@ namespace LabraxStudio.Game.Tiles
     {
         // CONSTRUCTORS: -------------------------------------------------------------------------------
 
-        public MoveAction(Tile tile, Vector2Int moveTo, Swipe swipe)
+        public MoveAction(Tile tile, Vector2Int moveTo, Swipe swipe, Direction direction)
         {
             _tile = tile;
             _moveTo = moveTo;
             _swipe = swipe;
+            _direction = direction;
             _gameFieldSettings = ServicesProvider.GameSettingsService.GetGameSettings().GameFieldSettings;
         }
         
@@ -28,6 +29,7 @@ namespace LabraxStudio.Game.Tiles
         private Tile _tile;
         private Vector2Int _moveTo;
         private Swipe _swipe;
+        private Direction _direction;
         private GameFieldSettings _gameFieldSettings;
         private Action _onMoveComplete;
 
@@ -54,6 +56,7 @@ namespace LabraxStudio.Game.Tiles
             }
             else
             {
+                _tile.PlayMoveEffect(_direction);
                 TilesController.StartCoroutine(Moving(_tile.transform,
                     _tile.Position,
                     newPosition));
@@ -100,8 +103,8 @@ namespace LabraxStudio.Game.Tiles
             float startSpeed = _gameFieldSettings.TileSpeed;
 
             float timeToMaxCoord = maxCoord / startSpeed;
-            float cylcesPerTile = 1 / startSpeed / timeStep;
-            float acceleration = _gameFieldSettings.TileAcceleration * timeStep / cylcesPerTile;
+            float cyclesPerTile = 1 / startSpeed / timeStep;
+            float acceleration = _gameFieldSettings.TileAcceleration * timeStep / cyclesPerTile;
 
             float currentTime = 0;
             float currentAcceleration = 0;
@@ -123,6 +126,7 @@ namespace LabraxStudio.Game.Tiles
 
         private void OnMoveComplete()
         {
+            _tile.StopMoveEffect();
             _onMoveComplete?.Invoke();
         }
     }

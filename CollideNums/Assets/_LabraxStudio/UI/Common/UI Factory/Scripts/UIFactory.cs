@@ -41,12 +41,11 @@ namespace LabraxStudio.UI.Common.Factory
         {
             UIMenuSettings menuSettings = GetMenuSettings(menuType);
             GameObject uiObject = Instantiate(menuSettings.MenuPrefab, menuSettings.Parent);
-            T result;
-            
-            uiObject.TryGetComponent<T>(out result);
+
+            uiObject.TryGetComponent<T>(out var result);
             return result;
         }
-
+        
         // PRIVATE METHODS: -----------------------------------------------------------------------
         
         private UIMenuSettings GetMenuSettings(MenuType menuType)

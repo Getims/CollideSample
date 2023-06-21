@@ -1,0 +1,14 @@
+tile_move1.png
+size:1409,511
+filter:Linear,Linear
+pma:true
+Layer10
+bounds:538,5,504,482
+offsets:0,0,505,483
+rotate:90
+Layer11
+bounds:1022,120,385,389
+offsets:51,67,505,483
+Layer9
+bounds:2,2,534,507
+offsets:33,29,584,555
