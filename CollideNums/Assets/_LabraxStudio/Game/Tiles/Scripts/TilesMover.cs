@@ -66,7 +66,7 @@ namespace LabraxStudio.Game.Tiles
             if (needMoveToGate)
                 tile.SetGateFlag();
 
-            return new MoveAction(tile, movePoint, swipe, direction);
+            return new MoveAction(tile, movePoint, swipe);
         }
 
         // PRIVATE METHODS: -----------------------------------------------------------------------

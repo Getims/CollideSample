@@ -19,7 +19,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8277726701524059795
 Transform:
   m_ObjectHideFlags: 0
@@ -48,9 +48,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _skeleton: {fileID: 2023427616316254878}
-  _mainAnimationName: 1Slide
   _isLooped: 1
+  _mainAnimationName: 1Slide
   _idleAnimationName: 1Slide_inv
+  _checkRenderer: 0
+  _spriteRenderer: {fileID: 0}
   _rotatePoint: {fileID: 8277726701524059795}
 --- !u!23 &9115812936641664985
 MeshRenderer:

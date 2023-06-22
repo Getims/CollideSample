@@ -39,9 +39,9 @@ namespace LabraxStudio.Game.Tiles
 
         // PUBLIC METHODS: -----------------------------------------------------------------------
 
-        public void Initialize(string name)
+        public void Initialize(string tileName)
         {
-            gameObject.name = name;
+            gameObject.name = tileName;
             _swipeChecker.Initialize(this, UnityEngine.Camera.main, OnSwipe);
         }
 
@@ -66,17 +66,20 @@ namespace LabraxStudio.Game.Tiles
             _movedToGate = true;
         }
 
-        public void PlayMoveEffect(Direction direction) => _tileEffectsController.PlayMoveEffect(direction);
         public void PlayMergeEffect() => _tileEffectsController.PlayMergeEffect();
-        public void StopMoveEffect() => _tileEffectsController.StopMoveEffect();
 
         // EVENTS RECEIVERS: ----------------------------------------------------------------------
 
-        public void OnSelecet() => _swipeChecker.OnSelect();
+        public void OnSelect() => _swipeChecker.OnSelect();
         public void OnDeselect() => _swipeChecker.OnDeselect();
 
         private void OnSwipe(Direction direction, Swipe swipe, float swipeSpeed)
         {
+            if (swipe == Swipe.Infinite)
+                _tileEffectsController.PlayInfiniteMoveEffect();
+            else
+                _tileEffectsController.StopInfiniteMoveEffect();
+
             TilesController.MoveTile(this, direction, swipe, swipeSpeed);
         }
 

@@ -13,6 +13,9 @@ namespace LabraxStudio.Game.Tiles
 
         [SerializeField]
         private MovementEffect _movementEffect;
+        
+        [SerializeField]
+        private GameObject _infiniteMoveParticles;
 
         // PUBLIC METHODS: -----------------------------------------------------------------------
         
@@ -31,5 +34,16 @@ namespace LabraxStudio.Game.Tiles
         {
             _movementEffect.StopAnimation();
         }
+        
+        public void PlayInfiniteMoveEffect()
+        {
+            _infiniteMoveParticles.SetActive(true);
+        }
+        
+        public void StopInfiniteMoveEffect()
+        {
+            _infiniteMoveParticles.SetActive(false);
+        }
+
     }
 }
