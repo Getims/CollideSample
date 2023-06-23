@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using LabraxStudio.Events;
 using UnityEngine;
 
 namespace LabraxStudio.Game.Tiles
@@ -30,6 +31,8 @@ namespace LabraxStudio.Game.Tiles
                 animation.Play(Unpause);
                 while (_isPaused)
                     await Task.Delay(10);
+                
+                GameEvents.SendTileAction();
             }
             
             if(onComplete != null)

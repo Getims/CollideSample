@@ -1,6 +1,7 @@
 using System;
 using DG.Tweening;
 using LabraxStudio.App.Services;
+using LabraxStudio.Game.Gates;
 using LabraxStudio.Meta;
 using UnityEngine;
 
@@ -10,11 +11,12 @@ namespace LabraxStudio.Game.Tiles
     {
         // CONSTRUCTORS: -------------------------------------------------------------------------------
 
-        public MoveInGateAction(Tile tile, Direction direction, Action<Tile> destroyAction)
+        public MoveInGateAction(Tile tile, Direction direction, Action<Tile> destroyAction, Vector2Int gateCell)
         {
             _tile = tile;
             _direction = direction;
             _destroyAction = destroyAction;
+            _gateCell = gateCell;
             _gameFieldSettings = ServicesProvider.GameSettingsService.GetGameSettings().GameFieldSettings;
         }
 
@@ -25,6 +27,7 @@ namespace LabraxStudio.Game.Tiles
         private Action<Tile> _destroyAction;
         private Action _onMoveComplete;
         private GameFieldSettings _gameFieldSettings;
+        private Vector2Int _gateCell;
 
         // PUBLIC METHODS: -----------------------------------------------------------------------
 
@@ -40,7 +43,10 @@ namespace LabraxStudio.Game.Tiles
 
             float time = CalculateTime(_gameFieldSettings.TileSpeed);
 
-            _tile.PlayPassGateEffect();
+            Gate gate = ServicesProvider.GameFlowService.GatesController.GetGate(_gateCell);
+            if(gate!=null)
+                gate.PlayPassGateEffect();
+            
             _tile.transform.DOMove(newPosition, time)
                 .SetEase(ease)
                 .OnComplete(OnMoveComplete);

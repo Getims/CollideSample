@@ -16,7 +16,7 @@ namespace LabraxStudio.Game.Gates
         private Transform _gateContainer;
 
         [SerializeField]
-        private GateCell _gateCellPrefab;
+        private Gate _gatePrefab;
 
         // FIELDS: -------------------------------------------------------------------
 
@@ -34,21 +34,21 @@ namespace LabraxStudio.Game.Gates
             _isInitialized = true;
         }
 
-        public List<GateCell> GenerateGates(int levelWidth, int levelHeight, int[,] levelMatrix)
+        public List<Gate> GenerateGates(int levelWidth, int levelHeight, int[,] levelMatrix)
         {
             if (!_isInitialized)
                 return null;
 
-            List<GateCell> gates = new List<GateCell>();
+            List<Gate> gates = new List<Gate>();
             _levelMatrix = levelMatrix;
 
             for (int i = 0; i < levelWidth; i++)
             {
                 for (int j = 0; j < levelHeight; j++)
                 {
-                    GateCell gateCell = CreateGate(i, j, levelMatrix[i, j] - 1);
-                    if (gateCell != null)
-                        gates.Add(gateCell);
+                    Gate _gate = CreateGate(i, j, levelMatrix[i, j] - 1);
+                    if (_gate != null)
+                        gates.Add(_gate);
                 }
             }
 
@@ -57,25 +57,25 @@ namespace LabraxStudio.Game.Gates
 
         // PRIVATE METHODS: -----------------------------------------------------------------------
 
-        private GateCell CreateGate(int x, int y, int spriteIndex)
+        private Gate CreateGate(int x, int y, int spriteIndex)
         {
             if (spriteIndex < 2)
                 return null;
 
-            GateCell gateCell = Object.Instantiate(_gateCellPrefab, _gateContainer);
+            Gate _gate = Object.Instantiate(_gatePrefab, _gateContainer);
             Vector3 position = Vector3.zero;
             position.x = _gameFieldSettings.CellSize * x;
             position.y = _gameFieldSettings.CellSize * (-y);
 
-            gateCell.transform.localPosition = position;
+            _gate.transform.localPosition = position;
 
             int gateType = 0;
             var gateDirection = GetGateDirection(x, y, ref gateType);
-            gateCell.SetupGate(spriteIndex - 2, _gameFieldSprites, gateDirection, gateType);
-            gateCell.SetCell(new Vector2Int(x, y));
-            gateCell.SetType((GameCellType) spriteIndex);
+            _gate.SetupGate(spriteIndex - 2, _gameFieldSprites, gateDirection, gateType);
+            _gate.SetCell(new Vector2Int(x, y));
+            _gate.SetType((GameCellType) spriteIndex);
 
-            return gateCell;
+            return _gate;
         }
 
         private Direction GetGateDirection(int x, int y, ref int type)

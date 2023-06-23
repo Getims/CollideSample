@@ -74,7 +74,7 @@ namespace LabraxStudio.Game.GameField
 
             newCell.transform.localPosition = position;
             newCell.SetName(GenerateName(x, y));
-            newCell.SetSprite(sprite);
+            newCell.SetSprite(sprite, spriteIndex == 0);
             return newCell;
         }
 

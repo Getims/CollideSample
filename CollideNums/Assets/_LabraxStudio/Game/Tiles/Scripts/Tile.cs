@@ -1,4 +1,5 @@
 using LabraxStudio.App.Services;
+using LabraxStudio.Game.Gates;
 using UnityEngine;
 
 namespace LabraxStudio.Game.Tiles
@@ -67,7 +68,6 @@ namespace LabraxStudio.Game.Tiles
         }
 
         public void PlayMergeEffect() => _tileEffectsController.PlayMergeEffect();
-        public void PlayPassGateEffect() => _tileEffectsController.PlayPassGateEffect();
 
         public void PlayCollideEffect(Direction direction)
         {

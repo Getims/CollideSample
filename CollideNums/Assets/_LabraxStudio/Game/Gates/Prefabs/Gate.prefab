@@ -1176,8 +1176,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 4a893752d0767d44999377d883980463, type: 3}
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1344,7 +1344,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -3219,8 +3219,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 4ebbccb0f0ba9144f8e5f83de75de658, type: 3}
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -3976,7 +3976,7 @@ GameObject:
   - component: {fileID: 6337905561813552885}
   - component: {fileID: 5464420599947067472}
   m_Layer: 0
-  m_Name: Gate Cell
+  m_Name: Gate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3997,6 +3997,7 @@ Transform:
   - {fileID: 9140608198889924274}
   - {fileID: 2674851514562053682}
   - {fileID: 4613678286298106885}
+  - {fileID: 3280002764591954655}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4012,14 +4013,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19b02ef25aac8bb42923f2611f083697, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gateBackground: {fileID: 3244748199999549193}
-  _number: {fileID: 3339349016199097326}
-  _leftNumber: {fileID: 474603960484296293}
-  _rightNumber: {fileID: 8183970994940585194}
-  _topGateLine: {fileID: 665769220597869060}
-  _bottomGateLine: {fileID: 2434741179174369038}
-  _leftGateLine: {fileID: 930258758852494451}
-  _rightGateLine: {fileID: 3349559360588374361}
+  _gateVisualizer:
+    _gateBackground: {fileID: 3244748199999549193}
+    _number: {fileID: 3339349016199097326}
+    _leftNumber: {fileID: 474603960484296293}
+    _rightNumber: {fileID: 8183970994940585194}
+    _topGateLine: {fileID: 665769220597869060}
+    _bottomGateLine: {fileID: 2434741179174369038}
+    _leftGateLine: {fileID: 930258758852494451}
+    _rightGateLine: {fileID: 3349559360588374361}
+  _gateEffectsController: {fileID: 6785446949655241482}
 --- !u!1 &8933140543197238734
 GameObject:
   m_ObjectHideFlags: 0
@@ -4092,8 +4095,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 4ebbccb0f0ba9144f8e5f83de75de658, type: 3}
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -4104,3 +4107,76 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &4587833267887745522
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 6337905561813552885}
+    m_Modifications:
+    - target: {fileID: 1310454232270656301, guid: 72f4b2f599ad1d641903c5a37de7f0ad, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1310454232270656301, guid: 72f4b2f599ad1d641903c5a37de7f0ad, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1310454232270656301, guid: 72f4b2f599ad1d641903c5a37de7f0ad, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1310454232270656301, guid: 72f4b2f599ad1d641903c5a37de7f0ad, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1310454232270656301, guid: 72f4b2f599ad1d641903c5a37de7f0ad, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1310454232270656301, guid: 72f4b2f599ad1d641903c5a37de7f0ad, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1310454232270656301, guid: 72f4b2f599ad1d641903c5a37de7f0ad, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1310454232270656301, guid: 72f4b2f599ad1d641903c5a37de7f0ad, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1310454232270656301, guid: 72f4b2f599ad1d641903c5a37de7f0ad, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1310454232270656301, guid: 72f4b2f599ad1d641903c5a37de7f0ad, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1310454232270656301, guid: 72f4b2f599ad1d641903c5a37de7f0ad, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6171760130997560524, guid: 72f4b2f599ad1d641903c5a37de7f0ad, type: 3}
+      propertyPath: m_Name
+      value: Effects controller
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 72f4b2f599ad1d641903c5a37de7f0ad, type: 3}
+--- !u!4 &3280002764591954655 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1310454232270656301, guid: 72f4b2f599ad1d641903c5a37de7f0ad, type: 3}
+  m_PrefabInstance: {fileID: 4587833267887745522}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6785446949655241482 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7026039832222518008, guid: 72f4b2f599ad1d641903c5a37de7f0ad, type: 3}
+  m_PrefabInstance: {fileID: 4587833267887745522}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a196179dbfd240009a3cf270990a92fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

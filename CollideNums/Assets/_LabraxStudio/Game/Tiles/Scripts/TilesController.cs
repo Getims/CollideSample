@@ -54,10 +54,11 @@ namespace LabraxStudio.Game.Tiles
             var moveAction = _tilesMover.CalculateMoveAction(tile, direction, swipe);
             actions.Add(moveAction);
             var mergeAction = _tilesMerger.CheckMerge(tile, direction);
+            
             if (tile.MovedToGate)
             {
                 mergeAction = null;
-                var moveInGateAction = new MoveInGateAction(tile, direction, DestroyTileInGate);
+                var moveInGateAction = new MoveInGateAction(tile, direction, DestroyTileInGate, moveAction.MoveTo);
                 actions.Add(moveInGateAction);
             }
 
@@ -70,7 +71,7 @@ namespace LabraxStudio.Game.Tiles
                     CheckChainMerges(mergeAction.MergeTo));
             }
 
-            GameEvents.SendTileAction();
+            //GameEvents.SendTileAction();
         }
 
         public Tile GetTile(Vector2 cell)

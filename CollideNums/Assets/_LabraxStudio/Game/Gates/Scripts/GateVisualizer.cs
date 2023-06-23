@@ -1,11 +1,13 @@
+using System;
 using System.Collections.Generic;
-using UnityEngine;
 using LabraxStudio.Meta;
 using Sirenix.OdinInspector;
+using UnityEngine;
 
 namespace LabraxStudio.Game.Gates
 {
-    public class GateCell : MonoBehaviour
+    [Serializable]
+    public class GateVisualizer
     {
         // MEMBERS: -------------------------------------------------------------------------------
 
@@ -35,22 +37,15 @@ namespace LabraxStudio.Game.Gates
         [SerializeField]
         private SpriteRenderer _rightGateLine;
 
-        // PROPERTIES: ----------------------------------------------------------------------------
-
-        public Vector2Int Cell => _cell;
-        public GameCellType GateType => _gateType;
-
         // FIELDS: -------------------------------------------------------------------
-
-        private Color _openedGate;
-        private Color _closedGate;
+        
+        private Color _openedGateColor;
+        private Color _closedGateColor;
         private SpriteRenderer _currentGate;
-        private Vector2Int _cell = Vector2Int.zero;
-        private GameCellType _gateType;
-
+        
         // PUBLIC METHODS: -----------------------------------------------------------------------
 
-        public void SetupGate(int spriteIndex, GameFieldSprites gameFieldSprites, Direction direction, int gateType)
+        public void Setup(int spriteIndex, GameFieldSprites gameFieldSprites, Direction direction, int gateType)
         {
             var gatesSprites = gameFieldSprites.GateSprites;
             var numberSprite = GetNumberSprite(spriteIndex, gatesSprites.GatesNumbers);
@@ -61,27 +56,11 @@ namespace LabraxStudio.Game.Gates
                 direction);
             SetGateLine(gatesSprites, direction, gateType);
         }
-
-        public void SetCell(Vector2Int cell)
-        {
-            _cell = cell;
-        }
-
-        public void SetType(GameCellType gateType)
-        {
-            _gateType = gateType;
-        }
-
-        public void SetState(bool _isLocked)
-        {
-            var color = _isLocked ? _closedGate : _openedGate;
-            _currentGate.color = color;
-        }
         
-        public void DestroySelf()
+        public void SetState(bool isLocked)
         {
-            if(gameObject!=null)
-                Destroy(gameObject);
+            var color = isLocked ? _closedGateColor : _openedGateColor;
+            _currentGate.color = color;
         }
 
         // PRIVATE METHODS: -----------------------------------------------------------------------
@@ -109,8 +88,8 @@ namespace LabraxStudio.Game.Gates
 
         private void SetGateLine(GatesSprites gatesSprites, Direction direction, int gateType)
         {
-            _openedGate = gatesSprites.UnlockedColor;
-            _closedGate = gatesSprites.LockedColor;
+            _openedGateColor = gatesSprites.UnlockedColor;
+            _closedGateColor = gatesSprites.LockedColor;
             Sprite sprite = null;
 
             switch (direction)
@@ -153,7 +132,8 @@ namespace LabraxStudio.Game.Gates
 
             _currentGate.enabled = true;
             _currentGate.sprite = sprite;
-            _currentGate.color = _openedGate;
+            _currentGate.color = _openedGateColor;
         }
+        
     }
 }

@@ -9,6 +9,12 @@ namespace LabraxStudio.Game.GameField
         [SerializeField]
         private SpriteRenderer _spriteRenderer;
 
+        [SerializeField]
+        private int _baseRenderOrder = 0;
+        
+        [SerializeField]
+        private int _lockedRenderOrder = 1;
+
         // PUBLIC METHODS: -----------------------------------------------------------------------
 
         public void SetName(string name)
@@ -16,9 +22,10 @@ namespace LabraxStudio.Game.GameField
             gameObject.name = name;
         }
 
-        public void SetSprite(Sprite sprite)
+        public void SetSprite(Sprite sprite, bool isLocked)
         {
             _spriteRenderer.sprite = sprite;
+            _spriteRenderer.sortingOrder = isLocked ? _lockedRenderOrder : _baseRenderOrder;
         }
 
         public void DestroySelf()

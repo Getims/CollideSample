@@ -18,11 +18,11 @@ namespace LabraxStudio.Game.Gates
 
         // PROPERTIES: ----------------------------------------------------------------------------
         
-        public List<GateCell> Gates => _gates;
+        public List<Gate> Gates => _gates;
         private TilesController TilesController => ServicesProvider.GameFlowService.TilesController;
         
         // FIELDS: -------------------------------------------------------------------
-        private List<GateCell> _gates = new List<GateCell>();
+        private List<Gate> _gates = new List<Gate>();
 
         // GAME ENGINE METHODS: -------------------------------------------------------------------
 
@@ -82,13 +82,18 @@ namespace LabraxStudio.Game.Gates
         
         public void ClearGates()
         {
-            RemoveGameField(new List<GateCell>(_gates));
+            RemoveGameField(new List<Gate>(_gates));
             _gates.Clear();
+        }
+
+        public Gate GetGate(Vector2Int gateCell)
+        {
+            return _gates.Find(g => g.Cell == gateCell);
         }
 
         // PRIVATE METHODS: -----------------------------------------------------------------------
 
-        private bool NeedLock(GateCell gate)
+        private bool NeedLock(Gate gate)
         {
             var cell = gate.Cell;
             var gateType = gate.GateType;
@@ -120,7 +125,7 @@ namespace LabraxStudio.Game.Gates
             return tileGate != gateType;
         }
 
-        private async void RemoveGameField(List<GateCell> gates)
+        private async void RemoveGameField(List<Gate> gates)
         {
             foreach (var gateCell in gates)
             {

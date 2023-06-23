@@ -22,8 +22,9 @@ namespace LabraxStudio.Game.Tiles
         
         // PROPERTIES: ----------------------------------------------------------------------------
         
+        public Vector2Int MoveTo => _moveTo;
         private TilesController TilesController => ServicesProvider.GameFlowService.TilesController;
-
+        
         // FIELDS: -------------------------------------------------------------------
 
         private readonly Tile _tile;
