@@ -17,7 +17,7 @@ MonoBehaviour:
     _enableDebug: 0
     _enableTutorial: 1
   _balanceSettings:
-    _startMoney: 0
+    _startMoney: 100
   _gameFieldSprites: {fileID: 11400000, guid: b6bc31775dbdf2842a216ba923c0d3a2, type: 2}
   _gameFieldSettings: {fileID: 11400000, guid: cd9f634cfe3db7d4fb9f12cee5a603fa, type: 2}
   _levelsList: {fileID: 11400000, guid: dff646fc1bb29af4ebfdb3e5de049847, type: 2}

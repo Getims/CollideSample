@@ -19,7 +19,7 @@ namespace LabraxStudio.Meta.Levels
 
         [SerializeField, Min(0)]
         private int _reward = 0;
-        
+
         #region LevelTemplate
 
         [FoldoutGroup("LevelTemplate", Expanded = true)]
@@ -44,24 +44,24 @@ namespace LabraxStudio.Meta.Levels
         [VerticalGroup("LevelTemplate/Brush/Horizontal/One")]
         [SerializeField]
         private bool _brushMode = false;
-        
+
         [VerticalGroup("LevelTemplate/Brush/Horizontal/One")]
         [ShowIf(nameof(_brushMode))]
         [SerializeField, Min(0)]
         private int _rightClickSize = 1;
-        
+
         [VerticalGroup("LevelTemplate/Brush/Horizontal/One")]
         [ShowIf(nameof(_brushMode))]
         [SerializeField, Range(0, 17), OnValueChanged(nameof(UpdateBrushSprite))]
         private int _brushSize = 1;
-        
+
         [HorizontalGroup("LevelTemplate/Brush/Horizontal", Width = 80)]
         [VerticalGroup("LevelTemplate/Brush/Horizontal/Two")]
         [ShowIf(nameof(_brushMode))]
         [SerializeField]
         [ReadOnly, PreviewField(ObjectFieldAlignment.Left, Height = 80), HideLabel]
         private Texture _brushSprite;
-        
+
         [FoldoutGroup("LevelTemplate")]
         [VerticalGroup("LevelTemplate/Matrix1", PaddingBottom = 20)]
         [Space(20), InfoBox(LevelDrawTip)]
@@ -76,19 +76,19 @@ namespace LabraxStudio.Meta.Levels
         [VerticalGroup("LevelTemplate/TilesBrush/Horizontal/One", PaddingTop = 20)]
         [SerializeField]
         private bool _tilesBrushMode = false;
-        
+
         [VerticalGroup("LevelTemplate/TilesBrush/Horizontal/One")]
         [ShowIf(nameof(_tilesBrushMode))]
         [SerializeField, Range(0, 15), OnValueChanged(nameof(UpdateTilesBrushSprite))]
         private int _tilesBrushSize = 1;
-        
+
         [HorizontalGroup("LevelTemplate/TilesBrush/Horizontal", Width = 80)]
         [VerticalGroup("LevelTemplate/TilesBrush/Horizontal/Two")]
         [ShowIf(nameof(_tilesBrushMode))]
         [SerializeField]
         [ReadOnly, PreviewField(ObjectFieldAlignment.Left, Height = 80), HideLabel]
         private Texture _tilesBrushSprite;
-        
+
         [FoldoutGroup("LevelTemplate")]
         [Space(20)]
         [OdinSerialize]
@@ -102,7 +102,7 @@ namespace LabraxStudio.Meta.Levels
 
         [SerializeField]
         private List<BoostersSettings> _boostersSettings = new List<BoostersSettings>();
-        
+
         // PROPERTIES: ----------------------------------------------------------------------------
 
         public string LevelName => _levelName;
@@ -111,7 +111,7 @@ namespace LabraxStudio.Meta.Levels
         public int[,] LevelMatrix => _levelMatrix;
         public int[,] TilesMatrix => _tilesMatrix;
 
-        public  List<BoostersSettings> BoostersSettings => _boostersSettings;
+        public List<BoostersSettings> BoostersSettings => _boostersSettings;
 
         // FIELDS: --------------------------------------------------------------------------------
 
@@ -143,9 +143,8 @@ namespace LabraxStudio.Meta.Levels
 
         private int DrawTilesEnumElement(Rect rect, int value)
         {
-            
 #if UNITY_EDITOR
-            value = LevelMatrixDrawer.DrawTilesEnumElement(rect, value,_tilesBrushMode, _tilesBrushSize);
+            value = LevelMatrixDrawer.DrawTilesEnumElement(rect, value, _tilesBrushMode, _tilesBrushSize);
 #endif
             return value;
         }
@@ -213,20 +212,26 @@ namespace LabraxStudio.Meta.Levels
 
         private void OnLevelMatrixChanged()
         {
+#if UNITY_EDITOR
             width = _levelMatrix.GetLength(0);
             height = _levelMatrix.GetLength(1);
 
             ResizeSecondMatrix();
+#endif
         }
 
         private void UpdateBrushSprite()
         {
+#if UNITY_EDITOR
             _brushSprite = LevelMatrixDrawer.GetBrushTexture(_brushSize);
+#endif
         }
-        
+
         private void UpdateTilesBrushSprite()
         {
+#if UNITY_EDITOR
             _tilesBrushSprite = LevelMatrixDrawer.GetTilesBrushTexture(_tilesBrushSize);
+#endif
         }
 
         // SAVE FIX: ------------------------------------------------------------------------
