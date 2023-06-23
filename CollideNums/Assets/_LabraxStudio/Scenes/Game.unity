@@ -1514,10 +1514,6 @@ PrefabInstance:
       value: 'Claim Coins Fly Animation '
       objectReference: {fileID: 0}
     - target: {fileID: 7917976698101883032, guid: 9a0753b3d1f00ca4b9562c7514eb83ed, type: 3}
-      propertyPath: _startPoint
-      value: 
-      objectReference: {fileID: 1784267412}
-    - target: {fileID: 7917976698101883032, guid: 9a0753b3d1f00ca4b9562c7514eb83ed, type: 3}
       propertyPath: _targetPoint
       value: 
       objectReference: {fileID: 1254997796}

@@ -21,6 +21,9 @@ namespace LabraxStudio.UI.GameScene.GameOver
         [SerializeField]
         private UIParticle _confettiPS;
 
+        [SerializeField]
+        private Image _raycastBlocker;
+
         // FIELDS: -------------------------------------------------------------------
 
         private int _reward;
@@ -47,6 +50,7 @@ namespace LabraxStudio.UI.GameScene.GameOver
 
         public override void Show()
         {
+            _raycastBlocker.enabled = false;
             base.Show();
             Invoke(nameof(ShowParticles), FadeTime*0.8f);
         }
@@ -71,6 +75,7 @@ namespace LabraxStudio.UI.GameScene.GameOver
             GameMediator.Instance.StartCoinsFlyAnimation(_rewardPanel.CoinCenter);
             yield return new WaitForSeconds(0.5f);
             ApplyReward();
+            yield return new WaitForSeconds(0.75f);
             ServicesProvider.PlayerDataService.SwitchToNextLevel();
             UIEvents.SendWinScreenClaimClicked();
 
@@ -82,19 +87,11 @@ namespace LabraxStudio.UI.GameScene.GameOver
 
         private void OnClaimClicked()
         {
+            _raycastBlocker.enabled = true;
             if (_closeAnimationCO != null)
                 StopCoroutine(_closeAnimationCO);
 
             _closeAnimationCO = StartCoroutine(CloseAnimation());
-            /*
-            ApplyReward();
-            ServicesAccess.PlayerDataService.SwitchToNextLevel();
-            UIEvents.SendWinScreenClaimClicked();
-            GameMediator.Instance.StartCoinsFlyAnimation(_rewardPanel.CoinCenter);
-
-            Hide();
-            DestroySelfDelayed();
-            */
         }
 
         private void ShowParticles() => _confettiPS?.Play();
