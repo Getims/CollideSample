@@ -16,7 +16,7 @@ MonoBehaviour:
   deleteDllAfterBuilds: 1
   AutomateForAllAOTPlatforms: 1
   automateForPlatforms: 09000000140000000d000000
-  lastScan: 638231173183838270
+  lastScan: 638231350594751980
   supportSerializedTypes:
   - TypeName: LabraxStudio.Meta.LevelMeta, Assembly-CSharp
     IsCustom: 1
