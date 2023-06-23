@@ -55,10 +55,13 @@ namespace LabraxStudio.UI.Common
             Show();
         }
         
-        private void OnGameOver(bool arg0)
+        private void OnGameOver(bool isWin)
         {
-            Hide();
-            DestroySelfDelayed();
+            if (isWin)
+            {
+                Hide();
+                DestroySelfDelayed();
+            }
         }
     }
 }

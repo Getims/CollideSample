@@ -202,6 +202,13 @@ namespace LabraxStudio.Meta.Levels
             }
         }
 
+        [Button]
+        private void CheckLevel()
+        {
+            LevelBot bot = new LevelBot();
+            bot.CalculateWinRate(_levelMatrix, _tilesMatrix, width, height);
+        }
+        
         // EVENTS RECEIVERS: ----------------------------------------------------------------------
 
         private void OnLevelMatrixChanged()
