@@ -40,6 +40,7 @@ namespace LabraxStudio.Game.Tiles
 
             float time = CalculateTime(_gameFieldSettings.TileSpeed);
 
+            _tile.PlayPassGateEffect();
             _tile.transform.DOMove(newPosition, time)
                 .SetEase(ease)
                 .OnComplete(OnMoveComplete);

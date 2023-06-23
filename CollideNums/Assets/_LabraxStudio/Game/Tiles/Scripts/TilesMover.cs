@@ -28,7 +28,6 @@ namespace LabraxStudio.Game.Tiles
         {
             bool needMoveToGate = false;
             int moves = 0;
-            int path = 0;
             Vector2Int startPoint = tile.Cell;
             Vector2Int movePoint = startPoint;
             Vector2Int moveVector = GameTypesConverter.DirectionToVector2Int(direction);
@@ -66,7 +65,7 @@ namespace LabraxStudio.Game.Tiles
             if (needMoveToGate)
                 tile.SetGateFlag();
 
-            return new MoveAction(tile, movePoint, swipe);
+            return new MoveAction(tile, movePoint, swipe, direction);
         }
 
         // PRIVATE METHODS: -----------------------------------------------------------------------

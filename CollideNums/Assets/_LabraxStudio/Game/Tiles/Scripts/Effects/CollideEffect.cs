@@ -1,15 +1,25 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace LabraxStudio.Game.Tiles
 {
-    internal class MovementEffect : TileEffect
+    public class CollideEffect : MonoBehaviour
     {
         // MEMBERS: -------------------------------------------------------------------------------
 
         [SerializeField]
+        private List<ParticleSystem> _particleSystems;
+        
+        [SerializeField]
         private Transform _rotatePoint;
 
         // PUBLIC METHODS: -----------------------------------------------------------------------
+
+        public void Play()
+        {
+            foreach (var system in _particleSystems)
+                system.Play();
+        }
         
         public void SetDirection(Direction direction)
         {

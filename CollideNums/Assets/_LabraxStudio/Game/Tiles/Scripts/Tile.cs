@@ -67,6 +67,13 @@ namespace LabraxStudio.Game.Tiles
         }
 
         public void PlayMergeEffect() => _tileEffectsController.PlayMergeEffect();
+        public void PlayPassGateEffect() => _tileEffectsController.PlayPassGateEffect();
+
+        public void PlayCollideEffect(Direction direction)
+        {
+            if (!_isMerging)
+                _tileEffectsController.PlayCollideEffect(direction);
+        }
 
         // EVENTS RECEIVERS: ----------------------------------------------------------------------
 

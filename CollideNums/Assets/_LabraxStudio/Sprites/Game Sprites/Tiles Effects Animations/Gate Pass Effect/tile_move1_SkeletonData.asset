@@ -13,21 +13,21 @@ MonoBehaviour:
   m_Name: tile_move1_SkeletonData
   m_EditorClassIdentifier: 
   atlasAssets:
-  - {fileID: 11400000, guid: d8ec3326bf099f349b0dd0ec730a59d9, type: 2}
+  - {fileID: 11400000, guid: 17f5be2d99ef7284f89ab5a11e9fc096, type: 2}
   scale: 0.01
-  skeletonJSON: {fileID: 4900000, guid: 2a73932ae1e2bec4ea7fa79aeb9cf036, type: 3}
+  skeletonJSON: {fileID: 4900000, guid: 07180b79029c1524b978a8f76628eea6, type: 3}
   isUpgradingBlendModeMaterials: 0
   blendModeMaterials:
     requiresBlendModeMaterials: 1
     applyAdditiveMaterial: 1
     additiveMaterials:
     - pageName: tile_move1.png
-      material: {fileID: 2100000, guid: 82e265a88afd48f44a3b7fab4fd2a4ae, type: 2}
+      material: {fileID: 2100000, guid: b923e99c87de4bb4da925ea97345e487, type: 2}
     multiplyMaterials: []
     screenMaterials: []
   skeletonDataModifiers: []
   fromAnimation: []
   toAnimation: []
   duration: []
-  defaultMix: 0.05
+  defaultMix: 0
   controller: {fileID: 0}

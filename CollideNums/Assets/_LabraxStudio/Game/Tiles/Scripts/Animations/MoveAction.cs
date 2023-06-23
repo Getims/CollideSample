@@ -11,11 +11,12 @@ namespace LabraxStudio.Game.Tiles
     {
         // CONSTRUCTORS: -------------------------------------------------------------------------------
 
-        public MoveAction(Tile tile, Vector2Int moveTo, Swipe swipe)
+        public MoveAction(Tile tile, Vector2Int moveTo, Swipe swipe, Direction direction)
         {
             _tile = tile;
             _moveTo = moveTo;
             _swipe = swipe;
+            _direction = direction;
             _gameFieldSettings = ServicesProvider.GameSettingsService.GetGameSettings().GameFieldSettings;
         }
         
@@ -25,10 +26,11 @@ namespace LabraxStudio.Game.Tiles
 
         // FIELDS: -------------------------------------------------------------------
 
-        private Tile _tile;
-        private Vector2Int _moveTo;
-        private Swipe _swipe;
-        private GameFieldSettings _gameFieldSettings;
+        private readonly Tile _tile;
+        private readonly Vector2Int _moveTo;
+        private readonly Swipe _swipe;
+        private Direction _direction;
+        private readonly GameFieldSettings _gameFieldSettings;
         private Action _onMoveComplete;
 
         // PUBLIC METHODS: -----------------------------------------------------------------------
@@ -64,7 +66,7 @@ namespace LabraxStudio.Game.Tiles
 
         private float CalculateTime(float tileSpeed, Swipe swipe)
         {
-            if (tileSpeed == 0)
+            if (Math.Abs(tileSpeed) < 0.01f)
                 return 0;
 
             float time = 0;
@@ -118,6 +120,7 @@ namespace LabraxStudio.Game.Tiles
             }
 
             //WUtils.ReworkPoint("TestTime: " + testTime);
+            _tile.PlayCollideEffect(_direction);
             OnMoveComplete();
         }
 
