@@ -16,8 +16,11 @@ MonoBehaviour:
   deleteDllAfterBuilds: 1
   AutomateForAllAOTPlatforms: 1
   automateForPlatforms: 09000000140000000d000000
-  lastScan: 638193988673017192
+  lastScan: 638231173183838270
   supportSerializedTypes:
+  - TypeName: LabraxStudio.Meta.LevelMeta, Assembly-CSharp
+    IsCustom: 1
+    Emit: 1
   - TypeName: LabraxStudio.Meta.LevelTemplate, Assembly-CSharp
     IsCustom: 1
     Emit: 1
@@ -25,9 +28,6 @@ MonoBehaviour:
     IsCustom: 1
     Emit: 1
   - TypeName: System.Int32[,], mscorlib
-    IsCustom: 1
-    Emit: 1
-  - TypeName: LabraxStudio.Meta.LevelMeta, Assembly-CSharp
     IsCustom: 1
     Emit: 1
   - TypeName: UnityEngine.Vector2Int, UnityEngine.CoreModule
