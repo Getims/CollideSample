@@ -1,5 +1,6 @@
 using LabraxStudio.App.Services;
 using LabraxStudio.Events;
+using LabraxStudio.UI.Common;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +12,10 @@ namespace LabraxStudio.UI.MainMenu
 
         [SerializeField]
         private Button _tapButton;
-
+        
+        [SerializeField]
+        private Pulsation _tapPulsation;
+        
         // FIELDS: -------------------------------------------------------------------
 
         private bool _wasClicked = false;
@@ -25,12 +29,14 @@ namespace LabraxStudio.UI.MainMenu
             _tapButton.onClick.AddListener(OnTapToStart);
             UIEvents.SendUISelect();
             ServicesProvider.TouchService.SetTouchState(false);
+            _tapPulsation.StartPulse();
         }
 
         // PRIVATE METHODS: -----------------------------------------------------------------------
 
         private void OnTapToStart()
         {
+            _tapPulsation.StopPulse();
             if (_wasClicked)
                 return;
 

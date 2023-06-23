@@ -73,9 +73,9 @@ namespace LabraxStudio.UI.GameScene.GameOver
         private IEnumerator CloseAnimation()
         {
             GameMediator.Instance.StartCoinsFlyAnimation(_rewardPanel.CoinCenter);
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.55f);
             ApplyReward();
-            yield return new WaitForSeconds(0.75f);
+            yield return new WaitForSeconds(0.8f);
             ServicesProvider.PlayerDataService.SwitchToNextLevel();
             UIEvents.SendWinScreenClaimClicked();
 

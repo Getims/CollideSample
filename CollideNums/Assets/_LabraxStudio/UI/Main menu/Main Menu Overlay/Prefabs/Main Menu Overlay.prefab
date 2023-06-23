@@ -212,6 +212,7 @@ MonoBehaviour:
   _hideOnAwake: 0
   _canvas: {fileID: 0}
   _tapButton: {fileID: 3580990851994915754}
+  _tapPulsation: {fileID: 4742284317305853141}
 --- !u!225 &7744767672914366951
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -321,12 +322,34 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb0987175ee394444a4658464af0ec84, type: 3}
+--- !u!1 &3580990851994915748 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7352991109943705061, guid: eb0987175ee394444a4658464af0ec84, type: 3}
+  m_PrefabInstance: {fileID: 6321134404770475585}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4742284317305853141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3580990851994915748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f143e6cd26764bc9942590cfc2c02f13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _element: {fileID: 3580990851994915755}
+  _pulseTime: 0.75
+  _pulsePower: 0.1
+  _isLooped: 1
+  _startScale: {x: 1, y: 1, z: 1}
 --- !u!114 &3580990851994915754 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7352991109943705067, guid: eb0987175ee394444a4658464af0ec84, type: 3}
   m_PrefabInstance: {fileID: 6321134404770475585}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 3580990851994915748}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
