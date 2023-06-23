@@ -59,6 +59,7 @@ namespace LabraxStudio.UI
         protected virtual void OnDestroy()
         {
             _fadeTN.Kill();
+            CancelInvoke(nameof(DestroySelf));
         }
 
         // PUBLIC METHODS: ------------------------------------------------------------------------
@@ -112,6 +113,11 @@ namespace LabraxStudio.UI
             catch (Exception e)
             {
             }
+        }
+        
+        protected void DestroySelfDelayed()
+        {
+            Invoke(nameof(DestroySelf), FadeTime);
         }
 
         // PRIVATE METHODS: -----------------------------------------------------------------------

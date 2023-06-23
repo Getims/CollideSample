@@ -505,6 +505,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LoadScreen
       objectReference: {fileID: 0}
+    - target: {fileID: 3224601496531651936, guid: ae9df9e7667b11949b713d4acaaf95a6, type: 3}
+      propertyPath: m_SortingOrder
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 3280950224345357163, guid: ae9df9e7667b11949b713d4acaaf95a6, type: 3}
       propertyPath: m_Alpha
       value: 1

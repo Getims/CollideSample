@@ -29,7 +29,7 @@ namespace LabraxStudio.Game.Tiles
                 _isPaused = true;
                 animation.Play(Unpause);
                 while (_isPaused)
-                    await Task.Delay(100);
+                    await Task.Delay(10);
             }
             
             if(onComplete != null)

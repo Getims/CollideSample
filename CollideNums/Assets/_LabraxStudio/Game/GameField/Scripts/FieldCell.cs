@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace LabraxStudio.Game.GameField
 {
-    public class FieldCell :MonoBehaviour
+    public class FieldCell : MonoBehaviour
     {
         // MEMBERS: -------------------------------------------------------------------------------
 
@@ -19,6 +19,12 @@ namespace LabraxStudio.Game.GameField
         public void SetSprite(Sprite sprite)
         {
             _spriteRenderer.sprite = sprite;
+        }
+
+        public void DestroySelf()
+        {
+            if(gameObject!=null)
+                Destroy(gameObject);
         }
     }
 }

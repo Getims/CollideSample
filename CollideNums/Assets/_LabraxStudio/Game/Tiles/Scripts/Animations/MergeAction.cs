@@ -1,5 +1,6 @@
 using System;
 using DG.Tweening;
+using LabraxStudio.App.Services;
 using UnityEngine;
 
 namespace LabraxStudio.Game.Tiles
@@ -18,6 +19,7 @@ namespace LabraxStudio.Game.Tiles
 
         public Tile MergeFrom => _mergeFrom;
         public Tile MergeTo => _mergeTo;
+        private TilesController TilesController => ServicesProvider.GameFlowService.TilesController;
 
         // FIELDS: -------------------------------------------------------------------
 
@@ -37,14 +39,36 @@ namespace LabraxStudio.Game.Tiles
             float time = 0.125f;
             _mergeFrom.transform.DOMove(newPosition, time)
                 .SetEase(ease)
+                .OnComplete(OnMoveComplete);
+            
+           
+            Vector3 punch = new Vector3(0, 0.15f, 0);
+
+            _mergeTo.PlayMergeEffect();
+            _mergeTo.transform.DOPunchScale(Vector3.one * 0.1f, 0.25f, 1, 0)
+                .SetDelay(time*0.8f);
+            _mergeTo.transform.DOPunchPosition(punch, 0.25f, 1, 0f)
+                .SetDelay(time*0.8f)
                 .OnComplete(OnComplete);
+        }
+
+        // PRIVATE METHODS: -----------------------------------------------------------------------
+
+        private void OnMoveComplete()
+        {
+            TilesController.DestroyTile(_mergeFrom);
+            TilesController.CheckTileValue(_mergeTo);
+            /*
+            Vector3 punch = new Vector3(0, 0.3f, 0);
+
+            _mergeTo.transform.DOPunchScale(Vector3.one * 0.1f, 0.5f, 1, 0);
+            _mergeTo.transform.DOPunchPosition(punch, 0.5f, 1, 0f)
+                .OnComplete(OnComplete);
+                */
         }
 
         private void OnComplete()
         {
-            TilesController.Instance.DestroyTile(_mergeFrom);
-            TilesController.Instance.CheckTileValue(_mergeTo);
-
             if (_onComplete != null)
                 _onComplete.Invoke();
         }

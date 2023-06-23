@@ -10,9 +10,28 @@ namespace LabraxStudio.Meta
     public class PlayableSprites
     {
         // MEMBERS: -------------------------------------------------------------------------------
+
+        [Title("Backgrounds")]
+        [SerializeField]
+        private Sprite _baseBackground;
+
+        [SerializeField]
+        private Sprite _topBackground;
+
+        [SerializeField]
+        private Sprite _leftBackground;
+
+        [SerializeField]
+        private Sprite _rightBackground;
+
+        [SerializeField]
+        private Sprite _bottomBackground;
         
-        [SerializeField, LabelText("Backgrounds")]
-        private List<Sprite> _playableCells = new List<Sprite>();
+        [SerializeField]
+        private Sprite _topBottomBackground;
+        
+        [SerializeField]
+        private Sprite _leftRightBackground;
 
         [Title("Corners")]
         [SerializeField]
@@ -38,9 +57,9 @@ namespace LabraxStudio.Meta
 
         [SerializeField]
         private Sprite _fullDownCorner;
-        
+
         // PROPERTIES: ----------------------------------------------------------------------------
-        
+
         public Sprite TopLeftCorner => _topLeftCorner;
 
         public Sprite TopRightCorner => _topRightCorner;
@@ -57,12 +76,18 @@ namespace LabraxStudio.Meta
 
         public Sprite FullDownCorner => _fullDownCorner;
 
-        // PUBLIC METHODS: -----------------------------------------------------------------------
+        public Sprite BaseBackground => _baseBackground;
 
-        public Sprite GetRandomBackground()
-        {
-            int count = _playableCells.Count;
-            return _playableCells[Random.Range(0, count)];
-        }
+        public Sprite TopBackground => _topBackground;
+
+        public Sprite LeftBackground => _leftBackground;
+
+        public Sprite RightBackground => _rightBackground;
+
+        public Sprite BottomBackground => _bottomBackground;
+
+        public Sprite TopBottomBackground => _topBottomBackground;
+
+        public Sprite LeftRightBackground => _leftRightBackground;
     }
 }

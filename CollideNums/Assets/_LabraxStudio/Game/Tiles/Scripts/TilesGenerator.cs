@@ -21,18 +21,23 @@ namespace LabraxStudio.Game.Tiles
 
         private float _cellSize;
         private GameFieldSprites _gameFieldSprites;
+        private bool _isInitialized = false;
 
         // PUBLIC METHODS: -----------------------------------------------------------------------
 
         public void Initialize()
         {
-            var _gameFieldSettings = ServicesFabric.GameSettingsService.GetGameSettings().GameFieldSettings;
+            var _gameFieldSettings = ServicesProvider.GameSettingsService.GetGameSettings().GameFieldSettings;
             _cellSize = _gameFieldSettings.CellSize;
-            _gameFieldSprites = ServicesFabric.GameSettingsService.GetGameSettings().GameFieldSprites;
+            _gameFieldSprites = ServicesProvider.GameSettingsService.GetGameSettings().GameFieldSprites;
+            _isInitialized = true;
         }
 
         public List<Tile> GenerateTiles(int levelWidth, int levelHeight, int[,] tilesMatrix)
         {
+            if (!_isInitialized)
+                return null;
+            
             List<Tile> generatedTiles = new List<Tile>();
 
             for (int i = 0; i < levelWidth; i++)
@@ -50,6 +55,9 @@ namespace LabraxStudio.Game.Tiles
 
         public Sprite GetSprite(int spriteIndex)
         {
+            if (!_isInitialized)
+                return null;
+            
             return _gameFieldSprites.GetTileSprite(spriteIndex);
         }
 

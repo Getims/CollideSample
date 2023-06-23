@@ -1,13 +1,14 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using LabraxStudio.App.Services;
-using LabraxStudio.Managers;
-using LabraxStudio.Meta;
+using LabraxStudio.Events;
+using LabraxStudio.Meta.Levels;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace LabraxStudio.Game.Tiles
 {
-    public class TilesController : SharedManager<TilesController>
+    public class TilesController : MonoBehaviour
     {
         // MEMBERS: -------------------------------------------------------------------------------
 
@@ -20,6 +21,11 @@ namespace LabraxStudio.Game.Tiles
         [SerializeField]
         private TilesMerger _tilesMerger = new TilesMerger();
 
+        // PROPERTIES: ----------------------------------------------------------------------------
+
+        public int[,] TilesMatrix => _tilesMatrix;
+        public List<Tile> Tiles => _tiles;
+        
         // FIELDS: -------------------------------------------------------------------
 
         [ShowInInspector]
@@ -48,14 +54,23 @@ namespace LabraxStudio.Game.Tiles
             var moveAction = _tilesMover.CalculateMoveAction(tile, direction, swipe);
             actions.Add(moveAction);
             var mergeAction = _tilesMerger.CheckMerge(tile, direction);
+            if (tile.MovedToGate)
+            {
+                mergeAction = null;
+                var moveInGateAction = new MoveInGateAction(tile, direction, DestroyTileInGate);
+                actions.Add(moveInGateAction);
+            }
 
             if (mergeAction == null)
-                tilesAnimator.Play(actions, CheckAllMerges);
+                tilesAnimator.Play(actions, onComplete: CheckAllMerges);
             else
             {
                 actions.Add(mergeAction);
-                tilesAnimator.Play(actions, () => CheckChainMerges(mergeAction.MergeTo));
+                tilesAnimator.Play(actions, () =>
+                    CheckChainMerges(mergeAction.MergeTo));
             }
+
+            GameEvents.SendTileAction();
         }
 
         public Tile GetTile(Vector2 cell)
@@ -69,16 +84,25 @@ namespace LabraxStudio.Game.Tiles
             return null;
         }
 
-        public void DestroyTile(Tile tile)
-        {
-            _tiles.Remove(tile);
-            tile.DestroySelf();
-        }
-
         public void CheckTileValue(Tile tile)
         {
             int newValue = _tilesMatrix[tile.Cell.x, tile.Cell.y];
             tile.SetValue(newValue, _tilesGenerator.GetSprite(newValue));
+        }
+
+        public void DestroyTile(Tile tile)
+        {
+            _tiles.Remove(tile);
+            tile.DestroySelf();
+
+            if (_tiles.Count == 0)
+                GameEvents.SendGameOver(true);
+        }
+
+        public void ClearTiles()
+        {
+            RemoveAllTiles(new List<Tile>(_tiles));
+            _tiles.Clear();
         }
 
         // PRIVATE METHODS: -----------------------------------------------------------------------
@@ -94,6 +118,8 @@ namespace LabraxStudio.Game.Tiles
                 TilesAnimator tilesAnimator = new TilesAnimator();
                 tilesAnimator.Play(mergeAction, () => CheckChainMerges(mergeAction.MergeTo));
             }
+
+            GameEvents.SendTileAction();
         }
 
         private void CheckAllMerges()
@@ -101,10 +127,10 @@ namespace LabraxStudio.Game.Tiles
             _animations--;
             if (_animations < 0)
                 _animations = 0;
-            
-            if(_animations>0)
+
+            if (_animations > 0)
                 return;
-            
+
             ResetMergeFlag();
             List<AnimationAction> actions = new List<AnimationAction>();
             MergeAction mergeAction = null;
@@ -115,20 +141,44 @@ namespace LabraxStudio.Game.Tiles
                     continue;
 
                 actions.Add(mergeAction);
-                mergeAction = null;
             }
 
             if (actions.Count == 0)
+            {
+                CheckForFail();
                 return;
+            }
 
             TilesAnimator tilesAnimator = new TilesAnimator();
             tilesAnimator.Play(actions, CheckAllMerges);
+
+            GameEvents.SendTileAction();
+        }
+
+        private void CheckForFail() => ServicesProvider.GameFlowService.FailTracker.CheckForFail();
+
+        private void DestroyTileInGate(Tile tile)
+        {
+            if (tile == null)
+                return;
+
+            _tilesMatrix[tile.Cell.x, tile.Cell.y] = 0;
+            DestroyTile(tile);
         }
 
         private void ResetMergeFlag()
         {
             foreach (var tile in _tiles)
                 tile.SetMergeFlag(false);
+        }
+
+        private async void RemoveAllTiles(List<Tile> tiles)
+        {
+            foreach (var tile in tiles)
+            {
+                tile.DestroySelf();
+                await Task.Delay(1);
+            }
         }
     }
 }

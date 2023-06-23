@@ -22,13 +22,13 @@ namespace LabraxStudio.Game.Tiles
         public void Initialize(Tile tile, UnityEngine.Camera camera, Action<Direction, Swipe, float> onSwipe)
         {
             _camera = camera;
-            _gameFieldSettings = ServicesFabric.GameSettingsService.GetGameSettings().GameFieldSettings;
+            _gameFieldSettings = ServicesProvider.GameSettingsService.GetGameSettings().GameFieldSettings;
             _onSwipe = onSwipe;
         }
 
         public void OnSelect()
         {
-            if (!ServicesFabric.TouchService.IsTouchEnabled)
+            if (!ServicesProvider.TouchService.IsTouchEnabled)
                 return;
 
             _isSelected = true;
@@ -73,13 +73,9 @@ namespace LabraxStudio.Game.Tiles
         {
             Direction _result = Direction.Null;
             if (Math.Abs(inputDelta.x) > Math.Abs(inputDelta.y))
-            {
                 _result = inputDelta.x > 0 ? Direction.Right : Direction.Left;
-            }
             else
-            {
                 _result = inputDelta.y > 0 ? Direction.Up : Direction.Down;
-            }
 
             return _result;
         }

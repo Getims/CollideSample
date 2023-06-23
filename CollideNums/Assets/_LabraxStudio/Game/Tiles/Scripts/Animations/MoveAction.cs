@@ -11,20 +11,27 @@ namespace LabraxStudio.Game.Tiles
     {
         // CONSTRUCTORS: -------------------------------------------------------------------------------
 
-        public MoveAction(Tile tile, Vector2Int moveTo, Swipe swipe)
+        public MoveAction(Tile tile, Vector2Int moveTo, Swipe swipe, Direction direction)
         {
             _tile = tile;
             _moveTo = moveTo;
             _swipe = swipe;
-            _gameFieldSettings = ServicesFabric.GameSettingsService.GetGameSettings().GameFieldSettings;
+            _direction = direction;
+            _gameFieldSettings = ServicesProvider.GameSettingsService.GetGameSettings().GameFieldSettings;
         }
+        
+        // PROPERTIES: ----------------------------------------------------------------------------
+        
+        private TilesController TilesController => ServicesProvider.GameFlowService.TilesController;
 
         // FIELDS: -------------------------------------------------------------------
 
-        private Tile _tile;
-        private Vector2Int _moveTo;
-        private Swipe _swipe;
-        private GameFieldSettings _gameFieldSettings;
+        private readonly Tile _tile;
+        private readonly Vector2Int _moveTo;
+        private readonly Swipe _swipe;
+        private Direction _direction;
+        private readonly GameFieldSettings _gameFieldSettings;
+        private Action _onMoveComplete;
 
         // PUBLIC METHODS: -----------------------------------------------------------------------
 
@@ -36,6 +43,7 @@ namespace LabraxStudio.Game.Tiles
             newPosition.x = matrixToPosition.x;
             newPosition.y = matrixToPosition.y;
 
+            _onMoveComplete = onComplete;
             Ease ease = Ease.Linear;
 
             float time = CalculateTime(_gameFieldSettings.TileSpeed, _swipe);
@@ -44,14 +52,13 @@ namespace LabraxStudio.Game.Tiles
             {
                 _tile.transform.DOMove(newPosition, time)
                     .SetEase(ease)
-                    .OnComplete(() => onComplete.Invoke());
+                    .OnComplete(OnMoveComplete);
             }
             else
             {
-                TilesController.Instance.StartCoroutine(Moving(_tile.transform, 
-                    _tile.Position, 
-                    newPosition, 
-                    onComplete));
+                TilesController.StartCoroutine(Moving(_tile.transform,
+                    _tile.Position,
+                    newPosition));
             }
         }
 
@@ -59,7 +66,7 @@ namespace LabraxStudio.Game.Tiles
 
         private float CalculateTime(float tileSpeed, Swipe swipe)
         {
-            if (tileSpeed == 0)
+            if (Math.Abs(tileSpeed) < 0.01f)
                 return 0;
 
             float time = 0;
@@ -84,19 +91,19 @@ namespace LabraxStudio.Game.Tiles
             return time;
         }
 
-        private IEnumerator Moving(Transform tile, Vector3 startPosition, Vector3 endPosition, Action onComplete)
+        private IEnumerator Moving(Transform tile, Vector3 startPosition, Vector3 endPosition)
         {
             float testTime = 0;
             float timeStep = 0.01f;
 
             var moveDelta = endPosition - startPosition;
             float maxCoord = Mathf.Max(Mathf.Abs(moveDelta.x), Mathf.Abs(moveDelta.y));
-            
+
             float startSpeed = _gameFieldSettings.TileSpeed;
-            
+
             float timeToMaxCoord = maxCoord / startSpeed;
-            float cylcesPerTile = 1 / startSpeed / timeStep;
-            float acceleration = _gameFieldSettings.TileAcceleration * timeStep / cylcesPerTile;
+            float cyclesPerTile = 1 / startSpeed / timeStep;
+            float acceleration = _gameFieldSettings.TileAcceleration * timeStep / cyclesPerTile;
 
             float currentTime = 0;
             float currentAcceleration = 0;
@@ -108,13 +115,18 @@ namespace LabraxStudio.Game.Tiles
                 tile.position = Vector3.Lerp(startPosition, endPosition, currentTime / timeToMaxCoord);
 
                 testTime += timeStep;
-                
-                yield return new WaitForSeconds(timeStep);
+                if(currentTime < timeToMaxCoord)
+                    yield return new WaitForSeconds(timeStep);
             }
 
             //WUtils.ReworkPoint("TestTime: " + testTime);
-            onComplete.Invoke();
+            _tile.PlayCollideEffect(_direction);
+            OnMoveComplete();
         }
 
+        private void OnMoveComplete()
+        {
+            _onMoveComplete?.Invoke();
+        }
     }
 }

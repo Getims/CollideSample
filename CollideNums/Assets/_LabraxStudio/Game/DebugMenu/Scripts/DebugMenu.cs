@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using LabraxStudio.App;
 using LabraxStudio.App.Services;
+using LabraxStudio.Events;
 using LabraxStudio.Managers;
 using LabraxStudio.Meta;
 using TMPro;
@@ -32,22 +33,39 @@ namespace LabraxStudio.Game.Debug
         [SerializeField]
         private GameObject _speedCounterPanel;
 
+        [SerializeField]
+        private TMP_Dropdown _dropdown;
+
+
         // FIELDS: -------------------------------------------------------------------
 
         private GameFieldSettings _gameFieldSettings;
         private List<string> _easeOptions;
 
         // GAME ENGINE METHODS: -------------------------------------------------------------------
+
+        protected override void Awake()
+        {
+            base.Awake();
+            GameEvents.OnGenerateLevel.AddListener(OnLevelGenerated);
+        }
+
+        private void OnDestroy()
+        {
+            GameEvents.OnGenerateLevel.RemoveListener(OnLevelGenerated);
+        }
+
         private void Start()
         {
             base.InitManager();
-            _gameFieldSettings = ServicesFabric.GameSettingsService.GetGameSettings().GameFieldSettings;
+            _gameFieldSettings = ServicesProvider.GameSettingsService.GetGameSettings().GameFieldSettings;
 
             _baseSwipeForce.SetTextWithoutNotify(_gameFieldSettings.BaseSwipeForce.ToString());
             _tileSpeed.SetTextWithoutNotify(_gameFieldSettings.TileSpeed.ToString());
             _tileAcceleration.SetTextWithoutNotify(_gameFieldSettings.TileAcceleration.ToString());
 
             PrepareEaseOptions();
+            PrepareLevelsDropDown();
         }
 
         // PUBLIC METHODS: -----------------------------------------------------------------------
@@ -91,13 +109,19 @@ namespace LabraxStudio.Game.Debug
 
         public void NextLevel()
         {
-            PlayerDataService.SwitchToNextLevel();
+            ServicesProvider.PlayerDataService.SwitchToNextLevel();
             GameManager.ReloadScene();
         }
-        
+
         public void PreviousLevel()
         {
-            PlayerDataService.SwitchToPreviousLevel();
+            ServicesProvider.PlayerDataService.SwitchToPreviousLevel();
+            GameManager.ReloadScene();
+        }
+
+        public void OnDropDownChange(int value)
+        {
+            ServicesProvider.PlayerDataService.SetLevel(value);
             GameManager.ReloadScene();
         }
 
@@ -128,6 +152,26 @@ namespace LabraxStudio.Game.Debug
             dropdown.SetValueWithoutNotify(index);
         }
 
+        private void PrepareLevelsDropDown()
+        {
+            _dropdown.options.Clear();
+
+            List<TMP_Dropdown.OptionData> options = new List<TMP_Dropdown.OptionData>();
+            var selectableLevels = ServicesProvider.GameSettingsService.GetGlobalSettings().GameSettings.LevelsList.List;
+            int currentIndex = ServicesProvider.PlayerDataService.CurrentLevel;
+            if (selectableLevels == null)
+                return;
+
+            int i = 1;
+            foreach (var levelMeta in selectableLevels)
+            {
+                _dropdown.options.Add(new TMP_Dropdown.OptionData($"{i}. {levelMeta.FileName}"));
+                i++;
+            }
+
+            _dropdown.SetValueWithoutNotify(currentIndex);
+        }
+
         private Ease GetEase(TMP_Dropdown dropdown, Ease baseEase)
         {
             return ConvertToEase(_easeOptions[dropdown.value], baseEase);
@@ -147,5 +191,9 @@ namespace LabraxStudio.Game.Debug
 
             return result;
         }
+
+        // EVENTS RECEIVERS: ----------------------------------------------------------------------
+
+        private void OnLevelGenerated() => PrepareLevelsDropDown();
     }
 }

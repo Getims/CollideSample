@@ -23,7 +23,7 @@ namespace LabraxStudio.Loadscreen
         // GAME ENGINE METHODS: -------------------------------------------------------------------
 
         private void Awake() =>
-            _isFirstStart = ServicesFabric.GameDataService.GetGameData().IsFirstStart;
+            _isFirstStart = ServicesProvider.GameDataService.GetGameData().IsFirstStart;
 
         private void Start()
         {

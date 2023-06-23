@@ -15,7 +15,7 @@ SpriteAtlas:
       compressionQuality: 50
       maxTextureSize: 2048
       textureCompression: 0
-      filterMode: 0
+      filterMode: 1
       generateMipMaps: 0
       readable: 0
       crunchedCompression: 0
@@ -67,13 +67,52 @@ SpriteAtlas:
       enableAlphaDilation: 0
     secondaryTextureSettings: {}
     variantMultiplier: 1
-    packables: []
+    packables:
+    - {fileID: 102900000, guid: 96b90aecea41cbe4daaba0003860f101, type: 3}
+    - {fileID: 102900000, guid: a6df6a1fddc88e04c9d3907496fdd5f9, type: 3}
+    - {fileID: 102900000, guid: d9c3b07050d9be940969d526ed76ae02, type: 3}
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
   m_MasterAtlas: {fileID: 0}
-  m_PackedSprites: []
-  m_PackedSpriteNamesToIndex: []
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 2ace32d0ab569f643a787c5db51491ee, type: 3}
+  - {fileID: 21300000, guid: 4b9a2441f1c69fd4e832ee9fa83669b4, type: 3}
+  - {fileID: 21300000, guid: dcbc9f842f792714697ea66b81102c15, type: 3}
+  - {fileID: 21300000, guid: 0937b2362ad39ac4286e1644b3ccc4ce, type: 3}
+  - {fileID: 21300000, guid: 00991e47e3dcd004385c6056b3c07ef0, type: 3}
+  - {fileID: 21300000, guid: f5676e47a241ae5438b2d176aebf42b7, type: 3}
+  - {fileID: 21300000, guid: d18414977d2c1724ea1406adb2f038c2, type: 3}
+  - {fileID: 21300000, guid: 8762a33890491354481622dc45ade361, type: 3}
+  - {fileID: 21300000, guid: 1423787801e40e24c8bd756a186a2636, type: 3}
+  - {fileID: 21300000, guid: f8f501b831e0437489e10d9972fee90a, type: 3}
+  - {fileID: 21300000, guid: af4f259959e11a24a928194aa584468e, type: 3}
+  - {fileID: 21300000, guid: c62c7faaea9e4f54aa1d779bbb245e46, type: 3}
+  - {fileID: 21300000, guid: a245fcda02f685540a31ec85b9698fe9, type: 3}
+  - {fileID: 21300000, guid: 8ab7a01c7e773524a9dad39109348522, type: 3}
+  - {fileID: 21300000, guid: 3323e74c5d363cc48ad8d4af153b2de6, type: 3}
+  - {fileID: 21300000, guid: 2399cadc77837ce4284822ab0b09eadc, type: 3}
+  - {fileID: 21300000, guid: 6385e13dbceae584c9b600d5ec684eb0, type: 3}
+  - {fileID: 21300000, guid: 633290bffd198814d873b089357304a5, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - tile_icon16
+  - booster_back
+  - level_completed_text
+  - tile_icon8
+  - booster_icon_reset
+  - claim_text
+  - tile_icon128
+  - tile_icon4
+  - tile_icon2
+  - booster_back_coinplate
+  - tile_icon64
+  - tile_icon512
+  - tile_icon32
+  - tile_icon256
+  - button_green
+  - booster_icon_devide
+  - checkmark
+  - booster_icon_multiply
   m_RenderDataMap: {}
   m_Tag: GameUI
   m_IsVariant: 0

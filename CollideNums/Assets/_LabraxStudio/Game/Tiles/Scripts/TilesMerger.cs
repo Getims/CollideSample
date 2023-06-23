@@ -1,4 +1,6 @@
 using System;
+using LabraxStudio.App.Services;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace LabraxStudio.Game.Tiles
@@ -6,6 +8,10 @@ namespace LabraxStudio.Game.Tiles
     [Serializable]
     public class TilesMerger
     {
+        // PROPERTIES: ----------------------------------------------------------------------------
+        
+        private TilesController TilesController => ServicesProvider.GameFlowService.TilesController;
+        
         // FIELDS: -------------------------------------------------------------------
 
         private int[,] _tilesMatrix;
@@ -35,7 +41,7 @@ namespace LabraxStudio.Game.Tiles
                     return new MergeAction(tile, otherTile);
                 }
             }
-            
+
             otherTile = CanMerge(tile, Direction.Right);
             if (otherTile != null)
             {
@@ -43,7 +49,7 @@ namespace LabraxStudio.Game.Tiles
                 otherTile.SetMergeFlag(true);
                 return new MergeAction(tile, otherTile);
             }
-            
+
             otherTile = CanMerge(tile, Direction.Down);
             if (otherTile != null)
             {
@@ -51,7 +57,7 @@ namespace LabraxStudio.Game.Tiles
                 otherTile.SetMergeFlag(true);
                 return new MergeAction(tile, otherTile);
             }
-            
+
             otherTile = CanMerge(tile, Direction.Left);
             if (otherTile != null)
             {
@@ -59,7 +65,7 @@ namespace LabraxStudio.Game.Tiles
                 otherTile.SetMergeFlag(true);
                 return new MergeAction(tile, otherTile);
             }
-            
+
             otherTile = CanMerge(tile, Direction.Up);
             if (otherTile != null)
             {
@@ -78,38 +84,27 @@ namespace LabraxStudio.Game.Tiles
             int x = tile.Cell.x;
             int y = tile.Cell.y;
 
-            switch (direction)
-            {
-                case Direction.Null:
-                    return null;
-                case Direction.Left:
-                    x -= 1;
-                    break;
-                case Direction.Right:
-                    x += 1;
-                    break;
-                case Direction.Up:
-                    y -= 1;
-                    break;
-                case Direction.Down:
-                    y += 1;
-                    break;
-            }
+            if (tile.Value == 16)
+                return null;
             
-            if (x<0 || x>=_width ||
-                y<0 || y>= _height)
+            Vector2Int mergeVector = GameTypesConverter.DirectionToVector2Int(direction);
+            x += mergeVector.x;
+            y += mergeVector.y;
+
+            if (x < 0 || x >= _width ||
+                y < 0 || y >= _height)
                 return null;
 
             int otherValue = _tilesMatrix[x, y];
             if (otherValue != tile.Value)
                 return null;
 
-            Tile otherTile = TilesController.Instance.GetTile(new Vector2(x, y));
-            if (otherTile.IsMerging)
+            Tile otherTile = TilesController.GetTile(new Vector2(x, y));
+            if (otherTile == null || otherTile.IsMerging)
                 return null;
-            
+
             _tilesMatrix[x, y] = tile.Value + 1;
-            _tilesMatrix[tile.Cell.x,tile.Cell.y] = 0;
+            _tilesMatrix[tile.Cell.x, tile.Cell.y] = 0;
             return otherTile;
         }
     }

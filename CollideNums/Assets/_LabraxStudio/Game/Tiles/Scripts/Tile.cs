@@ -1,3 +1,4 @@
+using LabraxStudio.App.Services;
 using UnityEngine;
 
 namespace LabraxStudio.Game.Tiles
@@ -9,10 +10,12 @@ namespace LabraxStudio.Game.Tiles
         [SerializeField]
         private SpriteRenderer _spriteRenderer;
 
+        [SerializeField]
+        private TileEffectsController _tileEffectsController;
+
         // PROPERTIES: ----------------------------------------------------------------------------
 
         public Vector2Int Cell => _cell;
-
         public int Value => _value;
 
         public Vector3 Position
@@ -22,6 +25,9 @@ namespace LabraxStudio.Game.Tiles
         }
 
         public bool IsMerging => _isMerging;
+        public bool MovedToGate => _movedToGate;
+
+        private TilesController TilesController => ServicesProvider.GameFlowService.TilesController;
 
         // FIELDS: -------------------------------------------------------------------
 
@@ -29,12 +35,13 @@ namespace LabraxStudio.Game.Tiles
         private int _value;
         private TileSwipeChecker _swipeChecker = new TileSwipeChecker();
         private bool _isMerging = false;
+        private bool _movedToGate = false;
 
         // PUBLIC METHODS: -----------------------------------------------------------------------
 
-        public void Initialize(string name)
+        public void Initialize(string tileName)
         {
-            gameObject.name = name;
+            gameObject.name = tileName;
             _swipeChecker.Initialize(this, UnityEngine.Camera.main, OnSwipe);
         }
 
@@ -54,19 +61,37 @@ namespace LabraxStudio.Game.Tiles
             _isMerging = isMerging;
         }
 
+        public void SetGateFlag()
+        {
+            _movedToGate = true;
+        }
+
+        public void PlayMergeEffect() => _tileEffectsController.PlayMergeEffect();
+        public void PlayPassGateEffect() => _tileEffectsController.PlayPassGateEffect();
+
+        public void PlayCollideEffect(Direction direction)
+        {
+            if (!_isMerging)
+                _tileEffectsController.PlayCollideEffect(direction);
+        }
+
         // EVENTS RECEIVERS: ----------------------------------------------------------------------
 
-        public void OnSelecet() => _swipeChecker.OnSelect();
+        public void OnSelect() => _swipeChecker.OnSelect();
         public void OnDeselect() => _swipeChecker.OnDeselect();
 
         private void OnSwipe(Direction direction, Swipe swipe, float swipeSpeed)
         {
-            TilesController.Instance.MoveTile(this, direction, swipe, swipeSpeed);
+            if (swipe == Swipe.Infinite)
+                _tileEffectsController.PlayInfiniteMoveEffect();
+            else
+                _tileEffectsController.StopInfiniteMoveEffect();
+
+            TilesController.MoveTile(this, direction, swipe, swipeSpeed);
         }
 
         public void DestroySelf()
         {
-            Utils.ReworkPoint(gameObject.name+": I destroyed");
             Destroy(gameObject);
         }
     }

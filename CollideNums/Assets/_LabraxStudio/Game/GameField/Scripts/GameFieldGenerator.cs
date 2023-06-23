@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using LabraxStudio.App.Services;
 using LabraxStudio.Meta;
 using UnityEngine;
@@ -22,47 +23,49 @@ namespace LabraxStudio.Game.GameField
         private GameFieldSettings _gameFieldSettings;
         private GameFieldSprites _gameFieldSprites;
         private int[,] _levelMatrix;
-
+       
         // PUBLIC METHODS: -----------------------------------------------------------------------
 
         public void Initialize()
         {
-            _gameFieldSettings = ServicesFabric.GameSettingsService.GetGameSettings().GameFieldSettings;
-            _gameFieldSprites = ServicesFabric.GameSettingsService.GetGameSettings().GameFieldSprites;
+            _gameFieldSettings = ServicesProvider.GameSettingsService.GetGameSettings().GameFieldSettings;
+            _gameFieldSprites = ServicesProvider.GameSettingsService.GetGameSettings().GameFieldSprites;
         }
-
-        public GameCellType[,] GenerateGameField(int levelWidth, int levelHeight, int[,] levelMatrix)
+        
+        public List<FieldCell> GenerateFieldSprites(int levelWidth, int levelHeight, int[,] levelMatrix)
         {
-            GameCellType[,] gamefield = new GameCellType[levelWidth, levelHeight];
-
-            for (int i = 0; i < levelWidth; i++)
-            {
-                for (int j = 0; j < levelHeight; j++)
-                {
-                    gamefield[i, j] = GameTypesConverter.MatrixValueToCellType(levelMatrix[i, j]);
-                }
-            }
-
-            return gamefield;
-        }
-
-        public void GenerateFieldSprites(int levelWidth, int levelHeight, int[,] levelMatrix)
-        {
+            List<FieldCell> gameField = new List<FieldCell>();
             _levelMatrix = levelMatrix;
 
             for (int i = 0; i < levelWidth; i++)
             {
                 for (int j = 0; j < levelHeight; j++)
                 {
-                    CreateCell(i, j, levelMatrix[i, j] - 1);
+                    var fieldCell = CreateCell(i, j, levelMatrix[i, j] - 1);
+                    if(fieldCell!=null)
+                        gameField.Add(fieldCell);
                 }
             }
+
+            return gameField;
         }
 
         // PRIVATE METHODS: -----------------------------------------------------------------------
 
-        private void CreateCell(int x, int y, int spriteIndex)
+        private FieldCell CreateCell(int x, int y, int spriteIndex)
         {
+            Sprite sprite = null;
+            bool isGate = false;
+            if (spriteIndex == 0)
+                sprite = GetNotPlayableSprite(x, y);
+            else if (spriteIndex == 1)
+                sprite = GetPlayableSprite(x, y);
+            else
+                return null;
+
+            if (sprite == null)
+                sprite = _gameFieldSprites.ErrorSprite;
+
             FieldCell newCell = Object.Instantiate(_fieldCellPrefab, _cellsContainer);
 
             Vector3 position = Vector3.zero;
@@ -71,24 +74,8 @@ namespace LabraxStudio.Game.GameField
 
             newCell.transform.localPosition = position;
             newCell.SetName(GenerateName(x, y));
-
-            Sprite sprite = null;
-            if (spriteIndex == 0)
-                sprite = GetNotPlayableSprite(x, y);
-            else if (spriteIndex == 1)
-                sprite = GetPlayableSprite(x, y);
-            else
-                sprite = GetGateSprite(spriteIndex);
-
-            if (sprite == null)
-                sprite = _gameFieldSprites.ErrorSprite;
-
             newCell.SetSprite(sprite);
-        }
-
-        private Sprite GetGateSprite(in int spriteIndex)
-        {
-            return null;
+            return newCell;
         }
 
         private Sprite GetPlayableSprite(int x, int y)
@@ -106,14 +93,26 @@ namespace LabraxStudio.Game.GameField
 
             switch (type)
             {
+                case 1:
+                    return _gameFieldSprites.PlayableSprites.LeftBackground;
+                case 2:
+                    return _gameFieldSprites.PlayableSprites.TopBackground;
                 case 3:
                     return _gameFieldSprites.PlayableSprites.TopLeftCorner;
+                case 4:
+                    return _gameFieldSprites.PlayableSprites.RightBackground;
+                case 5:
+                    return _gameFieldSprites.PlayableSprites.LeftRightBackground;
                 case 6:
                     return _gameFieldSprites.PlayableSprites.TopRightCorner;
                 case 7:
                     return _gameFieldSprites.PlayableSprites.FullTopCorner;
+                case 8:
+                    return _gameFieldSprites.PlayableSprites.BottomBackground;
                 case 9:
                     return _gameFieldSprites.PlayableSprites.BottomLeftCorner;
+                case 10:
+                    return _gameFieldSprites.PlayableSprites.TopBottomBackground;
                 case 11:
                     return _gameFieldSprites.PlayableSprites.FullLeftCorner;
                 case 12:
@@ -124,7 +123,7 @@ namespace LabraxStudio.Game.GameField
                     return _gameFieldSprites.PlayableSprites.FullRightCorner;
             }
 
-            return _gameFieldSprites.PlayableSprites.GetRandomBackground();
+            return _gameFieldSprites.PlayableSprites.BaseBackground;
         }
 
         private Sprite GetNotPlayableSprite(int x, int y)
@@ -150,13 +149,6 @@ namespace LabraxStudio.Game.GameField
             type += checkRightBottom >= 2 ? 32 : 0;
             type += checkBottom >= 2 ? 64 : 0;
             type += checkLeftBottom >= 2 ? 128 : 0;
-
-            /*
-            type += checkBottom > 2 ? 256 : 0;
-            type += checkRight > 2 ? 256 : 0;
-            type += checkLeft > 2 ? 512 : 0;
-            type += checkBottom > 2 ? 512 : 0;
-            */
 
             switch (type)
             {
@@ -198,12 +190,12 @@ namespace LabraxStudio.Game.GameField
                 case 244:
                 case 246:
                 case 248:
-                //case 560:
+                    //case 560:
                     return _gameFieldSprites.NotPlayableSprites.NotPlayable2;
                 case 225:
                 case 227:
                 case 237:
-               // case 385:
+                    // case 385:
                     return _gameFieldSprites.NotPlayableSprites.NotPlayable3;
                 case 241:
                 case 243:
