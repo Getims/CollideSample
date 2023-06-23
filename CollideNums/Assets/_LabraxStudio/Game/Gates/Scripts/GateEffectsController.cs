@@ -1,3 +1,4 @@
+using LabraxStudio.Game.Gates.Visual;
 using UnityEngine;
 
 namespace LabraxStudio.Game.Gates
@@ -8,15 +9,21 @@ namespace LabraxStudio.Game.Gates
 
         [SerializeField]
         private ParticleSystem _gatePassEffect;
-        
+
         [SerializeField]
         private ParticleSystem _gateLockEffect;
-        
+
+        [SerializeField]
+        private ParticleSystem _particles;
+
         [SerializeField]
         private Transform _rotatePoint;
-        
+
+        [SerializeField]
+        private GateNumber _gateNumber;
+
         // PUBLIC METHODS: -----------------------------------------------------------------------
-        
+
         public void Setup(Direction direction)
         {
             int angle = 0;
@@ -39,18 +46,22 @@ namespace LabraxStudio.Game.Gates
                     angle = 0;
                     break;
             }
-            
-            _rotatePoint.localEulerAngles = new Vector3(0,0,angle);
+
+            _rotatePoint.localEulerAngles = new Vector3(0, 0, angle);
         }
-        
+
         public void PlayPassGateEffect()
         {
-           _gatePassEffect.Play();
+            _gatePassEffect.Play();
+            _gateNumber.PlayGlow();
+            _particles.Play();
         }
 
         public void PlayLockGateEffect()
         {
-           _gateLockEffect.Play();
+            _gateLockEffect.Play();
+            _gateNumber.PlayGlow();
+            _particles.Play();
         }
     }
 }
