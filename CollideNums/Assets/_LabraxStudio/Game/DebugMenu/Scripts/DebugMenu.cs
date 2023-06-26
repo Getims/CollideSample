@@ -171,6 +171,29 @@ namespace LabraxStudio.Game.Debug
 
             _dropdown.SetValueWithoutNotify(currentIndex);
         }
+        
+        private void PrepareLevelsListsDropDown()
+        {
+            /*
+            _listsDropdown.options.Clear();
+
+            List<TMP_Dropdown.OptionData> options = new List<TMP_Dropdown.OptionData>();
+            var selectableLevels = ServicesProvider.GameSettingsService.GetGlobalSettings().GameSettings
+                .SelectableLevelsLists;
+            int currentIndex = ServicesProvider.PlayerDataService.CurrentLevel;
+            if (selectableLevels == null)
+                return;
+
+            int i = 1;
+            foreach (var levelsListMeta in selectableLevels)
+            {
+                _listsDropdown.options.Add(new TMP_Dropdown.OptionData($"{i}. {levelsListMeta.FileName}"));
+                i++;
+            }
+
+            _listsDropdown.SetValueWithoutNotify(currentIndex);
+            */
+        }
 
         private Ease GetEase(TMP_Dropdown dropdown, Ease baseEase)
         {
