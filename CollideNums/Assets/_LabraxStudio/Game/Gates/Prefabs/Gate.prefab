@@ -56,9 +56,11 @@ MonoBehaviour:
       _gateVertical: {fileID: 930258758852494451}
       _gateVerticalTop: {fileID: 6960870177944370364}
       _gateVerticalBottom: {fileID: 1678316591238342563}
+      _gateVerticalCut: {fileID: 4164039044838562843}
       _gateHorizontalBottom1: {fileID: 665769220597869060}
       _gateHorizontalBottom2: {fileID: 1595810404489730496}
       _gateHorizontalBottom3: {fileID: 8652214426709063823}
+      _gateHorizontalBottom4: {fileID: 6353548051769478181}
       _gateHorizontal: {fileID: 2434741179174369038}
   _gateEffectsController: {fileID: 6785446949655241482}
 --- !u!1001 &4514646424207951758
@@ -146,6 +148,16 @@ SpriteRenderer:
 --- !u!4 &2674851514562053682 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1997843718954287548, guid: 6b2008658fd8767419624b160e8cb87d, type: 3}
+  m_PrefabInstance: {fileID: 4514646424207951758}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &4164039044838562843 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 535537426980051861, guid: 6b2008658fd8767419624b160e8cb87d, type: 3}
+  m_PrefabInstance: {fileID: 4514646424207951758}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &6353548051769478181 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 7389115383141059499, guid: 6b2008658fd8767419624b160e8cb87d, type: 3}
   m_PrefabInstance: {fileID: 4514646424207951758}
   m_PrefabAsset: {fileID: 0}
 --- !u!212 &6960870177944370364 stripped

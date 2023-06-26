@@ -99,6 +99,9 @@ namespace LabraxStudio.Game.Gates
 
                 if (checkLeftTop != 2 && checkLeftBottom == 2)
                     type = 2;
+                
+                if (checkLeftTop != 2 && checkLeftBottom != 2)
+                    type = 3;
 
                 return Direction.Left;
             }
@@ -110,6 +113,9 @@ namespace LabraxStudio.Game.Gates
 
                 if (checkLeftTop != 2 && checkRightTop == 2)
                     type = 2;
+                
+                if (checkLeftTop != 2 && checkRightTop != 2)
+                    type = 3;
 
                 return Direction.Up;
             }
@@ -121,6 +127,9 @@ namespace LabraxStudio.Game.Gates
 
                 if (checkRightTop != 2 && checkRightBottom == 2)
                     type = 2;
+                
+                if (checkRightTop != 2 && checkRightBottom != 2)
+                    type = 3;
 
                 return Direction.Right;
             }
