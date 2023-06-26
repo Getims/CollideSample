@@ -669,6 +669,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4438141646963313721}
   - component: {fileID: 848831890681081084}
+  - component: {fileID: 1846133424659779527}
   m_Layer: 0
   m_Name: DebugMenu
   m_TagString: Untagged
@@ -718,6 +719,21 @@ MonoBehaviour:
   _speedCounter: {fileID: 3646701926587030425}
   _speedCounterPanel: {fileID: 419569312825769377}
   _dropdown: {fileID: 4118703711939099219}
+--- !u!114 &1846133424659779527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4438141646963313670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c97afc556caea1c44969477eb7ddec74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ConformX: 1
+  ConformY: 1
+  Logging: 0
 --- !u!1 &4522922970281890608
 GameObject:
   m_ObjectHideFlags: 0
@@ -3206,7 +3222,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5723564563904423077, guid: cfb5a97022c5b3f478735844e984a719, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 100
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 5723564563904423077, guid: cfb5a97022c5b3f478735844e984a719, type: 3}
       propertyPath: m_LocalPosition.x

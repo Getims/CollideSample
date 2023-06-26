@@ -22,17 +22,19 @@ namespace LabraxStudio.Meta.Levels
         // FIELDS: -------------------------------------------------------------------
 
         [FoldoutGroup("Size", Expanded = true)]
-        [SerializeField, Min(1)]
+        [SerializeField]
         private int width = 3;
 
         [FoldoutGroup("Size")]
-        [SerializeField, Min(1)]
+        [SerializeField]
         private int height = 3;
 
         [FoldoutGroup("Size")]
         [Button("Resize", 28), GUIColor(1, 0.2f, 0.2f)]
         private void OnTemplateSizeChanged()
         {
+            width = width < 1 ? 1 : width;
+            height = height < 1 ? 1 : height;
             ResizeLevelMatrix();
         }
 
@@ -76,7 +78,7 @@ namespace LabraxStudio.Meta.Levels
                 if (_tilesBrushMode == TileBrushMode.Null)
                     brushSize = 1;
                 else
-                    brushSize = GameConstants.TileStartValue -1  + (int) _tilesBrushMode;
+                    brushSize = GameConstants.TileStartValue - 1 + (int) _tilesBrushMode;
             }
 
             value = LevelMatrixDrawer.DrawLevelEnumElement(rect, value, isBrushMode, brushSize, _rightClickSize);

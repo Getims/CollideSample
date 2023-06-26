@@ -27,6 +27,9 @@ namespace LabraxStudio.Meta
         
         [BoxGroup("Game level settings/In", showLabel: false), SerializeField]
         private LevelsListMeta _levelsList;
+        
+        [BoxGroup("Game level settings/In"), SerializeField]
+        private List<LevelsListMeta> _selectableLevelsLists;
 
         // PROPERTIES: ----------------------------------------------------------------------------
 
@@ -35,5 +38,6 @@ namespace LabraxStudio.Meta
         public GameFieldSprites GameFieldSprites => _gameFieldSprites;
         public GameFieldSettings GameFieldSettings => _gameFieldSettings;
         public LevelsListMeta LevelsList => _levelsList;
+        public List<LevelsListMeta> SelectableLevelsLists => _selectableLevelsLists;
     }
 }
