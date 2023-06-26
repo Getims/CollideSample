@@ -53,14 +53,14 @@ namespace LabraxStudio.Game.Gates
         public void PlayPassGateEffect()
         {
             _gatePassEffect.Play();
-            _gateNumber.PlayGlow();
+            _gateNumber.PlayGlow(true);
             _particles.Play();
         }
 
         public void PlayLockGateEffect()
         {
             _gateLockEffect.Play();
-            _gateNumber.PlayGlow();
+            _gateNumber.PlayGlow(false);
             _particles.Play();
         }
     }

@@ -19,6 +19,7 @@ namespace LabraxStudio.App.Services
         public void Initialize()
         {
             _gameDataService = ServicesProvider.GameDataService;
+            _levelsDataList = _gameDataService.GetGameData().LevelsData.LevelDatas;
         }
 
         public void AddLevelDataToList(LevelData levelData)
@@ -100,6 +101,14 @@ namespace LabraxStudio.App.Services
         {
             var levelData = _levelsDataList[0];
             levelData.SetUnlocked(true);
+            _gameDataService.SaveGameData();
+        }
+
+        public string GetLevelsListName() => _gameDataService.GetGameData().LevelsData.LevelsListName;
+
+        public void SetLevelsListName(string listName)
+        {
+            _gameDataService.GetGameData().LevelsData.SetLevelsListName(listName);
             _gameDataService.SaveGameData();
         }
     }

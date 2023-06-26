@@ -1,5 +1,7 @@
 ﻿using System;
 using LabraxStudio.App.Services;
+using LabraxStudio.Meta;
+using LabraxStudio.Meta.Levels;
 using LabraxStudio.Sound;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -36,6 +38,7 @@ namespace LabraxStudio.App
         }
 
         // PUBLIC METHODS: ------------------------------------------------------------------------
+        
 #if UNITY_EDITOR
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         public static void Execute()
@@ -46,14 +49,19 @@ namespace LabraxStudio.App
         }
 #endif
 
+        public void Restart()
+        {
+            SetupManagers();
+        }
+        
         // PRIVATE METHODS: -----------------------------------------------------------------------
 
         private void SetupManagers()
         {
-            var gameSettings = ServicesProvider.GameSettingsService.GetGameSettings();
+            GameSettings gameSettings = ServicesProvider.GameSettingsService.GetGameSettings();
             ServicesProvider.PlayerDataService.Initialize();
             ServicesProvider.LevelDataService.Initialize();
-            ServicesProvider.LevelMetaService.Initialize(gameSettings.LevelsList.List);
+            ServicesProvider.LevelMetaService.Initialize(GetLevelsListMeta(gameSettings).List);
             GameManager.Instance.Initialize();
 
             if (!gameSettings.LaunchSettings.EnableTutorial)
@@ -69,6 +77,21 @@ namespace LabraxStudio.App
             }
 
             GameManager.Instance.SaveTime();
+        }
+
+        private LevelsListMeta GetLevelsListMeta(GameSettings gameSettings)
+        {
+            string listName = ServicesProvider.LevelDataService.GetLevelsListName();
+            LevelsListMeta levelsListMeta = gameSettings.SelectableLevelsLists.Find(llm => llm.FileName == listName);
+            if (levelsListMeta == null)
+            {
+                Utils.ReworkPoint("Levels list not found! Select default list");
+                levelsListMeta = gameSettings.LevelsList;
+            }
+
+            ServicesProvider.LevelDataService.SetLevelsListName(levelsListMeta.FileName);
+
+            return levelsListMeta;
         }
     }
 }
