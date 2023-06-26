@@ -36,11 +36,14 @@ namespace LabraxStudio.Game.Gates.Visual
 
         // PUBLIC METHODS: -----------------------------------------------------------------------
 
-        public void PlayGlow()
+        public void PlayGlow(bool isPass)
         {
             _currentNumber.color = _glowColor;
-            _glowTw = _currentNumber.DOColor(_baseColor, 0.2f)
-                .SetDelay(0.1f);
+            float time = isPass ? 0.3f : 0.2f;
+            float delay = isPass ? 0.25f : 0.1f;
+            
+            _glowTw = _currentNumber.DOColor(_baseColor, time)
+                .SetDelay(delay);
         }
 
         public void SetNumber(Sprite sprite, Direction direction)
