@@ -1,5 +1,4 @@
 #if UNITY_EDITOR
-using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -10,8 +9,9 @@ namespace LabraxStudio.Editor
     {
         // PROPERTIES: ----------------------------------------------------------------------------
 
-        public static Dictionary<int, Texture> TexturesDictionary { get; private set; } = new Dictionary<int, Texture>();
-        public static Dictionary<int, Texture> TilesDictionary { get; private set; } = new Dictionary<int, Texture>();
+        public static Dictionary<int, Texture> TexturesDictionary { get; private set; } =
+            new Dictionary<int, Texture>();
+
         public static int SpritesCount => TexturesDictionary.Count;
 
         // FIELDS: --------------------------------------------------------------------------------
@@ -43,7 +43,7 @@ namespace LabraxStudio.Editor
             LoadLockedTypes(ref idCount);
             LoadUnlockedTypes(ref idCount);
             LoadGatesTypes(ref idCount);
-            LoadTiles();
+            LoadTiles(ref idCount);
         }
 
         private static void LoadLockedTypes(ref int idCount)
@@ -62,33 +62,30 @@ namespace LabraxStudio.Editor
         {
             for (int i = 0; i < 16; i++)
             {
-                AddKeyAndValue(idCount, "Gate_" + i, false, GatesPath);
+                AddKeyAndValue(idCount, "Gate_" + i, GatesPath);
                 idCount++;
             }
         }
-        
-        private static void LoadTiles()
+
+        private static void LoadTiles(ref int idCount)
         {
             for (int i = 0; i < 16; i++)
             {
-                AddKeyAndValue(i, "Tile_" + i, true, TilesPath);
+                AddKeyAndValue(idCount, "Tile_" + i, TilesPath);
+                idCount++;
             }
         }
 
-        private static void AddKeyAndValue(int key, string textureName, bool isTile = false, string customPath="")
+        private static void AddKeyAndValue(int key, string textureName, string customPath = "")
         {
             Texture texture = LoadTexture(textureName, customPath);
-
-            if (isTile)
-                TilesDictionary.Add(key, texture);
-            else
-                TexturesDictionary.Add(key, texture);
+            TexturesDictionary.Add(key, texture);
         }
 
         private static Texture LoadTexture(string fileName, string customPath = "")
         {
             string path = customPath == "" ? SpritesPath : customPath;
-            
+
             var jpg = ".jpg";
             var png = ".png";
             var texture = EditorGUIUtility.Load(path + fileName + jpg) as Texture2D;
