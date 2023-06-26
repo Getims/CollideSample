@@ -11,12 +11,16 @@ namespace LabraxStudio.Data
         // MEMBERS: -------------------------------------------------------------------------------
 
         [SerializeField]
+        private string _levelsListName = string.Empty;
+        
+        [SerializeField]
         [ListDrawerSettings(ListElementLabelName = "ElementName", ShowIndexLabels = true)]
         private List<LevelData> _levelDatas = new List<LevelData>();
 
         // PROPERTIES: ----------------------------------------------------------------------------
 
-        public IEnumerable<LevelData> LevelDatas => _levelDatas;
+        public List<LevelData> LevelDatas => _levelDatas;
+        public string LevelsListName => _levelsListName;
 
         // PUBLIC METHODS: ------------------------------------------------------------------------
 
@@ -25,5 +29,10 @@ namespace LabraxStudio.Data
 
         public void AddLevelData(LevelData levelData) =>
             _levelDatas.Add(levelData);
+
+        public void SetLevelsListName(string listName)
+        {
+            _levelsListName = listName;
+        }
     }
 }

@@ -29,10 +29,9 @@ namespace LabraxStudio.App.Services
                 if (levelData == null)
                 {
                     levelData = new LevelData(levelMeta.LevelName);
-                    levelsData.AddLevelData(levelData);
+                    //levelsData.AddLevelData(levelData);
+                    ServicesProvider.LevelDataService.AddLevelDataToList(levelData);
                 }
-
-                ServicesProvider.LevelDataService.AddLevelDataToList(levelData);
             }
 
             ServicesProvider.LevelDataService.UnlockFirstLevel();

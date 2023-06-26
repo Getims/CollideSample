@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using DG.Tweening;
 using LabraxStudio.App;
 using LabraxStudio.App.Services;
 using LabraxStudio.Events;
 using LabraxStudio.Managers;
 using LabraxStudio.Meta;
+using LabraxStudio.Meta.Levels;
 using TMPro;
 using UnityEngine;
 
@@ -36,6 +38,8 @@ namespace LabraxStudio.Game.Debug
         [SerializeField]
         private TMP_Dropdown _dropdown;
 
+        [SerializeField]
+        private TMP_Dropdown _listsDropdown;
 
         // FIELDS: -------------------------------------------------------------------
 
@@ -66,6 +70,7 @@ namespace LabraxStudio.Game.Debug
 
             PrepareEaseOptions();
             PrepareLevelsDropDown();
+            PrepareLevelsListsDropDown();
         }
 
         // PUBLIC METHODS: -----------------------------------------------------------------------
@@ -125,6 +130,24 @@ namespace LabraxStudio.Game.Debug
             GameManager.ReloadScene();
         }
 
+        public void OnListsDropdownChange(int value)
+        {
+            string listName = _listsDropdown.options[value].text;
+            string pattern = @"\d+\.\s+";
+            string replacement = "";
+
+            listName = Regex.Replace(listName, pattern, replacement);
+
+            string currentLevelsList = ServicesProvider.LevelDataService.GetLevelsListName();
+
+            if (listName == currentLevelsList)
+                return;
+
+            ServicesProvider.LevelDataService.SetLevelsListName(listName);
+            GameDirector.Instance.Restart();
+            GameManager.ReloadScene();
+        }
+
         // PRIVATE METHODS: -----------------------------------------------------------------------
 
         private void PrepareEaseOptions()
@@ -157,7 +180,7 @@ namespace LabraxStudio.Game.Debug
             _dropdown.options.Clear();
 
             List<TMP_Dropdown.OptionData> options = new List<TMP_Dropdown.OptionData>();
-            var selectableLevels = ServicesProvider.GameSettingsService.GetGlobalSettings().GameSettings.LevelsList.List;
+            var selectableLevels = GetLevelsListMeta( ServicesProvider.GameSettingsService.GetGlobalSettings().GameSettings).List;
             int currentIndex = ServicesProvider.PlayerDataService.CurrentLevel;
             if (selectableLevels == null)
                 return;
@@ -172,27 +195,47 @@ namespace LabraxStudio.Game.Debug
             _dropdown.SetValueWithoutNotify(currentIndex);
         }
         
+        private LevelsListMeta GetLevelsListMeta(GameSettings gameSettings)
+        {
+            string listName = ServicesProvider.LevelDataService.GetLevelsListName();
+            LevelsListMeta levelsListMeta = gameSettings.SelectableLevelsLists.Find(llm => llm.FileName == listName);
+            if (levelsListMeta == null)
+            {
+                Utils.ReworkPoint("Levels list not found! Select default list");
+                levelsListMeta = gameSettings.LevelsList;
+            }
+
+            ServicesProvider.LevelDataService.SetLevelsListName(levelsListMeta.FileName);
+
+            return levelsListMeta;
+        }
+
         private void PrepareLevelsListsDropDown()
         {
-            /*
             _listsDropdown.options.Clear();
 
             List<TMP_Dropdown.OptionData> options = new List<TMP_Dropdown.OptionData>();
-            var selectableLevels = ServicesProvider.GameSettingsService.GetGlobalSettings().GameSettings
+            List<LevelsListMeta> selectableLevels = ServicesProvider.GameSettingsService.GetGlobalSettings()
+                .GameSettings
                 .SelectableLevelsLists;
-            int currentIndex = ServicesProvider.PlayerDataService.CurrentLevel;
             if (selectableLevels == null)
                 return;
 
-            int i = 1;
+            int currentIndex = 0;
+            string currentName = ServicesProvider.LevelDataService.GetLevelsListName();
+            if (currentName == string.Empty)
+                currentName = selectableLevels[0].FileName;
+
+            int i = 0;
             foreach (var levelsListMeta in selectableLevels)
             {
-                _listsDropdown.options.Add(new TMP_Dropdown.OptionData($"{i}. {levelsListMeta.FileName}"));
+                _listsDropdown.options.Add(new TMP_Dropdown.OptionData($"{i+1}. {levelsListMeta.FileName}"));
+                if (levelsListMeta.FileName == currentName) currentIndex = i;
+
                 i++;
             }
 
             _listsDropdown.SetValueWithoutNotify(currentIndex);
-            */
         }
 
         private Ease GetEase(TMP_Dropdown dropdown, Ease baseEase)
