@@ -23,9 +23,13 @@ namespace LabraxStudio.Meta.Levels
         private LevelTemplate _levelTemplate = new LevelTemplate();
 
         [TabGroup("Boosters settings")]
-        [SerializeField]
+        [SerializeField, InlineProperty, HideLabel]
         private List<BoostersSettings> _boostersSettings = new List<BoostersSettings>();
-        
+
+        [TabGroup("Tasks settings")]
+        [SerializeField, InlineProperty, HideLabel]
+        private TaskSettings _taskSettings;
+
         // PROPERTIES: ----------------------------------------------------------------------------
 
         public string LevelName => _levelName;
@@ -36,13 +40,14 @@ namespace LabraxStudio.Meta.Levels
 
         public List<BoostersSettings> BoostersSettings => _boostersSettings;
 
+        public int Reward => _reward;
+
+        public TaskSettings TaskSettings => _taskSettings;
+
         // FIELDS: --------------------------------------------------------------------------------
 
         private int _levelNumber;
-
         private string ElementName => $"{_levelNumber}";
-
-        public int Reward => _reward;
 
         // PUBLIC METHODS: ------------------------------------------------------------------------
 
@@ -50,7 +55,7 @@ namespace LabraxStudio.Meta.Levels
             _levelNumber = value;
 
         // PRIVATE METHODS: -----------------------------------------------------------------------
-        
+
         [TabGroup("Level checker")]
         [Button]
         private void CheckLevel()

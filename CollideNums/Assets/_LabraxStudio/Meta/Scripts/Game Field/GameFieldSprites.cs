@@ -1,10 +1,9 @@
 using System;
 using System.Collections.Generic;
 using LabraxEditor;
-using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace LabraxStudio.Meta
+namespace LabraxStudio.Meta.GameField
 {
     [Serializable]
     public class GameFieldSprites : ScriptableMeta

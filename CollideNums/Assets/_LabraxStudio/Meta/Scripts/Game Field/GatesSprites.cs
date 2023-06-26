@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace LabraxStudio.Meta
+namespace LabraxStudio.Meta.GameField
 {
     [Serializable]
     public class GatesSprites

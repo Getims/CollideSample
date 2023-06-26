@@ -7,6 +7,7 @@ using LabraxStudio.App.Services;
 using LabraxStudio.Events;
 using LabraxStudio.Managers;
 using LabraxStudio.Meta;
+using LabraxStudio.Meta.GameField;
 using LabraxStudio.Meta.Levels;
 using TMPro;
 using UnityEngine;

@@ -1,7 +1,7 @@
 using LabraxStudio.App.Services;
 using LabraxStudio.Events;
 using LabraxStudio.Game;
-using LabraxStudio.Meta;
+using LabraxStudio.Meta.Levels;
 
 namespace LabraxStudio.UI.GameScene.Boosters
 {

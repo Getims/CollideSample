@@ -2,7 +2,7 @@ using System;
 using DG.Tweening;
 using LabraxStudio.App.Services;
 using LabraxStudio.Game.Gates;
-using LabraxStudio.Meta;
+using LabraxStudio.Meta.GameField;
 using UnityEngine;
 
 namespace LabraxStudio.Game.Tiles

@@ -2,7 +2,7 @@ using LabraxEditor;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace LabraxStudio.Meta
+namespace LabraxStudio.Meta.GameField
 {
     public class GameFieldSettings : ScriptableMeta
     {

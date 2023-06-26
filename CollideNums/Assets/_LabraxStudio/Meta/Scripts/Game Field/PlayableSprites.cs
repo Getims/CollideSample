@@ -1,10 +1,8 @@
 using System;
-using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
-namespace LabraxStudio.Meta
+namespace LabraxStudio.Meta.GameField
 {
     [Serializable]
     public class PlayableSprites

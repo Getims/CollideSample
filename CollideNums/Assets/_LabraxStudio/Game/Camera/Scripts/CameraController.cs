@@ -1,6 +1,6 @@
 using LabraxStudio.App;
 using LabraxStudio.App.Services;
-using LabraxStudio.Meta;
+using LabraxStudio.Meta.GameField;
 using UnityEngine;
 
 namespace LabraxStudio.Game.Camera
