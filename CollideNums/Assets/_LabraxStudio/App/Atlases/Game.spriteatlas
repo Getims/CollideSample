@@ -122,6 +122,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 327dd8d85faccc046ab06cb69538878a, type: 3}
   - {fileID: 21300000, guid: 897a6239fe4be5142b8b6345d6fe51ff, type: 3}
   - {fileID: 21300000, guid: b84ce839fb2b8d8479f4c5879b1c641c, type: 3}
+  - {fileID: 21300000, guid: aa6f98a91fdb633498e0951051802e96, type: 3}
   - {fileID: 21300000, guid: c19d7c8aaf601e04e9695489b9407023, type: 3}
   - {fileID: 21300000, guid: a6eb37baed5549b4dbd727e848fadc93, type: 3}
   - {fileID: 21300000, guid: 58a22a0b961c902498438c888146c0db, type: 3}
@@ -148,6 +149,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 8fd4744ffbe08684b95af651a573b869, type: 3}
   - {fileID: 21300000, guid: b48ab84fdacfcd9419d808fb0b6bd9a6, type: 3}
   - {fileID: 21300000, guid: 143d1a8f0ad0cee4d885426885fd8dd0, type: 3}
+  - {fileID: 21300000, guid: 097b34ff8c4705449a52fc0b7c511ef3, type: 3}
   m_PackedSpriteNamesToIndex:
   - vertical_gate2
   - not_playable_12
@@ -194,6 +196,7 @@ SpriteAtlas:
   - restart arrow
   - gate_n_4
   - playable_background_7
+  - vertical_gate_cut
   - not_playable_14
   - not_playable_2
   - gate_n_4k
@@ -220,6 +223,7 @@ SpriteAtlas:
   - vertical_gate2_top
   - gate_n_2k
   - horizontal_gate_1_top
+  - vertical_gate_cut_top
   m_RenderDataMap: {}
   m_Tag: Game
   m_IsVariant: 0

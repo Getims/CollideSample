@@ -21,6 +21,9 @@ namespace LabraxStudio.Game.Gates.Visual
         private SpriteRenderer _gateVerticalBottom;
 
         [SerializeField]
+        private SpriteRenderer _gateVerticalCut;
+
+        [SerializeField]
         private SpriteRenderer _gateHorizontalBottom1;
 
         [SerializeField]
@@ -28,6 +31,9 @@ namespace LabraxStudio.Game.Gates.Visual
 
         [SerializeField]
         private SpriteRenderer _gateHorizontalBottom3;
+
+        [SerializeField]
+        private SpriteRenderer _gateHorizontalBottom4;
 
         [SerializeField]
         private SpriteRenderer _gateHorizontal;
@@ -56,12 +62,15 @@ namespace LabraxStudio.Game.Gates.Visual
             switch (direction)
             {
                 case Direction.Left:
-                    _gateContainer.localScale = _left;
+                case Direction.Right:
+                    _gateContainer.localScale = direction == Direction.Left ? _left : _right;
                     _currentGate = _gateVertical;
                     if (gateType == 1)
                         _currentGate = _gateVerticalTop;
                     if (gateType == 2)
                         _currentGate = _gateVerticalBottom;
+                    if (gateType == 3)
+                        _currentGate = _gateVerticalCut;
                     break;
                 case Direction.Up:
                     _currentGate = _gateHorizontalBottom1;
@@ -70,14 +79,8 @@ namespace LabraxStudio.Game.Gates.Visual
                         _currentGate = _gateHorizontalBottom2;
                     if (gateType == 2)
                         _currentGate = _gateHorizontalBottom3;
-                    break;
-                case Direction.Right:
-                    _gateContainer.localScale = _right;
-                    _currentGate = _gateVertical;
-                    if (gateType == 1)
-                        _currentGate = _gateVerticalTop;
-                    if (gateType == 2)
-                        _currentGate = _gateVerticalBottom;
+                    if (gateType == 3)
+                        _currentGate = _gateHorizontalBottom4;
                     break;
                 case Direction.Down:
                     _currentGate = _gateHorizontal;

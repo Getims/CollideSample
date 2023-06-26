@@ -266,6 +266,7 @@ namespace LabraxStudio.Game.GameField
                     return _gameFieldSprites.NotPlayableSprites.NotPlayable9;
                 case 124:
                 case 125:
+                case 126:
                 case 127:
                     return _gameFieldSprites.NotPlayableSprites.NotPlayable10;
                 case 199:
