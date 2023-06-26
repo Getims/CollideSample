@@ -18,10 +18,10 @@ MonoBehaviour:
   automateForPlatforms: 09000000140000000d000000
   lastScan: 638233756787829520
   supportSerializedTypes:
-  - TypeName: LabraxStudio.Meta.LevelMeta, Assembly-CSharp
+  - TypeName: LabraxStudio.Meta.Levels.LevelMeta, Assembly-CSharp
     IsCustom: 1
     Emit: 1
-  - TypeName: LabraxStudio.Meta.LevelTemplate, Assembly-CSharp
+  - TypeName: LabraxStudio.Meta.Levels.LevelTemplate, Assembly-CSharp
     IsCustom: 1
     Emit: 1
   - TypeName: System.Int32, mscorlib
