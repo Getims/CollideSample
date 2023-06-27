@@ -41,7 +41,7 @@ namespace LabraxStudio.Game.Tiles
                     moves = 2;
                     break;
                 case Swipe.Infinite:
-                    moves = 8;
+                    moves = 11;
                     break;
             }
 
