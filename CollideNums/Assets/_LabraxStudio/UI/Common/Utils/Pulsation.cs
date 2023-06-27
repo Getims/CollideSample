@@ -21,6 +21,9 @@ namespace LabraxStudio.UI.Common
         private bool _isLooped = false;
 
         [SerializeField]
+        private float _delay = 0;
+
+        [SerializeField]
         private Vector3 _startScale = Vector3.one;
         
         // PROPERTIES: ----------------------------------------------------------------------------
@@ -61,7 +64,9 @@ namespace LabraxStudio.UI.Common
         {
             StopPulse();
             _isPulsing = true;
-            _pulseTW = _element.DOPunchScale(Vector3.one * _pulsePower, _pulseTime, 1, 1).OnComplete(
+            _pulseTW = _element.DOPunchScale(Vector3.one * _pulsePower, _pulseTime, 1, 1)
+                .SetDelay(_delay)
+                .OnComplete(
                 () =>
                 {
                     _isPulsing = false;

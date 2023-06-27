@@ -18,7 +18,7 @@ namespace LabraxStudio.Game
             if (HasTileOverflow(tiles))
             {
                 Utils.ReworkPoint("Overflow");
-                GameEvents.SendGameOver(false);
+                GameEvents.SendGameOver(false, FailReason.NumbersOverflow);
                 return;
             }
 
@@ -28,7 +28,7 @@ namespace LabraxStudio.Game
             if (!HasGateForEachTile(tiles))
             {
                 Utils.ReworkPoint("No gates");
-                GameEvents.SendGameOver(false);
+                GameEvents.SendGameOver(false, FailReason.NoGatesForTiles);
                 return;
             }
         }
@@ -46,7 +46,7 @@ namespace LabraxStudio.Game
             if (HasNotCompletedTasks(taskController))
             {
                 Utils.ReworkPoint("Not complete all tasks");
-                GameEvents.SendGameOver(false);
+                GameEvents.SendGameOver(false, FailReason.NotCompleteAllTasks);
             }
         }
 
@@ -76,7 +76,7 @@ namespace LabraxStudio.Game
 
             if (duplicates.Count() > 0)
             {
-                Utils.ReworkPoint("Has merges");
+                //Utils.ReworkPoint("Has merges");
                 return true;
             }
 

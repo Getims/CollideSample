@@ -2286,6 +2286,10 @@ PrefabInstance:
       propertyPath: _uiMenuSettings.Array.data[2]._parent
       value: 
       objectReference: {fileID: 928849049}
+    - target: {fileID: 359528828119613942, guid: e82231b3a1bcd7a45a9805590a75b1e3, type: 3}
+      propertyPath: _uiMenuSettings.Array.data[3]._parent
+      value: 
+      objectReference: {fileID: 1906713294}
     - target: {fileID: 2978172004741499905, guid: e82231b3a1bcd7a45a9805590a75b1e3, type: 3}
       propertyPath: _uiMenuSettings.Array.data[0]._parent
       value: 

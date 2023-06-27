@@ -45,7 +45,6 @@ namespace _LabraxStudio.Game.GameFlow.Scripts
 
         private void CheckTaskProgress(int tileNumber)
         {
-            Utils.ReworkPoint("Check tile " + tileNumber);
             int taskIndex = -1;
             LevelTaskMeta taskMeta = FindTask(tileNumber, ref taskIndex);
 
@@ -56,24 +55,22 @@ namespace _LabraxStudio.Game.GameFlow.Scripts
                 return;
 
             _tasksProgress[taskIndex] += 1;
+            SendTaskProgress(tileNumber);
+            
             if (_tasksProgress[taskIndex] == taskMeta.TilesCount)
                 SendTaskComplete(tileNumber);
-            else
-                SendTaskProgress(tileNumber);
-            
+
             if (IsAllTasksComplete)
                 GameEvents.SendGameOver(true);
         }
 
         private void SendTaskProgress(int tileNumber)
         {
-            Utils.ReworkPoint("Progress on task " + tileNumber);
             GameEvents.SendLevelTaskProgress(tileNumber);
         }
 
         private void SendTaskComplete(int tileNumber)
         {
-            Utils.ReworkPoint("Complete task " + tileNumber);
             GameEvents.SendLevelTaskComplete(tileNumber);
         }
 

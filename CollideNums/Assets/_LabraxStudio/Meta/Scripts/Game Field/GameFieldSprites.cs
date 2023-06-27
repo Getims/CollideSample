@@ -31,6 +31,10 @@ namespace LabraxStudio.Meta.GameField
         [Space(10)]
         [SerializeField]
         private List<Sprite> _tilesSprites = new List<Sprite>();
+        
+        [Space(10)]
+        [SerializeField]
+        private List<Sprite> _tasksSprites = new List<Sprite>();
 
         // PROPERTIES: ----------------------------------------------------------------------------
         
@@ -43,6 +47,8 @@ namespace LabraxStudio.Meta.GameField
         public NotPlayableSprites NotPlayableSprites => _notPlayableSprites;
 
         public GatesSprites GateSprites => _gatesSprites;
+
+        public List<Sprite> TasksSprites => _tasksSprites;
 
 
         // PUBLIC METHODS: -----------------------------------------------------------------------

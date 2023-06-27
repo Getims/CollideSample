@@ -31,14 +31,12 @@ namespace LabraxStudio.Game.Gates
         {
             GameEvents.OnTileAction.AddListener(CheckGatesState);
             GameEvents.OnLevelTaskProgress.AddListener(ShowTaskTip);
-            GameEvents.OnLevelTaskComplete.AddListener(ShowTaskTip);
         }
 
         private void OnDestroy()
         {
             GameEvents.OnTileAction.RemoveListener(CheckGatesState);
             GameEvents.OnLevelTaskProgress.RemoveListener(ShowTaskTip);
-            GameEvents.OnLevelTaskComplete.RemoveListener(ShowTaskTip);
         }
 
         // PUBLIC METHODS: -----------------------------------------------------------------------

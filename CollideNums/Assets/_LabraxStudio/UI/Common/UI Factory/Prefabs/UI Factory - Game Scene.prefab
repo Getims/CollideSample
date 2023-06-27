@@ -54,3 +54,6 @@ MonoBehaviour:
   - _menuType: 1
     _menuPrefab: {fileID: 9134360182052063232, guid: cfaba6c35a309f743bc6bcca43b8fad4, type: 3}
     _parent: {fileID: 0}
+  - _menuType: 7
+    _menuPrefab: {fileID: 2520032765139034479, guid: 54711995517ccf647af822f99a169235, type: 3}
+    _parent: {fileID: 0}

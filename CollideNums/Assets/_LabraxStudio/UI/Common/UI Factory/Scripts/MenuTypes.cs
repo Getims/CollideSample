@@ -8,6 +8,7 @@
         MainMenuOverlay = 3,
         BoostersPanel = 4,
         WinScreen = 5,
-        FailScreen = 6
+        FailScreen = 6,
+        TasksPanel = 7
     }
 }
