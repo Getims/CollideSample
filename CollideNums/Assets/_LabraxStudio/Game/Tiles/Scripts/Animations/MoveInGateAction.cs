@@ -1,7 +1,7 @@
 using System;
 using DG.Tweening;
 using LabraxStudio.App.Services;
-using LabraxStudio.Game.Gates;
+using LabraxStudio.Events;
 using LabraxStudio.Meta.GameField;
 using UnityEngine;
 
@@ -43,9 +43,8 @@ namespace LabraxStudio.Game.Tiles
 
             float time = CalculateTime(_gameFieldSettings.TileSpeed);
 
-            Gate gate = ServicesProvider.GameFlowService.GatesController.GetGate(_gateCell);
-            if(gate!=null)
-                gate.PlayPassGateEffect();
+            ServicesProvider.GameFlowService.GatesController.PlayGatePassEffect(_gateCell);
+            GameEvents.SendMoveTileInGate(_tile.Value);
             
             _tile.transform.DOMove(newPosition, time)
                 .SetEase(ease)
@@ -56,7 +55,7 @@ namespace LabraxStudio.Game.Tiles
 
         private float CalculateTime(float tileSpeed)
         {
-            if (tileSpeed == 0)
+            if (Math.Abs(tileSpeed) < 0.01f)
                 return 0;
 
             float time = 0;

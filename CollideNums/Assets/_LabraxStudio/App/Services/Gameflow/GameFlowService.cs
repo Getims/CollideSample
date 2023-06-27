@@ -1,3 +1,4 @@
+using _LabraxStudio.Game.GameFlow.Scripts;
 using LabraxStudio.Game;
 using LabraxStudio.Game.Camera;
 using LabraxStudio.Game.GameField;
@@ -14,7 +15,8 @@ namespace LabraxStudio.App.Services
         public GatesController GatesController => _gatesController;
         public TilesController TilesController =>  _tilesController;
         public CameraController CameraController => _cameraController;
-        public FailTracker FailTracker=> _failTracker;
+        public GameOverTracker GameOverTracker=> _gameOverTracker;
+        public TasksController TasksController => _tasksController;
 
         // FIELDS: -------------------------------------------------------------------
 
@@ -22,7 +24,8 @@ namespace LabraxStudio.App.Services
         private GatesController _gatesController;
         private TilesController _tilesController;
         private CameraController _cameraController;
-        private FailTracker _failTracker;
+        private GameOverTracker _gameOverTracker;
+        private TasksController _tasksController;
 
         // PUBLIC METHODS: -----------------------------------------------------------------------
 
@@ -33,7 +36,13 @@ namespace LabraxStudio.App.Services
             _gatesController = gatesController;
             _tilesController = tilesController;
             _cameraController = cameraController;
-            _failTracker = new FailTracker();
+            _gameOverTracker = new GameOverTracker();
+            _tasksController = new TasksController();
+        }
+
+        public void OnDestroy()
+        {
+            _tasksController.OnDestroy();
         }
     }
 }

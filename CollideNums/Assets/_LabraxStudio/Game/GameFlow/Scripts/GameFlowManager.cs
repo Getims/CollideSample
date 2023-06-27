@@ -44,6 +44,7 @@ namespace LabraxStudio.Game
             GameEvents.OnGameOver.RemoveListener(OnGameOver);
             UIEvents.OnWinScreenClaimClicked.AddListener(OnWinScreenClaimClicked);
             GameEvents.OnLevelRestartBoosterUse.RemoveListener(OnLevelRestartBoosterUse);
+            ServicesProvider.GameFlowService.OnDestroy();
         }
 
         // PUBLIC METHODS: -----------------------------------------------------------------------
@@ -53,69 +54,76 @@ namespace LabraxStudio.Game
             ServicesProvider.GameFlowService.Setup(_gameFieldController,
                 _gatesController, _tilesController, _cameraController);
 
-            ServicesProvider.TouchService.SetTouchState(false);
-
-            int currentLevel = ServicesProvider.PlayerDataService.CurrentLevel;
-            LevelMeta levelMeta = ServicesProvider.LevelMetaService.GetLevelMeta(currentLevel);
-
-            _gameFieldController.Initialize();
-            _gameFieldController.GenerateField(levelMeta);
-
-            _gatesController.Initialize();
-            _gatesController.GenerateGates(levelMeta);
-
-            _tilesController.Initialize(levelMeta);
-            _cameraController.Initialize(levelMeta.Width, levelMeta.Height);
-            _gatesController.CheckGatesState();
-
-            ServicesProvider.TouchService.SetTouchState(true);
-            GameEvents.SendLevelGenerated();
-            IsLevelGenerated = true;
+            LoadLevel();
         }
 
         // PRIVATE METHODS: -----------------------------------------------------------------------
 
+        private void LoadLevel()
+        {
+            LockTouch();
+            LevelMeta levelMeta = ServicesProvider.LevelMetaService.GetCurrentLevelMeta();
+
+            _gameFieldController.Initialize();
+            _gatesController.Initialize();
+
+            _gameFieldController.GenerateField(levelMeta);
+            _gatesController.GenerateGates(levelMeta);
+            _tilesController.Initialize(levelMeta);
+            _cameraController.Initialize(levelMeta.Width, levelMeta.Height);
+
+            _gatesController.CheckGatesState();
+            ServicesProvider.GameFlowService.TasksController.Initialize(levelMeta.TaskSettings);
+
+            SetLevelGenerated();
+        }
 
         private void ReloadLevel()
         {
-            // GameManager.ReloadScene();
-
-            ServicesProvider.TouchService.SetTouchState(false);
-
-            int currentLevel = ServicesProvider.PlayerDataService.CurrentLevel;
-            LevelMeta levelMeta = ServicesProvider.LevelMetaService.GetLevelMeta(currentLevel);
+            LockTouch();
+            LevelMeta levelMeta = ServicesProvider.LevelMetaService.GetCurrentLevelMeta();
 
             _tilesController.ClearTiles();
             _tilesController.Initialize(levelMeta);
-            _gatesController.CheckGatesState();
 
-            ServicesProvider.TouchService.SetTouchState(true);
-            GameEvents.SendLevelGenerated();
-            IsLevelGenerated = true;
+            _gatesController.CheckGatesState();
+            ServicesProvider.GameFlowService.TasksController.Initialize(levelMeta.TaskSettings);
+
+            SetLevelGenerated();
         }
 
         private void LoadNewLevel()
         {
-            ServicesProvider.TouchService.SetTouchState(false);
-
-            int currentLevel = ServicesProvider.PlayerDataService.CurrentLevel;
-            LevelMeta levelMeta = ServicesProvider.LevelMetaService.GetLevelMeta(currentLevel);
+            LockTouch();
+            LevelMeta levelMeta = ServicesProvider.LevelMetaService.GetCurrentLevelMeta();
 
             _gameFieldController.ClearField();
-            _gameFieldController.GenerateField(levelMeta);
-
             _gatesController.ClearGates();
-            _gatesController.GenerateGates(levelMeta);
-
             _tilesController.ClearTiles();
+
+            _gameFieldController.GenerateField(levelMeta);
+            _gatesController.GenerateGates(levelMeta);
             _tilesController.Initialize(levelMeta);
             _cameraController.Initialize(levelMeta.Width, levelMeta.Height);
-            _gatesController.CheckGatesState();
 
-            ServicesProvider.TouchService.SetTouchState(true);
+            _gatesController.CheckGatesState();
+            ServicesProvider.GameFlowService.TasksController.Initialize(levelMeta.TaskSettings);
+
+            SetLevelGenerated();
+        }
+
+        private static void SetLevelGenerated()
+        {
+            UnlockTouch();
             GameEvents.SendLevelGenerated();
             IsLevelGenerated = true;
         }
+
+        private static void UnlockTouch() =>
+            ServicesProvider.TouchService.SetTouchState(true);
+
+        private static void LockTouch() =>
+            ServicesProvider.TouchService.SetTouchState(false);
 
         // EVENTS RECEIVERS: ----------------------------------------------------------------------
 
@@ -126,8 +134,7 @@ namespace LabraxStudio.Game
             if (isWin)
                 return;
 
-            int currentLevel = ServicesProvider.PlayerDataService.CurrentLevel;
-            LevelMeta levelMeta = ServicesProvider.LevelMetaService.GetLevelMeta(currentLevel);
+            LevelMeta levelMeta = ServicesProvider.LevelMetaService.GetCurrentLevelMeta();
             if (levelMeta.BoostersSettings.Count == 0 ||
                 levelMeta.BoostersSettings.Find(b => b.BoosterMeta.BoosterType == BoosterType.LevelRestart) == null)
                 ReloadLevel();

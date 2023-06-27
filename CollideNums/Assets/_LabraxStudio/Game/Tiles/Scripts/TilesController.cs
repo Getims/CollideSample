@@ -25,7 +25,7 @@ namespace LabraxStudio.Game.Tiles
 
         public int[,] TilesMatrix => _tilesMatrix;
         public List<Tile> Tiles => _tiles;
-        
+
         // FIELDS: -------------------------------------------------------------------
 
         [ShowInInspector]
@@ -51,14 +51,16 @@ namespace LabraxStudio.Game.Tiles
             _animations++;
             TilesAnimator tilesAnimator = new TilesAnimator();
             List<AnimationAction> actions = new List<AnimationAction>();
-            var moveAction = _tilesMover.CalculateMoveAction(tile, direction, swipe);
+
+            MoveAction moveAction = _tilesMover.CalculateMoveAction(tile, direction, swipe);
             actions.Add(moveAction);
-            var mergeAction = _tilesMerger.CheckMerge(tile, direction);
-            
+            MergeAction mergeAction = _tilesMerger.CheckMerge(tile, direction);
+
             if (tile.MovedToGate)
             {
                 mergeAction = null;
-                var moveInGateAction = new MoveInGateAction(tile, direction, DestroyTileInGate, moveAction.MoveTo);
+                MoveInGateAction moveInGateAction =
+                    new MoveInGateAction(tile, direction, DestroyTileInGate, moveAction.MoveTo);
                 actions.Add(moveInGateAction);
             }
 
@@ -96,8 +98,10 @@ namespace LabraxStudio.Game.Tiles
             _tiles.Remove(tile);
             tile.DestroySelf();
 
-            if (_tiles.Count == 0)
-                GameEvents.SendGameOver(true);
+            if (_tiles.Count > 0)
+                return;
+
+            ServicesProvider.GameFlowService.GameOverTracker.CheckForWin();
         }
 
         public void ClearTiles()
@@ -156,13 +160,13 @@ namespace LabraxStudio.Game.Tiles
             GameEvents.SendTileAction();
         }
 
-        private void CheckForFail() => ServicesProvider.GameFlowService.FailTracker.CheckForFail();
+        private void CheckForFail() => ServicesProvider.GameFlowService.GameOverTracker.CheckForFail();
 
         private void DestroyTileInGate(Tile tile)
         {
             if (tile == null)
                 return;
-
+            
             _tilesMatrix[tile.Cell.x, tile.Cell.y] = 0;
             DestroyTile(tile);
         }

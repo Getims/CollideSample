@@ -69,7 +69,6 @@ namespace LabraxStudio.UI
             InitializeGameUI();
         }
 
-
         private void OnWinScreenClaimClicked()
         {
             InitializeMenuUI();

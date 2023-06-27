@@ -1,13 +1,13 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
+using _LabraxStudio.Game.GameFlow.Scripts;
 using LabraxStudio.App.Services;
 using LabraxStudio.Events;
 using LabraxStudio.Game.Tiles;
 
 namespace LabraxStudio.Game
 {
-    public class FailTracker
+    public class GameOverTracker
     {
         // PUBLIC METHODS: -----------------------------------------------------------------------
 
@@ -30,6 +30,23 @@ namespace LabraxStudio.Game
                 Utils.ReworkPoint("No gates");
                 GameEvents.SendGameOver(false);
                 return;
+            }
+        }
+
+        public void CheckForWin()
+        {
+            TasksController taskController = ServicesProvider.GameFlowService.TasksController;
+
+            if (!taskController.HasTasks)
+            {
+                GameEvents.SendGameOver(true);
+                return;
+            }
+
+            if (HasNotCompletedTasks(taskController))
+            {
+                Utils.ReworkPoint("Not complete all tasks");
+                GameEvents.SendGameOver(false);
             }
         }
 
@@ -78,6 +95,14 @@ namespace LabraxStudio.Game
             }
 
             return true;
+        }
+        
+        private bool HasNotCompletedTasks( TasksController taskController)
+        {
+            if (!taskController.HasTasks)
+                return false;
+
+            return !taskController.IsAllTasksComplete;
         }
     }
 }

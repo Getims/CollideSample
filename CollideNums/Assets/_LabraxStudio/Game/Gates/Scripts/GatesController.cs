@@ -4,7 +4,6 @@ using LabraxStudio.App.Services;
 using LabraxStudio.Events;
 using LabraxStudio.Game.Tiles;
 using LabraxStudio.Meta.Levels;
-using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace LabraxStudio.Game.Gates
@@ -17,23 +16,28 @@ namespace LabraxStudio.Game.Gates
         private GatesGenerator _gatesGenerator = new GatesGenerator();
 
         // PROPERTIES: ----------------------------------------------------------------------------
-        
-        public List<Gate> Gates => _gates;
+
         private TilesController TilesController => ServicesProvider.GameFlowService.TilesController;
-        
+
         // FIELDS: -------------------------------------------------------------------
+        
         private List<Gate> _gates = new List<Gate>();
+        private Gate _lastPassedGate = null;
 
         // GAME ENGINE METHODS: -------------------------------------------------------------------
 
         private void Awake()
         {
             GameEvents.OnTileAction.AddListener(CheckGatesState);
+            GameEvents.OnLevelTaskProgress.AddListener(ShowTaskTip);
+            GameEvents.OnLevelTaskComplete.AddListener(ShowTaskTip);
         }
 
         private void OnDestroy()
         {
             GameEvents.OnTileAction.RemoveListener(CheckGatesState);
+            GameEvents.OnLevelTaskProgress.RemoveListener(ShowTaskTip);
+            GameEvents.OnLevelTaskComplete.RemoveListener(ShowTaskTip);
         }
 
         // PUBLIC METHODS: -----------------------------------------------------------------------
@@ -41,6 +45,7 @@ namespace LabraxStudio.Game.Gates
         public void Initialize()
         {
             _gatesGenerator.Initialize();
+            _lastPassedGate = null;
         }
 
         public void GenerateGates(LevelMeta levelMeta)
@@ -48,7 +53,6 @@ namespace LabraxStudio.Game.Gates
             _gates = _gatesGenerator.GenerateGates(levelMeta.Width, levelMeta.Height, levelMeta.LevelMatrix);
         }
 
-        [Button]
         public void CheckGatesState()
         {
             foreach (var gate in _gates)
@@ -76,19 +80,24 @@ namespace LabraxStudio.Game.Gates
                 if (gateValue == value)
                     return true;
             }
-            
+
             return false;
         }
-        
+
         public void ClearGates()
         {
             RemoveGameField(new List<Gate>(_gates));
             _gates.Clear();
         }
 
-        public Gate GetGate(Vector2Int gateCell)
+        public void PlayGatePassEffect(Vector2Int gateCell)
         {
-            return _gates.Find(g => g.Cell == gateCell);
+            Gate gate = GetGate(gateCell);
+            if (gate == null)
+                return;
+
+            _lastPassedGate = gate;
+            gate.PlayPassGateEffect();
         }
 
         // PRIVATE METHODS: -----------------------------------------------------------------------
@@ -132,6 +141,18 @@ namespace LabraxStudio.Game.Gates
                 gateCell.DestroySelf();
                 await Task.Delay(1);
             }
+        }
+
+        private Gate GetGate(Vector2Int gateCell)
+        {
+            return _gates.Find(g => g.Cell == gateCell);
+        }
+
+        // EVENTS RECEIVERS: ----------------------------------------------------------------------
+        
+        private void ShowTaskTip(int tileNumber)
+        {
+            
         }
     }
 }
