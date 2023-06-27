@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using LabraxEditor;
+using LabraxStudio.Meta.GameField;
 using LabraxStudio.Meta.Levels;
 using Sirenix.OdinInspector;
 using UnityEngine;

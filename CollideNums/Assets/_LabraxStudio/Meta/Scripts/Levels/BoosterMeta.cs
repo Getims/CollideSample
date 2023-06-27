@@ -3,7 +3,7 @@ using LabraxStudio.Game;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace LabraxStudio.Meta
+namespace LabraxStudio.Meta.Levels
 {
     public class BoosterMeta : ScriptableMeta
     {

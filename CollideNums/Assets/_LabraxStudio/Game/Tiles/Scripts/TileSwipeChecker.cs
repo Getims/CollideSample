@@ -1,7 +1,7 @@
 using System;
 using LabraxStudio.App.Services;
 using LabraxStudio.Game.Debug;
-using LabraxStudio.Meta;
+using LabraxStudio.Meta.GameField;
 using UnityEngine;
 
 namespace LabraxStudio.Game.Tiles

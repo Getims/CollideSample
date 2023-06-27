@@ -1,4 +1,3 @@
-using System;
 using LabraxStudio.Events;
 using LabraxStudio.Managers;
 using LabraxStudio.UI.Common;
@@ -46,6 +45,7 @@ namespace LabraxStudio.UI
         {
             _gameUIFactory.Create(MenuType.LevelIndexPanel);
             _gameUIFactory.Create(MenuType.BoostersPanel);
+            _gameUIFactory.Create(MenuType.TasksPanel);
 
             if (!_currencies)
                 _gameUIFactory.Create(MenuType.CurrenciesBase, out _currencies);
@@ -68,7 +68,6 @@ namespace LabraxStudio.UI
 
             InitializeGameUI();
         }
-
 
         private void OnWinScreenClaimClicked()
         {

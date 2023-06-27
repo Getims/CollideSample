@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using LabraxStudio.App.Services;
-using LabraxStudio.Meta;
+using LabraxStudio.Meta.GameField;
 using UnityEngine;
 using Object = UnityEngine.Object;
 

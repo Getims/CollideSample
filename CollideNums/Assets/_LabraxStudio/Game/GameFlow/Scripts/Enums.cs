@@ -50,4 +50,12 @@ namespace LabraxStudio.Game
         LevelRestart = 0,
         Split = 1
     }
+
+    public enum FailReason
+    {
+        None,
+        NumbersOverflow,
+        NoGatesForTiles,
+        NotCompleteAllTasks
+    }
 }

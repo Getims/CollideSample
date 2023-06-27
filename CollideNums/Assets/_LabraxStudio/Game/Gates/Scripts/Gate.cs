@@ -1,6 +1,6 @@
 using LabraxStudio.Game.Gates.Visual;
 using UnityEngine;
-using LabraxStudio.Meta;
+using LabraxStudio.Meta.GameField;
 
 namespace LabraxStudio.Game.Gates
 {

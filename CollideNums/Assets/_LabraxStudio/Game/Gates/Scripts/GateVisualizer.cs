@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using LabraxStudio.Meta;
+using LabraxStudio.Meta.GameField;
 using UnityEngine;
 
 namespace LabraxStudio.Game.Gates.Visual
