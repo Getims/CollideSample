@@ -16,18 +16,18 @@ MonoBehaviour:
   deleteDllAfterBuilds: 1
   AutomateForAllAOTPlatforms: 1
   automateForPlatforms: 09000000140000000d000000
-  lastScan: 638233756787829520
+  lastScan: 638234634124837280
   supportSerializedTypes:
-  - TypeName: LabraxStudio.Meta.Levels.LevelMeta, Assembly-CSharp
-    IsCustom: 1
-    Emit: 1
-  - TypeName: LabraxStudio.Meta.Levels.LevelTemplate, Assembly-CSharp
-    IsCustom: 1
-    Emit: 1
   - TypeName: System.Int32, mscorlib
     IsCustom: 1
     Emit: 1
   - TypeName: System.Int32[,], mscorlib
+    IsCustom: 1
+    Emit: 1
+  - TypeName: LabraxStudio.Meta.Levels.LevelMeta, Assembly-CSharp
+    IsCustom: 1
+    Emit: 1
+  - TypeName: LabraxStudio.Meta.Levels.LevelTemplate, Assembly-CSharp
     IsCustom: 1
     Emit: 1
   - TypeName: UnityEngine.Vector2Int, UnityEngine.CoreModule
@@ -37,5 +37,17 @@ MonoBehaviour:
     IsCustom: 0
     Emit: 1
   - TypeName: System.Int32[,], mscorlib
+    IsCustom: 0
+    Emit: 1
+  - TypeName: LabraxStudio.Meta.Levels.LevelTemplate, Assembly-CSharp
+    IsCustom: 0
+    Emit: 1
+  - TypeName: LabraxStudio.Meta.Levels.LevelTemplate+BrushMode, Assembly-CSharp
+    IsCustom: 0
+    Emit: 1
+  - TypeName: LabraxStudio.Meta.Levels.LevelTemplate+FieldBrushMode, Assembly-CSharp
+    IsCustom: 0
+    Emit: 1
+  - TypeName: LabraxStudio.Meta.Levels.LevelTemplate+TileBrushMode, Assembly-CSharp
     IsCustom: 0
     Emit: 1

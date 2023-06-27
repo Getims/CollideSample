@@ -14,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FileName: Level 5
   _levelName: Level 5
-  _reward: 50
+  _reward: 10
   _levelTemplate:
-    width: 8
-    height: 10
+    width: 6
+    height: 6
     _brushMode: 2
-    _rightClickSize: 1
+    _rightClickSize: 2
     _fieldBrushMode: 1
-    _tilesBrushMode: 0
+    _tilesBrushMode: 1
   _boostersSettings:
   - _boosterMeta: {fileID: 11400000, guid: f16bdf654cbd6214a8e90b9210e05d2f, type: 2}
   serializationData:
@@ -38,43 +38,31 @@ MonoBehaviour:
       Data: 0|LabraxStudio.Meta.Levels.LevelTemplate, Assembly-CSharp
     - Name: width
       Entry: 3
-      Data: 8
+      Data: 6
     - Name: height
       Entry: 3
-      Data: 10
+      Data: 6
     - Name: _brushMode
       Entry: 3
       Data: 2
     - Name: _rightClickSize
       Entry: 3
-      Data: 1
+      Data: 2
     - Name: _fieldBrushMode
       Entry: 3
       Data: 1
     - Name: _tilesBrushMode
       Entry: 3
-      Data: 0
+      Data: 1
     - Name: _levelMatrix
       Entry: 7
       Data: 1|System.Int32[,], mscorlib
     - Name: 
       Entry: 12
-      Data: 80
+      Data: 36
     - Name: ranks
       Entry: 1
-      Data: 8|10
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
+      Data: 6|6
     - Name: 
       Entry: 3
       Data: 1
@@ -101,25 +89,16 @@ MonoBehaviour:
       Data: 2
     - Name: 
       Entry: 3
-      Data: 2
+      Data: 19
     - Name: 
       Entry: 3
       Data: 2
     - Name: 
       Entry: 3
-      Data: 2
+      Data: 19
     - Name: 
       Entry: 3
-      Data: 2
-    - Name: 
-      Entry: 3
-      Data: 2
-    - Name: 
-      Entry: 3
-      Data: 2
-    - Name: 
-      Entry: 3
-      Data: 2
+      Data: 1
     - Name: 
       Entry: 3
       Data: 1
@@ -131,22 +110,7 @@ MonoBehaviour:
       Data: 2
     - Name: 
       Entry: 3
-      Data: 2
-    - Name: 
-      Entry: 3
-      Data: 2
-    - Name: 
-      Entry: 3
-      Data: 2
-    - Name: 
-      Entry: 3
-      Data: 2
-    - Name: 
-      Entry: 3
-      Data: 2
-    - Name: 
-      Entry: 3
-      Data: 2
+      Data: 19
     - Name: 
       Entry: 3
       Data: 2
@@ -158,22 +122,7 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 3
-      Data: 2
-    - Name: 
-      Entry: 3
-      Data: 2
-    - Name: 
-      Entry: 3
-      Data: 2
-    - Name: 
-      Entry: 3
-      Data: 2
-    - Name: 
-      Entry: 3
-      Data: 2
-    - Name: 
-      Entry: 3
-      Data: 2
+      Data: 19
     - Name: 
       Entry: 3
       Data: 2
@@ -191,49 +140,19 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 3
-      Data: 1
+      Data: 20
     - Name: 
       Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
+      Data: 19
     - Name: 
       Entry: 3
       Data: 2
     - Name: 
       Entry: 3
-      Data: 2
+      Data: 19
     - Name: 
       Entry: 3
-      Data: 2
-    - Name: 
-      Entry: 3
-      Data: 2
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 2
-    - Name: 
-      Entry: 3
-      Data: 2
-    - Name: 
-      Entry: 3
-      Data: 2
-    - Name: 
-      Entry: 3
-      Data: 2
-    - Name: 
-      Entry: 3
-      Data: 2
-    - Name: 
-      Entry: 3
-      Data: 2
+      Data: 3
     - Name: 
       Entry: 3
       Data: 1
@@ -243,57 +162,6 @@ MonoBehaviour:
     - Name: 
       Entry: 3
       Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 2
-    - Name: 
-      Entry: 3
-      Data: 2
-    - Name: 
-      Entry: 3
-      Data: 2
-    - Name: 
-      Entry: 3
-      Data: 2
-    - Name: 
-      Entry: 3
-      Data: 2
-    - Name: 
-      Entry: 3
-      Data: 2
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 8
     - Name: 
       Entry: 3
       Data: 1
