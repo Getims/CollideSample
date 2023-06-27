@@ -1,4 +1,3 @@
-using System;
 using LabraxStudio.Events;
 using LabraxStudio.Managers;
 using LabraxStudio.UI.Common;

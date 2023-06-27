@@ -4,6 +4,7 @@ using LabraxStudio.App.Services;
 using LabraxStudio.Events;
 using LabraxStudio.Game.Tiles;
 using LabraxStudio.Meta.Levels;
+using LabraxStudio.UI.GameScene;
 using UnityEngine;
 
 namespace LabraxStudio.Game.Gates
@@ -20,7 +21,7 @@ namespace LabraxStudio.Game.Gates
         private TilesController TilesController => ServicesProvider.GameFlowService.TilesController;
 
         // FIELDS: -------------------------------------------------------------------
-        
+
         private List<Gate> _gates = new List<Gate>();
         private Gate _lastPassedGate = null;
 
@@ -149,10 +150,8 @@ namespace LabraxStudio.Game.Gates
         }
 
         // EVENTS RECEIVERS: ----------------------------------------------------------------------
-        
-        private void ShowTaskTip(int tileNumber)
-        {
-            
-        }
+
+        private void ShowTaskTip(int tileNumber) =>
+            GameMediator.Instance.CreateGateTip(_lastPassedGate.transform.position);
     }
 }
