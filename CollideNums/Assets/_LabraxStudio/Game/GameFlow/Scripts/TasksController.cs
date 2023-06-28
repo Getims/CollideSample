@@ -1,12 +1,10 @@
-using System;
 using System.Collections.Generic;
 using LabraxStudio.App.Services;
 using LabraxStudio.Events;
 using LabraxStudio.Meta.Levels;
 
-namespace _LabraxStudio.Game.GameFlow.Scripts
+namespace LabraxStudio.Game
 {
-    [Serializable]
     public class TasksController
     {
         public TasksController()

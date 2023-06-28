@@ -110,6 +110,28 @@ namespace LabraxStudio.Game.Tiles
             _tiles.Clear();
         }
 
+        public void ChangeTileValue(Tile tile, bool increase)
+        {
+            int newValue = _tilesMatrix[tile.Cell.x, tile.Cell.y];
+            newValue = increase ? newValue + 1 : newValue - 1;
+            _tilesMatrix[tile.Cell.x, tile.Cell.y] = newValue;
+            tile.PlayMergeEffect();
+            tile.SetValue(newValue, _tilesGenerator.GetSprite(newValue));
+            CheckAllMerges();
+            GameEvents.SendTileAction();
+        }
+
+        public bool HasTilesExceptTile(int tileValue)
+        {
+            foreach (var tile in _tiles)
+            {
+                if (tile.Value != tileValue)
+                    return true;
+            }
+
+            return false;
+        }
+
         // PRIVATE METHODS: -----------------------------------------------------------------------
 
         private void CheckChainMerges(Tile mergeTo)
@@ -166,7 +188,7 @@ namespace LabraxStudio.Game.Tiles
         {
             if (tile == null)
                 return;
-            
+
             _tilesMatrix[tile.Cell.x, tile.Cell.y] = 0;
             DestroyTile(tile);
         }

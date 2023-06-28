@@ -13,13 +13,13 @@ namespace LabraxStudio.UI.GameScene.Boosters
 
         [SerializeField]
         private Image _boosterIcon;
-        
+
         [SerializeField]
-        private GameObject _currencyContainer;
+        private CanvasGroup _currencyContainer;
 
         [SerializeField]
         private Image _adIcon;
-        
+
         [SerializeField]
         private TextMeshProUGUI _currencyTMP;
 
@@ -29,7 +29,7 @@ namespace LabraxStudio.UI.GameScene.Boosters
         {
             _boosterIcon.sprite = icon;
         }
-        
+
         public void SetCurrency(int count)
         {
             _currencyTMP.text = count.ToString();
@@ -38,7 +38,15 @@ namespace LabraxStudio.UI.GameScene.Boosters
         public void SetState(BoosterCost costType)
         {
             _adIcon.enabled = costType == BoosterCost.RV;
-            _currencyContainer.SetActive(costType == BoosterCost.Money);
+            _currencyContainer.alpha = costType == BoosterCost.Money ? 1 : 0;
+        }
+
+        public void SetInteractable(bool isInteractable)
+        {
+            Color newColor = Color.white;
+            newColor.a = isInteractable ? 1 : 0.55f;
+            _boosterIcon.color = newColor;
+            _currencyContainer.alpha = isInteractable ? 1 : 0.55f;
         }
     }
 }

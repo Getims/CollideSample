@@ -1,4 +1,5 @@
 using LabraxStudio.Game;
+using LabraxStudio.Game.Tiles;
 using UnityEngine.Events;
 
 namespace LabraxStudio.Events
@@ -8,6 +9,7 @@ namespace LabraxStudio.Events
         // EVENTS RECEIVERS: ----------------------------------------------------------------------
 
         public static UnityEvent OnTileAction = new UnityEvent();
+        public static UnityEvent<Tile> OnTileSelectForBooster = new UnityEvent<Tile>();
         public static UnityEvent OnGenerateLevel = new UnityEvent();
         public static UnityEvent<bool> OnGameOver = new UnityEvent<bool>();
         public static UnityEvent<FailReason> OnGameFail = new UnityEvent< FailReason>();
@@ -19,6 +21,7 @@ namespace LabraxStudio.Events
         // PUBLIC METHODS: ------------------------------------------------------------------------
 
         public static void SendTileAction() => OnTileAction?.Invoke();
+        public static void SendTileSelectForBooster(Tile tile) => OnTileSelectForBooster?.Invoke(tile);
 
         public static void SendGameOver(bool isWin, FailReason failReason = FailReason.None)
         {

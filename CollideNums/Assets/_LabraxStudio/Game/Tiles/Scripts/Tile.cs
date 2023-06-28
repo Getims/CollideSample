@@ -1,4 +1,5 @@
 using LabraxStudio.App.Services;
+using LabraxStudio.Events;
 using LabraxStudio.Game.Gates;
 using UnityEngine;
 
@@ -29,6 +30,7 @@ namespace LabraxStudio.Game.Tiles
         public bool MovedToGate => _movedToGate;
 
         private TilesController TilesController => ServicesProvider.GameFlowService.TilesController;
+        private BoostersController BoostersController => ServicesProvider.GameFlowService.BoostersController;
 
         // FIELDS: -------------------------------------------------------------------
 
@@ -77,7 +79,17 @@ namespace LabraxStudio.Game.Tiles
 
         // EVENTS RECEIVERS: ----------------------------------------------------------------------
 
-        public void OnSelect() => _swipeChecker.OnSelect();
+        public void OnSelect()
+        {
+            if (BoostersController.IsBoosterActive)
+            {
+                GameEvents.SendTileSelectForBooster(this);
+                return;
+            }
+
+            _swipeChecker.OnSelect();
+        }
+
         public void OnDeselect() => _swipeChecker.OnDeselect();
 
         private void OnSwipe(Direction direction, Swipe swipe, float swipeSpeed)

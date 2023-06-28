@@ -1,4 +1,3 @@
-using _LabraxStudio.Game.GameFlow.Scripts;
 using LabraxStudio.Game;
 using LabraxStudio.Game.Camera;
 using LabraxStudio.Game.GameField;
@@ -17,6 +16,7 @@ namespace LabraxStudio.App.Services
         public CameraController CameraController => _cameraController;
         public GameOverTracker GameOverTracker=> _gameOverTracker;
         public TasksController TasksController => _tasksController;
+        public BoostersController BoostersController => _boostersController;
 
         // FIELDS: -------------------------------------------------------------------
 
@@ -26,6 +26,7 @@ namespace LabraxStudio.App.Services
         private CameraController _cameraController;
         private GameOverTracker _gameOverTracker;
         private TasksController _tasksController;
+        private BoostersController _boostersController;
 
         // PUBLIC METHODS: -----------------------------------------------------------------------
 
@@ -38,6 +39,7 @@ namespace LabraxStudio.App.Services
             _cameraController = cameraController;
             _gameOverTracker = new GameOverTracker();
             _tasksController = new TasksController();
+            _boostersController = new BoostersController();
         }
 
         public void OnDestroy()

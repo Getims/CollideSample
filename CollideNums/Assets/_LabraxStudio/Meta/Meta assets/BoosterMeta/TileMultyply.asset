@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f102255c9c0d4d6e9d6756a41399d195, type: 3}
-  m_Name: TileSplit
+  m_Name: TileMultyply
   m_EditorClassIdentifier: 
-  FileName: TileSplit
-  _boosterType: 1
-  _iconSprite: {fileID: 21300000, guid: 2399cadc77837ce4284822ab0b09eadc, type: 3}
+  FileName: TileMultyply
+  _boosterType: 2
+  _iconSprite: {fileID: 21300000, guid: 633290bffd198814d873b089357304a5, type: 3}
   _boosterCost: 1
   _price: 15

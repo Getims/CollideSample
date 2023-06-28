@@ -19,6 +19,9 @@ namespace LabraxStudio.UI.GameScene.Boosters
         [SerializeField]
         private Pulsation _pulsation;
 
+        [SerializeField]
+        private Image _clickBlocker;
+
         // PROPERTIES: ----------------------------------------------------------------------------
 
         public BoosterMeta BoosterMeta => _boosterMeta;
@@ -48,19 +51,31 @@ namespace LabraxStudio.UI.GameScene.Boosters
             _buttonVisualizer.SetState(boosterMeta.BoosterCost);
             _buttonVisualizer.SetCurrency(boosterMeta.MoneyPrice);
             _buttonVisualizer.SetIcon(boosterMeta.IconSprite);
-            CheckAdState();
+            CheckState();
         }
 
-        public void CheckAdState()
+        public void CheckState()
         {
-            /*
             if (_boosterMeta == null)
                 return;
 
-            int moneyCount = ServicesProvider.PlayerDataService.Money;
-            bool isEnoughMoney = _boosterMeta.MoneyPrice <= moneyCount;
-            _buttonVisualizer.SetState(!isEnoughMoney);
-            */
+            BoosterType boosterType = _boosterMeta.BoosterType;
+            bool canUseBooster = false;
+            switch (boosterType)
+            {
+                case BoosterType.Split:
+                    canUseBooster = ServicesProvider.GameFlowService.TilesController.HasTilesExceptTile(1);
+                    break;
+                case BoosterType.Multiply:
+                    canUseBooster = ServicesProvider.GameFlowService.TilesController.HasTilesExceptTile(16);
+                    break;
+                case BoosterType.LevelRestart:
+                    canUseBooster = true;
+                    break;
+            }
+
+            _clickBlocker.enabled = !canUseBooster;
+            _buttonVisualizer.SetInteractable(canUseBooster);
         }
 
         public void SetActive(bool isActive)
@@ -74,9 +89,9 @@ namespace LabraxStudio.UI.GameScene.Boosters
                 _pulsation.StartPulse();
         }
 
-        public void StopPulsation() => _pulsation.StopPulse();
-
         // PRIVATE METHODS: -----------------------------------------------------------------------
+
+        private void StopPulsation() => _pulsation.StopPulse();
 
         private void UseBooster()
         {

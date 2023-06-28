@@ -3,7 +3,7 @@ using LabraxStudio.Game.Tiles;
 
 namespace LabraxStudio.UI.GameScene.Boosters
 {
-    public class SplitBooster : IBooster
+    public class MultiplyBooster : IBooster
     {
         // FIELDS: -------------------------------------------------------------------
 
@@ -18,7 +18,7 @@ namespace LabraxStudio.UI.GameScene.Boosters
             if (_tile == null)
                 return false;
 
-            if (_tile.Value == 1)
+            if (_tile.Value == 16)
                 return false;
 
             return true;
@@ -26,12 +26,12 @@ namespace LabraxStudio.UI.GameScene.Boosters
 
         public bool CanUseBooster()
         {
-            return ServicesProvider.GameFlowService.TilesController.HasTilesExceptTile(1);
+            return ServicesProvider.GameFlowService.TilesController.HasTilesExceptTile(16);
         }
 
         public void UseBooster()
         {
-            ServicesProvider.GameFlowService.TilesController.ChangeTileValue(_tile, false);
+            ServicesProvider.GameFlowService.TilesController.ChangeTileValue(_tile, true);
         }
     }
 }

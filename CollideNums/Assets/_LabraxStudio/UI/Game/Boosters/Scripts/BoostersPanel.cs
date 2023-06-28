@@ -20,9 +20,12 @@ namespace LabraxStudio.UI.GameScene.Boosters
         [SerializeField]
         private HorizontalLayoutGroup _layoutGroup;
 
+        [SerializeField]
+        private ChooseTileText _chooseTileText;
+
         // FIELDS: -------------------------------------------------------------------
 
-        private BoostersHandler _boostersHandler = new BoostersHandler();
+        private BoostersHandler _boostersHandler;
 
         // GAME ENGINE METHODS: -------------------------------------------------------------------
 
@@ -32,6 +35,7 @@ namespace LabraxStudio.UI.GameScene.Boosters
             GameEvents.OnGenerateLevel.AddListener(OnLevelGenerate);
             GameEvents.OnGameOver.AddListener(OnGameOver);
             CommonEvents.AllCurrencyChanged.AddListener(OnAllCurrencyChanged);
+            GameEvents.OnTileAction.AddListener(OnTileAction);
         }
 
         protected override void OnDestroy()
@@ -40,6 +44,8 @@ namespace LabraxStudio.UI.GameScene.Boosters
             GameEvents.OnGenerateLevel.RemoveListener(OnLevelGenerate);
             GameEvents.OnGameOver.RemoveListener(OnGameOver);
             CommonEvents.AllCurrencyChanged.RemoveListener(OnAllCurrencyChanged);
+            GameEvents.OnTileAction.RemoveListener(OnTileAction);
+            _boostersHandler?.OnDestroy();
         }
 
         private void Start()
@@ -89,9 +95,9 @@ namespace LabraxStudio.UI.GameScene.Boosters
             try
             {
                 _layoutGroup.enabled = false;
-                await Task.Delay(30);
+                await Task.Delay(20);
                 _layoutGroup.enabled = true;
-                await Task.Delay(30);
+                await Task.Delay(20);
                 _layoutGroup.enabled = false;
             }
             catch (Exception e)
@@ -104,20 +110,10 @@ namespace LabraxStudio.UI.GameScene.Boosters
         private void CheckButtonsState()
         {
             for (int i = 0; i < 5; i++)
-                _boosterButtons[i].CheckAdState();
+                _boosterButtons[i].CheckState();
         }
 
-        private void TryToUseBooster(BoosterButton boosterButton)
-        {
-            BoosterMeta meta = boosterButton.BoosterMeta;
-            if (meta == null)
-            {
-                Debug.LogError("No boosters meta");
-                return;
-            }
-
-            _boostersHandler.UseBooster(meta);
-        }
+        private void TryToUseBooster(BoosterButton boosterButton) => _boostersHandler.OnBoosterClick(boosterButton);
 
         // EVENTS RECEIVERS: ----------------------------------------------------------------------
 
@@ -133,9 +129,9 @@ namespace LabraxStudio.UI.GameScene.Boosters
             bool hasRestartBooster = false;
             foreach (var boosterButton in _boosterButtons)
             {
-                if(boosterButton.BoosterMeta == null)
+                if (boosterButton.BoosterMeta == null)
                     continue;
-                
+
                 if (boosterButton.BoosterMeta.BoosterType == BoosterType.LevelRestart)
                 {
                     boosterButton.StartPulsation();
@@ -153,6 +149,7 @@ namespace LabraxStudio.UI.GameScene.Boosters
 
         private void OnLevelGenerate()
         {
+            _boostersHandler = new BoostersHandler(_chooseTileText, _targetCG);
             bool hasBoosters = SetupButtons();
             if (hasBoosters)
                 Show();
@@ -161,5 +158,6 @@ namespace LabraxStudio.UI.GameScene.Boosters
         }
 
         private void OnAllCurrencyChanged() => CheckButtonsState();
+        private void OnTileAction() => CheckButtonsState();
     }
 }
