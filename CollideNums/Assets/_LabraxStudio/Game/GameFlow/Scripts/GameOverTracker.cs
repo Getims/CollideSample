@@ -18,15 +18,15 @@ namespace LabraxStudio.Game
             if (HasTilesForGates(tiles))
                 return;
 
+            if (HasMerges(tiles))
+                return;
+            
             if (HasTileOverflow(tiles))
             {
                 Utils.ReworkPoint("Overflow");
                 GameEvents.SendGameOver(false, FailReason.NumbersOverflow);
                 return;
             }
-
-            if (HasMerges(tiles))
-                return;
 
             if (!HasGateForEachTile(tiles))
             {

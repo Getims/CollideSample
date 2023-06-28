@@ -15,18 +15,21 @@ namespace LabraxStudio.Meta.Levels
         [SerializeField, Required]
         private Sprite _iconSprite;
 
-        [SerializeField, LabelText("Receive For RV?")]
-        private bool _receiveForRv;
-
+        [SerializeField]
+        private BoosterCost _boosterCost = BoosterCost.Free;
+        
         [SerializeField, Min(0), LabelText("Money Price")]
-        [HideIf(nameof(_receiveForRv))]
+        [ShowIf(nameof(RecieveForMoney))]
         private int _price;
 
         // PROPERTIES: ----------------------------------------------------------------------------
 
-        public bool ReceiveForRv => _receiveForRv;
+        public BoosterCost BoosterCost => _boosterCost;
         public int MoneyPrice => _price;
         public Sprite IconSprite => _iconSprite;
         public BoosterType BoosterType => _boosterType;
+
+        private bool RecieveForMoney => _boosterCost == BoosterCost.Money;
+
     }
 }

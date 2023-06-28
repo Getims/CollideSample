@@ -1,7 +1,9 @@
+using System;
 using LabraxStudio.App.Services;
 using LabraxStudio.Events;
 using LabraxStudio.Game;
 using LabraxStudio.Meta.Levels;
+using UnityEngine;
 
 namespace LabraxStudio.UI.GameScene.Boosters
 {
@@ -15,15 +17,28 @@ namespace LabraxStudio.UI.GameScene.Boosters
         // PUBLIC METHODS: -----------------------------------------------------------------------
         public void UseBooster(BoosterMeta boosterMeta)
         {
-            //if (meta.ReceiveForRv)
-            //    WatchAd();
-            int moneyCount = ServicesProvider.PlayerDataService.Money;
-            bool isEnoughMoney = boosterMeta.MoneyPrice <= moneyCount;
-            if (isEnoughMoney)
+            switch (boosterMeta.BoosterCost)
             {
-                ServicesProvider.PlayerDataService.SpendMoney(boosterMeta.MoneyPrice);
-                CommonEvents.SendAllCurrencyChanged();
-                UseBooster(boosterMeta.BoosterType);
+                case BoosterCost.Free:
+
+                    UseBooster(boosterMeta.BoosterType);
+                    break;
+                case BoosterCost.Money:
+                    int moneyCount = ServicesProvider.PlayerDataService.Money;
+                    bool isEnoughMoney = boosterMeta.MoneyPrice <= moneyCount;
+                    if (isEnoughMoney)
+                    {
+                        ServicesProvider.PlayerDataService.SpendMoney(boosterMeta.MoneyPrice);
+                        CommonEvents.SendAllCurrencyChanged();
+                        UseBooster(boosterMeta.BoosterType);
+                    }
+                    else
+                        CommonEvents.PlayNoCurrencyAnimation(CurrencyType.Money);
+
+                    break;
+                case BoosterCost.RV:
+                    Debug.LogWarning("RV not implemented");
+                    break;
             }
         }
 

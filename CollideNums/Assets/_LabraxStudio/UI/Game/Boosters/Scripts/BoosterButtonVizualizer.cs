@@ -1,4 +1,5 @@
 using System;
+using LabraxStudio.Game;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -34,10 +35,10 @@ namespace LabraxStudio.UI.GameScene.Boosters
             _currencyTMP.text = count.ToString();
         }
 
-        public void SetState(bool isAdState)
+        public void SetState(BoosterCost costType)
         {
-            _adIcon.enabled = isAdState;
-            _currencyContainer.SetActive(!isAdState);
+            _adIcon.enabled = costType == BoosterCost.RV;
+            _currencyContainer.SetActive(costType == BoosterCost.Money);
         }
     }
 }

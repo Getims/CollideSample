@@ -54,7 +54,8 @@ namespace LabraxStudio.UI
         public void InitializeMenuUI()
         {
             _menuUIFactory.Create(MenuType.MainMenuOverlay);
-            _levelIndexPanelMenu = _menuUIFactory.Create<LevelIndexPanel>(MenuType.LevelIndexPanel);
+            if (_levelIndexPanelMenu == null)
+                _levelIndexPanelMenu = _menuUIFactory.Create<LevelIndexPanel>(MenuType.LevelIndexPanel);
             if (!_currencies)
                 _menuUIFactory.Create(MenuType.CurrenciesBase, out _currencies);
         }
@@ -81,7 +82,11 @@ namespace LabraxStudio.UI
                 InitializeMenuUI();
             */
             if (isWin)
+            {
                 _menuUIFactory.Create(MenuType.WinScreen);
+                if (_levelIndexPanelMenu == null)
+                    _levelIndexPanelMenu = _menuUIFactory.Create<LevelIndexPanel>(MenuType.LevelIndexPanel);
+            }
         }
     }
 }
