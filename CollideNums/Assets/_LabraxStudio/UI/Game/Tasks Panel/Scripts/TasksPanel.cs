@@ -101,8 +101,10 @@ namespace LabraxStudio.UI.GameScene.Tasks
             if (!_hasTasks)
                 return;
 
+            /*
             if (failReason != FailReason.NotCompleteAllTasks)
                 return;
+                */
 
             _currentContainer.CheckForIncorrectState();
         }

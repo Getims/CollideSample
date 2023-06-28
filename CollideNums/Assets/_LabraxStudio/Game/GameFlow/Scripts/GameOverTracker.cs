@@ -15,6 +15,9 @@ namespace LabraxStudio.Game
         {
             List<Tile> tiles = ServicesProvider.GameFlowService.TilesController.Tiles;
 
+            if (HasTilesForGates(tiles))
+                return;
+
             if (HasTileOverflow(tiles))
             {
                 Utils.ReworkPoint("Overflow");
@@ -35,6 +38,9 @@ namespace LabraxStudio.Game
 
         public void CheckForWin()
         {
+            if (HasTiles())
+                return;
+
             TasksController taskController = ServicesProvider.GameFlowService.TasksController;
 
             if (!taskController.HasTasks)
@@ -47,10 +53,19 @@ namespace LabraxStudio.Game
             {
                 Utils.ReworkPoint("Not complete all tasks");
                 GameEvents.SendGameOver(false, FailReason.NotCompleteAllTasks);
+                return;
             }
+
+            GameEvents.SendGameOver(true);
         }
 
         // PRIVATE METHODS: -----------------------------------------------------------------------
+
+        private bool HasTiles()
+        {
+            List<Tile> tiles = ServicesProvider.GameFlowService.TilesController.Tiles;
+            return tiles.Count > 0;
+        }
 
         private bool HasTileOverflow(List<Tile> tiles)
         {
@@ -84,6 +99,19 @@ namespace LabraxStudio.Game
             return false;
         }
 
+        private bool HasTilesForGates(List<Tile> tiles)
+        {
+            foreach (var tile in tiles)
+            {
+                int tileValue = tile.Value;
+                int tileGate = (int) GameTypesConverter.TileValueToGateType(tileValue);
+                if (ServicesProvider.GameFlowService.GatesController.HasGate(tileGate))
+                    return true;
+            }
+
+            return false;
+        }
+
         private bool HasGateForEachTile(List<Tile> tiles)
         {
             foreach (var tile in tiles)
@@ -96,8 +124,8 @@ namespace LabraxStudio.Game
 
             return true;
         }
-        
-        private bool HasNotCompletedTasks( TasksController taskController)
+
+        private bool HasNotCompletedTasks(TasksController taskController)
         {
             if (!taskController.HasTasks)
                 return false;
