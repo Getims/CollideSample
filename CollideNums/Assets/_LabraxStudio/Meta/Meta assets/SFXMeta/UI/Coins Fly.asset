@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FileName: Coins Fly
   _isDisabled: 0
-  _audioClip: {fileID: 8300000, guid: 213719105be845644b99789bf019e872, type: 3}
+  _audioClip: {fileID: 8300000, guid: de9ebbd6f8c78704a8f8499f7099f185, type: 3}
   _soundPrecent: 1
   _description: Description...

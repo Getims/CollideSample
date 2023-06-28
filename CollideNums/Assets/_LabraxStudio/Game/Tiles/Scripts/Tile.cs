@@ -75,10 +75,7 @@ namespace LabraxStudio.Game.Tiles
         public void PlayCollideEffect(Direction direction)
         {
             if (!_isMerging)
-            {
-                GameSoundMediator.Instance.PlayTileCollideSFX();
                 _tileEffectsController.PlayCollideEffect(direction);
-            }
         }
 
         // EVENTS RECEIVERS: ----------------------------------------------------------------------

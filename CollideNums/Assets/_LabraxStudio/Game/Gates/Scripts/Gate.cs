@@ -49,10 +49,7 @@ namespace LabraxStudio.Game.Gates
         {
             _gateVisualizer.SetState(isLocked);
             if (isLocked && !_isLocked)
-            {
-                GameSoundMediator.Instance.PlayTileCollideGateSFX();
                 _gateEffectsController.PlayLockGateEffect();
-            }
 
             _isLocked = isLocked;
         }

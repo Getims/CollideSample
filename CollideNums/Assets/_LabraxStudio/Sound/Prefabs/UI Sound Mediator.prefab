@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5752707933430769453
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5752707933430769452}
+  - component: {fileID: 5752707933430769455}
+  m_Layer: 0
+  m_Name: UI Sound Mediator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5752707933430769452
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5752707933430769453}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5752707933430769455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5752707933430769453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29edc6b720d5b2b4baa05a26054fa4bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _coinsFlySFX: {fileID: 11400000, guid: 5052656bae353494696b9e031a53a033, type: 2}
+  _taskCompleteSFX: {fileID: 11400000, guid: 9ac18be9e4183bb46925ee3017a892ab, type: 2}
+  _taskFailSFX: {fileID: 11400000, guid: 0d4a030ad1f4aac4ba842a9b2f781bac, type: 2}
+  _victoryMenuOpenedSFX: {fileID: 11400000, guid: b7e2716fc864247438c4b3df9ce2679a, type: 2}

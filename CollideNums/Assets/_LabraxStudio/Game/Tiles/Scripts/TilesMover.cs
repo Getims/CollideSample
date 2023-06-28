@@ -27,6 +27,7 @@ namespace LabraxStudio.Game.Tiles
         public MoveAction CalculateMoveAction(Tile tile, Direction direction, Swipe swipe)
         {
             bool needMoveToGate = false;
+            bool collideWithGate = false;
             int moves = 0;
             Vector2Int startPoint = tile.Cell;
             Vector2Int movePoint = startPoint;
@@ -50,7 +51,7 @@ namespace LabraxStudio.Game.Tiles
                 var tempPoint = movePoint;
                 tempPoint += moveVector;
 
-                if (IsPlayableCell(tempPoint.x, tempPoint.y, tile.Value, ref needMoveToGate))
+                if (IsPlayableCell(tempPoint.x, tempPoint.y, tile.Value, ref needMoveToGate, ref collideWithGate))
                 {
                     if (HasTile(tempPoint.x, tempPoint.y))
                         break;
@@ -63,14 +64,17 @@ namespace LabraxStudio.Game.Tiles
             SetTileToMatrix(movePoint.x, movePoint.y, tile.Value);
             tile.SetCell(movePoint);
             if (needMoveToGate)
+            {
+                collideWithGate = false;
                 tile.SetGateFlag();
+            }
 
-            return new MoveAction(tile, movePoint, swipe, direction);
+            return new MoveAction(tile, movePoint, swipe, direction, collideWithGate);
         }
 
         // PRIVATE METHODS: -----------------------------------------------------------------------
 
-        private bool IsPlayableCell(int x, int y, int tileValue, ref bool isGate)
+        private bool IsPlayableCell(int x, int y, int tileValue, ref bool needMoveToGate, ref bool collideWithGate)
         {
             if (x < 0 || y < 0)
                 return false;
@@ -89,8 +93,9 @@ namespace LabraxStudio.Game.Tiles
                 default:
                     GameCellType tileGate = GameTypesConverter.TileValueToGateType(tileValue);
                     bool isEqualType = tileGate == gameCellType;
+                    collideWithGate = true;
                     if (isEqualType)
-                        isGate = true;
+                        needMoveToGate = true;
                     return isEqualType;
             }
         }

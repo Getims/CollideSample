@@ -3,6 +3,7 @@ using Coffee.UIExtensions;
 using LabraxStudio.App.Services;
 using LabraxStudio.Events;
 using LabraxStudio.Meta.Levels;
+using LabraxStudio.Sound;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -50,9 +51,10 @@ namespace LabraxStudio.UI.GameScene.GameOver
 
         public override void Show()
         {
+            UISoundMediator.Instance.PlayVictoryMenuOpenedSFX();
             _raycastBlocker.enabled = false;
             base.Show();
-            Invoke(nameof(ShowParticles), FadeTime*0.8f);
+            Invoke(nameof(ShowParticles), FadeTime * 0.8f);
         }
 
         // PRIVATE METHODS: -----------------------------------------------------------------------
@@ -72,6 +74,7 @@ namespace LabraxStudio.UI.GameScene.GameOver
 
         private IEnumerator CloseAnimation()
         {
+            UISoundMediator.Instance.PlayCoinsFlySFX();
             GameMediator.Instance.StartCoinsFlyAnimation(_rewardPanel.CoinCenter);
             yield return new WaitForSeconds(0.55f);
             ApplyReward();
