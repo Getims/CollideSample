@@ -44,4 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 478a95411a4b7a541a78722c7d552a95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _levelStartSoundSFX: {fileID: 11400000, guid: 08ad91e95f35a87428aaf2aaa27799fd, type: 2}
+  _tileCollideGateSFX: {fileID: 11400000, guid: 4722ab2c4b26d2c469c9971acae9828b, type: 2}
+  _tileCollideSFX: {fileID: 11400000, guid: 94768650645c6a341bf6587ba36debcf, type: 2}
+  _tileMoveSFX: {fileID: 11400000, guid: 2a25efa403cac8340a63bea15251008c, type: 2}
+  _tileSuperMoveSFX: {fileID: 11400000, guid: 1842fbc31c5af6c47a125ab6ffbc81bb, type: 2}
+  _tilesGatePassSFX: {fileID: 11400000, guid: 7cc043a71958e664e804f9bf1e049f99, type: 2}
+  _tilesMergeSFX: {fileID: 11400000, guid: 7bc09a121fd785d47a31bd13ab2bf5d9, type: 2}

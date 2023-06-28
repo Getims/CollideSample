@@ -3,6 +3,7 @@ using System.Collections;
 using DG.Tweening;
 using LabraxStudio.App.Services;
 using LabraxStudio.Meta.GameField;
+using LabraxStudio.Sound;
 using UnityEngine;
 
 namespace LabraxStudio.Game.Tiles
@@ -48,15 +49,17 @@ namespace LabraxStudio.Game.Tiles
             Ease ease = Ease.Linear;
 
             float time = CalculateTime(_gameFieldSettings.TileSpeed, _swipe);
-
+            
             if (_swipe != Swipe.Infinite)
             {
+                GameSoundMediator.Instance.PlayTileMoveSFX();
                 _tile.transform.DOMove(newPosition, time)
                     .SetEase(ease)
                     .OnComplete(OnMoveComplete);
             }
             else
             {
+                GameSoundMediator.Instance.PlayTileSuperMoveSFX();
                 TilesController.StartCoroutine(Moving(_tile.transform,
                     _tile.Position,
                     newPosition));

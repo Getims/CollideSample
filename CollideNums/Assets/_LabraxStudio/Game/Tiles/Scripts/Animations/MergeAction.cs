@@ -1,6 +1,7 @@
 using System;
 using DG.Tweening;
 using LabraxStudio.App.Services;
+using LabraxStudio.Sound;
 using UnityEngine;
 
 namespace LabraxStudio.Game.Tiles
@@ -41,7 +42,7 @@ namespace LabraxStudio.Game.Tiles
                 .SetEase(ease)
                 .OnComplete(OnMoveComplete);
             
-           
+            GameSoundMediator.Instance.PlayTilesMergeSFX();
             Vector3 punch = new Vector3(0, 0.15f, 0);
 
             _mergeTo.PlayMergeEffect();

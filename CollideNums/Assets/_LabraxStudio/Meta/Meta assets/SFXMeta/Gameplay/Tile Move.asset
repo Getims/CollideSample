@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3ce0145eb48ec24e8c18a91b7dd8752, type: 3}
+  m_Name: Tile Move
+  m_EditorClassIdentifier: 
+  FileName: Tile Move
+  _isDisabled: 0
+  _audioClip: {fileID: 8300000, guid: 47c66df3ea795084e8b0f9c93f82cd28, type: 3}
+  _soundPrecent: 1
+  _description: Description...

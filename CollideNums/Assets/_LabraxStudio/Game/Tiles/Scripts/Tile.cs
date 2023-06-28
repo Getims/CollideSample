@@ -1,6 +1,7 @@
 using LabraxStudio.App.Services;
 using LabraxStudio.Events;
 using LabraxStudio.Game.Gates;
+using LabraxStudio.Sound;
 using UnityEngine;
 
 namespace LabraxStudio.Game.Tiles
@@ -74,7 +75,10 @@ namespace LabraxStudio.Game.Tiles
         public void PlayCollideEffect(Direction direction)
         {
             if (!_isMerging)
+            {
+                GameSoundMediator.Instance.PlayTileCollideSFX();
                 _tileEffectsController.PlayCollideEffect(direction);
+            }
         }
 
         // EVENTS RECEIVERS: ----------------------------------------------------------------------
