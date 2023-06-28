@@ -119,7 +119,16 @@ namespace LabraxStudio.Game.Tiles
             await Task.Delay(200);
             tile.SetValue(newValue, _tilesGenerator.GetSprite(newValue));
             await Task.Delay(100);
-            CheckAllMerges();
+            
+            MergeAction mergeAction = _tilesMerger.CheckMerge(tile);
+            if (mergeAction == null)
+                CheckAllMerges();
+            else
+            {
+                TilesAnimator tilesAnimator = new TilesAnimator();
+                tilesAnimator.Play(mergeAction, () => CheckChainMerges(mergeAction.MergeTo));
+            }
+
             GameEvents.SendTileAction();
         }
 

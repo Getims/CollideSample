@@ -16,7 +16,7 @@ MonoBehaviour:
   _musicFadeTime: 0.5
   _gameplayMinPitch: 0.9
   _gameplayMaxPitch: 1
-  _gameplaySoundsVolume: 1
+  _gameplaySoundsVolume: 0
   _backgroundMusicVolume: 0.7
   _gameplaySounds: []
   _backgroundMusic: []
