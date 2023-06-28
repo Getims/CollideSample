@@ -5,6 +5,7 @@ using LabraxStudio.UI.Common;
 using LabraxStudio.UiAnimator;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace LabraxStudio.UI.GameScene.Tasks
 {
@@ -18,10 +19,20 @@ namespace LabraxStudio.UI.GameScene.Tasks
         [SerializeField]
         private UIAnimator _animation;
 
+        [SerializeField]
+        private Image _background;
+
+        [SerializeField]
+        private Sprite _normalBackground;
+
+        [SerializeField]
+        private Sprite _badBackground;
+
         // PUBLIC METHODS: -----------------------------------------------------------------------
 
         public void Setup(List<LevelTaskMeta> levelTasks)
         {
+            _background.sprite = _normalBackground;
             List<Sprite> tasksSprites =
                 ServicesProvider.GameSettingsService.GetGameSettings().GameFieldSprites.TasksSprites;
 
@@ -53,11 +64,18 @@ namespace LabraxStudio.UI.GameScene.Tasks
 
         public void CheckForIncorrectState()
         {
+            bool switchBack = false;
             foreach (var taskItem in _taskItems)
             {
                 if (taskItem.CurrentCount != 0)
+                {
                     taskItem.SetIncorrectState();
+                    switchBack = true;
+                }
             }
+
+            if (switchBack)
+                _background.sprite = _badBackground;
         }
         // PRIVATE METHODS: -----------------------------------------------------------------------
 

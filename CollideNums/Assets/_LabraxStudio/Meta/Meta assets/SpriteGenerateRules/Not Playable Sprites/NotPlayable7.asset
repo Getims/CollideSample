@@ -1,0 +1,207 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb521538bb354d85a95697f3e3991d1b, type: 3}
+  m_Name: NotPlayable7
+  m_EditorClassIdentifier: 
+  FileName: NotPlayable7
+  _sprite: {fileID: 21300000, guid: 85be510fb71b8c944a181c0b9a7c4d35, type: 3}
+  _rules:
+  - _t2: 0
+    _t1: 0
+    _t128: 0
+    _t4: 0
+    _result: 64
+    _t64: 1
+    _t8: 0
+    _t16: 0
+    _t32: 0
+    _needNumber: 64
+  - _t2: 0
+    _t1: 1
+    _t128: 0
+    _t4: 0
+    _result: 65
+    _t64: 1
+    _t8: 0
+    _t16: 0
+    _t32: 0
+    _needNumber: 65
+  - _t2: 1
+    _t1: 0
+    _t128: 0
+    _t4: 0
+    _result: 66
+    _t64: 1
+    _t8: 0
+    _t16: 0
+    _t32: 0
+    _needNumber: 66
+  - _t2: 1
+    _t1: 1
+    _t128: 0
+    _t4: 0
+    _result: 67
+    _t64: 1
+    _t8: 0
+    _t16: 0
+    _t32: 0
+    _needNumber: 67
+  - _t2: 0
+    _t1: 0
+    _t128: 0
+    _t4: 1
+    _result: 68
+    _t64: 1
+    _t8: 0
+    _t16: 0
+    _t32: 0
+    _needNumber: 68
+  - _t2: 0
+    _t1: 1
+    _t128: 0
+    _t4: 1
+    _result: 69
+    _t64: 1
+    _t8: 0
+    _t16: 0
+    _t32: 0
+    _needNumber: 69
+  - _t2: 1
+    _t1: 0
+    _t128: 0
+    _t4: 1
+    _result: 70
+    _t64: 1
+    _t8: 0
+    _t16: 0
+    _t32: 0
+    _needNumber: 70
+  - _t2: 1
+    _t1: 1
+    _t128: 0
+    _t4: 1
+    _result: 71
+    _t64: 1
+    _t8: 0
+    _t16: 0
+    _t32: 0
+    _needNumber: 71
+  - _t2: 0
+    _t1: 0
+    _t128: 0
+    _t4: 0
+    _result: 72
+    _t64: 1
+    _t8: 1
+    _t16: 0
+    _t32: 0
+    _needNumber: 72
+  - _t2: 1
+    _t1: 0
+    _t128: 0
+    _t4: 0
+    _result: 74
+    _t64: 1
+    _t8: 1
+    _t16: 0
+    _t32: 0
+    _needNumber: 74
+  - _t2: 1
+    _t1: 1
+    _t128: 0
+    _t4: 0
+    _result: 75
+    _t64: 1
+    _t8: 1
+    _t16: 0
+    _t32: 0
+    _needNumber: 75
+  - _t2: 0
+    _t1: 0
+    _t128: 0
+    _t4: 1
+    _result: 76
+    _t64: 1
+    _t8: 1
+    _t16: 0
+    _t32: 0
+    _needNumber: 76
+  - _t2: 0
+    _t1: 1
+    _t128: 0
+    _t4: 1
+    _result: 77
+    _t64: 1
+    _t8: 1
+    _t16: 0
+    _t32: 0
+    _needNumber: 77
+  - _t2: 0
+    _t1: 0
+    _t128: 0
+    _t4: 0
+    _result: 80
+    _t64: 1
+    _t8: 0
+    _t16: 1
+    _t32: 0
+    _needNumber: 80
+  - _t2: 0
+    _t1: 1
+    _t128: 0
+    _t4: 0
+    _result: 81
+    _t64: 1
+    _t8: 0
+    _t16: 1
+    _t32: 0
+    _needNumber: 81
+  - _t2: 0
+    _t1: 0
+    _t128: 0
+    _t4: 1
+    _result: 84
+    _t64: 1
+    _t8: 0
+    _t16: 1
+    _t32: 0
+    _needNumber: 84
+  - _t2: 1
+    _t1: 0
+    _t128: 0
+    _t4: 1
+    _result: 86
+    _t64: 1
+    _t8: 0
+    _t16: 1
+    _t32: 0
+    _needNumber: 86
+  - _t2: 0
+    _t1: 0
+    _t128: 0
+    _t4: 0
+    _result: 88
+    _t64: 1
+    _t8: 1
+    _t16: 1
+    _t32: 0
+    _needNumber: 88
+  - _t2: 0
+    _t1: 0
+    _t128: 0
+    _t4: 1
+    _result: 92
+    _t64: 1
+    _t8: 1
+    _t16: 1
+    _t32: 0
+    _needNumber: 92

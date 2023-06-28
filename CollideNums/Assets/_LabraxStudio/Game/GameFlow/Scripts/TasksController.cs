@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using LabraxStudio.App.Services;
 using LabraxStudio.Events;
 using LabraxStudio.Meta.Levels;
 
@@ -61,7 +62,7 @@ namespace _LabraxStudio.Game.GameFlow.Scripts
                 SendTaskComplete(tileNumber);
 
             if (IsAllTasksComplete)
-                GameEvents.SendGameOver(true);
+                ServicesProvider.GameFlowService.GameOverTracker.CheckForWin();
         }
 
         private void SendTaskProgress(int tileNumber)

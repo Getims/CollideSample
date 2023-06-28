@@ -131,6 +131,9 @@ MonoBehaviour:
   _taskItems:
   - _taskElement: {fileID: 0}
   _animation: {fileID: 1624401884643163386}
+  _background: {fileID: 6321808519294849023}
+  _normalBackground: {fileID: 21300000, guid: d01f06759c08c3943b7067ed1daa001b, type: 3}
+  _badBackground: {fileID: 21300000, guid: 9703a16ad98bf654288e6ce6ce6fc909, type: 3}
 --- !u!114 &1624401884643163386
 MonoBehaviour:
   m_ObjectHideFlags: 0
