@@ -38,7 +38,7 @@ namespace LabraxStudio.UI.GameScene.Boosters
         public void SetState(BoosterCost costType)
         {
             _adIcon.enabled = costType == BoosterCost.RV;
-            _currencyContainer.alpha = costType == BoosterCost.Money ? 1 : 0;
+            _currencyContainer.gameObject.SetActive(costType == BoosterCost.Money);
         }
 
         public void SetInteractable(bool isInteractable)
