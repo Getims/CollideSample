@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FileName: Level 1
   _levelName: Level 1
-  _reward: 50
+  _reward: 10
   _levelTemplate:
     width: 6
     height: 6
