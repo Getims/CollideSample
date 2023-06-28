@@ -15,5 +15,5 @@ MonoBehaviour:
   FileName: TileSplit [RV]
   _boosterType: 1
   _iconSprite: {fileID: 21300000, guid: 2399cadc77837ce4284822ab0b09eadc, type: 3}
-  _boosterCost: 1
+  _boosterCost: 2
   _price: 15
