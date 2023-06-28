@@ -20,10 +20,16 @@ MonoBehaviour:
     height: 7
     _brushMode: 1
     _rightClickSize: 1
-    _fieldBrushMode: 4
+    _fieldBrushMode: 1
     _tilesBrushMode: 1
   _boostersSettings:
-  - _boosterMeta: {fileID: 11400000, guid: f16bdf654cbd6214a8e90b9210e05d2f, type: 2}
+  - _boosterMeta: {fileID: 11400000, guid: 3b85c5d335e9ce344b42fbcac79b97cd, type: 2}
+  _taskSettings:
+    _levelTasks:
+    - _tileNumber: 2
+      _tilesCount: 3
+    - _tileNumber: 3
+      _tilesCount: 3
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
@@ -50,7 +56,7 @@ MonoBehaviour:
       Data: 1
     - Name: _fieldBrushMode
       Entry: 3
-      Data: 4
+      Data: 1
     - Name: _tilesBrushMode
       Entry: 3
       Data: 1
@@ -92,46 +98,70 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 20
-    - Name: 
-      Entry: 3
-      Data: 19
-    - Name: 
-      Entry: 3
-      Data: 20
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
       Data: 20
     - Name: 
       Entry: 3
       Data: 2
     - Name: 
       Entry: 3
+      Data: 19
+    - Name: 
+      Entry: 3
       Data: 1
+    - Name: 
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 3
+      Data: 21
+    - Name: 
+      Entry: 3
+      Data: 2
     - Name: 
       Entry: 3
       Data: 19
     - Name: 
       Entry: 3
-      Data: 1
+      Data: 2
+    - Name: 
+      Entry: 3
+      Data: 19
     - Name: 
       Entry: 3
       Data: 5
     - Name: 
       Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 3
+      Data: 2
+    - Name: 
+      Entry: 3
+      Data: 2
+    - Name: 
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 3
       Data: 20
+    - Name: 
+      Entry: 3
+      Data: 2
     - Name: 
       Entry: 3
       Data: 19
@@ -140,13 +170,10 @@ MonoBehaviour:
       Data: 2
     - Name: 
       Entry: 3
-      Data: 1
+      Data: 19
     - Name: 
       Entry: 3
-      Data: 20
-    - Name: 
-      Entry: 3
-      Data: 1
+      Data: 4
     - Name: 
       Entry: 3
       Data: 1
@@ -155,37 +182,16 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 3
-      Data: 20
+      Data: 21
     - Name: 
       Entry: 3
       Data: 2
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 2
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 20
     - Name: 
       Entry: 3
       Data: 19
     - Name: 
       Entry: 3
-      Data: 20
+      Data: 1
     - Name: 
       Entry: 3
       Data: 1

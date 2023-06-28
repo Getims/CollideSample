@@ -23,7 +23,9 @@ MonoBehaviour:
     _fieldBrushMode: 10
     _tilesBrushMode: 5
   _boostersSettings:
-  - _boosterMeta: {fileID: 11400000, guid: f16bdf654cbd6214a8e90b9210e05d2f, type: 2}
+  - _boosterMeta: {fileID: 11400000, guid: 3b85c5d335e9ce344b42fbcac79b97cd, type: 2}
+  _taskSettings:
+    _levelTasks: []
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
