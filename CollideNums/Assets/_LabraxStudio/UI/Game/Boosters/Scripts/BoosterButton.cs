@@ -1,5 +1,6 @@
 using System;
 using LabraxStudio.App.Services;
+using LabraxStudio.Game;
 using LabraxStudio.Meta.Levels;
 using LabraxStudio.UI.Common;
 using UnityEngine;
@@ -44,7 +45,7 @@ namespace LabraxStudio.UI.GameScene.Boosters
         {
             _onClickAction = onClickAction;
             _boosterMeta = boosterMeta;
-            _buttonVisualizer.SetState(boosterMeta.ReceiveForRv);
+            _buttonVisualizer.SetState(boosterMeta.BoosterCost);
             _buttonVisualizer.SetCurrency(boosterMeta.MoneyPrice);
             _buttonVisualizer.SetIcon(boosterMeta.IconSprite);
             CheckAdState();
@@ -52,12 +53,14 @@ namespace LabraxStudio.UI.GameScene.Boosters
 
         public void CheckAdState()
         {
+            /*
             if (_boosterMeta == null)
                 return;
 
             int moneyCount = ServicesProvider.PlayerDataService.Money;
             bool isEnoughMoney = _boosterMeta.MoneyPrice <= moneyCount;
             _buttonVisualizer.SetState(!isEnoughMoney);
+            */
         }
 
         public void SetActive(bool isActive)

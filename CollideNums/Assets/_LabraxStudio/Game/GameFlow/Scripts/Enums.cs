@@ -50,6 +50,13 @@ namespace LabraxStudio.Game
         LevelRestart = 0,
         Split = 1
     }
+    
+    public enum BoosterCost
+    {
+        Free,
+        Money,
+        RV
+    }
 
     public enum FailReason
     {
