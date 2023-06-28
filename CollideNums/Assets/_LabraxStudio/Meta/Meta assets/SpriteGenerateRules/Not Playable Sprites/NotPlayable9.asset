@@ -1,0 +1,107 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb521538bb354d85a95697f3e3991d1b, type: 3}
+  m_Name: NotPlayable9
+  m_EditorClassIdentifier: 
+  FileName: NotPlayable9
+  _sprite: {fileID: 21300000, guid: 662e5ede969cc554dbf506ac6ac4ac14, type: 3}
+  _rules:
+  - _t2: 0
+    _t1: 0
+    _t128: 0
+    _t4: 0
+    _result: 112
+    _t64: 1
+    _t8: 0
+    _t16: 1
+    _t32: 1
+    _needNumber: 112
+  - _t2: 0
+    _t1: 1
+    _t128: 0
+    _t4: 0
+    _result: 113
+    _t64: 1
+    _t8: 0
+    _t16: 1
+    _t32: 1
+    _needNumber: 113
+  - _t2: 1
+    _t1: 0
+    _t128: 0
+    _t4: 0
+    _result: 114
+    _t64: 1
+    _t8: 0
+    _t16: 1
+    _t32: 1
+    _needNumber: 114
+  - _t2: 1
+    _t1: 1
+    _t128: 0
+    _t4: 0
+    _result: 115
+    _t64: 1
+    _t8: 0
+    _t16: 1
+    _t32: 1
+    _needNumber: 115
+  - _t2: 0
+    _t1: 0
+    _t128: 0
+    _t4: 1
+    _result: 116
+    _t64: 1
+    _t8: 0
+    _t16: 1
+    _t32: 1
+    _needNumber: 116
+  - _t2: 0
+    _t1: 0
+    _t128: 0
+    _t4: 0
+    _result: 120
+    _t64: 1
+    _t8: 1
+    _t16: 1
+    _t32: 1
+    _needNumber: 120
+  - _t2: 0
+    _t1: 1
+    _t128: 0
+    _t4: 0
+    _result: 121
+    _t64: 1
+    _t8: 1
+    _t16: 1
+    _t32: 1
+    _needNumber: 121
+  - _t2: 1
+    _t1: 0
+    _t128: 0
+    _t4: 0
+    _result: 122
+    _t64: 1
+    _t8: 1
+    _t16: 1
+    _t32: 1
+    _needNumber: 122
+  - _t2: 1
+    _t1: 1
+    _t128: 0
+    _t4: 0
+    _result: 123
+    _t64: 1
+    _t8: 1
+    _t16: 1
+    _t32: 1
+    _needNumber: 123

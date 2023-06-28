@@ -29,7 +29,7 @@ namespace LabraxStudio.Game.Gates.Visual
             _gateNumber.SetNumber(numberSprite, direction);
 
             _gateBackground.SetBackground(gatesSprites.GateVerticalBackground, gatesSprites.GateHorizontalBackground,
-                gameFieldSprites.NotPlayableSprites.NotPlayable1,
+                gameFieldSprites.NotPlayableSprites.HorizontalGateExtension,
                 direction);
 
             _gateLine.Setup(gatesSprites.UnlockedColor, gatesSprites.LockedColor, direction, gateType);
