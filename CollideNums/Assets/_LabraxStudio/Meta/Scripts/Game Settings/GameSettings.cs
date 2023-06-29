@@ -22,15 +22,19 @@ namespace LabraxStudio.Meta
         [TitleGroup("Game level settings")]
         [BoxGroup("Game level settings/In", showLabel: false), SerializeField]
         private GameFieldSprites _gameFieldSprites;
-        
+
         [BoxGroup("Game level settings/In", showLabel: false), SerializeField]
         private GameFieldSettings _gameFieldSettings;
-        
+
         [BoxGroup("Game level settings/In", showLabel: false), SerializeField]
         private LevelsListMeta _levelsList;
-        
+
         [BoxGroup("Game level settings/In"), SerializeField]
         private List<LevelsListMeta> _selectableLevelsLists;
+
+        [TitleGroup("Swipe settings")]
+        [SerializeField]
+        private SwipeSettings _swipeSettings;
 
         // PROPERTIES: ----------------------------------------------------------------------------
 
@@ -40,5 +44,6 @@ namespace LabraxStudio.Meta
         public GameFieldSettings GameFieldSettings => _gameFieldSettings;
         public LevelsListMeta LevelsList => _levelsList;
         public List<LevelsListMeta> SelectableLevelsLists => _selectableLevelsLists;
+        public SwipeSettings SwipeSettings => _swipeSettings;
     }
 }

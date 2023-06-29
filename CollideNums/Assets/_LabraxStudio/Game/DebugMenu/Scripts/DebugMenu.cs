@@ -23,6 +23,9 @@ namespace LabraxStudio.Game.Debug
 
         [SerializeField]
         private TMP_InputField _baseSwipeForce;
+        
+        [SerializeField]
+        private TMP_InputField _accelSwipeForce;
 
         [SerializeField]
         private TMP_InputField _tileSpeed;
@@ -44,7 +47,7 @@ namespace LabraxStudio.Game.Debug
 
         // FIELDS: -------------------------------------------------------------------
 
-        private GameFieldSettings _gameFieldSettings;
+        private SwipeSettings _swipeSettings;
         private List<string> _easeOptions;
 
         // GAME ENGINE METHODS: -------------------------------------------------------------------
@@ -63,11 +66,12 @@ namespace LabraxStudio.Game.Debug
         private void Start()
         {
             base.InitManager();
-            _gameFieldSettings = ServicesProvider.GameSettingsService.GetGameSettings().GameFieldSettings;
+            _swipeSettings = ServicesProvider.GameSettingsService.GetGameSettings().SwipeSettings;
 
-            _baseSwipeForce.SetTextWithoutNotify(_gameFieldSettings.BaseSwipeForce.ToString());
-            _tileSpeed.SetTextWithoutNotify(_gameFieldSettings.TileSpeed.ToString());
-            _tileAcceleration.SetTextWithoutNotify(_gameFieldSettings.TileAcceleration.ToString());
+            _baseSwipeForce.SetTextWithoutNotify(_swipeSettings.BaseSwipeForce.ToString());
+            _accelSwipeForce.SetTextWithoutNotify(_swipeSettings.AccelSwipeForce.ToString());
+            _tileSpeed.SetTextWithoutNotify(_swipeSettings.TileSpeed.ToString());
+            _tileAcceleration.SetTextWithoutNotify(_swipeSettings.TileAcceleration.ToString());
 
             PrepareEaseOptions();
             PrepareLevelsDropDown();
@@ -78,14 +82,15 @@ namespace LabraxStudio.Game.Debug
 
         public void ApplySettings()
         {
-            _gameFieldSettings.BaseSwipeForce = float.Parse(_baseSwipeForce.text);
-            _gameFieldSettings.TileSpeed = float.Parse(_tileSpeed.text);
+            _swipeSettings.BaseSwipeForce = float.Parse(_baseSwipeForce.text);
+            _swipeSettings.AccelSwipeForce = float.Parse(_accelSwipeForce.text);
+            _swipeSettings.TileSpeed = float.Parse(_tileSpeed.text);
 
             float acceleration = float.Parse(_tileAcceleration.text);
             if (acceleration < 0)
                 acceleration = 0.0f;
-            _gameFieldSettings.TileAcceleration = acceleration;
-            _tileAcceleration.SetTextWithoutNotify(_gameFieldSettings.TileAcceleration.ToString());
+            _swipeSettings.TileAcceleration = acceleration;
+            _tileAcceleration.SetTextWithoutNotify(_swipeSettings.TileAcceleration.ToString());
         }
 
         public void UpdateSpeed(float speed)

@@ -20,6 +20,7 @@ namespace LabraxStudio.Game.Tiles
             _direction = direction;
             _collideWithGate = collideWithGate;
             _gameFieldSettings = ServicesProvider.GameSettingsService.GetGameSettings().GameFieldSettings;
+            _swipeSettings = ServicesProvider.GameSettingsService.GetGameSettings().SwipeSettings;
         }
         
         // PROPERTIES: ----------------------------------------------------------------------------
@@ -36,6 +37,7 @@ namespace LabraxStudio.Game.Tiles
         private readonly bool _collideWithGate;
         private readonly GameFieldSettings _gameFieldSettings;
         private Action _onMoveComplete;
+        private SwipeSettings _swipeSettings;
 
         // PUBLIC METHODS: -----------------------------------------------------------------------
 
@@ -57,7 +59,7 @@ namespace LabraxStudio.Game.Tiles
                 return;
             }
             
-            float time = CalculateTime(_gameFieldSettings.TileSpeed, _swipe);
+            float time = CalculateTime(_swipeSettings.TileSpeed, _swipe);
             
             if (_swipe != Swipe.Infinite)
             {
@@ -117,11 +119,11 @@ namespace LabraxStudio.Game.Tiles
             var moveDelta = endPosition - startPosition;
             float maxCoord = Mathf.Max(Mathf.Abs(moveDelta.x), Mathf.Abs(moveDelta.y));
 
-            float startSpeed = _gameFieldSettings.TileSpeed;
+            float startSpeed = _swipeSettings.TileSpeed;
 
             float timeToMaxCoord = maxCoord / startSpeed;
             float cyclesPerTile = 1 / startSpeed / timeStep;
-            float acceleration = _gameFieldSettings.TileAcceleration * timeStep / cyclesPerTile;
+            float acceleration = _swipeSettings.TileAcceleration * timeStep / cyclesPerTile;
 
             float currentTime = 0;
             float currentAcceleration = 0;

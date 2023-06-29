@@ -18,7 +18,7 @@ namespace LabraxStudio.Game.Tiles
             _direction = direction;
             _destroyAction = destroyAction;
             _gateCell = gateCell;
-            _gameFieldSettings = ServicesProvider.GameSettingsService.GetGameSettings().GameFieldSettings;
+            _swipeSettings = ServicesProvider.GameSettingsService.GetGameSettings().SwipeSettings;
         }
 
         // FIELDS: -------------------------------------------------------------------
@@ -27,8 +27,8 @@ namespace LabraxStudio.Game.Tiles
         private Direction _direction;
         private Action<Tile> _destroyAction;
         private Action _onMoveComplete;
-        private GameFieldSettings _gameFieldSettings;
         private Vector2Int _gateCell;
+        private SwipeSettings _swipeSettings;
 
         // PUBLIC METHODS: -----------------------------------------------------------------------
 
@@ -42,7 +42,7 @@ namespace LabraxStudio.Game.Tiles
             _onMoveComplete = onComplete;
             Ease ease = Ease.OutCubic;
 
-            float time = CalculateTime(_gameFieldSettings.TileSpeed);
+            float time = CalculateTime(_swipeSettings.TileSpeed);
 
             GameSoundMediator.Instance.PlayTilesGatePassSFX();
             ServicesProvider.GameFlowService.GatesController.PlayGatePassEffect(_gateCell);

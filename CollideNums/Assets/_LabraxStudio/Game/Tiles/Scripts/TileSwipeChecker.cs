@@ -12,7 +12,7 @@ namespace LabraxStudio.Game.Tiles
 
         private bool _isSelected = false;
         private UnityEngine.Camera _camera;
-        private GameFieldSettings _gameFieldSettings;
+        private SwipeSettings _swipeSettings;
         private Vector2 _mouseDownPos;
         private float _mouseDownTime;
         private Action<Direction, Swipe, float> _onSwipe;
@@ -22,7 +22,7 @@ namespace LabraxStudio.Game.Tiles
         public void Initialize(Tile tile, UnityEngine.Camera camera, Action<Direction, Swipe, float> onSwipe)
         {
             _camera = camera;
-            _gameFieldSettings = ServicesProvider.GameSettingsService.GetGameSettings().GameFieldSettings;
+            _swipeSettings = ServicesProvider.GameSettingsService.GetGameSettings().SwipeSettings;
             _onSwipe = onSwipe;
         }
 
@@ -95,16 +95,12 @@ namespace LabraxStudio.Game.Tiles
 
         private Swipe CalculateSwipe(float swipeSpeed)
         {
-            int tilesCount =(int) (swipeSpeed / _gameFieldSettings.BaseSwipeForce);
-            if (tilesCount<1)
+            if(swipeSpeed<_swipeSettings.BaseSwipeForce)
                 return Swipe.Null;
-
-            if (tilesCount<2)
+            
+            if(swipeSpeed<_swipeSettings.AccelSwipeForce)
                 return Swipe.OneTile;
-
-            if (tilesCount<3)
-                return Swipe.TwoTiles;
-
+            
             return Swipe.Infinite;
         }
     }
