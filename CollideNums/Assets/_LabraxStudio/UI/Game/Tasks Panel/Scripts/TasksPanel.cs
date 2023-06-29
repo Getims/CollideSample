@@ -77,14 +77,6 @@ namespace LabraxStudio.UI.GameScene.Tasks
             }
         }
 
-        private void OnLevelTaskProgress(int tileNumber)
-        {
-            if (!_hasTasks)
-                return;
-
-            _currentContainer.AddTaskProgress(tileNumber);
-        }
-
         // EVENTS RECEIVERS: ----------------------------------------------------------------------
 
         private void OnGameOver(bool isWin)
@@ -116,6 +108,14 @@ namespace LabraxStudio.UI.GameScene.Tasks
                 Show();
             else
                 Hide();
+        }
+        
+        private void OnLevelTaskProgress(int tileNumber)
+        {
+            if (!_hasTasks)
+                return;
+
+            _currentContainer.AddTaskProgress(tileNumber);
         }
     }
 }

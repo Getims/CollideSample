@@ -29,10 +29,15 @@ namespace LabraxStudio.UI.GameScene.Tasks
         [SerializeField]
         private Sprite _badBackground;
 
+        // FIELDS: -------------------------------------------------------------------
+
+        private bool _isBackSwitched = false;
+
         // PUBLIC METHODS: -----------------------------------------------------------------------
 
         public void Setup(List<LevelTaskMeta> levelTasks)
         {
+            _isBackSwitched = false;
             _background.sprite = _normalBackground;
             List<Sprite> tasksSprites =
                 ServicesProvider.GameSettingsService.GetGameSettings().GameFieldSprites.TasksSprites;
@@ -78,8 +83,9 @@ namespace LabraxStudio.UI.GameScene.Tasks
                 }
             }
 
-            if (switchBack)
+            if (switchBack && !_isBackSwitched)
             {
+                _isBackSwitched = true;
                 UISoundMediator.Instance.PlayTaskFailSFX();
                 _background.sprite = _badBackground;
             }

@@ -222,6 +222,7 @@ RectTransform:
   - {fileID: 1723747923}
   - {fileID: 981321304}
   - {fileID: 1865132255}
+  - {fileID: 977653554}
   - {fileID: 1181259198}
   - {fileID: 953575393}
   - {fileID: 1352653344}
@@ -714,7 +715,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5535915021323567474, guid: 26ef2f9332d049444bca613b242761ad, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5535915021323567474, guid: 26ef2f9332d049444bca613b242761ad, type: 3}
       propertyPath: m_AnchorMax.x
@@ -834,6 +835,42 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 147888197}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &977653553
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 977653554}
+  m_Layer: 0
+  m_Name: '[Tutorial container]'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &977653554
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 977653553}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 147888197}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1045,7 +1082,7 @@ RectTransform:
   - {fileID: 2015483453}
   - {fileID: 247706731}
   m_Father: {fileID: 147888197}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -2197,7 +2234,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4438141646963313721, guid: 8153e4fee994ab941a3a888f8412cc04, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4438141646963313721, guid: 8153e4fee994ab941a3a888f8412cc04, type: 3}
       propertyPath: m_AnchorMax.x
@@ -2353,6 +2390,10 @@ PrefabInstance:
       propertyPath: _uiMenuSettings.Array.data[3]._parent
       value: 
       objectReference: {fileID: 1906713294}
+    - target: {fileID: 359528828119613942, guid: e82231b3a1bcd7a45a9805590a75b1e3, type: 3}
+      propertyPath: _uiMenuSettings.Array.data[4]._parent
+      value: 
+      objectReference: {fileID: 977653554}
     - target: {fileID: 2978172004741499905, guid: e82231b3a1bcd7a45a9805590a75b1e3, type: 3}
       propertyPath: _uiMenuSettings.Array.data[0]._parent
       value: 

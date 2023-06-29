@@ -9,6 +9,7 @@
         BoostersPanel = 4,
         WinScreen = 5,
         FailScreen = 6,
-        TasksPanel = 7
+        TasksPanel = 7,
+        TutorialPanel = 8
     }
 }
