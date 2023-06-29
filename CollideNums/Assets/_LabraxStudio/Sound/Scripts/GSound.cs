@@ -1,16 +1,8 @@
-using LabraxStudio.Base;
-
 namespace LabraxStudio.Sound
 {
     internal class GSound
     {
         // CONSTRUCTORS: --------------------------------------------------------------------------
-
-        public GSound(GameplaySounds soundTyme, long time = 0)
-        {
-            _soundType = soundTyme;
-            _lastPlayTime = time;
-        }
 
         public GSound(string id, long time = 0)
         {
@@ -20,13 +12,11 @@ namespace LabraxStudio.Sound
 
         // PROPERTIES: ----------------------------------------------------------------------------
 
-        public GameplaySounds SoundType => _soundType;
         public string Id => _id;
         public long LastPlayTime => _lastPlayTime;
 
         // FIELDS: --------------------------------------------------------------------------------
 
-        private readonly GameplaySounds _soundType;
         private readonly string _id;
         private long _lastPlayTime;
 

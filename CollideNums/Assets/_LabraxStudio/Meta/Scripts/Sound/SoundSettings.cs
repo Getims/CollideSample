@@ -32,47 +32,20 @@ namespace LabraxStudio.Meta
         private float _backgroundMusicVolume = 0.7f;
 
         [Space(10)]
-        [SerializeField, HideInInspector]
-        [ListDrawerSettings(ListElementLabelName = "_soundType")]
-        private List<GameplaySound> _gameplaySounds;
+        [SerializeField]
+        private SFXMeta _mainMenuBackgroundMusic;
 
         [SerializeField]
-        private List<BackgroundMusic> _backgroundMusic;
+        private List<SFXMeta> _gameBackgroundMusic = new List<SFXMeta>();
 
         // PROPERTIES: ----------------------------------------------------------------------------
 
-        public List<GameplaySound> GameplaySounds => _gameplaySounds;
-        public List<BackgroundMusic> BackgroundMusics => _backgroundMusic;
         public float MusicFadeTime => _musicFadeTime;
         public float GameplayMinPitch => _gameplayMinPitch;
         public float GameplayMaxPitch => _gameplayMaxPitch;
         public float GameplaySoundsVolume => _gameplaySoundsVolume;
         public float BackgroundMusicVolume => _backgroundMusicVolume;
-
-        // PUBLIC METHODS: -----------------------------------------------------------------------
-
-        public GameplaySound GetGameplaySound(GameplaySounds sound)
-        {
-            var sounds = _gameplaySounds.FindAll(_gs => _gs.SoundType == sound);
-            if (sounds != null && sounds.Count > 0)
-            {
-                int i = Random.Range(0, sounds.Count);
-                return sounds[i];
-            }
-
-            return null;
-        }
-
-        public BackgroundMusic GetBackgroundMusic(BackgroundMusics sound)
-        {
-            var sounds = _backgroundMusic.FindAll(_bm => _bm.MusicType == sound);
-            if (sounds != null && sounds.Count > 0)
-            {
-                int i = Random.Range(0, sounds.Count);
-                return sounds[i];
-            }
-
-            return null;
-        }
+        public SFXMeta MainMenuBackgroundMusic => _mainMenuBackgroundMusic;
+        public List<SFXMeta> GameBackgroundMusic => _gameBackgroundMusic;
     }
 }
