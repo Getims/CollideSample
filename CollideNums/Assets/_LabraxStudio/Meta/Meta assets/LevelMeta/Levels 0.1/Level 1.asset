@@ -18,7 +18,7 @@ MonoBehaviour:
   _levelTemplate:
     width: 6
     height: 6
-    _brushMode: 2
+    _brushMode: 1
     _rightClickSize: 1
     _fieldBrushMode: 3
     _tilesBrushMode: 2
@@ -50,7 +50,7 @@ MonoBehaviour:
       Data: 6
     - Name: _brushMode
       Entry: 3
-      Data: 2
+      Data: 1
     - Name: _rightClickSize
       Entry: 3
       Data: 1
@@ -170,10 +170,10 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 3
-      Data: 1
+      Data: 4
     - Name: 
       Entry: 3
-      Data: 4
+      Data: 1
     - Name: 
       Entry: 3
       Data: 1

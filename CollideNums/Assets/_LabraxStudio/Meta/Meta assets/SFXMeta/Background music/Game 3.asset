@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Game 3
   m_EditorClassIdentifier: 
   FileName: Game 3
-  _isDisabled: 0
-  _audioClip: {fileID: 8300000, guid: 41bcf0ea583c08145a50d403a144758e, type: 3}
+  _isDisabled: 1
+  _audioClip: {fileID: 0}
   _soundPrecent: 1
   _description: Description...
