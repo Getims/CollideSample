@@ -9,16 +9,4 @@
         DRAFT_1 = 100
     }
 
-    public enum GameplaySounds
-    {
-        ButtonClick,
-        VictoryJingle,
-        DefeatJingle,
-        Firework
-    }
-
-    public enum BackgroundMusics
-    {
-        MainMenuTheme = 0
-    }
 }

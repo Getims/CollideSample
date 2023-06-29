@@ -26,7 +26,8 @@ namespace LabraxStudio.Game.Gates.Visual
             var gatesSprites = gameFieldSprites.GateSprites;
             var numberSprite = GetNumberSprite(spriteIndex, gatesSprites.GatesNumbers);
 
-            _gateNumber.SetNumber(numberSprite, direction);
+            Direction numberDirection = CalculateDirection(spriteIndex, direction);
+            _gateNumber.SetNumber(numberSprite, numberDirection);
 
             _gateBackground.SetBackground(gatesSprites.GateVerticalBackground, gatesSprites.GateHorizontalBackground,
                 gameFieldSprites.NotPlayableSprites.HorizontalGateExtension,
@@ -47,6 +48,28 @@ namespace LabraxStudio.Game.Gates.Visual
                 spriteIndex = 0;
 
             return gatesNumbers[spriteIndex];
+        }
+
+        private Direction CalculateDirection(int spriteIndex, Direction direction)
+        {
+            Direction newDirection = direction;
+            switch (spriteIndex)
+            {
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                case 9:
+                case 10:
+                case 11:
+                case 12:
+                    newDirection = Direction.Up;
+                    break;
+            }
+
+            return newDirection;
         }
     }
 }

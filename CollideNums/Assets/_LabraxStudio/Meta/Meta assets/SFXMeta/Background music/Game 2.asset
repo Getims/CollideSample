@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d3ce0145eb48ec24e8c18a91b7dd8752, type: 3}
-  m_Name: UIClick
+  m_Name: Game 2
   m_EditorClassIdentifier: 
-  FileName: UIClick
+  FileName: Game 2
   _isDisabled: 0
-  _audioClip: {fileID: 8300000, guid: 213719105be845644b99789bf019e872, type: 3}
+  _audioClip: {fileID: 8300000, guid: e92272d429c9ed94684f59c1e5040404, type: 3}
   _soundPrecent: 1
   _description: Description...

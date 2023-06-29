@@ -14,6 +14,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FileName: BaseSettings
   _cellSize: 1
-  _baseSwipeForce: 1.8
-  _tileSpeed: 10
-  _tileAcceleration: 15

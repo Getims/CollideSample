@@ -1,3 +1,4 @@
+using LabraxStudio.App.Services;
 using LabraxStudio.Events;
 using LabraxStudio.Managers;
 using LabraxStudio.UI.Common;
@@ -43,6 +44,8 @@ namespace LabraxStudio.UI
 
         public void InitializeGameUI()
         {
+            ServicesProvider.MusicService.PlayGameMusic();
+            
             _gameUIFactory.Create(MenuType.LevelIndexPanel);
             _gameUIFactory.Create(MenuType.BoostersPanel);
             _gameUIFactory.Create(MenuType.TasksPanel);
@@ -53,6 +56,8 @@ namespace LabraxStudio.UI
 
         public void InitializeMenuUI()
         {
+            ServicesProvider.MusicService.PlayMainMenuMusic();
+            
             _menuUIFactory.Create(MenuType.MainMenuOverlay);
             if (_levelIndexPanelMenu == null)
                 _levelIndexPanelMenu = _menuUIFactory.Create<LevelIndexPanel>(MenuType.LevelIndexPanel);

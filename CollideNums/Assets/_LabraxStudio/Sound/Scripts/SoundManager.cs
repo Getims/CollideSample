@@ -1,10 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using LabraxStudio.App.Services;
-using LabraxStudio.Base;
 using LabraxStudio.Managers;
 using LabraxStudio.Meta;
-using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace LabraxStudio.Sound
@@ -13,7 +11,6 @@ namespace LabraxStudio.Sound
     {
         // MEMBERS: -------------------------------------------------------------------------------
 
-        [Title("References")]
         [SerializeField]
         private AudioSource _gameplayAS;
 
@@ -48,18 +45,10 @@ namespace LabraxStudio.Sound
             _isMusicOn = ServicesProvider.PlayerDataService.IsMusicOn;
         }
 
-        public float GetCustomGameplaySoundVolume(GameplaySound meta) =>
-            meta == null
-                ? SoundMeta.GameplaySoundsVolume * _soundK
-                : SoundMeta.GameplaySoundsVolume * _soundK * meta.SoundPercent;
-
         public float GetCustomGameplaySoundVolume(SFXMeta meta) =>
             meta == null
                 ? SoundMeta.GameplaySoundsVolume * _soundK
                 : SoundMeta.GameplaySoundsVolume * _soundK * meta.SoundPercent;
-
-        public float GetCustomMusicVolume(BackgroundMusic meta) =>
-            meta == null ? 1 : meta.SoundPrecent;
 
         public void SwitchSound()
         {
@@ -180,72 +169,24 @@ namespace LabraxStudio.Sound
             Destroy(audioSource, 5);
         }
 
-        public void PlaySoundNoRandomPitch(GameplaySounds sound)
+        public void PlayMusic(SFXMeta SFXMeta, bool highPassEffect = false, int frequency = 1000)
         {
-            if (!_isSoundOn)
-                return;
-
-            if (_gameplayAS.enabled == false)
-                return;
-
-            _canPlay = true;
-
-            var meta = SoundMeta.GetGameplaySound(sound);
-            _gameplayAS.PlayOneShot(meta.Clip, GetCustomGameplaySoundVolume(meta));
-        }
-
-        public void PlaySound(GameplaySounds sound, AudioSource source, bool oneShot = true)
-        {
-            if (!_isSoundOn || source == null)
-                return;
-
-            if (source.enabled == false)
-                return;
-
-            var meta = SoundMeta.GetGameplaySound(sound);
-            source.pitch = Random.Range(SoundMeta.GameplayMinPitch, SoundMeta.GameplayMaxPitch);
-
-            if (!oneShot)
+            if (SFXMeta == null)
             {
-                source.clip = meta.Clip;
-                source.volume = GetCustomGameplaySoundVolume(meta);
-                source.Play();
+                Debug.LogWarning("No music meta");
+                return;
             }
-            else
-            {
-                source.PlayOneShot(meta.Clip, GetCustomGameplaySoundVolume(meta));
-            }
-        }
 
-        public void PlaySound(AudioClip clip, GameplaySounds sound)
-        {
-            if (!_isSoundOn)
+            if (SFXMeta.IsDisabled)
                 return;
 
-            if (_gameplayAS.enabled == false)
-                return;
-
-            _gameplayAS.pitch = Random.Range(SoundMeta.GameplayMinPitch, SoundMeta.GameplayMaxPitch);
-            //gameplayAS.volume = GetCustomGameplaySoundVolume(_sound);
-            _gameplayAS.PlayOneShot(clip, GetCustomGameplaySoundVolume(SoundMeta.GetGameplaySound(sound)));
-        }
-
-        public void PlaySound(BackgroundMusics sound, bool highPassEffect = false, int frequency = 1000)
-        {
             _musicAS.pitch = 1;
             EnableBackgroundHighPass(highPassEffect, frequency);
 
             if (_musicCoroutine != null)
                 StopCoroutine(_musicCoroutine);
 
-            var meta = SoundMeta.GetBackgroundMusic(sound);
-            if (meta == null)
-            {
-                Debug.LogWarning("No music meta");
-                return;
-            }
-
-            _musicCoroutine = StartCoroutine(BackGroundMusicFading(meta.Clip, GetCustomMusicVolume(meta)));
+            _musicCoroutine = StartCoroutine(BackGroundMusicFading(SFXMeta.AudioClip, SFXMeta.SoundPercent));
         }
 
         public void StopBGMusic()

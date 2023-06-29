@@ -12,13 +12,15 @@ namespace LabraxStudio.Game.Tiles
     {
         // CONSTRUCTORS: -------------------------------------------------------------------------------
 
-        public MoveAction(Tile tile, Vector2Int moveTo, Swipe swipe, Direction direction)
+        public MoveAction(Tile tile, Vector2Int moveTo, Swipe swipe, Direction direction, bool collideWithGate)
         {
             _tile = tile;
             _moveTo = moveTo;
             _swipe = swipe;
             _direction = direction;
+            _collideWithGate = collideWithGate;
             _gameFieldSettings = ServicesProvider.GameSettingsService.GetGameSettings().GameFieldSettings;
+            _swipeSettings = ServicesProvider.GameSettingsService.GetGameSettings().SwipeSettings;
         }
         
         // PROPERTIES: ----------------------------------------------------------------------------
@@ -32,8 +34,10 @@ namespace LabraxStudio.Game.Tiles
         private readonly Vector2Int _moveTo;
         private readonly Swipe _swipe;
         private Direction _direction;
+        private readonly bool _collideWithGate;
         private readonly GameFieldSettings _gameFieldSettings;
         private Action _onMoveComplete;
+        private SwipeSettings _swipeSettings;
 
         // PUBLIC METHODS: -----------------------------------------------------------------------
 
@@ -45,17 +49,29 @@ namespace LabraxStudio.Game.Tiles
             newPosition.x = matrixToPosition.x;
             newPosition.y = matrixToPosition.y;
 
+            bool wasMoved = _tile.Position != newPosition;
             _onMoveComplete = onComplete;
             Ease ease = Ease.Linear;
 
-            float time = CalculateTime(_gameFieldSettings.TileSpeed, _swipe);
+            if (!wasMoved)
+            {
+                OnMoveComplete();
+                return;
+            }
+            
+            float time = CalculateTime(_swipeSettings.TileSpeed, _swipe);
             
             if (_swipe != Swipe.Infinite)
             {
                 GameSoundMediator.Instance.PlayTileMoveSFX();
                 _tile.transform.DOMove(newPosition, time)
                     .SetEase(ease)
-                    .OnComplete(OnMoveComplete);
+                    .OnComplete(()=>
+                    {
+                        if(_collideWithGate)
+                            GameSoundMediator.Instance.PlayTileCollideGateSFX();
+                        OnMoveComplete();
+                    });
             }
             else
             {
@@ -103,11 +119,11 @@ namespace LabraxStudio.Game.Tiles
             var moveDelta = endPosition - startPosition;
             float maxCoord = Mathf.Max(Mathf.Abs(moveDelta.x), Mathf.Abs(moveDelta.y));
 
-            float startSpeed = _gameFieldSettings.TileSpeed;
+            float startSpeed = _swipeSettings.TileSpeed;
 
             float timeToMaxCoord = maxCoord / startSpeed;
             float cyclesPerTile = 1 / startSpeed / timeStep;
-            float acceleration = _gameFieldSettings.TileAcceleration * timeStep / cyclesPerTile;
+            float acceleration = _swipeSettings.TileAcceleration * timeStep / cyclesPerTile;
 
             float currentTime = 0;
             float currentAcceleration = 0;
@@ -125,6 +141,11 @@ namespace LabraxStudio.Game.Tiles
 
             //WUtils.ReworkPoint("TestTime: " + testTime);
             _tile.PlayCollideEffect(_direction);
+            if(_collideWithGate)
+                GameSoundMediator.Instance.PlayTileCollideGateSFX();
+            else
+                GameSoundMediator.Instance.PlayTileCollideSFX();
+            
             OnMoveComplete();
         }
 

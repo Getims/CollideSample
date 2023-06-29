@@ -69,6 +69,7 @@ namespace LabraxStudio.App
 
             ScreenManager.Instance.Initialize();
             SoundManager.Instance.Setup();
+            ServicesProvider.MusicService.Initialize();
 
             if (ServicesProvider.PlayerDataService.IsFirstStart)
             {

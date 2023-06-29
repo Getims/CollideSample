@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using LabraxStudio.App.Services;
 using LabraxStudio.Meta.Levels;
+using LabraxStudio.Sound;
 using LabraxStudio.UI.Common;
 using LabraxStudio.UiAnimator;
 using Unity.VisualScripting;
@@ -59,7 +60,10 @@ namespace LabraxStudio.UI.GameScene.Tasks
             currentCount--;
             taskItem.SetCurrentCount(currentCount);
             if (taskItem.CurrentCount == 0)
+            {
                 _animation.Play();
+                UISoundMediator.Instance.PlayTaskCompleteSFX();
+            }
         }
 
         public void CheckForIncorrectState()
@@ -75,7 +79,10 @@ namespace LabraxStudio.UI.GameScene.Tasks
             }
 
             if (switchBack)
+            {
+                UISoundMediator.Instance.PlayTaskFailSFX();
                 _background.sprite = _badBackground;
+            }
         }
         // PRIVATE METHODS: -----------------------------------------------------------------------
 
