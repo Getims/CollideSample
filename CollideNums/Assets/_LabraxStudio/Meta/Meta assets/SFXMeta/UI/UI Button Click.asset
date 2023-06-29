@@ -15,5 +15,5 @@ MonoBehaviour:
   FileName: UI Button Click
   _isDisabled: 0
   _audioClip: {fileID: 8300000, guid: 213719105be845644b99789bf019e872, type: 3}
-  _soundPrecent: 1
+  _soundPrecent: 0.509
   _description: Description...
