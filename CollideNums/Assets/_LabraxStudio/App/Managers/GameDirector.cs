@@ -91,7 +91,8 @@ namespace LabraxStudio.App
             }
 
             ServicesProvider.LevelDataService.SetLevelsListName(levelsListMeta.FileName);
-
+            ServicesProvider.LevelMetaService.SetSelectedLevelsList(levelsListMeta);
+            
             return levelsListMeta;
         }
     }

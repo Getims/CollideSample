@@ -1,14 +1,25 @@
+using LabraxStudio.App.Services;
 using LabraxStudio.Events;
 using LabraxStudio.Game;
+using LabraxStudio.Meta.Levels;
+using LabraxStudio.Meta.Tutorial;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace LabraxStudio.UI.GameScene.Tutorial
 {
     public class TutorialPanel : UIPanel
     {
+        // MEMBERS: -------------------------------------------------------------------------------
+
+        [SerializeField]
+        private Image _tutorialTitleText;
+        
         // FIELDS: -------------------------------------------------------------------
         
         private bool _hasTutorial;
+        private LevelRules _currentRules;
+        private int _currentStep = 0;
         
         // GAME ENGINE METHODS: -------------------------------------------------------------------
 
@@ -37,8 +48,32 @@ namespace LabraxStudio.UI.GameScene.Tutorial
         
         private bool SetupTutorial()
         {
-            return false;
-            //throw new System.NotImplementedException();
+            LevelsListMeta levelsListMeta = ServicesProvider.LevelMetaService.SelectedLevelsList;
+            TutorialSettingsMeta tutorialSettings = levelsListMeta.TutorialSettingsMeta;
+            
+            if (tutorialSettings == null)
+                return false;
+            
+            int currentLevel = ServicesProvider.PlayerDataService.CurrentLevel;
+            _currentRules = tutorialSettings.GetRules(currentLevel);
+
+            if (_currentRules == null || _currentRules.RulesCount == 0)
+                return false;
+
+            _currentStep = 0;
+            SetupTitle();
+            
+            return true;
+        }
+
+        private void SetupTitle()
+        {
+            _tutorialTitleText.sprite = _currentRules.TutorialTitleSprite;
+        }
+
+        private void StartTutorial()
+        {
+            
         }
         
         // EVENTS RECEIVERS: ----------------------------------------------------------------------

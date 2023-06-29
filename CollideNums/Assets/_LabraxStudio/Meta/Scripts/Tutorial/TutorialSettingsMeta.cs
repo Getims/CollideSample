@@ -16,5 +16,9 @@ namespace LabraxStudio.Meta.Tutorial
         // PROPERTIES: ----------------------------------------------------------------------------
 
         public List<LevelRules> LevelsRules => _levelsRules;
+
+        // PUBLIC METHODS: -----------------------------------------------------------------------
+
+        public LevelRules GetRules(int levelIndex) => _levelsRules.Find(lr => lr.LevelIndex == levelIndex);
     }
 }
