@@ -21,7 +21,7 @@ MonoBehaviour:
     _brushMode: 2
     _rightClickSize: 2
     _fieldBrushMode: 4
-    _tilesBrushMode: 4
+    _tilesBrushMode: 1
   _boostersSettings:
   - _boosterMeta: {fileID: 11400000, guid: 3b85c5d335e9ce344b42fbcac79b97cd, type: 2}
   - _boosterMeta: {fileID: 11400000, guid: e7863cc6e7c2d6448af41b8478f28cef, type: 2}
@@ -59,7 +59,7 @@ MonoBehaviour:
       Data: 4
     - Name: _tilesBrushMode
       Entry: 3
-      Data: 4
+      Data: 1
     - Name: _levelMatrix
       Entry: 7
       Data: 1|System.Int32[,], mscorlib
