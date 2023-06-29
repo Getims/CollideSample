@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using LabraxStudio.App.Services;
 using LabraxStudio.Events;
 using LabraxStudio.Meta.Levels;
+using LabraxStudio.Sound;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -116,6 +117,7 @@ namespace LabraxStudio.Game.Tiles
             newValue = increase ? newValue + 1 : newValue - 1;
             _tilesMatrix[tile.Cell.x, tile.Cell.y] = newValue;
             tile.PlayMergeEffect();
+            GameSoundMediator.Instance.PlayTilesMergeSFX();
             await Task.Delay(200);
             tile.SetValue(newValue, _tilesGenerator.GetSprite(newValue));
             await Task.Delay(100);

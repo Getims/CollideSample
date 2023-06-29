@@ -1,0 +1,135 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c15a05c7215349fc96f9fef9a3077ebb, type: 3}
+  m_Name: Tutorial Settings 0.1
+  m_EditorClassIdentifier: 
+  _levelsRules:
+  - _levelIndex: 1
+    _tutorialTitleSprite: {fileID: 21300000, guid: 5a6ddd414585aec4abab09b69d72aed3, type: 3}
+    _colorIndexRules:
+    - _showTitle: 1
+      _hideTitle: 0
+      _ruleType: 1
+      _showHand: 1
+      _tilePosition: {x: 4, y: 1}
+      _swipePosition: {x: 0, y: 1}
+      _mergePosition: {x: 0, y: 0}
+      _boosterType: 0
+      _boosterTargetTile: {x: 0, y: 0}
+    - _showTitle: 0
+      _hideTitle: 0
+      _ruleType: 1
+      _showHand: 1
+      _tilePosition: {x: 1, y: 4}
+      _swipePosition: {x: 5, y: 4}
+      _mergePosition: {x: 0, y: 0}
+      _boosterType: 0
+      _boosterTargetTile: {x: 0, y: 0}
+  - _levelIndex: 2
+    _tutorialTitleSprite: {fileID: 21300000, guid: ab9888a4856926041a43e8e5b0d0d43e, type: 3}
+    _colorIndexRules:
+    - _showTitle: 1
+      _hideTitle: 0
+      _ruleType: 2
+      _showHand: 1
+      _tilePosition: {x: 4, y: 3}
+      _swipePosition: {x: 0, y: 0}
+      _mergePosition: {x: 4, y: 1}
+      _boosterType: 0
+      _boosterTargetTile: {x: 0, y: 0}
+    - _showTitle: 0
+      _hideTitle: 0
+      _ruleType: 1
+      _showHand: 1
+      _tilePosition: {x: 4, y: 1}
+      _swipePosition: {x: 4, y: 0}
+      _mergePosition: {x: 0, y: 0}
+      _boosterType: 0
+      _boosterTargetTile: {x: 0, y: 0}
+    - _showTitle: 0
+      _hideTitle: 0
+      _ruleType: 1
+      _showHand: 1
+      _tilePosition: {x: 2, y: 2}
+      _swipePosition: {x: 2, y: 1}
+      _mergePosition: {x: 0, y: 0}
+      _boosterType: 0
+      _boosterTargetTile: {x: 0, y: 0}
+    - _showTitle: 0
+      _hideTitle: 0
+      _ruleType: 1
+      _showHand: 1
+      _tilePosition: {x: 4, y: 1}
+      _swipePosition: {x: 5, y: 1}
+      _mergePosition: {x: 0, y: 0}
+      _boosterType: 0
+      _boosterTargetTile: {x: 0, y: 0}
+  - _levelIndex: 3
+    _tutorialTitleSprite: {fileID: 21300000, guid: 36daa7ad500f2024dafc0d97e4ce5eeb, type: 3}
+    _colorIndexRules:
+    - _showTitle: 1
+      _hideTitle: 0
+      _ruleType: 3
+      _showHand: 1
+      _tilePosition: {x: 0, y: 0}
+      _swipePosition: {x: 0, y: 0}
+      _mergePosition: {x: 0, y: 0}
+      _boosterType: 0
+      _boosterTargetTile: {x: 0, y: 0}
+  - _levelIndex: 10
+    _tutorialTitleSprite: {fileID: 21300000, guid: 1a9d7fd0886c2cd48903a84164ecefb8, type: 3}
+    _colorIndexRules:
+    - _showTitle: 1
+      _hideTitle: 0
+      _ruleType: 4
+      _showHand: 1
+      _tilePosition: {x: 0, y: 0}
+      _swipePosition: {x: 0, y: 0}
+      _mergePosition: {x: 0, y: 0}
+      _boosterType: 2
+      _boosterTargetTile: {x: 0, y: 0}
+    - _showTitle: 0
+      _hideTitle: 0
+      _ruleType: 5
+      _showHand: 1
+      _tilePosition: {x: 0, y: 0}
+      _swipePosition: {x: 0, y: 0}
+      _mergePosition: {x: 0, y: 0}
+      _boosterType: 0
+      _boosterTargetTile: {x: 1, y: 3}
+    - _showTitle: 0
+      _hideTitle: 0
+      _ruleType: 4
+      _showHand: 1
+      _tilePosition: {x: 0, y: 0}
+      _swipePosition: {x: 0, y: 0}
+      _mergePosition: {x: 0, y: 0}
+      _boosterType: 1
+      _boosterTargetTile: {x: 0, y: 0}
+    - _showTitle: 0
+      _hideTitle: 0
+      _ruleType: 5
+      _showHand: 1
+      _tilePosition: {x: 0, y: 0}
+      _swipePosition: {x: 0, y: 0}
+      _mergePosition: {x: 0, y: 0}
+      _boosterType: 0
+      _boosterTargetTile: {x: 2, y: 1}
+    - _showTitle: 0
+      _hideTitle: 1
+      _ruleType: 0
+      _showHand: 1
+      _tilePosition: {x: 0, y: 0}
+      _swipePosition: {x: 0, y: 0}
+      _mergePosition: {x: 0, y: 0}
+      _boosterType: 0
+      _boosterTargetTile: {x: 0, y: 0}
