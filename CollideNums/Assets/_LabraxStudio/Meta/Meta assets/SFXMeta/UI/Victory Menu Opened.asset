@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FileName: Victory Menu Opened
   _isDisabled: 0
-  _audioClip: {fileID: 8300000, guid: 1b8e5312f5141524db527c8bffbdaa6d, type: 3}
-  _soundPrecent: 1
+  _audioClip: {fileID: 8300000, guid: dbf71515d426e4e7b9d118a285e72680, type: 3}
+  _soundPrecent: 0.375
   _description: Description...

@@ -15,5 +15,5 @@ MonoBehaviour:
   FileName: Task Fail
   _isDisabled: 0
   _audioClip: {fileID: 8300000, guid: 34fa1e0a7b9b5499bbb543b9b6f63643, type: 3}
-  _soundPrecent: 0.7
+  _soundPrecent: 0.6
   _description: Description...
