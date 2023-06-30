@@ -185,6 +185,7 @@ namespace LabraxStudio.Game.Tiles
 
             if (actions.Count == 0)
             {
+                GameEvents.SendTileMergesComplete();
                 CheckForFail();
                 return;
             }

@@ -84,6 +84,11 @@ namespace LabraxStudio.Game.Tiles
         {
             if (BoostersController.IsBoosterActive)
             {
+                bool lockedByTutorial = !ServicesProvider.TutorialService.CanUseBoosterOnTile(this);
+                
+                if(lockedByTutorial)
+                    return;
+                
                 GameEvents.SendTileSelectForBooster(this);
                 return;
             }
@@ -95,6 +100,10 @@ namespace LabraxStudio.Game.Tiles
 
         private void OnSwipe(Direction direction, Swipe swipe, float swipeSpeed)
         {
+            bool lockedByTutorial = !ServicesProvider.TutorialService.CanMoveTile(_cell, direction, swipe);
+            if(lockedByTutorial)
+                return;
+            
             if (swipe == Swipe.Infinite)
                 _tileEffectsController.PlayInfiniteMoveEffect();
             else

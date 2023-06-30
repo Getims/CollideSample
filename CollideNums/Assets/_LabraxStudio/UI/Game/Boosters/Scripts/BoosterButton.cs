@@ -3,6 +3,7 @@ using LabraxStudio.App.Services;
 using LabraxStudio.Game;
 using LabraxStudio.Meta.Levels;
 using LabraxStudio.UI.Common;
+using LabraxStudio.UI.GameScene.Tutorial;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,6 +23,9 @@ namespace LabraxStudio.UI.GameScene.Boosters
         [SerializeField]
         private Image _clickBlocker;
 
+        [SerializeField] 
+        private BoosterTutorialHand _tutorialHand;
+
         // PROPERTIES: ----------------------------------------------------------------------------
 
         public BoosterMeta BoosterMeta => _boosterMeta;
@@ -40,6 +44,7 @@ namespace LabraxStudio.UI.GameScene.Boosters
         private void OnDestroy()
         {
             _button.onClick.RemoveListener(OnButtonClick);
+            _tutorialHand.OnDestroy();
         }
 
         // PUBLIC METHODS: -----------------------------------------------------------------------
@@ -51,6 +56,7 @@ namespace LabraxStudio.UI.GameScene.Boosters
             _buttonVisualizer.SetState(boosterMeta.BoosterCost);
             _buttonVisualizer.SetCurrency(boosterMeta.MoneyPrice);
             _buttonVisualizer.SetIcon(boosterMeta.IconSprite);
+            _tutorialHand.Initialize(boosterMeta.BoosterType);
             CheckState();
         }
 
@@ -103,6 +109,11 @@ namespace LabraxStudio.UI.GameScene.Boosters
 
         private void OnButtonClick()
         {
+            bool canUseBooster = ServicesProvider.TutorialService.CanUseBooster(_boosterMeta.BoosterType);
+            if(!canUseBooster)
+                return;
+
+            _tutorialHand.OnBoosterClick();
             StopPulsation();
             UseBooster();
         }

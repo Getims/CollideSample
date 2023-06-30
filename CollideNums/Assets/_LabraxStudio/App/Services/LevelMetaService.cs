@@ -11,10 +11,13 @@ namespace LabraxStudio.App.Services
         public int LevelsCount => _levelsMetaList.Count;
 
         public string CurrentLevelName => GetCurrentLevelMeta().LevelName;
+        
+        public LevelsListMeta SelectedLevelsList => _selectedLevelsList;
 
         // FIELDS: --------------------------------------------------------------------------------
 
         private List<LevelMeta> _levelsMetaList = new List<LevelMeta>();
+        private LevelsListMeta _selectedLevelsList;
 
         // PUBLIC METHODS: -----------------------------------------------------------------------
 
@@ -57,6 +60,11 @@ namespace LabraxStudio.App.Services
             var levelMeta = GetLevelMeta(levelName);
             int levelIndex = _levelsMetaList.IndexOf(levelMeta);
             return levelIndex;
+        }
+
+        public void SetSelectedLevelsList(LevelsListMeta meta)
+        {
+            _selectedLevelsList = meta;
         }
     }
 }

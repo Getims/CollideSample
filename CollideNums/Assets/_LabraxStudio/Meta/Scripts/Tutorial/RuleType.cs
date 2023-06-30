@@ -4,9 +4,10 @@ namespace LabraxStudio.Meta.Tutorial
     {
         Null = 0,
         TileSwipe = 1,
-        TileMerge = 2,
-        TaskComplete = 3,
-        BoosterUse = 4,
-        BoosterTarget = 5
+        TaskComplete = 2,
+        BoosterUse = 3,
+        BoosterTarget = 4,
+        Merge = 5,
+        MoveToGate = 6
     }
 }

@@ -49,7 +49,7 @@ namespace LabraxStudio.UI
             _gameUIFactory.Create(MenuType.LevelIndexPanel);
             _gameUIFactory.Create(MenuType.BoostersPanel);
             _gameUIFactory.Create(MenuType.TasksPanel);
-            //_gameUIFactory.Create(MenuType.TutorialPanel);
+            _gameUIFactory.Create(MenuType.TutorialPanel);
 
             if (!_currencies)
                 _gameUIFactory.Create(MenuType.CurrenciesBase, out _currencies);
@@ -89,6 +89,7 @@ namespace LabraxStudio.UI
             */
             if (isWin)
             {
+                ServicesProvider.MusicService.PlayWinScreenMusic();
                 _menuUIFactory.Create(MenuType.WinScreen);
                 if (_levelIndexPanelMenu == null)
                     _levelIndexPanelMenu = _menuUIFactory.Create<LevelIndexPanel>(MenuType.LevelIndexPanel);

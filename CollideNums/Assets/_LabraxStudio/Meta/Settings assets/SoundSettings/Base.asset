@@ -19,5 +19,6 @@ MonoBehaviour:
   _gameplaySoundsVolume: 1
   _backgroundMusicVolume: 0.15
   _mainMenuBackgroundMusic: {fileID: 11400000, guid: 63efca3c41e2a0e4d855bdbaa71b7dc6, type: 2}
+  _winScreenBackgroundMusic: {fileID: 11400000, guid: 015342532cc24d84d8fd2cb42ef2b172, type: 2}
   _gameBackgroundMusic:
   - {fileID: 11400000, guid: a027710ea90550045a681b3859207078, type: 2}

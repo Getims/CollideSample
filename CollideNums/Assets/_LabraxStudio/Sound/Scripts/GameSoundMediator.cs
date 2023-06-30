@@ -25,6 +25,9 @@ namespace LabraxStudio.Sound
         private SFXMeta _tilesGatePassSFX;
 
         [SerializeField, Required, AssetsOnly]
+        private SFXMeta _taskGatePassSFX;
+
+        [SerializeField, Required, AssetsOnly]
         private SFXMeta _tilesMergeSFX;
         // FIELDS: --------------------------------------------------------------------------------
 
@@ -54,6 +57,9 @@ namespace LabraxStudio.Sound
 
         [Button, DisableInEditorMode]
         public void PlayTilesGatePassSFX() => _soundManager.PlaySound(_tilesGatePassSFX);
+        
+        [Button, DisableInEditorMode]
+        public void PlayTaskGatePassSFX() => _soundManager.PlaySound(_taskGatePassSFX);
 
         [Button, DisableInEditorMode]
         public void PlayTilesMergeSFX() => _soundManager.PlaySound(_tilesMergeSFX);

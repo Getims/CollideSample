@@ -1,14 +1,29 @@
+using LabraxStudio.App.Services;
 using LabraxStudio.Events;
 using LabraxStudio.Game;
+using LabraxStudio.Meta.Levels;
+using LabraxStudio.Meta.Tutorial;
+using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace LabraxStudio.UI.GameScene.Tutorial
 {
     public class TutorialPanel : UIPanel
     {
-        // FIELDS: -------------------------------------------------------------------
+        // MEMBERS: -------------------------------------------------------------------------------
+
+        [SerializeField]
+        private Image _tutorialTitleText;
+
+        [SerializeField]
+        private TutorialHand _tutorialHand;
         
+        // FIELDS: -------------------------------------------------------------------
+
+        private readonly TutorialController _tutorialController = new TutorialController();
         private bool _hasTutorial;
+        private LevelRules _currentRules;
         
         // GAME ENGINE METHODS: -------------------------------------------------------------------
 
@@ -18,13 +33,16 @@ namespace LabraxStudio.UI.GameScene.Tutorial
             GameEvents.OnGenerateLevel.AddListener(OnLevelGenerate);
             GameEvents.OnGameOver.AddListener(OnGameOver);
             GameEvents.OnGameFail.AddListener(OnGameFail);
+            GameEvents.OnLevelRestartBoosterUse.AddListener(OnLevelRestartBoosterUse);
         }
 
         protected override void OnDestroy()
         {
+            _tutorialController.OnDestroy();
             base.OnDestroy();
             GameEvents.OnGenerateLevel.RemoveListener(OnLevelGenerate);
             GameEvents.OnGameOver.RemoveListener(OnGameOver);
+            GameEvents.OnLevelRestartBoosterUse.RemoveListener(OnLevelRestartBoosterUse);
         }
 
         private void Start()
@@ -33,13 +51,45 @@ namespace LabraxStudio.UI.GameScene.Tutorial
                 OnLevelGenerate();
         }
 
+        // PUBLIC METHODS: -----------------------------------------------------------------------
+
+        public override void Show()
+        {
+            base.Show();
+            StartTutorial();
+        }
+
         // PRIVATE METHODS: -----------------------------------------------------------------------
         
         private bool SetupTutorial()
         {
-            return false;
-            //throw new System.NotImplementedException();
+            LevelsListMeta levelsListMeta = ServicesProvider.LevelMetaService.SelectedLevelsList;
+            TutorialSettingsMeta tutorialSettings = levelsListMeta.TutorialSettingsMeta;
+            ServicesProvider.TutorialService.Initialize(null);
+            
+            if (tutorialSettings == null)
+                return false;
+            
+            int currentLevel = ServicesProvider.PlayerDataService.CurrentLevel;
+            _currentRules = tutorialSettings.GetRules(currentLevel);
+
+            if (_currentRules == null || _currentRules.RulesCount == 0)
+                return false;
+
+            SetupTitle();
+            
+            _tutorialController.Initialize(_currentRules, _tutorialTitleText, _tutorialHand, OnTutorialComplete);
+            ServicesProvider.TutorialService.Initialize(_tutorialController);
+            
+            return true;
         }
+
+        private void SetupTitle()
+        {
+            _tutorialTitleText.sprite = _currentRules.TutorialTitleSprite;
+        }
+
+        private void StartTutorial() => _tutorialController.StartTutorial();
         
         // EVENTS RECEIVERS: ----------------------------------------------------------------------
         
@@ -70,6 +120,13 @@ namespace LabraxStudio.UI.GameScene.Tutorial
                 Show();
             else
                 Hide();
+        }
+
+        private void OnTutorialComplete() => Hide();
+
+        private void OnLevelRestartBoosterUse()
+        {
+            
         }
     }
 }

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using LabraxStudio.App.Services;
 using LabraxStudio.Events;
 using LabraxStudio.Meta.Levels;
+using LabraxStudio.Sound;
 
 namespace LabraxStudio.Game
 {
@@ -39,28 +40,33 @@ namespace LabraxStudio.Game
         {
             GameEvents.OnMoveTileInGate.RemoveListener(OnTileMovedToGate);
         }
-        
+
         // PRIVATE METHODS: -----------------------------------------------------------------------
 
-        private void CheckTaskProgress(int tileNumber)
+        private bool CheckTaskProgress(int tileNumber)
         {
             int taskIndex = -1;
             LevelTaskMeta taskMeta = FindTask(tileNumber, ref taskIndex);
 
             if (taskIndex == -1)
-                return;
+                return false;
 
             if (_tasksProgress[taskIndex] == taskMeta.TilesCount)
-                return;
+                return false;
 
             _tasksProgress[taskIndex] += 1;
             SendTaskProgress(tileNumber);
-            
+
             if (_tasksProgress[taskIndex] == taskMeta.TilesCount)
                 SendTaskComplete(tileNumber);
 
             if (IsAllTasksComplete)
+            {
+                GameEvents.SendAllTasksComplete();
                 ServicesProvider.GameFlowService.GameOverTracker.CheckForWin();
+            }
+
+            return true;
         }
 
         private void SendTaskProgress(int tileNumber)
@@ -104,6 +110,14 @@ namespace LabraxStudio.Game
 
         // EVENTS RECEIVERS: ----------------------------------------------------------------------
 
-        public void OnTileMovedToGate(int tileNumber) => CheckTaskProgress(tileNumber);
+        public void OnTileMovedToGate(int tileNumber)
+        {
+            bool hasTaskProgress = CheckTaskProgress(tileNumber);
+
+            if (hasTaskProgress)
+                GameSoundMediator.Instance.PlayTaskGatePassSFX();
+            else
+                GameSoundMediator.Instance.PlayTilesGatePassSFX();
+        }
     }
 }

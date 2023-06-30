@@ -11,6 +11,7 @@ namespace LabraxStudio.App.Services
 
         private bool _isInitialized;
         private SFXMeta _mainMenuBackgroundMusic;
+        private SFXMeta _winScreenBackgroundMusic;
         private List<SFXMeta> _gameBackgroundMusic = new List<SFXMeta>();
         private int _currentGameMusic = 0;
 
@@ -24,6 +25,7 @@ namespace LabraxStudio.App.Services
             _isInitialized = true;
 
             _mainMenuBackgroundMusic = ServicesProvider.GameSettingsService.GetSoundSettings.MainMenuBackgroundMusic;
+            _winScreenBackgroundMusic = ServicesProvider.GameSettingsService.GetSoundSettings.WinScreenBackgroundMusic;
             _gameBackgroundMusic =
                 new List<SFXMeta>(ServicesProvider.GameSettingsService.GetSoundSettings.GameBackgroundMusic);
             Utils.Shuffle(_gameBackgroundMusic);
@@ -41,6 +43,17 @@ namespace LabraxStudio.App.Services
             }
 
             PlayMusic(_mainMenuBackgroundMusic);
+        }
+
+        public void PlayWinScreenMusic()
+        {
+            if (_winScreenBackgroundMusic == null)
+            {
+                Debug.LogWarning("No win screen background music!");
+                return;
+            }
+
+            PlayMusic(_winScreenBackgroundMusic);
         }
 
         public void PlayGameMusic()

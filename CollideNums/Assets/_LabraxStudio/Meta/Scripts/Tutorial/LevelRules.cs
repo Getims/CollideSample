@@ -16,17 +16,19 @@ namespace LabraxStudio.Meta.Tutorial
         
         [Space(5)]
         [SerializeField, ListDrawerSettings(ListElementLabelName = "ElementName", ShowIndexLabels = true)]
-        private Rule[] _colorIndexRules;
+        private Rule[] _rules;
         
-
         // PROPERTIES: ----------------------------------------------------------------------------
 
         public Sprite TutorialTitleSprite => _tutorialTitleSprite;
         
         private string LabelText => $"'Level index: {_levelIndex}'";
 
+        public int LevelIndex => _levelIndex-1;
+
+        public int RulesCount => _rules.Length;
         // PUBLIC METHODS: ------------------------------------------------------------------------
 
-        public Rule GetRule(int ruleIndex) => _colorIndexRules[ruleIndex];
+        public Rule GetRule(int ruleIndex) => _rules[ruleIndex];
     }
 }

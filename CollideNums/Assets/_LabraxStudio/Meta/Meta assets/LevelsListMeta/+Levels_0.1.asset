@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: +Levels_0.1
   m_EditorClassIdentifier: 
   FileName: +Levels_0.1
+  _tutorialSettingsMeta: {fileID: 11400000, guid: eae40d871eb38e94eb8a68b9ad574ff7, type: 2}
   _levelsMetaList:
   - {fileID: 11400000, guid: f879f37c1ccf8c645acb275d75d9a03f, type: 2}
   - {fileID: 11400000, guid: 0a485882299d07440ace4609abac5b1c, type: 2}
