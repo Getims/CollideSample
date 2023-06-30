@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Tile Collide Gate
   m_EditorClassIdentifier: 
   FileName: Tile Collide Gate
-  _isDisabled: 0
+  _isDisabled: 1
   _audioClip: {fileID: 8300000, guid: e5ee3f68b250eb542928a043a5375b48, type: 3}
   _soundPrecent: 1
   _description: Description...

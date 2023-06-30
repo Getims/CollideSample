@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FileName: Tile Collide
   _isDisabled: 0
-  _audioClip: {fileID: 8300000, guid: 3ea62dd3d048be7418a3bb8cf0c4cad4, type: 3}
-  _soundPrecent: 1
+  _audioClip: {fileID: 8300000, guid: 325dd9c36ed88428cb8f41747f9f08b1, type: 3}
+  _soundPrecent: 0.6
   _description: Description...

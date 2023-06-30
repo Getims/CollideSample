@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FileName: Tile Super Move
   _isDisabled: 0
-  _audioClip: {fileID: 8300000, guid: 895f7acbf1b54c341bee180e09d43394, type: 3}
-  _soundPrecent: 1
+  _audioClip: {fileID: 8300000, guid: 3abec19dded7242d29a980e04273f4d0, type: 3}
+  _soundPrecent: 0.55
   _description: Description...
