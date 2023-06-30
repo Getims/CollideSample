@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FileName: Win screen
   _isDisabled: 0
-  _audioClip: {fileID: 8300000, guid: 41bcf0ea583c08145a50d403a144758e, type: 3}
+  _audioClip: {fileID: 8300000, guid: ad78317889d3c46e3881ef162ff984ff, type: 3}
   _soundPrecent: 1
   _description: Description...

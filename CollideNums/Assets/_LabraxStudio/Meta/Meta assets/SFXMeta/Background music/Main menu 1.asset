@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Main menu 1
   m_EditorClassIdentifier: 
   FileName: Main menu 1
-  _isDisabled: 1
-  _audioClip: {fileID: 0}
+  _isDisabled: 0
+  _audioClip: {fileID: 8300000, guid: ad78317889d3c46e3881ef162ff984ff, type: 3}
   _soundPrecent: 1
   _description: Description...
