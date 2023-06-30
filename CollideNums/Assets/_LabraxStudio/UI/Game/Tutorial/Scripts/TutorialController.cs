@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using LabraxStudio.Events;
 using LabraxStudio.Game;
 using LabraxStudio.Meta.Tutorial;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -45,7 +47,7 @@ namespace LabraxStudio.UI.GameScene.Tutorial
         {
             StartStep(_currentStep);
         }
-        
+
         public SwipeTracker GetSwipeTracker()
         {
             ARuleTracker tracker = _ruleTrackers.Find(r => r.Type == RuleType.TileSwipe);
@@ -54,7 +56,7 @@ namespace LabraxStudio.UI.GameScene.Tutorial
 
             return (SwipeTracker) tracker;
         }
-        
+
         public bool HasLockTracker()
         {
             foreach (var ruleTracker in _ruleTrackers)
@@ -71,8 +73,9 @@ namespace LabraxStudio.UI.GameScene.Tutorial
 
         // PRIVATE METHODS: -----------------------------------------------------------------------
 
-        private void StartNextStep()
+        private async void StartNextStep()
         {
+            await Task.Delay(100);
             _currentStep++;
             if (_currentStep >= _currentRules.RulesCount)
                 SendTutorialComplete();
@@ -82,7 +85,7 @@ namespace LabraxStudio.UI.GameScene.Tutorial
 
         private void StartStep(int stepIndex)
         {
-            var rule = _currentRules.GetRule(stepIndex);
+            Rule rule = _currentRules.GetRule(stepIndex);
             if (rule == null)
                 return;
 
@@ -98,18 +101,22 @@ namespace LabraxStudio.UI.GameScene.Tutorial
                     _ruleTrackers.Add(new SwipeTracker(rule.TilePosition, rule.SwipeDirection, rule.SwipeType,
                         _tutorialHand, CheckRules));
                     if (rule.WaitForMerge)
-                        _ruleTrackers.Add(new MergeTracker( CheckRules));
+                        _ruleTrackers.Add(new MergeTracker(CheckRules));
                     if (rule.WaitForGateMove)
-                        _ruleTrackers.Add(new MoveToGateTracker( CheckRules));
+                        _ruleTrackers.Add(new MoveToGateTracker(CheckRules));
                     break;
                 case RuleType.TaskComplete:
-                    _ruleTrackers.Add(new TaskTracker( CheckRules));
+                    _ruleTrackers.Add(new TaskTracker(CheckRules));
                     break;
                 case RuleType.BoosterUse:
-                    _ruleTrackers.Add(new BoosterUseTracker(rule.BoosterType,  CheckRules));
+                    _ruleTrackers.Add(new BoosterUseTracker(rule.BoosterType, CheckRules));
                     break;
                 case RuleType.BoosterTarget:
-                    _ruleTrackers.Add(new BoosterTargetTracker(rule.BoosterTargetTile,  CheckRules));
+                    _ruleTrackers.Add(new BoosterTargetTracker(rule.BoosterTargetTile, CheckRules));
+                    break;
+                case RuleType.Merge:
+                    if (rule.WaitForMerge)
+                        _ruleTrackers.Add(new MergeTracker(CheckRules));
                     break;
             }
         }

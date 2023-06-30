@@ -38,7 +38,7 @@ namespace LabraxStudio.Meta.Tutorial
         private Swipe _swipeType;
 
         [SerializeField]
-        [ShowIf(nameof(TileSwipe))]
+        [ShowIf(nameof(SwipeOrMerge))]
         private bool _waitForMerge = false;
 
         [SerializeField]
@@ -70,6 +70,8 @@ namespace LabraxStudio.Meta.Tutorial
 
 
         private bool TileSwipe => _ruleType == RuleType.TileSwipe;
+        private bool TileMerge => _ruleType == RuleType.Merge;
+        private bool SwipeOrMerge => TileSwipe || TileMerge;
         private bool BoosterUse => _ruleType == RuleType.BoosterUse;
         private bool BoosterTarget => _ruleType == RuleType.BoosterTarget;
 

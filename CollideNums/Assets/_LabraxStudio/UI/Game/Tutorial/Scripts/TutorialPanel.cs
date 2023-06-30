@@ -3,6 +3,7 @@ using LabraxStudio.Events;
 using LabraxStudio.Game;
 using LabraxStudio.Meta.Levels;
 using LabraxStudio.Meta.Tutorial;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
 
