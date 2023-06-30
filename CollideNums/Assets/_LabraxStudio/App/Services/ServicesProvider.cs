@@ -12,6 +12,7 @@ namespace LabraxStudio.App.Services
         public static PlayerDataService PlayerDataService => _playerDataService;
         public static GameFlowService GameFlowService => _gameFlowService;
         public static MusicService MusicService => _musicService;
+        public static TutorialService TutorialService => _tutorialService;
 
         // FIELDS: -------------------------------------------------------------------
 
@@ -23,5 +24,6 @@ namespace LabraxStudio.App.Services
         private static readonly PlayerDataService _playerDataService = new PlayerDataService();
         private static readonly GameFlowService _gameFlowService = new GameFlowService();
         private static readonly MusicService _musicService = new MusicService();
+        private static readonly TutorialService _tutorialService = new TutorialService();
     }
 }

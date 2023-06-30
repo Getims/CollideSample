@@ -18,10 +18,10 @@ MonoBehaviour:
   _levelTemplate:
     width: 6
     height: 6
-    _brushMode: 1
+    _brushMode: 2
     _rightClickSize: 1
     _fieldBrushMode: 3
-    _tilesBrushMode: 2
+    _tilesBrushMode: 0
   _boostersSettings:
   - _boosterMeta: {fileID: 11400000, guid: 3b85c5d335e9ce344b42fbcac79b97cd, type: 2}
   _taskSettings:
@@ -50,7 +50,7 @@ MonoBehaviour:
       Data: 6
     - Name: _brushMode
       Entry: 3
-      Data: 1
+      Data: 2
     - Name: _rightClickSize
       Entry: 3
       Data: 1
@@ -59,7 +59,7 @@ MonoBehaviour:
       Data: 3
     - Name: _tilesBrushMode
       Entry: 3
-      Data: 2
+      Data: 0
     - Name: _levelMatrix
       Entry: 7
       Data: 1|System.Int32[,], mscorlib
@@ -101,7 +101,7 @@ MonoBehaviour:
       Data: 2
     - Name: 
       Entry: 3
-      Data: 20
+      Data: 2
     - Name: 
       Entry: 3
       Data: 1
@@ -155,7 +155,7 @@ MonoBehaviour:
       Data: 2
     - Name: 
       Entry: 3
-      Data: 2
+      Data: 20
     - Name: 
       Entry: 3
       Data: 1

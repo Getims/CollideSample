@@ -14,122 +14,170 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _levelsRules:
   - _levelIndex: 1
-    _tutorialTitleSprite: {fileID: 21300000, guid: 5a6ddd414585aec4abab09b69d72aed3, type: 3}
+    _tutorialTitleSprite: {fileID: 21300000, guid: 7885a157a1cf91d4494cfb0e155996bd, type: 3}
     _rules:
-    - _showTitle: 1
+    - _replaceTitle: 0
+      _newTitle: {fileID: 0}
       _hideTitle: 0
       _ruleType: 1
       _showHand: 1
       _tilePosition: {x: 4, y: 1}
-      _swipePosition: {x: 0, y: 1}
-      _mergePosition: {x: 0, y: 0}
+      _swipeDirection: 1
+      _swipeType: 3
+      _waitForMerge: 0
+      _waitForGateMove: 1
       _boosterType: 0
       _boosterTargetTile: {x: 0, y: 0}
-    - _showTitle: 0
+    - _replaceTitle: 1
+      _newTitle: {fileID: 21300000, guid: 2717967ba057f1a479ab931adc01f1d0, type: 3}
       _hideTitle: 0
       _ruleType: 1
       _showHand: 1
-      _tilePosition: {x: 1, y: 4}
-      _swipePosition: {x: 5, y: 4}
-      _mergePosition: {x: 0, y: 0}
+      _tilePosition: {x: 4, y: 4}
+      _swipeDirection: 3
+      _swipeType: 1
+      _waitForMerge: 0
+      _waitForGateMove: 0
+      _boosterType: 0
+      _boosterTargetTile: {x: 0, y: 0}
+    - _replaceTitle: 0
+      _newTitle: {fileID: 0}
+      _hideTitle: 0
+      _ruleType: 1
+      _showHand: 1
+      _tilePosition: {x: 4, y: 3}
+      _swipeDirection: 2
+      _swipeType: 0
+      _waitForMerge: 0
+      _waitForGateMove: 1
       _boosterType: 0
       _boosterTargetTile: {x: 0, y: 0}
   - _levelIndex: 2
     _tutorialTitleSprite: {fileID: 21300000, guid: ab9888a4856926041a43e8e5b0d0d43e, type: 3}
     _rules:
-    - _showTitle: 1
+    - _replaceTitle: 0
+      _newTitle: {fileID: 0}
       _hideTitle: 0
-      _ruleType: 2
+      _ruleType: 1
       _showHand: 1
       _tilePosition: {x: 4, y: 3}
-      _swipePosition: {x: 0, y: 0}
-      _mergePosition: {x: 4, y: 1}
+      _swipeDirection: 3
+      _swipeType: 3
+      _waitForMerge: 1
+      _waitForGateMove: 0
       _boosterType: 0
       _boosterTargetTile: {x: 0, y: 0}
-    - _showTitle: 0
+    - _replaceTitle: 0
+      _newTitle: {fileID: 0}
       _hideTitle: 0
       _ruleType: 1
       _showHand: 1
       _tilePosition: {x: 4, y: 1}
-      _swipePosition: {x: 4, y: 0}
-      _mergePosition: {x: 0, y: 0}
+      _swipeDirection: 3
+      _swipeType: 0
+      _waitForMerge: 0
+      _waitForGateMove: 1
       _boosterType: 0
       _boosterTargetTile: {x: 0, y: 0}
-    - _showTitle: 0
+    - _replaceTitle: 0
+      _newTitle: {fileID: 0}
       _hideTitle: 0
       _ruleType: 1
       _showHand: 1
       _tilePosition: {x: 2, y: 2}
-      _swipePosition: {x: 2, y: 1}
-      _mergePosition: {x: 0, y: 0}
+      _swipeDirection: 1
+      _swipeType: 0
+      _waitForMerge: 1
+      _waitForGateMove: 0
       _boosterType: 0
       _boosterTargetTile: {x: 0, y: 0}
-    - _showTitle: 0
+    - _replaceTitle: 0
+      _newTitle: {fileID: 0}
       _hideTitle: 0
       _ruleType: 1
       _showHand: 1
-      _tilePosition: {x: 4, y: 1}
-      _swipePosition: {x: 5, y: 1}
-      _mergePosition: {x: 0, y: 0}
+      _tilePosition: {x: 1, y: 4}
+      _swipeDirection: 4
+      _swipeType: 0
+      _waitForMerge: 0
+      _waitForGateMove: 1
       _boosterType: 0
       _boosterTargetTile: {x: 0, y: 0}
   - _levelIndex: 3
     _tutorialTitleSprite: {fileID: 21300000, guid: 36daa7ad500f2024dafc0d97e4ce5eeb, type: 3}
     _rules:
-    - _showTitle: 1
+    - _replaceTitle: 0
+      _newTitle: {fileID: 0}
       _hideTitle: 0
-      _ruleType: 3
+      _ruleType: 2
       _showHand: 1
       _tilePosition: {x: 0, y: 0}
-      _swipePosition: {x: 0, y: 0}
-      _mergePosition: {x: 0, y: 0}
+      _swipeDirection: 0
+      _swipeType: 0
+      _waitForMerge: 0
+      _waitForGateMove: 0
       _boosterType: 0
       _boosterTargetTile: {x: 0, y: 0}
   - _levelIndex: 10
     _tutorialTitleSprite: {fileID: 21300000, guid: 1a9d7fd0886c2cd48903a84164ecefb8, type: 3}
     _rules:
-    - _showTitle: 1
+    - _replaceTitle: 0
+      _newTitle: {fileID: 0}
       _hideTitle: 0
-      _ruleType: 4
+      _ruleType: 3
       _showHand: 1
       _tilePosition: {x: 0, y: 0}
-      _swipePosition: {x: 0, y: 0}
-      _mergePosition: {x: 0, y: 0}
+      _swipeDirection: 0
+      _swipeType: 0
+      _waitForMerge: 0
+      _waitForGateMove: 0
       _boosterType: 2
       _boosterTargetTile: {x: 0, y: 0}
-    - _showTitle: 0
-      _hideTitle: 0
-      _ruleType: 5
-      _showHand: 1
-      _tilePosition: {x: 0, y: 0}
-      _swipePosition: {x: 0, y: 0}
-      _mergePosition: {x: 0, y: 0}
-      _boosterType: 0
-      _boosterTargetTile: {x: 1, y: 3}
-    - _showTitle: 0
+    - _replaceTitle: 0
+      _newTitle: {fileID: 0}
       _hideTitle: 0
       _ruleType: 4
       _showHand: 1
       _tilePosition: {x: 0, y: 0}
-      _swipePosition: {x: 0, y: 0}
-      _mergePosition: {x: 0, y: 0}
-      _boosterType: 1
-      _boosterTargetTile: {x: 0, y: 0}
-    - _showTitle: 0
+      _swipeDirection: 0
+      _swipeType: 0
+      _waitForMerge: 0
+      _waitForGateMove: 0
+      _boosterType: 0
+      _boosterTargetTile: {x: 1, y: 3}
+    - _replaceTitle: 0
+      _newTitle: {fileID: 0}
       _hideTitle: 0
-      _ruleType: 5
+      _ruleType: 3
       _showHand: 1
       _tilePosition: {x: 0, y: 0}
-      _swipePosition: {x: 0, y: 0}
-      _mergePosition: {x: 0, y: 0}
+      _swipeDirection: 0
+      _swipeType: 0
+      _waitForMerge: 0
+      _waitForGateMove: 0
+      _boosterType: 1
+      _boosterTargetTile: {x: 0, y: 0}
+    - _replaceTitle: 0
+      _newTitle: {fileID: 0}
+      _hideTitle: 0
+      _ruleType: 4
+      _showHand: 1
+      _tilePosition: {x: 0, y: 0}
+      _swipeDirection: 0
+      _swipeType: 0
+      _waitForMerge: 0
+      _waitForGateMove: 0
       _boosterType: 0
       _boosterTargetTile: {x: 2, y: 1}
-    - _showTitle: 0
+    - _replaceTitle: 0
+      _newTitle: {fileID: 0}
       _hideTitle: 1
       _ruleType: 0
       _showHand: 1
       _tilePosition: {x: 0, y: 0}
-      _swipePosition: {x: 0, y: 0}
-      _mergePosition: {x: 0, y: 0}
+      _swipeDirection: 0
+      _swipeType: 0
+      _waitForMerge: 0
+      _waitForGateMove: 0
       _boosterType: 0
       _boosterTargetTile: {x: 0, y: 0}

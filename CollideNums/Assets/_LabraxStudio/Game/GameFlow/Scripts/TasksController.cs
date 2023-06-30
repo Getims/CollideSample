@@ -60,7 +60,10 @@ namespace LabraxStudio.Game
                 SendTaskComplete(tileNumber);
 
             if (IsAllTasksComplete)
+            {
+                GameEvents.SendAllTasksComplete();
                 ServicesProvider.GameFlowService.GameOverTracker.CheckForWin();
+            }
         }
 
         private void SendTaskProgress(int tileNumber)
