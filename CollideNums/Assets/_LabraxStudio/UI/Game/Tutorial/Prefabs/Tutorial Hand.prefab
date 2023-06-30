@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 650810743312042124}
   - component: {fileID: 1100626530046569005}
+  - component: {fileID: 8922091196312322703}
   m_Layer: 0
   m_Name: Tutorial Hand
   m_TagString: Untagged
@@ -72,6 +73,25 @@ MonoBehaviour:
     _moveDelay: 0.16
     _fadeTime: 0.16
     _fadeDelay: 0.9
+  _handClick: {fileID: 8922091196312322703}
+--- !u!114 &8922091196312322703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2031086647892994123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f143e6cd26764bc9942590cfc2c02f13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _element: {fileID: 6403171112089505864}
+  _pulseTime: 0.65
+  _pulsePower: 0.2
+  _isLooped: 1
+  _delay: 0
+  _startScale: {x: 1, y: 1, z: 1}
 --- !u!1 &5031589402719159309
 GameObject:
   m_ObjectHideFlags: 0

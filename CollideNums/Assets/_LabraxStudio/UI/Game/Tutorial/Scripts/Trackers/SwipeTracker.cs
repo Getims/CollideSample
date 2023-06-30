@@ -35,13 +35,13 @@ namespace LabraxStudio.UI.GameScene.Tutorial
         public override void SetComplete()
         {
             _isComplete = true;
-            _tutorialHand.StopSwipeAnimation();
+            _tutorialHand.StopAnimations();
             //_checkRules?.Invoke();
         }
 
         public override void OnDestroy()
         {
-            _tutorialHand.StopSwipeAnimation();
+            _tutorialHand.StopAnimations();
         }
 
         public bool IsCorrectSwipe(Vector2Int tile, Direction direction, Swipe swipe)

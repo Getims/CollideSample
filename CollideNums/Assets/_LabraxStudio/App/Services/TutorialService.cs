@@ -1,4 +1,5 @@
 using LabraxStudio.Game;
+using LabraxStudio.Game.Tiles;
 using LabraxStudio.UI.GameScene.Tutorial;
 using UnityEngine;
 
@@ -29,11 +30,37 @@ namespace LabraxStudio.App.Services
             SwipeTracker _swipeTracker = _tutorialController.GetSwipeTracker();
             if (_swipeTracker == null || _swipeTracker.IsComplete)
                 return !_tutorialController.HasLockTracker();
-            
-            if(!_swipeTracker.IsCorrectSwipe(tile, direction, swipe)) 
+
+            if (!_swipeTracker.IsCorrectSwipe(tile, direction, swipe))
                 return false;
 
             return true;
+        }
+
+        public bool CanUseBooster(BoosterType boosterType)
+        {
+            if (!IsInitialized)
+                return true;
+            
+            BoosterUseTracker boosterUseTracker = _tutorialController.GetBoosterUseTracker();
+
+            if (boosterUseTracker == null || boosterUseTracker.IsComplete)
+                return true;
+
+            return boosterUseTracker.IsCorrectBooster(boosterType);
+        }
+
+        public bool CanUseBoosterOnTile(Tile tile)
+        {
+            if (!IsInitialized)
+                return true;
+            
+            BoosterTargetTracker boosterTargetTracker = _tutorialController.GetBoosterTargetTracker();
+
+            if (boosterTargetTracker == null || boosterTargetTracker.IsComplete)
+                return true;
+
+            return boosterTargetTracker.IsCorrectTarget(tile);
         }
     }
 }

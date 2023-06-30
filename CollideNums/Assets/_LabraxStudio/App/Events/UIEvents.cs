@@ -1,3 +1,4 @@
+using LabraxStudio.Game;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -11,6 +12,7 @@ namespace LabraxStudio.Events
         public static UnityEvent OnWinScreenClaimClicked = new UnityEvent();
         public static UnityEvent OnUISelect = new UnityEvent();
         public static UnityEvent OnUIDeselect = new UnityEvent();
+        public static UnityEvent<BoosterType> OnNeedBoosterHand = new UnityEvent<BoosterType>();
 
         // PUBLIC METHODS: ------------------------------------------------------------------------
 
@@ -18,5 +20,6 @@ namespace LabraxStudio.Events
         public static void SendUIDeselect() => OnUIDeselect?.Invoke();
         public static void SendMainMenuTapToPlay() => OnMainMenuTapToPlay?.Invoke();
         public static void SendWinScreenClaimClicked() => OnWinScreenClaimClicked?.Invoke();
+        public static void SendNeedBoosterHand(BoosterType type) => OnNeedBoosterHand?.Invoke(type);
     }
 }

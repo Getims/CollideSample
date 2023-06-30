@@ -84,6 +84,11 @@ namespace LabraxStudio.Game.Tiles
         {
             if (BoostersController.IsBoosterActive)
             {
+                bool lockedByTutorial = !ServicesProvider.TutorialService.CanUseBoosterOnTile(this);
+                
+                if(lockedByTutorial)
+                    return;
+                
                 GameEvents.SendTileSelectForBooster(this);
                 return;
             }

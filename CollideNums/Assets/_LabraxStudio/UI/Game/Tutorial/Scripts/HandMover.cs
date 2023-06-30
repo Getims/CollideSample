@@ -1,7 +1,6 @@
 using System;
 using DG.Tweening;
 using LabraxStudio.Game;
-using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace LabraxStudio.UI.GameScene.Tutorial

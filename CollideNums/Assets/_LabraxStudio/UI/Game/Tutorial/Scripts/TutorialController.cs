@@ -57,6 +57,24 @@ namespace LabraxStudio.UI.GameScene.Tutorial
             return (SwipeTracker) tracker;
         }
 
+        public BoosterUseTracker GetBoosterUseTracker()
+        {
+            ARuleTracker tracker = _ruleTrackers.Find(r => r.Type == RuleType.BoosterUse);
+            if (tracker == null)
+                return null;
+
+            return (BoosterUseTracker) tracker;
+        }
+        
+        public BoosterTargetTracker GetBoosterTargetTracker()
+        {
+            ARuleTracker tracker = _ruleTrackers.Find(r => r.Type == RuleType.BoosterTarget);
+            if (tracker == null)
+                return null;
+
+            return (BoosterTargetTracker) tracker;
+        }
+        
         public bool HasLockTracker()
         {
             foreach (var ruleTracker in _ruleTrackers)
@@ -112,7 +130,7 @@ namespace LabraxStudio.UI.GameScene.Tutorial
                     _ruleTrackers.Add(new BoosterUseTracker(rule.BoosterType, CheckRules));
                     break;
                 case RuleType.BoosterTarget:
-                    _ruleTrackers.Add(new BoosterTargetTracker(rule.BoosterTargetTile, CheckRules));
+                    _ruleTrackers.Add(new BoosterTargetTracker(rule.BoosterTargetTile, _tutorialHand, CheckRules));
                     break;
                 case RuleType.Merge:
                     if (rule.WaitForMerge)
@@ -153,5 +171,6 @@ namespace LabraxStudio.UI.GameScene.Tutorial
             _ruleTrackers.Clear();
             OnStepComplete();
         }
+
     }
 }

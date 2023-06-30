@@ -1,23 +1,25 @@
 using System;
+using LabraxStudio.Events;
 using LabraxStudio.Game;
 using LabraxStudio.Meta.Tutorial;
 
 namespace LabraxStudio.UI.GameScene.Tutorial
 {
-    internal class BoosterUseTracker : ARuleTracker
+    public class BoosterUseTracker : ARuleTracker
     {
         // FIELDS: -------------------------------------------------------------------
         
-        private readonly BoosterType _ruleBoosterType;
+        private readonly BoosterType _boosterType;
         private readonly Action _checkRules;
 
         // PUBLIC METHODS: -----------------------------------------------------------------------
         
-        public BoosterUseTracker(BoosterType ruleBoosterType, Action checkRules)
+        public BoosterUseTracker(BoosterType boosterType, Action checkRules)
         {
             _type = RuleType.BoosterUse;
-            _ruleBoosterType = ruleBoosterType;
+            _boosterType = boosterType;
             _checkRules = checkRules;
+            UIEvents.SendNeedBoosterHand(_boosterType);
         }
 
         public override void SetComplete()
@@ -28,6 +30,15 @@ namespace LabraxStudio.UI.GameScene.Tutorial
 
         public override void OnDestroy()
         {
+        }
+
+        public bool IsCorrectBooster(BoosterType boosterType)
+        {
+            if (_boosterType != boosterType)
+                return false;
+            
+            SetComplete();
+            return true;
         }
     }
 }

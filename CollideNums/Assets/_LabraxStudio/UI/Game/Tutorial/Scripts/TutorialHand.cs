@@ -2,6 +2,7 @@ using System;
 using LabraxStudio.App.Services;
 using LabraxStudio.Game;
 using LabraxStudio.Game.Tiles;
+using LabraxStudio.UI.Common;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -17,6 +18,9 @@ namespace LabraxStudio.UI.GameScene.Tutorial
         [SerializeField]
         private HandMover _longMove;
 
+        [SerializeField]
+        private Pulsation _handClick;
+        
         // FIELDS: -------------------------------------------------------------------
 
         private HandMover _currentMover;
@@ -26,14 +30,23 @@ namespace LabraxStudio.UI.GameScene.Tutorial
         protected override void OnDestroy()
         {
             base.OnDestroy();
-            StopMovers();
+            StopAnimations();
         }
 
         // PUBLIC METHODS: -----------------------------------------------------------------------
+
+        public void PlayClickAnimation(Vector2Int tilePosition)
+        {
+            StopAnimations();
+            Vector3 startPosition = CalculateStartPosition(tilePosition);
+            transform.position = startPosition;
+            Show(true);
+            _handClick.StartPulse();
+        }
         
         public void PlaySwipeAnimation(Vector2Int tilePosition, Direction swipeDirection, Swipe swipeType)
         {
-            StopMovers();
+            StopAnimations();
             Vector3 startPosition = CalculateStartPosition(tilePosition);
             _currentMover = _shortMove;
             if (swipeType == Swipe.Infinite)
@@ -42,17 +55,19 @@ namespace LabraxStudio.UI.GameScene.Tutorial
             _currentMover.StartMove(startPosition, swipeDirection, _targetCG);
         }
         
-        [Button]
-        public void StopSwipeAnimation()
+        public void StopAnimations()
         {
-            StopMovers();
+            _handClick.StopPulse();
+            _shortMove.StopMove();
+            _longMove.StopMove();
+            Hide(true);
         }
-
+        
         // PRIVATE METHODS: -----------------------------------------------------------------------
-        [Button]
+        
         private void DebugMove(Vector3 tilePosition, Direction swipeDirection, Swipe swipeType)
         {
-            StopMovers();
+            StopAnimations();
             Vector3 startPosition = tilePosition;
             _currentMover = _shortMove;
             if (swipeType == Swipe.Infinite)
@@ -61,11 +76,6 @@ namespace LabraxStudio.UI.GameScene.Tutorial
             _currentMover.StartMove(startPosition, swipeDirection, _targetCG);
         }
         
-        private void StopMovers()
-        {
-            _shortMove.StopMove();
-            _longMove.StopMove();
-        }
 
         private Vector3 CalculateStartPosition(Vector2Int tilePosition)
         {

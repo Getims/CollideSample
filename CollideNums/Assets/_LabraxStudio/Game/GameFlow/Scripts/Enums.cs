@@ -47,6 +47,7 @@ namespace LabraxStudio.Game
 
     public enum BoosterType
     {
+        Null = -1,
         LevelRestart = 0,
         Split = 1,
         Multiply = 2
