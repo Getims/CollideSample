@@ -51,3 +51,5 @@ MonoBehaviour:
   _tilesGatePassSFX: {fileID: 11400000, guid: 7cc043a71958e664e804f9bf1e049f99, type: 2}
   _taskGatePassSFX: {fileID: 11400000, guid: d602b6e1b47c24047b18df973f9d787b, type: 2}
   _tilesMergeSFX: {fileID: 11400000, guid: 7bc09a121fd785d47a31bd13ab2bf5d9, type: 2}
+  _tileSplitBoosterSFX: {fileID: 11400000, guid: cf3a8a4e6307f9f45ab7dc4c30d38857, type: 2}
+  _tileMultiplyBoosterSFX: {fileID: 11400000, guid: 8c0e62569877c024b9ba34715e73a61d, type: 2}

@@ -37,6 +37,7 @@ namespace LabraxStudio.UI.GameScene.Tutorial
             OnDestroy();
             _currentRules = currentRules;
             _tutorialTitleText = tutorialTitleText;
+            SetTitleState(null, true);
             _tutorialHand = tutorialHand;
             _onTutorialComplete = onTutorialComplete;
             _currentStep = 0;

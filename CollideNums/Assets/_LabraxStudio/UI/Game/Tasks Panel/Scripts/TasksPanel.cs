@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using LabraxStudio.App.Services;
 using LabraxStudio.Events;
 using LabraxStudio.Game;
+using LabraxStudio.Game.Tiles;
 using LabraxStudio.Meta.Levels;
 using UnityEngine;
 
@@ -56,7 +57,7 @@ namespace LabraxStudio.UI.GameScene.Tasks
             LevelMeta currentLevel = ServicesProvider.LevelMetaService.GetCurrentLevelMeta();
             TaskSettings taskSettings = currentLevel.TaskSettings;
             _taskTip.Hide();
-            
+
             if (taskSettings == null)
                 return false;
 
@@ -85,8 +86,22 @@ namespace LabraxStudio.UI.GameScene.Tasks
 
         private void CheckTiles()
         {
-            int tilesCount = ServicesProvider.GameFlowService.TilesController.Tiles.Count;
-            if (tilesCount > 0)
+            List<Tile> tiles = ServicesProvider.GameFlowService.TilesController.Tiles;
+            int tilesCount = tiles.Count;
+            if (tilesCount == 0)
+                return;
+
+            bool showTip = false;
+            foreach (var tile in tiles)
+            {
+                if (!tile.MovedToGate)
+                {
+                    showTip = true;
+                    break;
+                }
+            }
+
+            if (showTip)
                 _taskTip.Show();
         }
         // EVENTS RECEIVERS: ----------------------------------------------------------------------
@@ -129,7 +144,6 @@ namespace LabraxStudio.UI.GameScene.Tasks
 
             _currentContainer.AddTaskProgress(tileNumber);
         }
-
 
         private void OnAllTasksComplete() => CheckTiles();
     }
