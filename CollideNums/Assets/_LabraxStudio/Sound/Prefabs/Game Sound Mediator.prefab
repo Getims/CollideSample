@@ -49,4 +49,5 @@ MonoBehaviour:
   _tileMoveSFX: {fileID: 11400000, guid: 2a25efa403cac8340a63bea15251008c, type: 2}
   _tileSuperMoveSFX: {fileID: 11400000, guid: 1842fbc31c5af6c47a125ab6ffbc81bb, type: 2}
   _tilesGatePassSFX: {fileID: 11400000, guid: 7cc043a71958e664e804f9bf1e049f99, type: 2}
+  _taskGatePassSFX: {fileID: 11400000, guid: d602b6e1b47c24047b18df973f9d787b, type: 2}
   _tilesMergeSFX: {fileID: 11400000, guid: 7bc09a121fd785d47a31bd13ab2bf5d9, type: 2}

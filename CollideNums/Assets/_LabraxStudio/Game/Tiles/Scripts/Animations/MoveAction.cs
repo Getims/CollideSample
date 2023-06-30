@@ -22,12 +22,12 @@ namespace LabraxStudio.Game.Tiles
             _gameFieldSettings = ServicesProvider.GameSettingsService.GetGameSettings().GameFieldSettings;
             _swipeSettings = ServicesProvider.GameSettingsService.GetGameSettings().SwipeSettings;
         }
-        
+
         // PROPERTIES: ----------------------------------------------------------------------------
-        
+
         public Vector2Int MoveTo => _moveTo;
         private TilesController TilesController => ServicesProvider.GameFlowService.TilesController;
-        
+
         // FIELDS: -------------------------------------------------------------------
 
         private readonly Tile _tile;
@@ -58,17 +58,17 @@ namespace LabraxStudio.Game.Tiles
                 OnMoveComplete();
                 return;
             }
-            
+
             float time = CalculateTime(_swipeSettings.TileSpeed, _swipe);
-            
+
             if (_swipe != Swipe.Infinite)
             {
                 GameSoundMediator.Instance.PlayTileMoveSFX();
                 _tile.transform.DOMove(newPosition, time)
                     .SetEase(ease)
-                    .OnComplete(()=>
+                    .OnComplete(() =>
                     {
-                        if(_collideWithGate)
+                        if (_collideWithGate)
                             GameSoundMediator.Instance.PlayTileCollideGateSFX();
                         OnMoveComplete();
                     });
@@ -113,7 +113,6 @@ namespace LabraxStudio.Game.Tiles
 
         private IEnumerator Moving(Transform tile, Vector3 startPosition, Vector3 endPosition)
         {
-            float testTime = 0;
             float timeStep = 0.01f;
 
             var moveDelta = endPosition - startPosition;
@@ -134,18 +133,20 @@ namespace LabraxStudio.Game.Tiles
                 currentAcceleration += acceleration;
                 tile.position = Vector3.Lerp(startPosition, endPosition, currentTime / timeToMaxCoord);
 
-                testTime += timeStep;
-                if(currentTime < timeToMaxCoord)
+                if (currentTime < timeToMaxCoord)
                     yield return new WaitForSeconds(timeStep);
             }
 
-            //WUtils.ReworkPoint("TestTime: " + testTime);
             _tile.PlayCollideEffect(_direction);
-            if(_collideWithGate)
+
+            if (_collideWithGate)
                 GameSoundMediator.Instance.PlayTileCollideGateSFX();
             else
-                GameSoundMediator.Instance.PlayTileCollideSFX();
-            
+            {
+                if (!_tile.IsMerging && !_tile.MovedToGate)
+                    GameSoundMediator.Instance.PlayTileCollideSFX();
+            }
+
             OnMoveComplete();
         }
 

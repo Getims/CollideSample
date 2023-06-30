@@ -89,6 +89,7 @@ namespace LabraxStudio.UI
             */
             if (isWin)
             {
+                ServicesProvider.MusicService.PlayWinScreenMusic();
                 _menuUIFactory.Create(MenuType.WinScreen);
                 if (_levelIndexPanelMenu == null)
                     _levelIndexPanelMenu = _menuUIFactory.Create<LevelIndexPanel>(MenuType.LevelIndexPanel);

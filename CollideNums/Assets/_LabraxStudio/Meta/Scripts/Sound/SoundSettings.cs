@@ -34,6 +34,10 @@ namespace LabraxStudio.Meta
         [Space(10)]
         [SerializeField]
         private SFXMeta _mainMenuBackgroundMusic;
+        
+        [Space(10)]
+        [SerializeField]
+        private SFXMeta _winScreenBackgroundMusic;
 
         [SerializeField]
         private List<SFXMeta> _gameBackgroundMusic = new List<SFXMeta>();
@@ -46,6 +50,7 @@ namespace LabraxStudio.Meta
         public float GameplaySoundsVolume => _gameplaySoundsVolume;
         public float BackgroundMusicVolume => _backgroundMusicVolume;
         public SFXMeta MainMenuBackgroundMusic => _mainMenuBackgroundMusic;
+        public SFXMeta WinScreenBackgroundMusic => _winScreenBackgroundMusic;
         public List<SFXMeta> GameBackgroundMusic => _gameBackgroundMusic;
     }
 }

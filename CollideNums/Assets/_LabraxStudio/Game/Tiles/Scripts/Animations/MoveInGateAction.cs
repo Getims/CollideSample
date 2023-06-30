@@ -3,7 +3,6 @@ using DG.Tweening;
 using LabraxStudio.App.Services;
 using LabraxStudio.Events;
 using LabraxStudio.Meta.GameField;
-using LabraxStudio.Sound;
 using UnityEngine;
 
 namespace LabraxStudio.Game.Tiles
@@ -43,8 +42,6 @@ namespace LabraxStudio.Game.Tiles
             Ease ease = Ease.OutCubic;
 
             float time = CalculateTime(_swipeSettings.TileSpeed);
-
-            GameSoundMediator.Instance.PlayTilesGatePassSFX();
             ServicesProvider.GameFlowService.GatesController.PlayGatePassEffect(_gateCell);
             GameEvents.SendMoveTileInGate(_tile.Value);
             
