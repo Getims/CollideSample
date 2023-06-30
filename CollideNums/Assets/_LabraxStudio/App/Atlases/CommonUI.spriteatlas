@@ -74,6 +74,7 @@ SpriteAtlas:
     cachedData: {fileID: 0}
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
+  - {fileID: 21300000, guid: 94a385421d954b74c99b2944004c501a, type: 3}
   - {fileID: 21300000, guid: edf5fb136be84224185c2863fb6fc928, type: 3}
   - {fileID: 21300000, guid: e8362b93e84eb8741a0ba69116921302, type: 3}
   - {fileID: 21300000, guid: d01f06759c08c3943b7067ed1daa001b, type: 3}
@@ -82,6 +83,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 9703a16ad98bf654288e6ce6ce6fc909, type: 3}
   - {fileID: 21300000, guid: fcbe756e33c9f084bab8b67954b55f82, type: 3}
   m_PackedSpriteNamesToIndex:
+  - white_plate2 - no_shadow
   - back_shade
   - ad_icon_yellow2
   - white_plate2

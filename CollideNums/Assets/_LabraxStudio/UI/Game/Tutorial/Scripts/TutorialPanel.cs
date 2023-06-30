@@ -33,7 +33,6 @@ namespace LabraxStudio.UI.GameScene.Tutorial
             GameEvents.OnGenerateLevel.AddListener(OnLevelGenerate);
             GameEvents.OnGameOver.AddListener(OnGameOver);
             GameEvents.OnGameFail.AddListener(OnGameFail);
-            GameEvents.OnLevelRestartBoosterUse.AddListener(OnLevelRestartBoosterUse);
         }
 
         protected override void OnDestroy()
@@ -42,7 +41,6 @@ namespace LabraxStudio.UI.GameScene.Tutorial
             base.OnDestroy();
             GameEvents.OnGenerateLevel.RemoveListener(OnLevelGenerate);
             GameEvents.OnGameOver.RemoveListener(OnGameOver);
-            GameEvents.OnLevelRestartBoosterUse.RemoveListener(OnLevelRestartBoosterUse);
         }
 
         private void Start()
@@ -124,9 +122,5 @@ namespace LabraxStudio.UI.GameScene.Tutorial
 
         private void OnTutorialComplete() => Hide();
 
-        private void OnLevelRestartBoosterUse()
-        {
-            
-        }
     }
 }

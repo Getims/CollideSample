@@ -10,6 +10,7 @@
         WinScreen = 5,
         FailScreen = 6,
         TasksPanel = 7,
-        TutorialPanel = 8
+        TutorialPanel = 8,
+        TaskPopupWindow = 9
     }
 }

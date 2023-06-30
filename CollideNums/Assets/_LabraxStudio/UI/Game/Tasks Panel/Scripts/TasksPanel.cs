@@ -14,6 +14,9 @@ namespace LabraxStudio.UI.GameScene.Tasks
         [SerializeField]
         private List<TasksContainer> _tasksContainers = new List<TasksContainer>();
 
+        [SerializeField]
+        private TaskTip _taskTip;
+
         // FIELDS: -------------------------------------------------------------------
 
         private TasksContainer _currentContainer;
@@ -28,6 +31,7 @@ namespace LabraxStudio.UI.GameScene.Tasks
             GameEvents.OnGameOver.AddListener(OnGameOver);
             GameEvents.OnGameFail.AddListener(OnGameFail);
             GameEvents.OnLevelTaskProgress.AddListener(OnLevelTaskProgress);
+            GameEvents.OnAllTasksComplete.AddListener(OnAllTasksComplete);
         }
 
         protected override void OnDestroy()
@@ -36,6 +40,7 @@ namespace LabraxStudio.UI.GameScene.Tasks
             GameEvents.OnGenerateLevel.RemoveListener(OnLevelGenerate);
             GameEvents.OnGameOver.RemoveListener(OnGameOver);
             GameEvents.OnLevelTaskProgress.RemoveListener(OnLevelTaskProgress);
+            GameEvents.OnAllTasksComplete.RemoveListener(OnAllTasksComplete);
         }
 
         private void Start()
@@ -50,7 +55,8 @@ namespace LabraxStudio.UI.GameScene.Tasks
         {
             LevelMeta currentLevel = ServicesProvider.LevelMetaService.GetCurrentLevelMeta();
             TaskSettings taskSettings = currentLevel.TaskSettings;
-
+            _taskTip.Hide();
+            
             if (taskSettings == null)
                 return false;
 
@@ -77,6 +83,12 @@ namespace LabraxStudio.UI.GameScene.Tasks
             }
         }
 
+        private void CheckTiles()
+        {
+            int tilesCount = ServicesProvider.GameFlowService.TilesController.Tiles.Count;
+            if (tilesCount > 0)
+                _taskTip.Show();
+        }
         // EVENTS RECEIVERS: ----------------------------------------------------------------------
 
         private void OnGameOver(bool isWin)
@@ -109,7 +121,7 @@ namespace LabraxStudio.UI.GameScene.Tasks
             else
                 Hide();
         }
-        
+
         private void OnLevelTaskProgress(int tileNumber)
         {
             if (!_hasTasks)
@@ -117,5 +129,8 @@ namespace LabraxStudio.UI.GameScene.Tasks
 
             _currentContainer.AddTaskProgress(tileNumber);
         }
+
+
+        private void OnAllTasksComplete() => CheckTiles();
     }
 }
