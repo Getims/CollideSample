@@ -29,6 +29,13 @@ namespace LabraxStudio.Sound
 
         [SerializeField, Required, AssetsOnly]
         private SFXMeta _tilesMergeSFX;
+        
+        [SerializeField, Required, AssetsOnly]
+        private SFXMeta _tileSplitBoosterSFX;
+        
+        [SerializeField, Required, AssetsOnly]
+        private SFXMeta _tileMultiplyBoosterSFX;
+        
         // FIELDS: --------------------------------------------------------------------------------
 
         private SoundManager _soundManager;
@@ -63,5 +70,11 @@ namespace LabraxStudio.Sound
 
         [Button, DisableInEditorMode]
         public void PlayTilesMergeSFX() => _soundManager.PlaySound(_tilesMergeSFX);
+        
+        [Button, DisableInEditorMode]
+        public void PlayTileSplitByBoosterSFX() => _soundManager.PlaySound(_tileSplitBoosterSFX);
+        
+        [Button, DisableInEditorMode]
+        public void PlayTileMultiplyByBoosterSFX() => _soundManager.PlaySound(_tileMultiplyBoosterSFX);
     }
 }

@@ -111,17 +111,22 @@ namespace LabraxStudio.Game.Tiles
             _tiles.Clear();
         }
 
-        public async void  ChangeTileValue(Tile tile, bool increase)
+        public async void ChangeTileValue(Tile tile, bool increase)
         {
             int newValue = _tilesMatrix[tile.Cell.x, tile.Cell.y];
             newValue = increase ? newValue + 1 : newValue - 1;
             _tilesMatrix[tile.Cell.x, tile.Cell.y] = newValue;
             tile.PlayMergeEffect();
-            GameSoundMediator.Instance.PlayTilesMergeSFX();
+
+            if (increase)
+                GameSoundMediator.Instance.PlayTileMultiplyByBoosterSFX();
+            else
+                GameSoundMediator.Instance.PlayTileSplitByBoosterSFX();
+
             await Task.Delay(200);
             tile.SetValue(newValue, _tilesGenerator.GetSprite(newValue));
             await Task.Delay(100);
-            
+
             MergeAction mergeAction = _tilesMerger.CheckMerge(tile);
             if (mergeAction == null)
                 CheckAllMerges();
