@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FileName: Task Gate Pass
   _isDisabled: 0
-  _audioClip: {fileID: 8300000, guid: 8d108537c9dc0734ab6d5d98143f7707, type: 3}
-  _soundPrecent: 0.601
+  _audioClip: {fileID: 8300000, guid: c0e3f771e5f714e188207c42fc7f97a5, type: 3}
+  _soundPrecent: 0.65
   _description: Description...
