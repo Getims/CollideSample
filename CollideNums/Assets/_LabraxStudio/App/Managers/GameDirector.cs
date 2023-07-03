@@ -1,4 +1,5 @@
 ﻿using System;
+using LabraxStudio.AnalyticsIntegration.RemoteControl;
 using LabraxStudio.App.Services;
 using LabraxStudio.Meta;
 using LabraxStudio.Meta.Levels;
@@ -32,11 +33,6 @@ namespace LabraxStudio.App
             Debug.unityLogger.logEnabled = ServicesProvider.GameSettingsService.GetGlobalSettings().UsesUnityLogs;
         }
 
-        protected override void OnDestroy()
-        {
-            base.OnDestroy();
-        }
-
         // PUBLIC METHODS: ------------------------------------------------------------------------
         
 #if UNITY_EDITOR
@@ -59,6 +55,8 @@ namespace LabraxStudio.App
         private void SetupManagers()
         {
             GameSettings gameSettings = ServicesProvider.GameSettingsService.GetGameSettings();
+            
+            RemoteDataManager.Initialize();
             ServicesProvider.PlayerDataService.Initialize();
             ServicesProvider.LevelDataService.Initialize();
             ServicesProvider.LevelMetaService.Initialize(GetLevelsListMeta(gameSettings).List);
@@ -76,8 +74,6 @@ namespace LabraxStudio.App
                 ServicesProvider.PlayerDataService.SetFirstStartState(false);
                 ServicesProvider.GameDataService.SaveGameData();
             }
-
-            GameManager.Instance.SaveTime();
         }
 
         private LevelsListMeta GetLevelsListMeta(GameSettings gameSettings)

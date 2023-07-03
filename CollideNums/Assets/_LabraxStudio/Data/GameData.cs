@@ -20,6 +20,9 @@ namespace LabraxStudio.Data
 
         [BoxGroup(Level), SerializeField]
         private LevelsData _levelsData = new LevelsData();
+        
+        [BoxGroup(Level), SerializeField]
+        private RemoteData _remoteData = new RemoteData();
 
         // PROPERTIES: ----------------------------------------------------------------------------
 
@@ -46,6 +49,10 @@ namespace LabraxStudio.Data
             get => _levelsData;
             set => _levelsData = value;
         }
+
+        public AnalyticsData AnalyticsData { get; set; }
+
+        public RemoteData RemoteData => _remoteData;
 
         // FIELDS: --------------------------------------------------------------------------------
 
