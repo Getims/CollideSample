@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FileName: Tile Multiply Booster
   _isDisabled: 0
-  _audioClip: {fileID: 8300000, guid: 47c66df3ea795084e8b0f9c93f82cd28, type: 3}
-  _soundPrecent: 1
+  _audioClip: {fileID: 8300000, guid: 6cc0d8a21f5d34144886a6b6ea1f8d9e, type: 3}
+  _soundPrecent: 0.4
   _description: Description...
