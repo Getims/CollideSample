@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bde5b51eef6a4560b2a2442b047a9a7, type: 3}
+  m_Name: SwAccountData
+  m_EditorClassIdentifier: 
+  titlesList:
+  - games: []
+    id: 
+    name: --- select ---
+  - games:
+    - adMobId: 
+      bundleId: 
+      facebookAppId: 1555975658263417
+      gameAnalyticsKey: 231f6821d9e4c3c69f4e81aea8e3556c
+      gameAnalyticsSecret: 17d2d26a59152db1fad2a96ee5c2ea4ac097ff0b
+      id: d88cbbb8-2405-4129-bf48-71f88f2412e3
+      isAppKey: 
+      os: android
+      platform: google_play
+      storeId: 
+    id: b5f4b750-467e-49ee-becb-c6e4c5ddff1c
+    name: Collide Nums
+  - games:
+    - adMobId: ca-app-pub-9334727648055753~6115592764
+      bundleId: com.labraxstudio.histogram
+      facebookAppId: 905476760430491
+      gameAnalyticsKey: 93d63dc450605ac2c00fccba98250ba7
+      gameAnalyticsSecret: 28af48e5ba616b6f2fd468bd1ff18597bf31617b
+      id: f22d74e4-77e5-4414-ad9f-2dd5b1bc4c54
+      isAppKey: 1a066708d
+      os: android
+      platform: google_play
+      storeId: com.labraxstudio.histogram
+    - adMobId: ca-app-pub-9334727648055753~8550184411
+      bundleId: com.labraxstudio.histogram
+      facebookAppId: 905476760430491
+      gameAnalyticsKey: f376d234af290db590ddbd1321374be1
+      gameAnalyticsSecret: 3900ffee5fd79a1051ac58eff9c1f65586ca3d05
+      id: 93664f06-59fa-4372-a385-3be5b25eaefe
+      isAppKey: 1a066aa15
+      os: ios
+      platform: app_store
+      storeId: id1658748785
+    id: bcf115f8-2b5f-4197-92f6-dc0bf02104d9
+    name: 'Histogram: Hexa Puzzle Story'
+  integrationGuideUrl: 
