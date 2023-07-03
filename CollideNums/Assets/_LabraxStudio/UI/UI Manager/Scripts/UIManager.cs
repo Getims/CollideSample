@@ -72,6 +72,13 @@ namespace LabraxStudio.UI
                 _menuUIFactory.Create(MenuType.CurrenciesBase, out _currencies);
         }
 
+        public void InitializeDebugMenu()
+        {
+            bool enableDebug = ServicesProvider.GameSettingsService.GetGameSettings().LaunchSettings.EnableDebug;
+            if(enableDebug)
+                _menuUIFactory.Create(MenuType.DebugMenu);
+        }
+        
         // PRIVATE METHODS: -----------------------------------------------------------------------
 
         private void OnMainMenuTapToPlay()

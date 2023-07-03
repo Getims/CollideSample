@@ -56,11 +56,13 @@ namespace LabraxStudio.Game.Debug
         {
             base.Awake();
             GameEvents.OnGenerateLevel.AddListener(OnLevelGenerated);
+            UIEvents.OnCalculateSwipeSpeed.AddListener(UpdateSpeed);
         }
 
         private void OnDestroy()
         {
             GameEvents.OnGenerateLevel.RemoveListener(OnLevelGenerated);
+            UIEvents.OnCalculateSwipeSpeed.RemoveListener(UpdateSpeed);
         }
 
         private void Start()

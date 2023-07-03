@@ -8,6 +8,7 @@ namespace LabraxStudio.Events
     {
         // EVENTS RECEIVERS: ----------------------------------------------------------------------
 
+        public static UnityEvent<float> OnCalculateSwipeSpeed = new UnityEvent<float>();
         public static UnityEvent OnMainMenuTapToPlay = new UnityEvent();
         public static UnityEvent OnWinScreenClaimClicked = new UnityEvent();
         public static UnityEvent OnTaskWindowClosed = new UnityEvent();
@@ -16,7 +17,8 @@ namespace LabraxStudio.Events
         public static UnityEvent<BoosterType> OnNeedBoosterHand = new UnityEvent<BoosterType>();
 
         // PUBLIC METHODS: ------------------------------------------------------------------------
-
+        
+        public static void SendCalculateSwipeSpeed(float swipeSpeed) => OnCalculateSwipeSpeed?.Invoke(swipeSpeed);
         public static void SendUISelect() => OnUISelect?.Invoke();
         public static void SendUIDeselect() => OnUIDeselect?.Invoke();
         public static void SendMainMenuTapToPlay() => OnMainMenuTapToPlay?.Invoke();

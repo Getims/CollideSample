@@ -174,7 +174,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1020788128839848143, guid: 6825177b6920d584d80329fecffb9a9a, type: 3}
       propertyPath: m_Name
-      value: UI Factory - Map Scene
+      value: UI Factory - Main menu
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6825177b6920d584d80329fecffb9a9a, type: 3}
