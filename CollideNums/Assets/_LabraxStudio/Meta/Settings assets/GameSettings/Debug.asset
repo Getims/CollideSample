@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FileName: Debug
   _launchSettings:
-    _enableDebug: 0
+    _enableDebug: 1
     _enableTutorial: 1
   _balanceSettings:
     _startMoney: 100

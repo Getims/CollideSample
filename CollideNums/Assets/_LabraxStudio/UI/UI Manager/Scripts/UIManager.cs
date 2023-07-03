@@ -51,7 +51,10 @@ namespace LabraxStudio.UI
             if (_levelIndexPanelMenu == null)
                 _gameUIFactory.Create(MenuType.LevelIndexPanel);
             _gameUIFactory.Create(MenuType.BoostersPanel);
-            _gameUIFactory.Create(MenuType.TasksPanel);
+
+            int currentLevel = ServicesProvider.PlayerDataService.CurrentLevel;
+            if (currentLevel > 1)
+                _gameUIFactory.Create(MenuType.TasksPanel);
             _gameUIFactory.Create(MenuType.TutorialPanel);
 
             if (!_currencies)
@@ -69,6 +72,13 @@ namespace LabraxStudio.UI
                 _menuUIFactory.Create(MenuType.CurrenciesBase, out _currencies);
         }
 
+        public void InitializeDebugMenu()
+        {
+            bool enableDebug = ServicesProvider.GameSettingsService.GetGameSettings().LaunchSettings.EnableDebug;
+            if(enableDebug)
+                _menuUIFactory.Create(MenuType.DebugMenu);
+        }
+        
         // PRIVATE METHODS: -----------------------------------------------------------------------
 
         private void OnMainMenuTapToPlay()
@@ -81,7 +91,10 @@ namespace LabraxStudio.UI
             }
 
             if (_levelIndexPanelMenu != null)
+            {
                 _levelIndexPanelMenu.HideAndDestroy();
+                _levelIndexPanelMenu = null;
+            }
 
             InitializeGameUI();
         }
@@ -89,7 +102,11 @@ namespace LabraxStudio.UI
         private void CreateTaskWindow()
         {
             if (_levelIndexPanelMenu != null)
+            {
                 _levelIndexPanelMenu.HideAndDestroy();
+                _levelIndexPanelMenu = null;
+            }
+
             _levelIndexPanelMenu = _gameUIFactory.Create<LevelIndexPanel>(MenuType.LevelIndexPanel);
             _gameUIFactory.Create(MenuType.TaskPopupWindow);
         }

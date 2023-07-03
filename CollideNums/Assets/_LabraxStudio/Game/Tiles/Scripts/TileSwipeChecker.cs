@@ -1,5 +1,6 @@
 using System;
 using LabraxStudio.App.Services;
+using LabraxStudio.Events;
 using LabraxStudio.Game.Debug;
 using LabraxStudio.Meta.GameField;
 using UnityEngine;
@@ -89,7 +90,7 @@ namespace LabraxStudio.Game.Tiles
                 delta = Math.Abs(inputDelta.x);
 
             float swipeSpeed = delta / swipeTime;
-            DebugMenu.Instance.UpdateSpeed(swipeSpeed);
+            UIEvents.SendCalculateSwipeSpeed(swipeSpeed);
             return swipeSpeed;
         }
 

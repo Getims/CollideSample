@@ -21,6 +21,7 @@ namespace LabraxStudio.App
         {
             _gameFlowManager.Initialize();
             _uiManager.InitializeMenuUI();
+            _uiManager.InitializeDebugMenu();
         }
     }
 }

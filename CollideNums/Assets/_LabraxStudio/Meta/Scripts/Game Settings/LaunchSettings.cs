@@ -17,5 +17,7 @@ namespace LabraxStudio.Meta
         // PROPERTIES: ----------------------------------------------------------------------------
 
         public bool EnableTutorial => _enableTutorial;
+
+        public bool EnableDebug => _enableDebug;
     }
 }
