@@ -20,8 +20,11 @@ namespace LabraxStudio.Data
 
         [BoxGroup(Level), SerializeField]
         private LevelsData _levelsData = new LevelsData();
-        
-        [BoxGroup(Level), SerializeField]
+
+        [BoxGroup(Analytics), SerializeField]
+        private AnalyticsData _analyticsData = new AnalyticsData();
+
+        [BoxGroup(Analytics), SerializeField]
         private RemoteData _remoteData = new RemoteData();
 
         // PROPERTIES: ----------------------------------------------------------------------------
@@ -50,7 +53,11 @@ namespace LabraxStudio.Data
             set => _levelsData = value;
         }
 
-        public AnalyticsData AnalyticsData { get; set; }
+        public AnalyticsData AnalyticsData
+        {
+            get => _analyticsData;
+            set => _analyticsData = value;
+        }
 
         public RemoteData RemoteData => _remoteData;
 
@@ -59,5 +66,6 @@ namespace LabraxStudio.Data
         private const string MainSettings = "Main Settings";
         private const string Player = "Player Data";
         private const string Level = "Level Data";
+        private const string Analytics = "Analytics Data";
     }
 }

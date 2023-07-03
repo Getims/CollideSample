@@ -1,5 +1,6 @@
 using System;
 using LabraxStudio.AnalyticsIntegration.Ads;
+using LabraxStudio.App.Services;
 using LabraxStudio.Sound;
 using UnityEngine.Events;
 
@@ -8,8 +9,10 @@ namespace LabraxStudio.AnalyticsIntegration.Modules
     public class SuperSonicManager
     {
         // PROPERTIES: ----------------------------------------------------------------------------
-        public bool IsSetuped => _isSetuped; 
-        
+
+        public bool IsSetuped => _isSetuped;
+        private AnalyticsService AnalyticsService => ServicesProvider.AnalyticsService;
+
         // FIELDS: -------------------------------------------------------------------
 
         private bool _isSetuped = false;
@@ -32,7 +35,7 @@ namespace LabraxStudio.AnalyticsIntegration.Modules
             SupersonicWisdom.Api.AddOnRewardedVideoAdAvailableEventListener(OnRewardedOn);
             SupersonicWisdom.Api.AddOnRewardedVideoAdUnavailableEventListener(OnRewardedOff);
             */
-            if(AnalyticsManager.IsPremium())
+            if (AnalyticsService.IsPremium())
                 SetPremiumUser(true);
         }
 
@@ -147,7 +150,7 @@ namespace LabraxStudio.AnalyticsIntegration.Modules
             }
 
             _onInterstitialClose = action;
-           // SupersonicWisdom.Api.ShowInterstitial();
+            // SupersonicWisdom.Api.ShowInterstitial();
         }
 
         public void SendRewardedVideoMissedAfterLevelEnd(Action action)

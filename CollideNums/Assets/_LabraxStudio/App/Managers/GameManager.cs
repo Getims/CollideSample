@@ -1,6 +1,4 @@
-﻿
-using LabraxStudio.Base;
-using LabraxStudio.Loadscreen;
+﻿using LabraxStudio.Loadscreen;
 using LabraxStudio.Managers;
 using Sirenix.OdinInspector;
 using UnityEngine;

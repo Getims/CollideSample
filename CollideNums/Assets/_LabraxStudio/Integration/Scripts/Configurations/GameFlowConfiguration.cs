@@ -12,15 +12,11 @@ namespace LabraxStudio.AnalyticsIntegration.RemoteControl
         [SerializeField, LabelWidth(200)]
         public string LevelsListName = string.Empty;
 
-        [SerializeField, LabelWidth(200)]
-        public string MapPlatformsListName = string.Empty;
-
         // PUBLIC METHODS: -----------------------------------------------------------------------
 
         internal static bool IsEqual(GameFlowConfiguration firstConfig, GameFlowConfiguration secondConfig)
         {
-            return firstConfig.LevelsListName == secondConfig.LevelsListName &&
-                   firstConfig.MapPlatformsListName == secondConfig.MapPlatformsListName;
+            return firstConfig.LevelsListName == secondConfig.LevelsListName;
         }
     }
 }

@@ -1,9 +1,6 @@
 using LabraxStudio.AnalyticsIntegration.Ads;
-using LabraxStudio.AnalyticsIntegration.IAP;
-using LabraxStudio.AnalyticsIntegration.RemoteControl;
-using UnityEngine.Rendering;
-
-//using mixpanel;
+using LabraxStudio.App.Services;
+using mixpanel;
 
 namespace LabraxStudio.AnalyticsIntegration.AnalyticsEvents
 {
@@ -21,197 +18,155 @@ namespace LabraxStudio.AnalyticsIntegration.AnalyticsEvents
 
         public void Setup(bool resetData, bool wasFirstPurchase)
         {
-            /*
             Mixpanel.Init();
             _isSetuped = true;
 
             if (resetData)
                 Mixpanel.Reset();
-            if(wasFirstPurchase)
+            if (wasFirstPurchase)
                 CreateProfile();
 
             RegisterSuperProperties();
-            */
         }
 
-        public void SendGameStartEvent(int sessionNumber)
+        public void SendGameStartEvent()
         {
-            /*
+            if (!_isSetuped)
+                return;
+
+            Mixpanel.Track(LabraxAnalyticsConstants.START_GAME_EVENT_NAME);
+        }
+
+        public void SendGameFinishEvent(int sessionTime)
+        {
             if (!_isSetuped)
                 return;
 
             var props = new Value();
-            props[LabraxAnalyticsConstants.SessionNumberProperty] = sessionNumber;
+            props[LabraxAnalyticsConstants.SESSION_DURATION_PROPERTY] = sessionTime;
 
-            Mixpanel.Track(LabraxAnalyticsConstants.StartGameEventName, props);
-            */
+            Mixpanel.Track(LabraxAnalyticsConstants.FINISH_GAME_EVENT_NAME, props);
         }
 
-        public void SendGameFinishEvent(int sessionNumber, int sessionTime)
+        public void SendLevelStartEvent(int level)
         {
-            /*
             if (!_isSetuped)
                 return;
 
             var props = new Value();
-            props[LabraxAnalyticsConstants.SessionNumberProperty] = sessionNumber;
-            props[LabraxAnalyticsConstants.SessionTimeProperty] = sessionTime;
+            props[LabraxAnalyticsConstants.LEVEL_NUMBER_PROPERTY] = level;
 
-            Mixpanel.Track(LabraxAnalyticsConstants.FinishGameEventName, props);
-            */
+            Mixpanel.Track(LabraxAnalyticsConstants.LEVEL_START_EVENT_NAME, props);
         }
 
-        public void SendLevelStartEvent(int level, int sessionNumber)
+        public void SendLevelRestartEvent(int level)
         {
-            /*
             if (!_isSetuped)
                 return;
 
             var props = new Value();
-            props[LabraxAnalyticsConstants.LevelNumberProperty] = level;
-            props[LabraxAnalyticsConstants.SessionNumberProperty] = sessionNumber;
-            props[LabraxAnalyticsConstants.AttemptNumberProperty] = attemptNum;
+            props[LabraxAnalyticsConstants.LEVEL_NUMBER_PROPERTY] = level;
 
-            Mixpanel.Track(LabraxAnalyticsConstants.LevelStartEventName, props);
-            */
+            Mixpanel.Track(LabraxAnalyticsConstants.LEVEL_RESTART_EVENT_NAME, props);
         }
 
-        public void SendLevelRestartEvent(int level, int sessionNumber)
+        public void SendLevelCompleteEvent(int level, float time)
         {
-            /*
             if (!_isSetuped)
                 return;
 
             var props = new Value();
-            props[LabraxAnalyticsConstants.LevelNumberProperty] = level;
-            props[LabraxAnalyticsConstants.AttemptNumberProperty] = attemptNum;
-            props[LabraxAnalyticsConstants.SessionNumberProperty] = sessionNumber;
+            props[LabraxAnalyticsConstants.LEVEL_NUMBER_PROPERTY] = level;
+            props[LabraxAnalyticsConstants.LEVEL_PLAY_TIME_PROPERTY] = time;
 
-            Mixpanel.Track(LabraxAnalyticsConstants.LevelRestarteEventName, props);
-            */
+            Mixpanel.Track(LabraxAnalyticsConstants.LEVEL_COMPLETE_EVENT_NAME, props);
         }
 
-        public void SendLevelCompleteEvent(int level, int sessionNumber, float time)
-        {
-            /*
-            if (!_isSetuped)
-                return;
-
-            var props = new Value();
-            props[LabraxAnalyticsConstants.LevelNumberProperty] = level;
-            props[LabraxAnalyticsConstants.AttemptNumberProperty] = attemptNum;
-            props[LabraxAnalyticsConstants.SessionNumberProperty] = sessionNumber;
-            props[LabraxAnalyticsConstants.StarsCountProperty] = stars;
-            props[LabraxAnalyticsConstants.LevelPlayTimeProperty] = time;
-
-            Mixpanel.Track(LabraxAnalyticsConstants.LevelCompleteEventName, props);
-            */
-        }
-        
         public void SendBoosterUseEvent(int level, string boosterName)
         {
-            /*
             if (!_isSetuped)
                 return;
 
             var props = new Value();
-            props[LabraxAnalyticsConstants.LevelNumberProperty] = level;
-            props[LabraxAnalyticsConstants.BoosterNameProperty] = boosterName;
+            props[LabraxAnalyticsConstants.LEVEL_NUMBER_PROPERTY] = level;
+            props[LabraxAnalyticsConstants.BOOSTER_NAME_PROPERTY] = boosterName;
 
-            Mixpanel.Track(LabraxAnalyticsConstants.OneBoosterUseEventName, props);
-            */
+            Mixpanel.Track(LabraxAnalyticsConstants.BOOSTER_USE_EVENT_NAME, props);
         }
 
         public void SendBoosterBuyEvent(int level, string boosterName)
         {
-            /*
             if (!_isSetuped)
                 return;
 
             var props = new Value();
-            props[LabraxAnalyticsConstants.LevelNumberProperty] = level;
-            props[LabraxAnalyticsConstants.BoosterNameProperty] = boosterName;
+            props[LabraxAnalyticsConstants.LEVEL_NUMBER_PROPERTY] = level;
+            props[LabraxAnalyticsConstants.BOOSTER_NAME_PROPERTY] = boosterName;
 
-            Mixpanel.Track(LabraxAnalyticsConstants.BuyBoosterEventName, props);
-            */
+            Mixpanel.Track(LabraxAnalyticsConstants.BUY_BOOSTER_EVENT_NAME, props);
         }
 
         public void SendRewardedAdEvent(AdReward adReward, int cashPoints)
         {
-            /*
             if (!_isSetuped)
                 return;
 
             var props = new Value();
-            props[LabraxAnalyticsConstants.RewardTypeProperty] = AdsEnumsConverter.RewardToGADesignName(adReward);
-            props[LabraxAnalyticsConstants.CashPointsProperty] = cashPoints;
+            props[LabraxAnalyticsConstants.REWARD_TYPE_PROPERTY] = AdsEnumsConverter.RewardToGADesignName(adReward);
+            props[LabraxAnalyticsConstants.CASH_POINTS_PROPERTY] = cashPoints;
 
-            Mixpanel.Track(LabraxAnalyticsConstants.RewardedVideoEventName, props);
-            */
+            Mixpanel.Track(LabraxAnalyticsConstants.REWARDED_VIDEO_EVENT_NAME, props);
         }
-        
+
         public void SendInterstitialAdEvent(InterstitialPlacement placement, int cashPoints)
         {
-            /*
             if (!_isSetuped)
                 return;
 
             var props = new Value();
-            props[LabraxAnalyticsConstants.InterstitialPlacementProperty] = placement.ToString(); 
-            props[LabraxAnalyticsConstants.CashPointsProperty] = cashPoints;
+            props[LabraxAnalyticsConstants.INTERSTITIAL_PLACEMENT_PROPERTY] = placement.ToString();
+            props[LabraxAnalyticsConstants.CASH_POINTS_PROPERTY] = cashPoints;
 
-            Mixpanel.Track(LabraxAnalyticsConstants.InterstitialEventName, props);
-            */
+            Mixpanel.Track(LabraxAnalyticsConstants.INTERSTITIAL_EVENT_NAME, props);
         }
-    
-        public void RegisterSuperProperty(string key, int value)
-        { 
-            /*
+
+        public void RegisterSuperProperty(string key, Value value)
+        {
             if (!_isSetuped)
                 return;
-            
+
             Mixpanel.Register(key, value);
-            */
         }
 
         public void CreateProfile()
         {
-            /*
             if (!_isSetuped)
                 return;
-            
+
             Mixpanel.Identify(Mixpanel.DistinctId);
-            */
         }
 
         public void SetCashPointsInProfile(int cashPoints)
         {
-            /*
             if (!_isSetuped)
                 return;
-            
-            Mixpanel.People.Set(LabraxAnalyticsConstants.CashPointsProperty, cashPoints);
-            */
+
+            Mixpanel.People.Set(LabraxAnalyticsConstants.CASH_POINTS_PROPERTY, cashPoints);
         }
-        
+
         // PRIVATE METHODS: -----------------------------------------------------------------------
 
         private void RegisterSuperProperties()
         {
-            /*
-            string abTest = RemoteDataManager.AbTestName;
-            string abConfig = RemoteDataManager.AbTestConfigName;
-            string сonfigSource = RemoteDataManager.GameConfigSource;
+            string abTest = LabraxAnalyticsConstants.AB_NONE_VALUE; // RemoteDataManager.AbTestName;
+            string abConfig = LabraxAnalyticsConstants.AB_NONE_VALUE;
+            string сonfigSource = ServicesProvider.RemoteDataService.GameConfigSource;
 
-            RegisterSuperProperty(LabraxAnalyticsConstants.AbConfigPropertyName, abConfig);
-            RegisterSuperProperty(LabraxAnalyticsConstants.AbTestPropertyName, abTest);
-            RegisterSuperProperty(LabraxAnalyticsConstants.ConfigSourcePropertyName, сonfigSource);
-            RegisterSuperProperty(LabraxAnalyticsConstants.СoinsCountProperty, PlayerManager.Money);
-            RegisterSuperProperty(LabraxAnalyticsConstants.GemsCountProperty, PlayerManager.Gems);
-            RegisterSuperProperty(LabraxAnalyticsConstants.EnergyCountProperty, PlayerManager.Energy);
-            RegisterSuperProperty(LabraxAnalyticsConstants.СashPointsTotalProperty, AnalyticsManager.Instance.CashPoints);
-        */
+            RegisterSuperProperty(LabraxAnalyticsConstants.AB_TEST_PROPERTY, abTest);
+            RegisterSuperProperty(LabraxAnalyticsConstants.AB_CONFIG_PROPERTY, abConfig);
+            RegisterSuperProperty(LabraxAnalyticsConstants.CONFIG_SOURCE_PROPERTY, сonfigSource);
+            RegisterSuperProperty(LabraxAnalyticsConstants.COINS_COUNT_PROPERTY,
+                ServicesProvider.PlayerDataService.Money);
         }
-
     }
 }

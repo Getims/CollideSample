@@ -13,6 +13,7 @@ namespace LabraxStudio.AnalyticsIntegration
         private int levelNumber = 0;
         private int _levelTime = 0;
         private bool _isRestart = false;
+        private AnalyticsService AnalyticsService => ServicesProvider.AnalyticsService;
 
         // GAME ENGINE METHODS: -------------------------------------------------------------------
 
@@ -34,9 +35,9 @@ namespace LabraxStudio.AnalyticsIntegration
             levelNumber = ServicesProvider.PlayerDataService.CurrentLevel;
 
             if (_isRestart)
-                AnalyticsManager.EventsCore.TrackLevelRestart(levelNumber + 1);
+                AnalyticsService.EventsCore.TrackLevelRestart(levelNumber + 1);
             else
-                AnalyticsManager.EventsCore.TrackLevelStart(levelNumber + 1);
+                AnalyticsService.EventsCore.TrackLevelStart(levelNumber + 1);
 
             _isRestart = false;
         }
@@ -45,10 +46,9 @@ namespace LabraxStudio.AnalyticsIntegration
         {
             _levelTime = UnixTime.Now - _levelTime;
 
-            AnalyticsManager.EventsCore.TrackLevelComplete(levelNumber + 1, _levelTime);
+            AnalyticsService.EventsCore.TrackLevelComplete(levelNumber + 1, _levelTime);
         }
-
-
+        
         // EVENTS RECEIVERS: ----------------------------------------------------------------------
 
         private void OnLevelStart()

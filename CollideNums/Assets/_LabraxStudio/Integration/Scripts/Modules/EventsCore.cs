@@ -1,6 +1,8 @@
 using LabraxStudio.AnalyticsIntegration.Ads;
 using LabraxStudio.AnalyticsIntegration.IAP;
+using LabraxStudio.App.Services;
 using LabraxStudio.Data;
+using mixpanel;
 
 namespace LabraxStudio.AnalyticsIntegration.AnalyticsEvents
 {
@@ -8,7 +10,7 @@ namespace LabraxStudio.AnalyticsIntegration.AnalyticsEvents
     {
         // PROPERTIES: ----------------------------------------------------------------------------
 
-        public bool IsMixpanelInitialized => _mixpanelManager.IsSetuped;
+        private AnalyticsService AnalyticsService => ServicesProvider.AnalyticsService;
 
         // FIELDS: -------------------------------------------------------------------
 
@@ -22,44 +24,40 @@ namespace LabraxStudio.AnalyticsIntegration.AnalyticsEvents
         public void Initialize(LabraxAnalyticsSettings analyticsSettings)
         {
             _labraxAnalyticsSettings = analyticsSettings;
-            _analyticsData = AnalyticsManager.Instance.AnalyticsData;
+            _analyticsData = AnalyticsService.AnalyticsData;
             _isInitialized = true;
 
             if (_labraxAnalyticsSettings.EnableMixpanel)
             {
 #if UNITY_EDITOR
                 if (_labraxAnalyticsSettings.UseMixpanelInEditor)
-                {
                     _mixpanelManager.Setup(_analyticsData.IsFirstGameStart, _analyticsData.WasFirstPurchase);
-                    RegisterMixpanelSuperProperty(LabraxAnalyticsConstants.SessionNumberProperty,
-                        _analyticsData.SessionNumber);
-                    if (_analyticsData.SessionNumber > 1)
-                        _mixpanelManager.SendGameFinishEvent(_analyticsData.SessionNumber - 1,
-                            AnalyticsManager.Instance.LastSessionTime);
-                    _mixpanelManager.SendGameStartEvent(_analyticsData.SessionNumber);
-                }
-
 #else
                 _mixpanelManager.Setup(_analyticsData.IsFirstGameStart, _analyticsData.WasFirstPurchase);
-                RegisterMixpanelSuperProperty(LabraxAnalyticsConstants.SessionNumberProperty,
-                    _analyticsData.SessionNumber);
-                if (_analyticsData.SessionNumber > 1)
-                    _mixpanelManager.SendGameFinishEvent(_analyticsData.SessionNumber - 1,
-                        AnalyticsManager.Instance.LastSessionTime);
-                _mixpanelManager.SendGameStartEvent(_analyticsData.SessionNumber);
 #endif
+                
+                if (_analyticsData.SessionNumber > 0)
+                {
+                    RegisterMixpanelSuperProperty(LabraxAnalyticsConstants.SESSION_NUMBER_PROPERTY,
+                        _analyticsData.SessionNumber);
+                    TrackGameFinishEvent(_analyticsData.SessionNumber, AnalyticsService.LastSessionTime);
+                }
+                
+                RegisterMixpanelSuperProperty(LabraxAnalyticsConstants.SESSION_NUMBER_PROPERTY,
+                    _analyticsData.SessionNumber+1);
+                TrackGameStartEvent(_analyticsData.SessionNumber+1);
             }
 
             if (!_analyticsData.WasFirstPurchase)
             {
-                if (AnalyticsManager.IsPremium())
+                if (AnalyticsService.IsPremium())
                     RegisterFirstPurchase();
             }
 
             if (_analyticsData.IsFirstGameStart)
             {
                 _analyticsData.SetFirstGameStart(false);
-                TrackLevelComplete(0, 0);
+                // TrackLevelComplete(0, 0);
             }
         }
 
@@ -67,20 +65,22 @@ namespace LabraxStudio.AnalyticsIntegration.AnalyticsEvents
         {
             if (!_isInitialized)
                 return;
-
-            AnalyticsManager.DebugEvent(string.Format("Level {0} start", level));
-
-            _mixpanelManager.SendLevelStartEvent(level, _analyticsData.SessionNumber);
+            
+            _mixpanelManager.SendLevelStartEvent(level);
+            
+            AnalyticsService.DebugEvent(string.Format("Level {0} start", level));
+            AnalyticsService.SaveSessionTime();
         }
 
         public void TrackLevelRestart(int level)
         {
             if (!_isInitialized)
                 return;
-
-            AnalyticsManager.DebugEvent(string.Format("Level {0} restart", level));
-
-            _mixpanelManager.SendLevelRestartEvent(level, _analyticsData.SessionNumber);
+            
+            _mixpanelManager.SendLevelRestartEvent(level);
+            
+            AnalyticsService.DebugEvent(string.Format("Level {0} restart", level));
+            AnalyticsService.SaveSessionTime();
         }
 
         public void TrackLevelFail(int level)
@@ -88,19 +88,20 @@ namespace LabraxStudio.AnalyticsIntegration.AnalyticsEvents
             if (!_isInitialized)
                 return;
 
-            AnalyticsManager.DebugEvent(string.Format("Level {0} fail", level));
+            AnalyticsService.DebugEvent(string.Format("Level {0} fail", level));
+            AnalyticsService.SaveSessionTime();
         }
 
         public void TrackLevelComplete(int level, float time)
         {
             if (!_isInitialized)
                 return;
+            
+            _mixpanelManager.SendLevelCompleteEvent(level, time);
 
-            AnalyticsManager.DebugEvent(string.Format(
-                "Level {0} Comlete. Session {1}. Level time {2}", level, _analyticsData.SessionNumber,
-                time.ToString()));
-
-            _mixpanelManager.SendLevelCompleteEvent(level, _analyticsData.SessionNumber, time);
+            AnalyticsService.DebugEvent(string.Format(
+                "Level {0} Comlete. Level time {1}", level, time.ToString()));
+            AnalyticsService.SaveSessionTime();
         }
 
         public void TrackBoosterUse(int level, string boosterName)
@@ -108,8 +109,10 @@ namespace LabraxStudio.AnalyticsIntegration.AnalyticsEvents
             if (!_isInitialized)
                 return;
 
-            AnalyticsManager.DebugEvent(string.Format("Level {0}. Use booster", level));
             _mixpanelManager.SendBoosterUseEvent(level, boosterName);
+            
+            AnalyticsService.DebugEvent(string.Format("Level {0}. Use booster {1}", level, boosterName));
+            AnalyticsService.SaveSessionTime();
         }
 
         public void TrackBoosterBuy(int level, string boosterName)
@@ -117,8 +120,10 @@ namespace LabraxStudio.AnalyticsIntegration.AnalyticsEvents
             if (!_isInitialized)
                 return;
 
-            AnalyticsManager.DebugEvent(string.Format("Level {0}. Buy {1} booster", level, boosterName));
             _mixpanelManager.SendBoosterBuyEvent(level, boosterName);
+            
+            AnalyticsService.DebugEvent(string.Format("Level {0}. Buy {1} booster", level, boosterName));
+            AnalyticsService.SaveSessionTime();
         }
 
         public void TrackRewardedAdEvent(AdReward adReward, int cashPoints)
@@ -126,7 +131,8 @@ namespace LabraxStudio.AnalyticsIntegration.AnalyticsEvents
             if (!_isInitialized)
                 return;
 
-            AnalyticsManager.DebugEvent(string.Format("Rewarded video: {0} ", adReward.ToString()));
+            AnalyticsService.DebugEvent(string.Format("Rewarded video: {0} ", adReward.ToString()));
+            AnalyticsService.SaveSessionTime();
         }
 
         public void TrackIapPurchaseComplete(ProductName productName, int cashPoints)
@@ -134,8 +140,9 @@ namespace LabraxStudio.AnalyticsIntegration.AnalyticsEvents
             if (!_isInitialized)
                 return;
 
-            AnalyticsManager.DebugEvent(string.Format("Purchase iap: {0} ",
+            AnalyticsService.DebugEvent(string.Format("Purchase iap: {0} ",
                 AdsEnumsConverter.IapProductNameToMixpanelName(productName)));
+            AnalyticsService.SaveSessionTime();
         }
 
         public void TrackInterstitialAdEvent(InterstitialPlacement placement)
@@ -144,10 +151,11 @@ namespace LabraxStudio.AnalyticsIntegration.AnalyticsEvents
                 return;
 
             int cashPoints = _labraxAnalyticsSettings.ChashPointsForInterstitial;
-            AnalyticsManager.DebugEvent(string.Format("Interstitional show: {0} - {1}", placement, cashPoints));
+            AnalyticsService.DebugEvent(string.Format("Interstitional show: {0} - {1}", placement, cashPoints));
+            AnalyticsService.SaveSessionTime();
         }
 
-        public void RegisterMixpanelSuperProperty(string key, int value) =>
+        public void RegisterMixpanelSuperProperty(string key, Value value) =>
             _mixpanelManager.RegisterSuperProperty(key, value);
 
         // PRIVATE METHODS: -----------------------------------------------------------------------
@@ -158,9 +166,33 @@ namespace LabraxStudio.AnalyticsIntegration.AnalyticsEvents
                 return;
 
             _analyticsData.SetFirstPurchaseState(true);
-            AnalyticsManager.Instance.SaveAnalyticsData();
+            AnalyticsService.SaveAnalyticsData();
 
             _mixpanelManager.CreateProfile();
+        }
+
+        private void TrackGameFinishEvent(int sessionNumber, int sessionTime)
+        {
+            if (!_isInitialized)
+                return;
+
+            _mixpanelManager.SendGameFinishEvent(sessionTime);
+            
+            AnalyticsService.DebugEvent(
+                string.Format("Game finish: session {0}, time {1} ", sessionNumber, sessionTime));
+            AnalyticsService.SaveSessionTime();
+        }
+
+        private void TrackGameStartEvent(int sessionNumber)
+        {
+            if (!_isInitialized)
+                return;
+
+            _mixpanelManager.SendGameStartEvent();
+            
+            AnalyticsService.DebugEvent(
+                string.Format("Game start: session {0} ", sessionNumber));
+            AnalyticsService.SaveSessionTime();
         }
     }
 }

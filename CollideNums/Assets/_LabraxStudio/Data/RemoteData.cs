@@ -18,8 +18,11 @@ namespace LabraxStudio.Data
         private GameFlowConfiguration _gameFlowConfiguration = new GameFlowConfiguration();
 
         [SerializeField]
-        private string _configSource = LabraxAnalyticsConstants.ConfigSourceBuild;
-
+        private string _configSource = LabraxAnalyticsConstants.CONFIG_SOURCE_BUILD_VALUE;
+        
+        [SerializeField]
+        private string _abTestName = LabraxAnalyticsConstants.AB_NONE_VALUE;
+        
         [SerializeField]
         private int _abTestId = -1;
 
@@ -47,6 +50,12 @@ namespace LabraxStudio.Data
         {
             get => _abTestId;
             set => _abTestId = value;
+        }
+
+        public string AbTestName
+        {
+            get => _abTestName;
+            set => _abTestName = value;
         }
     }
 }

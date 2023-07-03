@@ -1,4 +1,6 @@
 using System;
+using LabraxStudio.AnalyticsIntegration.Modules;
+using LabraxStudio.App.Services;
 using LabraxStudio.Events;
 using LabraxStudio.UI;
 using UnityEngine.Events;
@@ -10,15 +12,17 @@ namespace LabraxStudio.AnalyticsIntegration.Ads
         // PROPERTIES: ----------------------------------------------------------------------------
 
         public bool CanShowInterstitial => _isSetuped &&
-                                           AnalyticsManager.SuperSonicManager.IsInterstitialAvailable() &&
-                                           !AnalyticsManager.IsPremium();
+                                           SuperSonicManager.IsInterstitialAvailable() &&
+                                           !AnalyticsService.IsPremium();
 
         public bool CanShowReward => _isSetuped &&
-                                     AnalyticsManager.SuperSonicManager.IsRewardedAvailable();
+                                     SuperSonicManager.IsRewardedAvailable();
 
+        public bool CanShowCrossPromo => SuperSonicManager.IsSetuped && !AnalyticsService.IsPremium();
 
-        public bool CanShowCrossPromo => AnalyticsManager.SuperSonicManager.IsSetuped && !AnalyticsManager.IsPremium();
         private bool ForceReward => false;
+        private SuperSonicManager SuperSonicManager => ServicesProvider.AnalyticsService.SuperSonicManager;
+        private AnalyticsService AnalyticsService => ServicesProvider.AnalyticsService;
 
         // FIELDS: -------------------------------------------------------------------
 
@@ -44,7 +48,7 @@ namespace LabraxStudio.AnalyticsIntegration.Ads
             if (!_isSetuped)
                 return;
 
-            if (AnalyticsManager.SuperSonicManager.IsBannerEnabled())
+            if (SuperSonicManager.IsBannerEnabled())
                 _bannerTracker.ShowBanner();
         }
 
@@ -78,7 +82,7 @@ namespace LabraxStudio.AnalyticsIntegration.Ads
             else
             {
                 string placement = AdsEnumsConverter.RewardToGADesignName(_rewardType);
-                AnalyticsManager.SuperSonicManager.ShowRewarded(OnRewardedCallback, onAdClosed, placement);
+                SuperSonicManager.ShowRewarded(OnRewardedCallback, onAdClosed, placement);
             }
         }
 
@@ -91,7 +95,7 @@ namespace LabraxStudio.AnalyticsIntegration.Ads
                 return;
             }
 
-            AnalyticsManager.SuperSonicManager.ShowInterstitial(onInterstitialClose);
+            SuperSonicManager.ShowInterstitial(onInterstitialClose);
         }
 
         public void ShowGDPRSettings()
@@ -99,7 +103,7 @@ namespace LabraxStudio.AnalyticsIntegration.Ads
             if (!_isSetuped)
                 return;
 
-            AnalyticsManager.SuperSonicManager.ShowPrivacyWindow();
+            SuperSonicManager.ShowPrivacyWindow();
         }
 
         // EVENTS RECEIVERS: ----------------------------------------------------------------------
@@ -110,7 +114,7 @@ namespace LabraxStudio.AnalyticsIntegration.Ads
             {
                 _onRewardedReceived.Invoke();
                 int cashPoints = _analyticsSettings.ChashPointsForRv;
-                AnalyticsManager.EventsCore.TrackRewardedAdEvent(_rewardType, cashPoints);
+                AnalyticsService.EventsCore.TrackRewardedAdEvent(_rewardType, cashPoints);
             }
 
             if (_onAdClosed != null)
@@ -119,6 +123,5 @@ namespace LabraxStudio.AnalyticsIntegration.Ads
 
         private void OnBannerLoaded(float height) =>
             _bannerTracker.ShowBanner(height);
-
     }
 }

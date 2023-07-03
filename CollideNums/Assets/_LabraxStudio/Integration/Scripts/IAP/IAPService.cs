@@ -1,14 +1,16 @@
 using System;
-using LabraxStudio.Managers;
+using LabraxStudio.App.Services;
 using UnityEngine;
 
 namespace LabraxStudio.AnalyticsIntegration.IAP
 {
-    public class IAPManager : SharedManager<IAPManager>
+    public class IAPService
     {
         // PROPERTIES: ----------------------------------------------------------------------------
 
         private bool IsBusy => !_isSetuped || _purchaseInProgress || _isRestore;
+        private IAPCore IAPCore => ServicesProvider.AnalyticsService.IAPCore;
+        private AnalyticsService AnalyticsService => ServicesProvider.AnalyticsService;
 
         // FIELDS: -------------------------------------------------------------------
 
@@ -25,13 +27,11 @@ namespace LabraxStudio.AnalyticsIntegration.IAP
 
         public void Setup(IapSettings iapSettings)
         {
-            base.InitManager();
-
             _iapSettings = iapSettings;
             _iapDelegate = new IapDelegate();
             _iapDelegate.Setup(OnInitComplete, OnPurchaseComplete, OnPurchaseFailure);
 
-            AnalyticsManager.IAPCore.AddIapPurchaseDelegate(_iapDelegate);
+            IAPCore.AddIapPurchaseDelegate(_iapDelegate);
         }
 
         public void BuyProduct(ProductName productName, Action<bool> onComplete = null)
@@ -51,7 +51,7 @@ namespace LabraxStudio.AnalyticsIntegration.IAP
 
             _needBuyEvent = true;
 
-            AnalyticsManager.IAPCore.Purchase(iap.Product);
+            IAPCore.Purchase(iap.Product);
         }
 
         public void DebugBuyProduct(ProductName productName, Action onComplete = null)
@@ -72,7 +72,7 @@ namespace LabraxStudio.AnalyticsIntegration.IAP
             _onRestoreDone += onRestoreDone;
             _isRestore = true;
 
-            AnalyticsManager.IAPCore.RestorePurchases(OnRestorePurchasesComplete);
+            IAPCore.RestorePurchases(OnRestorePurchasesComplete);
         }
 
         // PRIVATE METHODS: -----------------------------------------------------------------------
@@ -82,14 +82,14 @@ namespace LabraxStudio.AnalyticsIntegration.IAP
             switch (productName)
             {
                 case ProductName.NoAds:
-                    AnalyticsManager.EnablePremium();
+                    AnalyticsService.EnablePremium();
                     break;
 
                 case ProductName.NoProduct:
                     break;
 
                 default:
-                    AnalyticsManager.EnablePremium();
+                    AnalyticsService.EnablePremium();
                     break;
             }
         }
@@ -149,7 +149,7 @@ namespace LabraxStudio.AnalyticsIntegration.IAP
 
             ApplyPurchase(iap.Product);
             if (_needBuyEvent)
-                AnalyticsManager.EventsCore.TrackIapPurchaseComplete(iap.Product, iap.CashPoints);
+                AnalyticsService.EventsCore.TrackIapPurchaseComplete(iap.Product, iap.CashPoints);
 
             if (_onPurchaseComplete != null)
             {
