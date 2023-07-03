@@ -1,3 +1,5 @@
+using LabraxStudio.AnalyticsIntegration;
+
 namespace LabraxStudio.App.Services
 {
     public static class ServicesProvider
@@ -13,6 +15,8 @@ namespace LabraxStudio.App.Services
         public static GameFlowService GameFlowService => _gameFlowService;
         public static MusicService MusicService => _musicService;
         public static TutorialService TutorialService => _tutorialService;
+        public static RemoteDataService RemoteDataService => _remoteDataService;
+        public static AnalyticsService AnalyticsService => _analyticsService;
 
         // FIELDS: -------------------------------------------------------------------
 
@@ -25,5 +29,7 @@ namespace LabraxStudio.App.Services
         private static readonly GameFlowService _gameFlowService = new GameFlowService();
         private static readonly MusicService _musicService = new MusicService();
         private static readonly TutorialService _tutorialService = new TutorialService();
+        private static readonly RemoteDataService _remoteDataService = new RemoteDataService();
+        private static readonly AnalyticsService _analyticsService = new AnalyticsService();
     }
 }

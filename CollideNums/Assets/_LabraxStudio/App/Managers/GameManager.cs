@@ -1,6 +1,4 @@
-﻿using LabraxStudio.App.Services;
-using LabraxStudio.Base;
-using LabraxStudio.Loadscreen;
+﻿using LabraxStudio.Loadscreen;
 using LabraxStudio.Managers;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -18,38 +16,13 @@ namespace LabraxStudio.App
 
         // FIELDS: -------------------------------------------------------------------
 
-        private int _sessionStartTime;
-        private static GameManager _gameManager;
         public static LoadingUIE LoadingUIE;
-
-        // GAME ENGINE METHODS: -------------------------------------------------------------------
-
-        private void OnDestroy() =>
-            CancelInvoke(nameof(SaveTime));
-
+        
         // PUBLIC METHODS: -----------------------------------------------------------------------
 
         public void Initialize()
         {
-            _sessionStartTime = UnixTime.Now;
             LoadingUIE = _loadingUIE;
-        }
-
-        public void SaveTime()
-        {
-            /*
-            CancelInvoke(nameof(SaveTime));
-            int time = UnixTime.Now - _sessionStartTime;
-            */
-            Invoke(nameof(SaveTime), 7);
-        }
-
-        public static void LoadScene(Scenes scene)
-        {
-            if (LoadingUIE != null)
-                LoadingUIE.LoadScene(scene);
-            else
-                SceneManager.LoadScene(scene.ToString());
         }
 
         public static void LoadScene(string scene)

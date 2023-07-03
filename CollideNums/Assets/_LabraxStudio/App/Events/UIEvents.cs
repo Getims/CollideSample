@@ -15,6 +15,8 @@ namespace LabraxStudio.Events
         public static UnityEvent OnUISelect = new UnityEvent();
         public static UnityEvent OnUIDeselect = new UnityEvent();
         public static UnityEvent<BoosterType> OnNeedBoosterHand = new UnityEvent<BoosterType>();
+        public static UnityEvent<float> OnBannerShow = new UnityEvent<float>();
+        public static UnityEvent OnBannerHide = new UnityEvent();
 
         // PUBLIC METHODS: ------------------------------------------------------------------------
         
@@ -25,5 +27,7 @@ namespace LabraxStudio.Events
         public static void SendWinScreenClaimClicked() => OnWinScreenClaimClicked?.Invoke();
         public static void SendNeedBoosterHand(BoosterType type) => OnNeedBoosterHand?.Invoke(type);
         public static void SendTaskWindowClosed() => OnTaskWindowClosed?.Invoke();
+        public static void SendShowBanner(float height) => OnBannerShow?.Invoke(height);
+        public static void SendHideBanner() => OnBannerHide?.Invoke();
     }
 }

@@ -46,8 +46,6 @@ namespace LabraxStudio.UI
 
         public void InitializeGameUI()
         {
-            ServicesProvider.MusicService.PlayGameMusic();
-
             if (_levelIndexPanelMenu == null)
                 _gameUIFactory.Create(MenuType.LevelIndexPanel);
             _gameUIFactory.Create(MenuType.BoostersPanel);
@@ -90,17 +88,21 @@ namespace LabraxStudio.UI
                 return;
             }
 
+            ServicesProvider.MusicService.PlayGameMusic();
+            
             if (_levelIndexPanelMenu != null)
             {
                 _levelIndexPanelMenu.HideAndDestroy();
                 _levelIndexPanelMenu = null;
             }
-
+            
             InitializeGameUI();
         }
 
         private void CreateTaskWindow()
         {
+            ServicesProvider.MusicService.PlayGameMusic();
+            
             if (_levelIndexPanelMenu != null)
             {
                 _levelIndexPanelMenu.HideAndDestroy();

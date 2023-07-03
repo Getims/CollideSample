@@ -1,4 +1,5 @@
 using LabraxEditor;
+using LabraxStudio.AnalyticsIntegration;
 using UnityEngine;
 
 namespace LabraxStudio.Meta
@@ -16,11 +17,14 @@ namespace LabraxStudio.Meta
         [SerializeField]
         private SoundSettings _soundSettings;
 
+        [SerializeField]
+        private LabraxAnalyticsSettings _analyticsSettings;
+
         // PROPERTIES: ----------------------------------------------------------------------------
 
         public bool UsesUnityLogs => _usesUnityLogs;
         public GameSettings GameSettings => _gameSettings;
         public SoundSettings SoundSettings => _soundSettings;
-        
+        public LabraxAnalyticsSettings LabraxAnalyticsSettings => _analyticsSettings;
     }
 }

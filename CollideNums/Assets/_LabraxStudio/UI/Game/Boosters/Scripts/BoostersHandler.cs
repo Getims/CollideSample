@@ -96,6 +96,7 @@ namespace LabraxStudio.UI.GameScene.Boosters
                 case BoosterCost.Money:
                     ServicesProvider.PlayerDataService.SpendMoney(boosterMeta.MoneyPrice);
                     CommonEvents.SendAllCurrencyChanged();
+                    TrackBoosterBuy(boosterMeta.BoosterType);
                     UseBooster(boosterMeta.BoosterType);
                     break;
                 case BoosterCost.RV:
@@ -106,6 +107,8 @@ namespace LabraxStudio.UI.GameScene.Boosters
 
         private void UseBooster(BoosterType boosterType)
         {
+            TrackBoosterUse(boosterType);
+
             switch (boosterType)
             {
                 case BoosterType.LevelRestart:
@@ -155,6 +158,18 @@ namespace LabraxStudio.UI.GameScene.Boosters
         {
             int moneyCount = ServicesProvider.PlayerDataService.Money;
             return boosterPrice <= moneyCount;
+        }
+
+        private void TrackBoosterUse(BoosterType boosterType)
+        {
+            int currentLevel = ServicesProvider.PlayerDataService.CurrentLevel + 1;
+            ServicesProvider.AnalyticsService.EventsCore.TrackBoosterUse(currentLevel, boosterType.ToString());
+        }
+
+        private void TrackBoosterBuy(BoosterType boosterType)
+        {
+            int currentLevel = ServicesProvider.PlayerDataService.CurrentLevel + 1;
+            ServicesProvider.AnalyticsService.EventsCore.TrackBoosterBuy(currentLevel, boosterType.ToString());
         }
 
         private void LockPanel() => _panelCanvasGroup.blocksRaycasts = false;

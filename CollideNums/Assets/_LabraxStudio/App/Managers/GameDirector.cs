@@ -35,10 +35,11 @@ namespace LabraxStudio.App
         protected override void OnDestroy()
         {
             base.OnDestroy();
+            CancelInvoke(nameof(SaveTime));
         }
 
         // PUBLIC METHODS: ------------------------------------------------------------------------
-        
+
 #if UNITY_EDITOR
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         public static void Execute()
@@ -53,16 +54,19 @@ namespace LabraxStudio.App
         {
             SetupManagers();
         }
-        
+
         // PRIVATE METHODS: -----------------------------------------------------------------------
 
         private void SetupManagers()
         {
             GameSettings gameSettings = ServicesProvider.GameSettingsService.GetGameSettings();
+
             ServicesProvider.PlayerDataService.Initialize();
             ServicesProvider.LevelDataService.Initialize();
             ServicesProvider.LevelMetaService.Initialize(GetLevelsListMeta(gameSettings).List);
             GameManager.Instance.Initialize();
+            ServicesProvider.RemoteDataService.Initialize();
+            ServicesProvider.AnalyticsService.Initialize();
 
             if (!gameSettings.LaunchSettings.EnableTutorial)
                 ServicesProvider.PlayerDataService.SetTutorialState(true);
@@ -77,7 +81,7 @@ namespace LabraxStudio.App
                 ServicesProvider.GameDataService.SaveGameData();
             }
 
-            GameManager.Instance.SaveTime();
+            Invoke(nameof(SaveTime), 7);
         }
 
         private LevelsListMeta GetLevelsListMeta(GameSettings gameSettings)
@@ -92,8 +96,21 @@ namespace LabraxStudio.App
 
             ServicesProvider.LevelDataService.SetLevelsListName(levelsListMeta.FileName);
             ServicesProvider.LevelMetaService.SetSelectedLevelsList(levelsListMeta);
-            
+
             return levelsListMeta;
+        }
+
+        protected override void OnApplicationQuit()
+        {
+            base.OnApplicationQuit();
+            ServicesProvider.AnalyticsService.SaveSessionTime();
+        }
+
+        private void SaveTime()
+        {
+            CancelInvoke(nameof(SaveTime));
+            ServicesProvider.AnalyticsService.SaveSessionTime();
+            Invoke(nameof(SaveTime), 7);
         }
     }
 }

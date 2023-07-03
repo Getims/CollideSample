@@ -4,6 +4,7 @@
     "com.esotericsoftware.spine.spine-csharp": "https://github.com/EsotericSoftware/spine-runtimes.git?path=spine-csharp/src#4.1",
     "com.esotericsoftware.spine.spine-unity": "https://github.com/EsotericSoftware/spine-runtimes.git?path=spine-unity/Assets/Spine#4.1",
     "com.getims.w-tabs": "https://github.com/Getims/W-Tabs.git",
+    "com.mixpanel.unity": "https://github.com/mixpanel/mixpanel-unity.git#master",
     "com.unity.collab-proxy": "1.17.6",
     "com.unity.collections": "1.2.4",
     "com.unity.feature.2d": "1.0.0",

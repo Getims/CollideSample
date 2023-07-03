@@ -121,6 +121,18 @@ MonoBehaviour:
     - _replaceTitle: 0
       _newTitle: {fileID: 0}
       _hideTitle: 0
+      _ruleType: 1
+      _showHand: 1
+      _tilePosition: {x: 1, y: 1}
+      _swipeDirection: 3
+      _swipeType: 0
+      _waitForMerge: 0
+      _waitForGateMove: 1
+      _boosterType: 0
+      _boosterTargetTile: {x: 0, y: 0}
+    - _replaceTitle: 0
+      _newTitle: {fileID: 0}
+      _hideTitle: 0
       _ruleType: 2
       _showHand: 1
       _tilePosition: {x: 0, y: 0}
