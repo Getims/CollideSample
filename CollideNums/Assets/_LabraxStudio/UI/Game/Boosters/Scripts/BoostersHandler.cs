@@ -163,7 +163,16 @@ namespace LabraxStudio.UI.GameScene.Boosters
         private void TrackBoosterUse(BoosterType boosterType)
         {
             int currentLevel = ServicesProvider.PlayerDataService.CurrentLevel + 1;
-            ServicesProvider.AnalyticsService.EventsCore.TrackBoosterUse(currentLevel, boosterType.ToString());
+
+            if (boosterType != BoosterType.LevelRestart)
+                ServicesProvider.AnalyticsService.EventsCore.TrackBoosterUse(currentLevel, boosterType.ToString());
+            else
+            {
+                if (ServicesProvider.GameFlowService.GameOverTracker.IsFail)
+                    ServicesProvider.AnalyticsService.EventsCore.TrackLevelFail(currentLevel);
+                else
+                    ServicesProvider.AnalyticsService.EventsCore.TrackBoosterUse(currentLevel, boosterType.ToString());
+            }
         }
 
         private void TrackBoosterBuy(BoosterType boosterType)

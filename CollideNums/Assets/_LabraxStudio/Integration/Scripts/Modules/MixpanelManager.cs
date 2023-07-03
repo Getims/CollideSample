@@ -70,6 +70,17 @@ namespace LabraxStudio.AnalyticsIntegration.AnalyticsEvents
             Mixpanel.Track(LabraxAnalyticsConstants.LEVEL_RESTART_EVENT_NAME, props);
         }
 
+        public void SendLevelFailEvent(int level)
+        {
+            if (!_isSetuped)
+                return;
+
+            var props = new Value();
+            props[LabraxAnalyticsConstants.LEVEL_NUMBER_PROPERTY] = level;
+
+            Mixpanel.Track(LabraxAnalyticsConstants.LEVEL_FAIL_EVENT_NAME, props);
+        }
+        
         public void SendLevelCompleteEvent(int level, float time)
         {
             if (!_isSetuped)
@@ -168,5 +179,6 @@ namespace LabraxStudio.AnalyticsIntegration.AnalyticsEvents
             RegisterSuperProperty(LabraxAnalyticsConstants.COINS_COUNT_PROPERTY,
                 ServicesProvider.PlayerDataService.Money);
         }
+
     }
 }

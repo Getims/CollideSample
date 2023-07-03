@@ -9,6 +9,7 @@ namespace LabraxStudio.AnalyticsIntegration
         internal const string LEVEL_START_EVENT_NAME = "Level Start";
         internal const string LEVEL_RESTART_EVENT_NAME = "Level Restart";
         internal const string LEVEL_COMPLETE_EVENT_NAME = "Level Complete";
+        internal const string LEVEL_FAIL_EVENT_NAME = "Level Fail";
 
         internal const string BOOSTER_USE_EVENT_NAME = "Booster Use";
         internal const string BUY_BOOSTER_EVENT_NAME = "Booster Buy ";
