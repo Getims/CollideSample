@@ -30,7 +30,9 @@ namespace LabraxStudio.UI.GameScene.Tutorial
         protected override void OnDestroy()
         {
             base.OnDestroy();
-            StopAnimations();
+            _handClick.StopPulse();
+            _shortMove.StopMove();
+            _longMove.StopMove();
         }
 
         // PUBLIC METHODS: -----------------------------------------------------------------------
@@ -60,7 +62,7 @@ namespace LabraxStudio.UI.GameScene.Tutorial
             _handClick.StopPulse();
             _shortMove.StopMove();
             _longMove.StopMove();
-            Hide(true);
+            _targetCG.alpha = 0;
         }
         
         // PRIVATE METHODS: -----------------------------------------------------------------------

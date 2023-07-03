@@ -120,7 +120,11 @@ namespace LabraxStudio.UI.GameScene.Tutorial
                 Hide();
         }
 
-        private void OnTutorialComplete() => Hide();
+        private void OnTutorialComplete()
+        {
+            Hide();
+            //DestroySelfDelayed();
+        }
 
     }
 }
