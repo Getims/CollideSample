@@ -1,4 +1,5 @@
-﻿using LabraxStudio.Loadscreen;
+﻿using LabraxStudio.Events;
+using LabraxStudio.Loadscreen;
 using LabraxStudio.Managers;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -35,6 +36,7 @@ namespace LabraxStudio.App
 
         public static void ReloadScene()
         {
+            CommonEvents.SendSceneReload();
             LoadScene(SceneManager.GetActiveScene().name);
         }
     }

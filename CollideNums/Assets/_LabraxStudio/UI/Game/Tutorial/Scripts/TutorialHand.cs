@@ -1,10 +1,9 @@
-using System;
 using LabraxStudio.App.Services;
 using LabraxStudio.Game;
 using LabraxStudio.Game.Tiles;
 using LabraxStudio.UI.Common;
-using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace LabraxStudio.UI.GameScene.Tutorial
 {
@@ -20,6 +19,9 @@ namespace LabraxStudio.UI.GameScene.Tutorial
 
         [SerializeField]
         private Pulsation _handClick;
+
+        [SerializeField]
+        private Image _handIcon;
         
         // FIELDS: -------------------------------------------------------------------
 
@@ -29,10 +31,8 @@ namespace LabraxStudio.UI.GameScene.Tutorial
 
         protected override void OnDestroy()
         {
+            StopAnimations();
             base.OnDestroy();
-            _handClick.StopPulse();
-            _shortMove.StopMove();
-            _longMove.StopMove();
         }
 
         // PUBLIC METHODS: -----------------------------------------------------------------------
@@ -40,6 +40,7 @@ namespace LabraxStudio.UI.GameScene.Tutorial
         public void PlayClickAnimation(Vector2Int tilePosition)
         {
             StopAnimations();
+            _handIcon.enabled = true;
             Vector3 startPosition = CalculateStartPosition(tilePosition);
             transform.position = startPosition;
             Show(true);
@@ -49,6 +50,7 @@ namespace LabraxStudio.UI.GameScene.Tutorial
         public void PlaySwipeAnimation(Vector2Int tilePosition, Direction swipeDirection, Swipe swipeType)
         {
             StopAnimations();
+            _handIcon.enabled = true;
             Vector3 startPosition = CalculateStartPosition(tilePosition);
             _currentMover = _shortMove;
             if (swipeType == Swipe.Infinite)
@@ -63,6 +65,7 @@ namespace LabraxStudio.UI.GameScene.Tutorial
             _shortMove.StopMove();
             _longMove.StopMove();
             _targetCG.alpha = 0;
+            _handIcon.enabled = false;
         }
         
         // PRIVATE METHODS: -----------------------------------------------------------------------

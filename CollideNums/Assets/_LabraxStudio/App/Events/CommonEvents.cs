@@ -7,12 +7,14 @@ namespace LabraxStudio.Events
     {
         // EVENTS RECEIVERS: ----------------------------------------------------------------------
 
+        public static UnityEvent OnSceneReload = new UnityEvent();
         public static UnityEvent AllCurrencyChanged = new UnityEvent();
         public static UnityEvent<CurrencyType> CurrencyChanged = new UnityEvent<CurrencyType>();
         public static UnityEvent<CurrencyType> OnNoCurrencyAnimationPlay = new UnityEvent<CurrencyType>();
 
         // PUBLIC METHODS: ------------------------------------------------------------------------
 
+        public static void SendSceneReload() => OnSceneReload?.Invoke();
         public static void SendAllCurrencyChanged() => AllCurrencyChanged?.Invoke();
         public static void SendCurrencyChanged(CurrencyType currencyType) => CurrencyChanged?.Invoke(currencyType);
 
