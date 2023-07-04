@@ -231,6 +231,11 @@ public static class Utils
         Debug.Log("<color=yellow>Rework point</color>"); ;
     }
     
+    public static void InfoPoint(object log)
+    {
+        Debug.Log("<color=blue>Rework point:</color> " + log.ToString()); ;
+    }
+    
     public static void ReworkPoint(object log)
     {
         Debug.Log("<color=yellow>Rework point:</color> " + log.ToString()); ;

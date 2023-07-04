@@ -10,7 +10,7 @@ namespace LabraxStudio.UI.GameScene.Tasks
 
         [SerializeField]
         private Image _tileIcon;
-        
+
         [SerializeField]
         private Pulsation _tilePulsation;
 
@@ -54,9 +54,9 @@ namespace LabraxStudio.UI.GameScene.Tasks
             _taskCounter.SetState(showCounter);
             _taskCounter.UpdateCounter(count);
 
-            if(_lastCount!=-1)
+            if (_lastCount != -1)
                 _tilePulsation.StartPulse();
-            
+
             if (isCorrect)
                 _correctIcon.Show();
             else
@@ -75,6 +75,24 @@ namespace LabraxStudio.UI.GameScene.Tasks
             _taskCounter.SetState(false);
             _correctIcon.Hide();
             _incorrectIcon.Show();
+        }
+
+        public void RevertIncorrectState()
+        {
+            bool isCorrect = _lastCount == 0;
+            bool isIncorrect =  _lastCount < 0;
+            bool showCounter = _lastCount > 0;
+
+            _taskCounter.SetState(showCounter);
+            if (isCorrect)
+                _correctIcon.Show(true);
+            else
+                _correctIcon.Hide();
+
+            if (isIncorrect)
+                _incorrectIcon.Show();
+            else
+                _incorrectIcon.Hide();
         }
     }
 }

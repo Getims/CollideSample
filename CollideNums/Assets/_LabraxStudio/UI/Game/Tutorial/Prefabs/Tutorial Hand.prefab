@@ -74,6 +74,7 @@ MonoBehaviour:
     _fadeTime: 0.16
     _fadeDelay: 0.9
   _handClick: {fileID: 8922091196312322703}
+  _handIcon: {fileID: 5913638289254812671}
 --- !u!114 &8922091196312322703
 MonoBehaviour:
   m_ObjectHideFlags: 0
