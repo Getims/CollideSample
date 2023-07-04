@@ -81,6 +81,9 @@ namespace LabraxStudio.UI.GameScene.Boosters
             ServicesProvider.GameFlowService.BoostersController.SetBoosterState(true);
             GameEvents.OnTileSelectForBooster.AddListener(OnTileClick);
 
+            if (ServicesProvider.GameFlowService.GameOverTracker.IsFail)
+                GameEvents.SendLevelCanBePassedAgain();
+
             _preUsedBooster = boosterMeta;
             _chooseTileText.Show();
             LockPanel();
