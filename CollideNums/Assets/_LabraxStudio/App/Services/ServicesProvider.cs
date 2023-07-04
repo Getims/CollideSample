@@ -17,6 +17,7 @@ namespace LabraxStudio.App.Services
         public static TutorialService TutorialService => _tutorialService;
         public static RemoteDataService RemoteDataService => _remoteDataService;
         public static AnalyticsService AnalyticsService => _analyticsService;
+        public static DebugService DebugService => _debugService;
 
         // FIELDS: -------------------------------------------------------------------
 
@@ -31,5 +32,6 @@ namespace LabraxStudio.App.Services
         private static readonly TutorialService _tutorialService = new TutorialService();
         private static readonly RemoteDataService _remoteDataService = new RemoteDataService();
         private static readonly AnalyticsService _analyticsService = new AnalyticsService();
+        private static readonly DebugService _debugService= new DebugService();
     }
 }

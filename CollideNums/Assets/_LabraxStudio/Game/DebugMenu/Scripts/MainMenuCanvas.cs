@@ -2,11 +2,11 @@ using LabraxStudio.App.Services;
 
 namespace LabraxStudio.Game.Debug
 {
-    public class GameCanvas : CanvasDebugger
+    public class MainMenuCanvas : CanvasDebugger
     {
         private void Awake()
         {
-            ServicesProvider.DebugService.SetGameCanvas(this);
+            ServicesProvider.DebugService.SetMenuCanvas(this);
         }
     }
 }

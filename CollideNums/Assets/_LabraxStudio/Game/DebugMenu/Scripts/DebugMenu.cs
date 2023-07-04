@@ -23,7 +23,7 @@ namespace LabraxStudio.Game.Debug
 
         [SerializeField]
         private TMP_InputField _baseSwipeForce;
-        
+
         [SerializeField]
         private TMP_InputField _accelSwipeForce;
 
@@ -44,6 +44,9 @@ namespace LabraxStudio.Game.Debug
 
         [SerializeField]
         private TMP_Dropdown _listsDropdown;
+
+        [SerializeField]
+        private GameObject _handCursor;
 
         // FIELDS: -------------------------------------------------------------------
 
@@ -156,6 +159,18 @@ namespace LabraxStudio.Game.Debug
             GameManager.ReloadScene();
         }
 
+        public void SwitchCanvasState()
+        {
+            ServicesProvider.DebugService.SwitchCanvases();
+        }
+
+        public void SwitchHandCursor()
+        {
+            bool state = _handCursor.activeInHierarchy;
+            _handCursor.SetActive(!state);
+            Cursor.visible = state;
+        }
+
         // PRIVATE METHODS: -----------------------------------------------------------------------
 
         private void PrepareEaseOptions()
@@ -188,7 +203,8 @@ namespace LabraxStudio.Game.Debug
             _dropdown.options.Clear();
 
             List<TMP_Dropdown.OptionData> options = new List<TMP_Dropdown.OptionData>();
-            var selectableLevels = GetLevelsListMeta( ServicesProvider.GameSettingsService.GetGlobalSettings().GameSettings).List;
+            var selectableLevels =
+                GetLevelsListMeta(ServicesProvider.GameSettingsService.GetGlobalSettings().GameSettings).List;
             int currentIndex = ServicesProvider.PlayerDataService.CurrentLevel;
             if (selectableLevels == null)
                 return;
@@ -202,7 +218,7 @@ namespace LabraxStudio.Game.Debug
 
             _dropdown.SetValueWithoutNotify(currentIndex);
         }
-        
+
         private LevelsListMeta GetLevelsListMeta(GameSettings gameSettings)
         {
             string listName = ServicesProvider.LevelDataService.GetLevelsListName();
@@ -237,7 +253,7 @@ namespace LabraxStudio.Game.Debug
             int i = 0;
             foreach (var levelsListMeta in selectableLevels)
             {
-                _listsDropdown.options.Add(new TMP_Dropdown.OptionData($"{i+1}. {levelsListMeta.FileName}"));
+                _listsDropdown.options.Add(new TMP_Dropdown.OptionData($"{i + 1}. {levelsListMeta.FileName}"));
                 if (levelsListMeta.FileName == currentName) currentIndex = i;
 
                 i++;
