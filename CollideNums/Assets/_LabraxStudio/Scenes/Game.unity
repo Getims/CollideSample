@@ -194,6 +194,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 147888197}
+  - component: {fileID: 147888202}
   - component: {fileID: 147888201}
   - component: {fileID: 147888200}
   - component: {fileID: 147888199}
@@ -306,6 +307,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _revert: 0
+--- !u!114 &147888202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 147888196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd1ab122feb74aa581cba2b0eaade0f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _canvas: {fileID: 147888200}
 --- !u!1 &247706730
 GameObject:
   m_ObjectHideFlags: 0
@@ -482,7 +496,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 5
   m_TargetDisplay: 0
 --- !u!114 &334878053
 MonoBehaviour:
@@ -1458,6 +1472,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1302087267}
+  - component: {fileID: 1302087272}
   - component: {fileID: 1302087271}
   - component: {fileID: 1302087270}
   - component: {fileID: 1302087269}
@@ -1563,6 +1578,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _revert: 0
+--- !u!114 &1302087272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1302087266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46ea9a79beba4693b3f3e41c2d851f9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _canvas: {fileID: 1302087270}
 --- !u!1 &1369974673
 GameObject:
   m_ObjectHideFlags: 0

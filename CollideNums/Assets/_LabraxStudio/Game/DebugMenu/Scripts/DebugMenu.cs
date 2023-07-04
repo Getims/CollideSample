@@ -156,6 +156,11 @@ namespace LabraxStudio.Game.Debug
             GameManager.ReloadScene();
         }
 
+        public void SwitchCanvasState()
+        {
+            ServicesProvider.DebugService.SwitchCanvases();
+        }
+        
         // PRIVATE METHODS: -----------------------------------------------------------------------
 
         private void PrepareEaseOptions()
