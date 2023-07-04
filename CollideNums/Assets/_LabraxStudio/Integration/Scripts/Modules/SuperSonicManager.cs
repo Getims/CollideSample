@@ -2,6 +2,7 @@ using System;
 using LabraxStudio.AnalyticsIntegration.Ads;
 using LabraxStudio.App.Services;
 using LabraxStudio.Sound;
+using SupersonicWisdomSDK;
 using UnityEngine.Events;
 
 namespace LabraxStudio.AnalyticsIntegration.Modules
@@ -26,9 +27,8 @@ namespace LabraxStudio.AnalyticsIntegration.Modules
 
         public void Setup()
         {
-            _isSetuped = false;
-            /*
             _isSetuped = SupersonicWisdom.Api.IsReady();
+            /*
             SupersonicWisdom.Api.AddOnRewardedVideoAdRewardedListener(OnRewarded);
             SupersonicWisdom.Api.AddOnAdClosedListener(OnAdClosed);
             SupersonicWisdom.Api.AddOnAdOpenedListener(OnAdOpened);
@@ -79,7 +79,7 @@ namespace LabraxStudio.AnalyticsIntegration.Modules
             */
         }
 
-        public void SendLevelStartEvent(int level, Action action)
+        public void SendLevelStartEvent(int level, Action action = null)
         {
             if (!_isSetuped)
             {
@@ -89,10 +89,11 @@ namespace LabraxStudio.AnalyticsIntegration.Modules
             }
 
             SetInterstitialPlacement(InterstitialPlacement.UsualLevelStart);
+            SupersonicWisdom.Api.NotifyLevelStarted(level, null);
             //SupersonicWisdom.Api.NotifyLevelStarted(level, action);
         }
 
-        public void SendLevelCompleteEvent(int level, Action action)
+        public void SendLevelCompleteEvent(int level, Action action = null)
         {
             if (!_isSetuped)
             {
@@ -102,10 +103,11 @@ namespace LabraxStudio.AnalyticsIntegration.Modules
             }
 
             SetInterstitialPlacement(InterstitialPlacement.UsualLevelComplete);
+            SupersonicWisdom.Api.NotifyLevelCompleted(level, null);
             //SupersonicWisdom.Api.NotifyLevelCompleted(level, action);
         }
 
-        public void SendLevelFailEvent(int level, Action action)
+        public void SendLevelFailEvent(int level, Action action = null)
         {
             if (!_isSetuped)
             {
@@ -115,6 +117,7 @@ namespace LabraxStudio.AnalyticsIntegration.Modules
             }
 
             SetInterstitialPlacement(InterstitialPlacement.UsualLevelComplete);
+            SupersonicWisdom.Api.NotifyLevelFailed(level, null);
             //SupersonicWisdom.Api.NotifyLevelFailed(level, action);
         }
 

@@ -1,5 +1,6 @@
 using LabraxStudio.AnalyticsIntegration.Ads;
 using LabraxStudio.AnalyticsIntegration.IAP;
+using LabraxStudio.AnalyticsIntegration.Modules;
 using LabraxStudio.App.Services;
 using LabraxStudio.Data;
 using mixpanel;
@@ -11,6 +12,7 @@ namespace LabraxStudio.AnalyticsIntegration.AnalyticsEvents
         // PROPERTIES: ----------------------------------------------------------------------------
 
         private AnalyticsService AnalyticsService => ServicesProvider.AnalyticsService;
+        private SuperSonicManager SuperSonicManager => ServicesProvider.AnalyticsService.SuperSonicManager;
 
         // FIELDS: -------------------------------------------------------------------
 
@@ -67,6 +69,7 @@ namespace LabraxStudio.AnalyticsIntegration.AnalyticsEvents
                 return;
             
             _mixpanelManager.SendLevelStartEvent(level);
+            SuperSonicManager.SendLevelStartEvent(level);
             
             AnalyticsService.DebugEvent(string.Format("Level {0} start", level));
             AnalyticsService.SaveSessionTime();
@@ -78,6 +81,7 @@ namespace LabraxStudio.AnalyticsIntegration.AnalyticsEvents
                 return;
             
             _mixpanelManager.SendLevelRestartEvent(level);
+            SuperSonicManager.SendLevelStartEvent(level);
             
             AnalyticsService.DebugEvent(string.Format("Level {0} restart", level));
             AnalyticsService.SaveSessionTime();
@@ -87,6 +91,9 @@ namespace LabraxStudio.AnalyticsIntegration.AnalyticsEvents
         {
             if (!_isInitialized)
                 return;
+
+            _mixpanelManager.SendLevelFailEvent(level);
+            SuperSonicManager.SendLevelFailEvent(level);
 
             AnalyticsService.DebugEvent(string.Format("Level {0} fail", level));
             AnalyticsService.SaveSessionTime();
@@ -98,7 +105,8 @@ namespace LabraxStudio.AnalyticsIntegration.AnalyticsEvents
                 return;
             
             _mixpanelManager.SendLevelCompleteEvent(level, time);
-
+            SuperSonicManager.SendLevelCompleteEvent(level);
+            
             AnalyticsService.DebugEvent(string.Format(
                 "Level {0} Comlete. Level time {1}", level, time.ToString()));
             AnalyticsService.SaveSessionTime();
@@ -109,6 +117,7 @@ namespace LabraxStudio.AnalyticsIntegration.AnalyticsEvents
             if (!_isInitialized)
                 return;
 
+            boosterName += "Booster";
             _mixpanelManager.SendBoosterUseEvent(level, boosterName);
             
             AnalyticsService.DebugEvent(string.Format("Level {0}. Use booster {1}", level, boosterName));
@@ -119,7 +128,8 @@ namespace LabraxStudio.AnalyticsIntegration.AnalyticsEvents
         {
             if (!_isInitialized)
                 return;
-
+            
+            boosterName += "Booster";
             _mixpanelManager.SendBoosterBuyEvent(level, boosterName);
             
             AnalyticsService.DebugEvent(string.Format("Level {0}. Buy {1} booster", level, boosterName));

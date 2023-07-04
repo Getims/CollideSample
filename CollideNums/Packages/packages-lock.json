@@ -37,6 +37,14 @@
       "dependencies": {},
       "hash": "5ded691b6c09bdc4275523d9afb6d524b6d68d75"
     },
+    "com.supersonic.wisdom": {
+      "version": "file:SupersonicWisdom",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {
+        "com.unity.nuget.newtonsoft-json": "3.0.2"
+      }
+    },
     "com.unity.2d.animation": {
       "version": "7.0.8",
       "depth": 1,
@@ -212,7 +220,7 @@
     },
     "com.unity.nuget.newtonsoft-json": {
       "version": "3.0.2",
-      "depth": 2,
+      "depth": 1,
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"

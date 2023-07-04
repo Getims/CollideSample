@@ -8,6 +8,14 @@ namespace LabraxStudio.Game
 {
     public class GameOverTracker
     {
+        // PROPERTIES: ----------------------------------------------------------------------------
+
+        public bool IsFail => _isFail;
+
+        // FIELDS: -------------------------------------------------------------------
+
+        private bool _isFail = false;
+        
         // PUBLIC METHODS: -----------------------------------------------------------------------
 
         public void CheckForFail()
@@ -23,6 +31,7 @@ namespace LabraxStudio.Game
             if (HasTileOverflow(tiles))
             {
                 Utils.ReworkPoint("Overflow");
+                _isFail = true;
                 GameEvents.SendGameOver(false, FailReason.NumbersOverflow);
                 return;
             }
@@ -30,6 +39,7 @@ namespace LabraxStudio.Game
             if (!HasGateForEachTile(tiles))
             {
                 Utils.ReworkPoint("No gates");
+                _isFail = true;
                 GameEvents.SendGameOver(false, FailReason.NoGatesForTiles);
                 return;
             }
@@ -51,11 +61,17 @@ namespace LabraxStudio.Game
             if (HasNotCompletedTasks(taskController))
             {
                 Utils.ReworkPoint("Not complete all tasks");
+                _isFail = true;
                 GameEvents.SendGameOver(false, FailReason.NotCompleteAllTasks);
                 return;
             }
 
             GameEvents.SendGameOver(true);
+        }
+
+        public void ResetFailFlag()
+        {
+            _isFail = false;
         }
 
         // PRIVATE METHODS: -----------------------------------------------------------------------

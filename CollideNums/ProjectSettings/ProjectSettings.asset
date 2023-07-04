@@ -240,12 +240,12 @@ PlayerSettings:
   clonedFromGUID: c19f32bac17ee4170b3bf8a6a0333fb9
   templatePackageId: com.unity.template.universal-2d@1.1.3
   templateDefaultScene: Assets/Scenes/SampleScene.unity
-  useCustomMainManifest: 0
+  useCustomMainManifest: 1
   useCustomLauncherManifest: 0
-  useCustomMainGradleTemplate: 0
+  useCustomMainGradleTemplate: 1
   useCustomLauncherGradleManifest: 0
   useCustomBaseGradleTemplate: 0
-  useCustomGradlePropertiesTemplate: 0
+  useCustomGradlePropertiesTemplate: 1
   useCustomProguardFile: 0
   AndroidTargetArchitectures: 3
   AndroidTargetDevices: 0
@@ -781,7 +781,7 @@ PlayerSettings:
   webGLDecompressionFallback: 0
   webGLPowerPreference: 2
   scriptingDefineSymbols:
-    Android: ODIN_INSPECTOR;ODIN_INSPECTOR_3;ODIN_INSPECTOR_3_1;TextMeshPro
+    Android: ODIN_INSPECTOR;ODIN_INSPECTOR_3;ODIN_INSPECTOR_3_1;TextMeshPro;SW_STAGE_STAGE1;SW_STAGE_STAGE1_OR_ABOVE
     EmbeddedLinux: TextMeshPro
     GameCoreXboxOne: TextMeshPro
     Lumin: TextMeshPro
@@ -789,11 +789,11 @@ PlayerSettings:
     PS4: TextMeshPro
     PS5: TextMeshPro
     Stadia: TextMeshPro
-    Standalone: TextMeshPro;ODIN_INSPECTOR;ODIN_INSPECTOR_3;ODIN_INSPECTOR_3_1
+    Standalone: TextMeshPro;ODIN_INSPECTOR;ODIN_INSPECTOR_3;ODIN_INSPECTOR_3_1;SW_STAGE_STAGE1;SW_STAGE_STAGE1_OR_ABOVE
     WebGL: TextMeshPro
     Windows Store Apps: TextMeshPro
     XboxOne: TextMeshPro
-    iPhone: TextMeshPro
+    iPhone: TextMeshPro;SW_STAGE_STAGE1;SW_STAGE_STAGE1_OR_ABOVE
     tvOS: TextMeshPro
   additionalCompilerArguments: {}
   platformArchitecture: {}
@@ -812,7 +812,8 @@ PlayerSettings:
   gcIncremental: 1
   assemblyVersionValidation: 1
   gcWBarrierValidation: 0
-  apiCompatibilityLevelPerPlatform: {}
+  apiCompatibilityLevelPerPlatform:
+    Android: 3
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
   metroPackageName: 2D_URP

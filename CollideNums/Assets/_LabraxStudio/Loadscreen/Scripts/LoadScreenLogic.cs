@@ -2,6 +2,7 @@ using System.Collections;
 using LabraxStudio.App;
 using LabraxStudio.App.Services;
 using LabraxStudio.Base;
+using SupersonicWisdomSDK;
 using UnityEngine;
 
 namespace LabraxStudio.Loadscreen
@@ -28,9 +29,8 @@ namespace LabraxStudio.Loadscreen
         private void Start()
         {
 #if !UNITY_EDITOR
-            OnSupersonicWisdomReady();
-            //SupersonicWisdom.Api.AddOnReadyListener(OnSupersonicWisdomReady);
-            //SupersonicWisdom.Api.Initialize();
+            SupersonicWisdom.Api.AddOnReadyListener(OnSupersonicWisdomReady);
+            SupersonicWisdom.Api.Initialize();
 #else
             Utils.PerformWithDelay(this, 0.1f, SelectScene);
 #endif
