@@ -90,6 +90,23 @@ namespace LabraxStudio.UI.GameScene.Tasks
                 _background.sprite = _badBackground;
             }
         }
+
+        public void RevertIncorrectState()
+        {
+            if (_isBackSwitched)
+            {
+                _isBackSwitched = false;
+                _background.sprite = _normalBackground;
+            }
+
+            foreach (var taskItem in _taskItems)
+            {
+                taskItem.RevertIncorrectState();
+                //int count = taskItem.CurrentCount;
+                //taskItem.SetCurrentCount(count);
+            }
+        }
+
         // PRIVATE METHODS: -----------------------------------------------------------------------
 
         private Sprite GetSprite(int tileNumber, List<Sprite> tasksSprites)

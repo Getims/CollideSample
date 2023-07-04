@@ -36,6 +36,7 @@ namespace LabraxStudio.UI.GameScene.Boosters
             GameEvents.OnGameOver.AddListener(OnGameOver);
             CommonEvents.AllCurrencyChanged.AddListener(OnAllCurrencyChanged);
             GameEvents.OnTileAction.AddListener(OnTileAction);
+            GameEvents.OnLevelCanBePassedAgain.AddListener(OnLevelCanBePassedAgain);
         }
 
         protected override void OnDestroy()
@@ -45,6 +46,7 @@ namespace LabraxStudio.UI.GameScene.Boosters
             GameEvents.OnGameOver.RemoveListener(OnGameOver);
             CommonEvents.AllCurrencyChanged.RemoveListener(OnAllCurrencyChanged);
             GameEvents.OnTileAction.RemoveListener(OnTileAction);
+            GameEvents.OnLevelCanBePassedAgain.RemoveListener(OnLevelCanBePassedAgain);
             _boostersHandler?.OnDestroy();
         }
 
@@ -159,5 +161,16 @@ namespace LabraxStudio.UI.GameScene.Boosters
 
         private void OnAllCurrencyChanged() => CheckButtonsState();
         private void OnTileAction() => CheckButtonsState();
+
+        private void OnLevelCanBePassedAgain()
+        {
+            foreach (var boosterButton in _boosterButtons)
+            {
+                if (boosterButton.BoosterMeta == null)
+                    continue;
+
+                boosterButton.StopPulsation();
+            }
+        }
     }
 }

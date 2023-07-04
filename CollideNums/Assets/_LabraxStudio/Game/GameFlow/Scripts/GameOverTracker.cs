@@ -23,14 +23,20 @@ namespace LabraxStudio.Game
             List<Tile> tiles = ServicesProvider.GameFlowService.TilesController.Tiles;
 
             if (HasTilesForGates(tiles))
+            {
+                CheckForFailRevert();
                 return;
+            }
 
             if (HasMerges(tiles))
+            {
+                CheckForFailRevert();
                 return;
+            }
             
             if (HasTileOverflow(tiles))
             {
-                Utils.ReworkPoint("Overflow");
+                Utils.InfoPoint("Overflow");
                 _isFail = true;
                 GameEvents.SendGameOver(false, FailReason.NumbersOverflow);
                 return;
@@ -38,11 +44,13 @@ namespace LabraxStudio.Game
 
             if (!HasGateForEachTile(tiles))
             {
-                Utils.ReworkPoint("No gates");
+                Utils.InfoPoint("No gates");
                 _isFail = true;
                 GameEvents.SendGameOver(false, FailReason.NoGatesForTiles);
                 return;
             }
+            
+            //CheckForFailRevert();
         }
 
         public void CheckForWin()
@@ -60,7 +68,7 @@ namespace LabraxStudio.Game
 
             if (HasNotCompletedTasks(taskController))
             {
-                Utils.ReworkPoint("Not complete all tasks");
+                Utils.InfoPoint("Not complete all tasks");
                 _isFail = true;
                 GameEvents.SendGameOver(false, FailReason.NotCompleteAllTasks);
                 return;
@@ -76,6 +84,16 @@ namespace LabraxStudio.Game
 
         // PRIVATE METHODS: -----------------------------------------------------------------------
 
+        private void CheckForFailRevert()
+        {
+            if (_isFail)
+            {
+                _isFail = false;
+                GameEvents.SendLevelCanBePassedAgain();
+                Utils.ReworkPoint("Fail revert");
+            }
+        }
+        
         private bool HasTiles()
         {
             List<Tile> tiles = ServicesProvider.GameFlowService.TilesController.Tiles;
@@ -105,12 +123,9 @@ namespace LabraxStudio.Game
                 .Select(y => y.Key);
 
             if (duplicates.Count() > 0)
-            {
-                //Utils.ReworkPoint("Has merges");
                 return true;
-            }
 
-            Utils.ReworkPoint("No merges");
+            Utils.InfoPoint("No merges");
             return false;
         }
 

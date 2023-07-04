@@ -47,7 +47,7 @@ namespace LabraxStudio.AnalyticsIntegration
             _levelStartTime = UnixTime.Now - _levelStartTime;
             AnalyticsService.EventsCore.TrackLevelComplete(_levelNumber + 1, _levelStartTime);
         }
-        
+
         // EVENTS RECEIVERS: ----------------------------------------------------------------------
 
         private void OnLevelStart()
@@ -61,7 +61,7 @@ namespace LabraxStudio.AnalyticsIntegration
             if (isPlayerWon)
                 TrackLevelComplete();
         }
-        
+
         private void SetRestartFlag()
         {
             _isRestart = true;

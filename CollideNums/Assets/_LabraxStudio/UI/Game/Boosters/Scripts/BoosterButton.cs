@@ -94,11 +94,11 @@ namespace LabraxStudio.UI.GameScene.Boosters
             if (!_pulsation.IsPulsing)
                 _pulsation.StartPulse();
         }
+        
+        public void StopPulsation() => _pulsation.StopPulse();
 
         // PRIVATE METHODS: -----------------------------------------------------------------------
-
-        private void StopPulsation() => _pulsation.StopPulse();
-
+        
         private void UseBooster()
         {
             if (_onClickAction != null)

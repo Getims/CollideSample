@@ -37,5 +37,7 @@ namespace LabraxStudio.UI.GameScene.Tasks
         }
 
         public void SetIncorrectState() => _taskElement.SetIncorrectState();
+
+        public void RevertIncorrectState() => _taskElement.RevertIncorrectState();
     }
 }

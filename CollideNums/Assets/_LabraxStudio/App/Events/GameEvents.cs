@@ -19,6 +19,7 @@ namespace LabraxStudio.Events
         public static UnityEvent<int> OnLevelTaskComplete = new UnityEvent<int>();
         public static UnityEvent OnAllTasksComplete = new UnityEvent();
         public static UnityEvent OnTileMergesComplete = new UnityEvent();
+        public static UnityEvent OnLevelCanBePassedAgain = new UnityEvent();
 
         // PUBLIC METHODS: ------------------------------------------------------------------------
 
@@ -39,5 +40,6 @@ namespace LabraxStudio.Events
         public static void SendLevelTaskProgress(int tileNumber) => OnLevelTaskProgress?.Invoke(tileNumber);
         public static void SendLevelTaskComplete(int tileNumber) => OnLevelTaskComplete?.Invoke(tileNumber);
         public static void SendAllTasksComplete() => OnAllTasksComplete?.Invoke();
+        public static void SendLevelCanBePassedAgain() => OnLevelCanBePassedAgain?.Invoke();
     }
 }

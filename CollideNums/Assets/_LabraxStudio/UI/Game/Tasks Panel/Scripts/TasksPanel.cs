@@ -33,6 +33,7 @@ namespace LabraxStudio.UI.GameScene.Tasks
             GameEvents.OnGameFail.AddListener(OnGameFail);
             GameEvents.OnLevelTaskProgress.AddListener(OnLevelTaskProgress);
             GameEvents.OnAllTasksComplete.AddListener(OnAllTasksComplete);
+            GameEvents.OnLevelCanBePassedAgain.AddListener(OnLevelCanBePassedAgain);
         }
 
         protected override void OnDestroy()
@@ -42,6 +43,7 @@ namespace LabraxStudio.UI.GameScene.Tasks
             GameEvents.OnGameOver.RemoveListener(OnGameOver);
             GameEvents.OnLevelTaskProgress.RemoveListener(OnLevelTaskProgress);
             GameEvents.OnAllTasksComplete.RemoveListener(OnAllTasksComplete);
+            GameEvents.OnLevelCanBePassedAgain.RemoveListener(OnLevelCanBePassedAgain);
         }
 
         private void Start()
@@ -146,5 +148,12 @@ namespace LabraxStudio.UI.GameScene.Tasks
         }
 
         private void OnAllTasksComplete() => CheckTiles();
+        
+        private void OnLevelCanBePassedAgain()
+        {
+            if (!_hasTasks)
+                return;
+            _currentContainer.RevertIncorrectState();
+        }
     }
 }

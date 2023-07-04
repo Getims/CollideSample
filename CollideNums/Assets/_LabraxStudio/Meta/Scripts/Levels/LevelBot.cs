@@ -25,7 +25,7 @@ namespace LabraxStudio.Meta.Levels
             }
 
             float winRate = 1f * winsCount / testCount * 100f;
-            Utils.ReworkPoint(winRate+"%");
+            Utils.InfoPoint(winRate+"%");
         }
 
         private bool CheckWin(List<int> gatesList, List<int> tilesList)
