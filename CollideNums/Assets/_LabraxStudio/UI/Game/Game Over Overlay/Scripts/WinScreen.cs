@@ -43,7 +43,7 @@ namespace LabraxStudio.UI.GameScene.GameOver
         protected override void OnDestroy()
         {
             _claimButton.onClick.RemoveListener(OnClaimClicked);
-            CancelInvoke(nameof(ShowParticles));
+            CancelInvoke(nameof(AfterShow));
             if (_closeAnimationCO != null)
                 StopCoroutine(_closeAnimationCO);
             base.OnDestroy();
@@ -54,7 +54,7 @@ namespace LabraxStudio.UI.GameScene.GameOver
             UISoundMediator.Instance.PlayVictoryMenuOpenedSFX();
             _raycastBlocker.enabled = false;
             base.Show();
-            Invoke(nameof(ShowParticles), FadeTime * 0.8f);
+            Invoke(nameof(AfterShow), FadeTime * 0.8f);
         }
 
         // PRIVATE METHODS: -----------------------------------------------------------------------
@@ -77,9 +77,9 @@ namespace LabraxStudio.UI.GameScene.GameOver
             UISoundMediator.Instance.PlayCoinsFlySFX();
             GameMediator.Instance.StartCoinsFlyAnimation(_rewardPanel.CoinCenter);
             yield return new WaitForSeconds(0.55f);
-            ApplyReward();
+            CommonEvents.SendAllCurrencyChanged();
             yield return new WaitForSeconds(0.8f);
-            ServicesProvider.PlayerDataService.SwitchToNextLevel();
+            //ServicesProvider.PlayerDataService.SwitchToNextLevel();
             UIEvents.SendWinScreenClaimClicked();
 
             Hide();
@@ -97,6 +97,11 @@ namespace LabraxStudio.UI.GameScene.GameOver
             _closeAnimationCO = StartCoroutine(CloseAnimation());
         }
 
-        private void ShowParticles() => _confettiPS?.Play();
+        private void AfterShow()
+        {
+            ServicesProvider.PlayerDataService.AddMoney(_reward);
+            ServicesProvider.PlayerDataService.SwitchToNextLevel();
+            _confettiPS?.Play();
+        }
     }
 }
