@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5d5eacf6b1578904bb8af5ea903ab7b6, type: 3}
-  m_Name: Debug
+  m_Name: Release 0.10
   m_EditorClassIdentifier: 
-  FileName: Debug
+  FileName: Release 0.10
   _launchSettings:
-    _enableDebug: 1
+    _enableDebug: 0
     _enableTutorial: 1
   _balanceSettings:
     _startMoney: 100
@@ -24,7 +24,6 @@ MonoBehaviour:
   _selectableLevelsLists:
   - {fileID: 11400000, guid: 53e4c40bdceae5d46b0da80f9b92baa9, type: 2}
   - {fileID: 11400000, guid: dff646fc1bb29af4ebfdb3e5de049847, type: 2}
-  - {fileID: 11400000, guid: 5132c8c59affe4c4db420315430bd3a4, type: 2}
   _swipeSettings:
     _baseSwipeForce: 0.5
     _accelSwipeForce: 8.5
