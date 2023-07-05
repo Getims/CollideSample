@@ -15,10 +15,11 @@ namespace LabraxStudio.Meta.Levels
         public int Width => width;
         public int Height => height;
         public int[,] LevelMatrix => _levelMatrix;
-        private bool BrushModeEnabled => _brushMode != BrushMode.Disabled;
         private bool BrushModeField => _brushMode == BrushMode.Field;
         private bool BrushModeTiles => _brushMode == BrushMode.Tiles;
+        private bool EnableBrushModeField => _brushMode == BrushMode.Field && _enableFieldPalette;
 
+        private bool EnableBrushModeTiles => _brushMode == BrushMode.Tiles && _enableTilePalette;
         // FIELDS: -------------------------------------------------------------------
 
         [FoldoutGroup("Size", Expanded = true)]
@@ -42,17 +43,33 @@ namespace LabraxStudio.Meta.Levels
         [EnumToggleButtons]
         private BrushMode _brushMode;
 
-        [ShowIf(nameof(BrushModeEnabled))]
-        [SerializeField]
-        private int _rightClickSize = 1;
-
         [SerializeField, ShowIf(nameof(BrushModeField))]
+        [LabelText("Enable Palette")]
+        private bool _enableFieldPalette;
+
+        [SerializeField, ShowIf(nameof(BrushModeTiles))]
+        [LabelText("Enable Palette")]
+        private bool _enableTilePalette;
+
+        [Title("Left click")]
+        [SerializeField, ShowIf(nameof(EnableBrushModeField))]
         [EnumToggleButtons, HideLabel]
         private FieldBrushMode _fieldBrushMode;
 
-        [SerializeField, ShowIf(nameof(BrushModeTiles))]
+        [Title("Right click")]
+        [SerializeField, ShowIf(nameof(EnableBrushModeField))]
+        [EnumToggleButtons, HideLabel]
+        private FieldBrushMode _fieldBrushModeRight;
+
+        [Title("Left click")]
+        [SerializeField, ShowIf(nameof(EnableBrushModeTiles))]
         [EnumToggleButtons, HideLabel]
         private TileBrushMode _tilesBrushMode;
+
+        [Title("Right click")]
+        [SerializeField, ShowIf(nameof(EnableBrushModeTiles))]
+        [EnumToggleButtons, HideLabel]
+        private TileBrushMode _tilesBrushModeRight;
 
         [Space(20), InfoBox(LevelDrawTip)]
         [OdinSerialize]
@@ -71,17 +88,42 @@ namespace LabraxStudio.Meta.Levels
         private int DrawLevelEnumElement(Rect rect, int value)
         {
 #if UNITY_EDITOR
-            bool isBrushMode = _brushMode != BrushMode.Disabled;
+            bool isBrushMode = _enableFieldPalette;
             int brushSize = (int) _fieldBrushMode;
+            int rightClickSize = (int) _fieldBrushModeRight;
+
             if (_brushMode == BrushMode.Tiles)
             {
-                if (_tilesBrushMode == TileBrushMode.Null)
-                    brushSize = 1;
-                else
-                    brushSize = GameConstants.TileStartValue - 1 + (int) _tilesBrushMode;
+                isBrushMode = _enableTilePalette;
+                switch (_tilesBrushMode)
+                {
+                    case TileBrushMode.L:
+                        brushSize = 0;
+                        break;
+                    case TileBrushMode.O:
+                        brushSize = 1;
+                        break;
+                    default:
+                        brushSize = GameConstants.TileStartValue - 1 + (int) _tilesBrushMode;
+                        break;
+                }
+
+                switch (_tilesBrushModeRight)
+                {
+                    case TileBrushMode.L:
+                        rightClickSize = 0;
+                        break;
+                    case TileBrushMode.O:
+                        rightClickSize = 1;
+                        break;
+                    default:
+                        rightClickSize = GameConstants.TileStartValue - 1 + (int) _tilesBrushModeRight;
+                        break;
+                }
             }
 
-            value = LevelMatrixDrawer.DrawLevelEnumElement(rect, value, isBrushMode, brushSize, _rightClickSize);
+            value = LevelMatrixDrawer.DrawLevelEnumElement(rect, value, isBrushMode, _brushMode == BrushMode.Field, brushSize,
+                rightClickSize);
 #endif
             return value;
         }
@@ -124,9 +166,8 @@ namespace LabraxStudio.Meta.Levels
 
         private enum BrushMode
         {
-            Disabled = 0,
-            Field = 1,
-            Tiles = 2
+            Field = 0,
+            Tiles = 1
         }
 
         private enum FieldBrushMode
@@ -154,7 +195,8 @@ namespace LabraxStudio.Meta.Levels
 
         private enum TileBrushMode
         {
-            Null = 0,
+            L = -1,
+            O = 0,
             T2 = 1,
             T4 = 2,
             T8 = 3,
