@@ -48,6 +48,10 @@ namespace LabraxStudio.Editor
 
         private static int GetLeftValue(bool brushMode, int brushSize, int value, bool isFieldMode)
         {
+#if !UNITY_EDITOR
+            return value;
+#else
+
             if (brushMode)
                 return Mathf.Min(brushSize + 1, ColorsCount);
 
@@ -68,10 +72,14 @@ namespace LabraxStudio.Editor
                 return 1;
 
             return newValue;
+#endif
         }
 
         private static int GetRightValue(bool brushMode, int rightClickSize, int value, bool isFieldMode)
         {
+#if !UNITY_EDITOR
+            return value;
+#else
             if (brushMode)
                 return Mathf.Min(rightClickSize + 1, ColorsCount);
 
@@ -96,6 +104,7 @@ namespace LabraxStudio.Editor
                 return 1;
 
             return newValue;
+#endif
         }
 
 #if UNITY_EDITOR

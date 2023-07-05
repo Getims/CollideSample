@@ -29,5 +29,5 @@ MonoBehaviour:
     _accelSwipeForce: 8.5
     _tileSpeed: 10
     _tileAcceleration: 15
-    _dragInsensitivity: 7
-    _dragMinSpeed: 20
+    _dragInsensitivity: 3
+    _dragMinSpeed: 300

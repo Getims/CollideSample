@@ -12,6 +12,8 @@ namespace LabraxStudio.Game.Tiles
         // FIELDS: -------------------------------------------------------------------
 
         private bool _isSelected = false;
+        private bool _isDragging = false;
+        private bool _isDragPause = false;
         private UnityEngine.Camera _camera;
         private SwipeSettings _swipeSettings;
         private Vector2 _mouseDownPos;
@@ -35,6 +37,7 @@ namespace LabraxStudio.Game.Tiles
                 return;
 
             _isSelected = true;
+            _isDragging = true;
             _mouseDownPos = GetMousePosition();
             _mouseDownTime = Time.realtimeSinceStartup;
             ServicesProvider.CoroutineService.RunCoroutine(DragTracker());
@@ -42,6 +45,7 @@ namespace LabraxStudio.Game.Tiles
 
         public void OnDeselect()
         {
+            _isDragging = false;
             if (!_isSelected)
                 return;
 
@@ -63,6 +67,15 @@ namespace LabraxStudio.Game.Tiles
                 _onSwipe.Invoke(moveDirection, swipe, swipeSpeed);
         }
 
+        public void StopDragging()
+        {
+            _isDragging = false;
+        }
+
+        public void SetPause(bool isPause)
+        {
+            _isDragPause = isPause;
+        }
         // PRIVATE METHODS: -----------------------------------------------------------------------
 
         private Vector2 GetMousePosition()
@@ -116,7 +129,7 @@ namespace LabraxStudio.Game.Tiles
             else
                 delta = Math.Abs(inputDelta.x);
 
-            //Utils.ReworkPoint("Delta: " + delta);
+            Utils.ReworkPoint("Delta: " + delta);
             if (delta < 0.5f)
                 return Swipe.Null;
 
@@ -132,34 +145,37 @@ namespace LabraxStudio.Game.Tiles
 
         IEnumerator DragTracker()
         {
+            yield return new WaitForSeconds(0.1f);
             int checksCount = _swipeSettings.DragInsensitivity;
             float minSpeed = _swipeSettings.DragMinSpeed;
             int currentCheck = 0;
             float speedSumm = minSpeed+1f;
 
-            while (_isSelected)
+            while (_isDragging)
             {
-                if (currentCheck < checksCount)
+                if (!_isDragPause)
                 {
-                    float speedX = Input.GetAxis("Mouse X");
-                    float speedY = Input.GetAxis("Mouse Y");
-                    float avgSpeed = (speedX + speedY) * 0.5f;
-                    speedSumm += avgSpeed;
-                    currentCheck++;
-                }
-                else
-                {
-                    float avgSpeed = speedSumm / checksCount;
-                    avgSpeed = Math.Abs(avgSpeed * 100);
-                    //Utils.ReworkPoint("Avg speed: " + avgSpeed);
-                    if (avgSpeed <= minSpeed)
+                    if (currentCheck < checksCount)
                     {
-                        OnDragStop();
-                        break;
+                        float speedX = Input.GetAxis("Mouse X");
+                        float speedY = Input.GetAxis("Mouse Y");
+                        float avgSpeed = (speedX + speedY) * 0.5f;
+                        speedSumm += avgSpeed;
+                        currentCheck++;
                     }
+                    else
+                    {
+                        float avgSpeed = speedSumm / checksCount;
+                        avgSpeed = Math.Abs(avgSpeed * 100);
+                        Utils.ReworkPoint("Avg speed: " + avgSpeed);
+                        if (avgSpeed <= minSpeed)
+                        {
+                            OnDragStop();
+                        }
 
-                    speedSumm = 0;
-                    currentCheck = 0;
+                        speedSumm = 0;
+                        currentCheck = 0;
+                    }
                 }
 
                 yield return new WaitForEndOfFrame();
@@ -168,7 +184,7 @@ namespace LabraxStudio.Game.Tiles
 
         private void OnDragStop()
         {
-            if (!_isSelected)
+            if (!_isDragging)
                 return;
 
             _isSelected = false;
@@ -186,5 +202,6 @@ namespace LabraxStudio.Game.Tiles
             if (_onSwipe != null)
                 _onSwipe.Invoke(moveDirection, swipe, swipeSpeed);
         }
+
     }
 }

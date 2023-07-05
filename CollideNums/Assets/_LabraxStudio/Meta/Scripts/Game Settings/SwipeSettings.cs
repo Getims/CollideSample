@@ -26,7 +26,7 @@ namespace LabraxStudio.Meta.GameField
         private int _dragInsensitivity = 5;
         
         [SerializeField]
-        [Min(0), MaxValue(100)]
+        [Min(0)]
         private float _dragMinSpeed = 1;
 
         // PROPERTIES: ----------------------------------------------------------------------------
