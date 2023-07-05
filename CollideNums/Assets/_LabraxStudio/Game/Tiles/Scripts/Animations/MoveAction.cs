@@ -59,6 +59,7 @@ namespace LabraxStudio.Game.Tiles
                 return;
             }
 
+            _tile.SetMoveFlag(true);
             float time = CalculateTime(_swipeSettings.TileSpeed, _swipe);
 
             if (_swipe != Swipe.Infinite)
@@ -152,6 +153,7 @@ namespace LabraxStudio.Game.Tiles
 
         private void OnMoveComplete()
         {
+            _tile.SetMoveFlag(false);
             _onMoveComplete?.Invoke();
         }
     }

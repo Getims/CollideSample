@@ -63,11 +63,16 @@ namespace LabraxStudio.Game.Tiles
         public void SetMergeFlag(bool isMerging)
         {
             _isMerging = isMerging;
+            if(_isMerging)
+                _swipeChecker.StopDragging();
         }
 
+        public void SetMoveFlag(bool isMoving) => _swipeChecker.SetPause(isMoving);
+        
         public void SetGateFlag()
         {
             _movedToGate = true;
+            _swipeChecker.StopDragging();
         }
 
         public void PlayMergeEffect() => _tileEffectsController.PlayMergeEffect();

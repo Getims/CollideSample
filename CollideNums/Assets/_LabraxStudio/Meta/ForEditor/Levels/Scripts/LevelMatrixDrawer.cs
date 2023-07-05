@@ -11,7 +11,7 @@ namespace LabraxStudio.Editor
         public static int ColorsCount => MatrixHelper.SpritesCount;
 #endif
 
-        public static int DrawLevelEnumElement(Rect rect, int value, bool brushMode, int brushSize,
+        public static int DrawLevelEnumElement(Rect rect, int value, bool brushMode, bool isFieldMode, int brushSize,
             int rightClickSize)
         {
 #if UNITY_EDITOR
@@ -26,28 +26,16 @@ namespace LabraxStudio.Editor
                 bool increaseHeight = currentEvent.button == 0;
 
                 if (increaseHeight)
-                {
-                    if (brushMode)
-                        value = Mathf.Min(brushSize + 1, ColorsCount);
-                    else
-                        value = Mathf.Min(value + 1, ColorsCount);
-                }
+                    value = GetLeftValue(brushMode, brushSize, value, isFieldMode);
                 else
-                {
-                    if (brushMode)
-                        value = Mathf.Max(rightClickSize, 0);
-                    else
-                        value = Mathf.Max(value - 1, 0);
-                }
+                    value = GetRightValue(brushMode, rightClickSize, value, isFieldMode);
 
                 GUI.changed = true;
                 Event.current.Use();
             }
 
             if (value == 0)
-            {
                 UnityEditor.EditorGUI.DrawRect(rect.Padding(1), Color.black);
-            }
             else
             {
                 Texture texture = MatrixHelper.TexturesDictionary[value - 1];
@@ -56,6 +44,67 @@ namespace LabraxStudio.Editor
 #endif
 
             return value;
+        }
+
+        private static int GetLeftValue(bool brushMode, int brushSize, int value, bool isFieldMode)
+        {
+#if !UNITY_EDITOR
+            return value;
+#else
+
+            if (brushMode)
+                return Mathf.Min(brushSize + 1, ColorsCount);
+
+            int newValue = value + 1;
+
+            if (isFieldMode)
+            {
+                if (newValue > 18)
+                    newValue = 1;
+                return newValue;
+            }
+
+            if (newValue == 1 || newValue == 2)
+                return newValue;
+            if (newValue == 3)
+                return 19;
+            if (newValue < 19 || newValue > ColorsCount)
+                return 1;
+
+            return newValue;
+#endif
+        }
+
+        private static int GetRightValue(bool brushMode, int rightClickSize, int value, bool isFieldMode)
+        {
+#if !UNITY_EDITOR
+            return value;
+#else
+            if (brushMode)
+                return Mathf.Min(rightClickSize + 1, ColorsCount);
+
+            int newValue = value - 1;
+
+            if (isFieldMode)
+            {
+                if (newValue < 1)
+                    newValue = 18;
+                if (value == 19)
+                    newValue = 1;
+                if (newValue >= 19)
+                    newValue = 1;
+                return newValue;
+            }
+
+            if (newValue < 1)
+                return ColorsCount;
+            if (newValue == 18)
+                return 2;
+            if (newValue > 2 && newValue < 18)
+                return 1;
+
+            return newValue;
+#endif
         }
 
 #if UNITY_EDITOR

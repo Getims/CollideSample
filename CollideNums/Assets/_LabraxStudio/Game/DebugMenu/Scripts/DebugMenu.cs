@@ -34,6 +34,12 @@ namespace LabraxStudio.Game.Debug
         private TMP_InputField _tileAcceleration;
 
         [SerializeField]
+        private TMP_InputField _dragInsensivity;
+
+        [SerializeField]
+        private TMP_InputField _dragMinSpeed;
+
+        [SerializeField]
         private TextMeshProUGUI _speedCounter;
 
         [SerializeField]
@@ -77,6 +83,8 @@ namespace LabraxStudio.Game.Debug
             _accelSwipeForce.SetTextWithoutNotify(_swipeSettings.AccelSwipeForce.ToString());
             _tileSpeed.SetTextWithoutNotify(_swipeSettings.TileSpeed.ToString());
             _tileAcceleration.SetTextWithoutNotify(_swipeSettings.TileAcceleration.ToString());
+            _dragInsensivity.SetTextWithoutNotify(_swipeSettings.DragInsensitivity.ToString());
+            _dragMinSpeed.SetTextWithoutNotify(_swipeSettings.DragMinSpeed.ToString());
 
             PrepareEaseOptions();
             PrepareLevelsDropDown();
@@ -96,6 +104,14 @@ namespace LabraxStudio.Game.Debug
                 acceleration = 0.0f;
             _swipeSettings.TileAcceleration = acceleration;
             _tileAcceleration.SetTextWithoutNotify(_swipeSettings.TileAcceleration.ToString());
+
+            int dragI = int.Parse(_dragInsensivity.text);
+            if (dragI < 0)
+                dragI = 1;
+            _dragInsensivity.SetTextWithoutNotify(dragI.ToString());
+
+            _swipeSettings.DragInsensitivity = dragI;
+            _swipeSettings.DragMinSpeed = float.Parse(_dragMinSpeed.text);
         }
 
         public void UpdateSpeed(float speed)
