@@ -1,4 +1,5 @@
 using System;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace LabraxStudio.Meta.GameField
@@ -19,6 +20,14 @@ namespace LabraxStudio.Meta.GameField
 
         [SerializeField]
         private float _tileAcceleration = 15f;
+
+        [SerializeField]
+        [Min(1)]
+        private int _dragInsensitivity = 5;
+        
+        [SerializeField]
+        [Min(0), MaxValue(100)]
+        private float _dragMinSpeed = 1;
 
         // PROPERTIES: ----------------------------------------------------------------------------
        
@@ -44,6 +53,18 @@ namespace LabraxStudio.Meta.GameField
         {
             get => _accelSwipeForce;
             set => _accelSwipeForce = value;
+        }
+
+        public int DragInsensitivity
+        {
+            get => _dragInsensitivity;
+            set => _dragInsensitivity = value;
+        }
+
+        public float DragMinSpeed
+        {
+            get => _dragMinSpeed;
+            set => _dragMinSpeed = value;
         }
     }
 }

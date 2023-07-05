@@ -1,7 +1,7 @@
 using System;
+using System.Collections;
 using LabraxStudio.App.Services;
 using LabraxStudio.Events;
-using LabraxStudio.Game.Debug;
 using LabraxStudio.Meta.GameField;
 using UnityEngine;
 
@@ -17,11 +17,13 @@ namespace LabraxStudio.Game.Tiles
         private Vector2 _mouseDownPos;
         private float _mouseDownTime;
         private Action<Direction, Swipe, float> _onSwipe;
+        private Tile _tile;
 
         // PUBLIC METHODS: -----------------------------------------------------------------------
 
         public void Initialize(Tile tile, UnityEngine.Camera camera, Action<Direction, Swipe, float> onSwipe)
         {
+            _tile = tile;
             _camera = camera;
             _swipeSettings = ServicesProvider.GameSettingsService.GetGameSettings().SwipeSettings;
             _onSwipe = onSwipe;
@@ -35,6 +37,7 @@ namespace LabraxStudio.Game.Tiles
             _isSelected = true;
             _mouseDownPos = GetMousePosition();
             _mouseDownTime = Time.realtimeSinceStartup;
+            ServicesProvider.CoroutineService.RunCoroutine(DragTracker());
         }
 
         public void OnDeselect()
@@ -48,7 +51,7 @@ namespace LabraxStudio.Game.Tiles
             float _mouseUpTime = Time.realtimeSinceStartup;
             Vector2 inputDelta = _mouseUpPos - _mouseDownPos;
             Direction moveDirection = CalculateDirection(inputDelta);
-            
+
             float swipeTime = _mouseUpTime - _mouseDownTime;
             float swipeSpeed = CalculateSwipeSpeed(inputDelta, moveDirection, swipeTime);
             Swipe swipe = CalculateSwipe(swipeSpeed);
@@ -96,13 +99,92 @@ namespace LabraxStudio.Game.Tiles
 
         private Swipe CalculateSwipe(float swipeSpeed)
         {
-            if(swipeSpeed<_swipeSettings.BaseSwipeForce)
+            if (swipeSpeed < _swipeSettings.BaseSwipeForce)
                 return Swipe.Null;
-            
-            if(swipeSpeed<_swipeSettings.AccelSwipeForce)
+
+            if (swipeSpeed < _swipeSettings.AccelSwipeForce)
                 return Swipe.OneTile;
-            
+
             return Swipe.Infinite;
+        }
+
+        private Swipe CalculateSwipe(Vector2 inputDelta, Direction direction, ref float swipeSpeed)
+        {
+            float delta = 0;
+            if (direction == Direction.Up || direction == Direction.Down)
+                delta = Math.Abs(inputDelta.y);
+            else
+                delta = Math.Abs(inputDelta.x);
+
+            //Utils.ReworkPoint("Delta: " + delta);
+            if (delta < 0.5f)
+                return Swipe.Null;
+
+            if (delta > 1.5f)
+            {
+                swipeSpeed = _swipeSettings.AccelSwipeForce;
+                return Swipe.Infinite;
+            }
+
+            swipeSpeed = _swipeSettings.BaseSwipeForce;
+            return Swipe.OneTile;
+        }
+
+        IEnumerator DragTracker()
+        {
+            int checksCount = _swipeSettings.DragInsensitivity;
+            float minSpeed = _swipeSettings.DragMinSpeed;
+            int currentCheck = 0;
+            float speedSumm = minSpeed+1f;
+
+            while (_isSelected)
+            {
+                if (currentCheck < checksCount)
+                {
+                    float speedX = Input.GetAxis("Mouse X");
+                    float speedY = Input.GetAxis("Mouse Y");
+                    float avgSpeed = (speedX + speedY) * 0.5f;
+                    speedSumm += avgSpeed;
+                    currentCheck++;
+                }
+                else
+                {
+                    float avgSpeed = speedSumm / checksCount;
+                    avgSpeed = Math.Abs(avgSpeed * 100);
+                    //Utils.ReworkPoint("Avg speed: " + avgSpeed);
+                    if (avgSpeed <= minSpeed)
+                    {
+                        OnDragStop();
+                        break;
+                    }
+
+                    speedSumm = 0;
+                    currentCheck = 0;
+                }
+
+                yield return new WaitForEndOfFrame();
+            }
+        }
+
+        private void OnDragStop()
+        {
+            if (!_isSelected)
+                return;
+
+            _isSelected = false;
+            Vector2 _tilePos = _tile.Position;
+            Vector2 _mouseUpPos = GetMousePosition();
+            Vector2 inputDelta = _mouseUpPos - _tilePos;
+            Direction moveDirection = CalculateDirection(inputDelta);
+
+            float swipeSpeed = 0;
+            Swipe swipe = CalculateSwipe(inputDelta, moveDirection, ref swipeSpeed);
+
+            if (swipe == Swipe.Null)
+                return;
+
+            if (_onSwipe != null)
+                _onSwipe.Invoke(moveDirection, swipe, swipeSpeed);
         }
     }
 }
