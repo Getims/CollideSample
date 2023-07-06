@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FileName: Task Complete
   _isDisabled: 1
-  _audioClip: {fileID: 8300000, guid: c0e3f771e5f714e188207c42fc7f97a5, type: 3}
-  _soundPrecent: 1
+  _audioClip: {fileID: 8300000, guid: 236f9ec03504e4b3aabb37fd2b929cba, type: 3}
+  _soundPrecent: 0.7
   _description: Description...

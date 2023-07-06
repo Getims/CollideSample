@@ -26,6 +26,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: dff646fc1bb29af4ebfdb3e5de049847, type: 2}
   _swipeSettings:
     _baseSwipeForce: 0.5
-    _accelSwipeForce: 8.5
+    _accelSwipeForce: 6
     _tileSpeed: 10
     _tileAcceleration: 15
+    _dragInsensitivity: 3
+    _dragMinSpeed: 300
