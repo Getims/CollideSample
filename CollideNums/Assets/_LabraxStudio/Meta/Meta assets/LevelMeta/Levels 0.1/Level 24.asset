@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FileName: Level 24
   _levelName: Level 24
-  _reward: 100
+  _reward: 30
   _levelTemplate:
     width: 8
     height: 9
@@ -32,11 +32,11 @@ MonoBehaviour:
   _taskSettings:
     _levelTasks:
     - _tileNumber: 2
-      _tilesCount: 1
+      _tilesCount: 4
     - _tileNumber: 3
-      _tilesCount: 1
+      _tilesCount: 3
     - _tileNumber: 4
-      _tilesCount: 1
+      _tilesCount: 2
     - _tileNumber: 5
       _tilesCount: 1
   serializationData:
