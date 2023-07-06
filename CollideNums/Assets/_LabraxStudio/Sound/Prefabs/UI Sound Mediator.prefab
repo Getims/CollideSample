@@ -48,3 +48,4 @@ MonoBehaviour:
   _taskCompleteSFX: {fileID: 11400000, guid: 9ac18be9e4183bb46925ee3017a892ab, type: 2}
   _taskFailSFX: {fileID: 11400000, guid: 0d4a030ad1f4aac4ba842a9b2f781bac, type: 2}
   _victoryMenuOpenedSFX: {fileID: 11400000, guid: b7e2716fc864247438c4b3df9ce2679a, type: 2}
+  _clearFieldTipSFX: {fileID: 11400000, guid: 4c662cefeef2d494baf3fd01ffd0531f, type: 2}

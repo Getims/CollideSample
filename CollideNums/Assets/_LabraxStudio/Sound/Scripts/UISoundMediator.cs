@@ -20,6 +20,9 @@ namespace LabraxStudio.Sound
 
         [SerializeField, Required, AssetsOnly]
         private SFXMeta _victoryMenuOpenedSFX;
+        
+        [SerializeField, Required, AssetsOnly]
+        private SFXMeta _clearFieldTipSFX;
 
         // FIELDS: --------------------------------------------------------------------------------
 
@@ -43,5 +46,8 @@ namespace LabraxStudio.Sound
 
         [Button, DisableInEditorMode]
         public void PlayVictoryMenuOpenedSFX() => _soundManager.PlaySound(_victoryMenuOpenedSFX);
+        
+        [Button, DisableInEditorMode]
+        public void PlayClearFieldTipSFX() => _soundManager.PlaySound(_clearFieldTipSFX);
     }
 }
