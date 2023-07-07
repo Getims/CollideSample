@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FileName: Tiles Gate Pass
   _isDisabled: 0
-  _audioClip: {fileID: 8300000, guid: 43aa250d5ed00402b927764d76e88c69, type: 3}
-  _soundPrecent: 0.55
+  _audioClip: {fileID: 8300000, guid: e1157bc2f2c66404a85c4f8f78e0ef2d, type: 3}
+  _soundPrecent: 0.5
   _description: Description...

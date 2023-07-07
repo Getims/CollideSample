@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fdcb5f4c920c4071a0f401bb129addc4, type: 3}
-  m_Name: DebugLevels
+  m_Name: LevelsDebug
   m_EditorClassIdentifier: 
-  FileName: DebugLevels
+  FileName: LevelsDebug
+  _tutorialSettingsMeta: {fileID: 0}
   _levelsMetaList:
   - {fileID: 11400000, guid: 8feb2604041401f4cbf5133ebc772770, type: 2}
   - {fileID: 11400000, guid: 66b4b3c72a394c34ba523694aca4f238, type: 2}

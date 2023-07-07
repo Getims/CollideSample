@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FileName: Clear Field
   _isDisabled: 0
-  _audioClip: {fileID: 8300000, guid: 8d108537c9dc0734ab6d5d98143f7707, type: 3}
+  _audioClip: {fileID: 8300000, guid: 236f9ec03504e4b3aabb37fd2b929cba, type: 3}
   _soundPrecent: 0.6
   _description: Play on clear field text show

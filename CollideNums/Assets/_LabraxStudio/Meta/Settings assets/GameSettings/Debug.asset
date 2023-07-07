@@ -24,9 +24,10 @@ MonoBehaviour:
   _selectableLevelsLists:
   - {fileID: 11400000, guid: 53e4c40bdceae5d46b0da80f9b92baa9, type: 2}
   - {fileID: 11400000, guid: dff646fc1bb29af4ebfdb3e5de049847, type: 2}
+  - {fileID: 11400000, guid: 5132c8c59affe4c4db420315430bd3a4, type: 2}
   _swipeSettings:
     _baseSwipeForce: 0.5
-    _accelSwipeForce: 8.5
+    _accelSwipeForce: 6
     _tileSpeed: 10
     _tileAcceleration: 15
     _dragInsensitivity: 3
