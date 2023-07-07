@@ -27,7 +27,7 @@ namespace LabraxStudio.Game.Gates.Visual
             var numberSprite = GetNumberSprite(spriteIndex, gatesSprites.GatesNumbers);
 
             Direction numberDirection = CalculateDirection(spriteIndex, direction);
-            _gateNumber.SetNumber(numberSprite, numberDirection);
+            _gateNumber.SetNumber(numberSprite, numberDirection, gatesSprites.NumberBaseColor, gatesSprites.NumberGlowColor);
 
             _gateBackground.SetBackground(gatesSprites.GateVerticalBackground, gatesSprites.GateHorizontalBackground,
                 gameFieldSprites.NotPlayableSprites.HorizontalGateExtension,

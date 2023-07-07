@@ -16,16 +16,12 @@ namespace LabraxStudio.Game.Gates.Visual
         [SerializeField]
         private SpriteRenderer _rightNumber;
 
-        [SerializeField]
-        private Color _baseColor = Color.white;
-
-        [SerializeField]
-        private Color _glowColor = Color.white;
-
         // FIELDS: -------------------------------------------------------------------
 
         private Tweener _glowTw;
         private SpriteRenderer _currentNumber;
+        private Color _baseColor = Color.white;
+        private Color _glowColor = Color.white;
 
         // GAME ENGINE METHODS: -------------------------------------------------------------------
 
@@ -46,8 +42,10 @@ namespace LabraxStudio.Game.Gates.Visual
                 .SetDelay(delay);
         }
 
-        public void SetNumber(Sprite sprite, Direction direction)
+        public void SetNumber(Sprite sprite, Direction direction, Color numberBaseColor, Color numberGlowColor)
         {
+            _baseColor = numberBaseColor;
+            _glowColor = numberGlowColor;
             _number.sprite = sprite;
             _leftNumber.sprite = sprite;
             _rightNumber.sprite = sprite;
@@ -84,5 +82,6 @@ namespace LabraxStudio.Game.Gates.Visual
             _leftNumber.color = _glowColor;
             _rightNumber.color = _glowColor;
         }
+
     }
 }

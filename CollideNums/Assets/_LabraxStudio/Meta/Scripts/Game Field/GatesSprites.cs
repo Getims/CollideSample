@@ -24,7 +24,13 @@ namespace LabraxStudio.Meta.GameField
         [SerializeField]
         private Color _lockedColor = Color.black;
 
-        [Space(10)]
+        [Title("Numbers")] 
+        [SerializeField]
+        private Color _numberBaseColor = Color.white;
+
+        [SerializeField]
+        private Color _numberGlowColor = Color.white;
+        
         [SerializeField, LabelWidth(175)]
         private List<Sprite> _gatesNumbers = new List<Sprite>();
 
@@ -39,5 +45,9 @@ namespace LabraxStudio.Meta.GameField
         public Color UnlockedColor => _unlockedColor;
 
         public Color LockedColor => _lockedColor;
+
+        public Color NumberBaseColor => _numberBaseColor;
+
+        public Color NumberGlowColor => _numberGlowColor;
     }
 }
