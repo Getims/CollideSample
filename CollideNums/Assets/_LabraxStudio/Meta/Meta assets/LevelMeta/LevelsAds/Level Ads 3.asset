@@ -13,15 +13,18 @@ MonoBehaviour:
   m_Name: Level Ads 3
   m_EditorClassIdentifier: 
   FileName: Level Ads 3
-  _levelName: Level 2
+  _levelName: Level 3
   _reward: 10
   _levelTemplate:
     width: 8
     height: 8
     _brushMode: 0
-    _rightClickSize: 2
+    _enableFieldPalette: 0
+    _enableTilePalette: 0
     _fieldBrushMode: 8
+    _fieldBrushModeRight: 0
     _tilesBrushMode: 5
+    _tilesBrushModeRight: 0
   _boostersSettings:
   - _boosterMeta: {fileID: 11400000, guid: 3b85c5d335e9ce344b42fbcac79b97cd, type: 2}
   _taskSettings:
@@ -51,15 +54,24 @@ MonoBehaviour:
     - Name: _brushMode
       Entry: 3
       Data: 0
-    - Name: _rightClickSize
-      Entry: 3
-      Data: 2
+    - Name: _enableFieldPalette
+      Entry: 5
+      Data: false
+    - Name: _enableTilePalette
+      Entry: 5
+      Data: false
     - Name: _fieldBrushMode
       Entry: 3
       Data: 8
+    - Name: _fieldBrushModeRight
+      Entry: 3
+      Data: 0
     - Name: _tilesBrushMode
       Entry: 3
       Data: 5
+    - Name: _tilesBrushModeRight
+      Entry: 3
+      Data: 0
     - Name: _levelMatrix
       Entry: 7
       Data: 1|System.Int32[,], mscorlib
