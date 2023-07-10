@@ -1,6 +1,7 @@
 using System;
 using DG.Tweening;
 using LabraxStudio.App.Services;
+using LabraxStudio.Events;
 using LabraxStudio.Sound;
 using UnityEngine;
 
@@ -32,6 +33,7 @@ namespace LabraxStudio.Game.Tiles
 
         public override void Play(Action onComplete)
         {
+            GameEvents.SendPreMergeTile(this);
             _onComplete = onComplete;
             Vector3 newPosition = _mergeTo.Position;
 

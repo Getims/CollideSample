@@ -66,7 +66,7 @@ namespace LabraxStudio.Game.Camera
             {
                 if (_lastMoveTile != null)
                     return;
-
+                
                 List<Tile> tiles = ServicesProvider.GameFlowService.TilesController.Tiles;
                 avgPosition = CalculatePosition(tiles);
             }
@@ -86,14 +86,13 @@ namespace LabraxStudio.Game.Camera
                 return;
             if (mergeAction == null)
                 return;
-
+            
             float avgPosition = mergeAction.MergeTo.Position.y;
             avgPosition += _tileOffset;
+            _lastMoveTile = mergeAction.MergeTo;
             bool inBorders = CheckTilesInBorders(avgPosition);
             if (inBorders)
                 return;
-
-            _lastMoveTile = mergeAction.MergeTo;
 
             MoveCamera(avgPosition, _moveTime);
         }
