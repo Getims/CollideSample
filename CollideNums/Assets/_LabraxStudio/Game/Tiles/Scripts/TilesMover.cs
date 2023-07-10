@@ -12,16 +12,18 @@ namespace LabraxStudio.Game.Tiles
         private int[,] _levelMatrix;
         private int _width;
         private int _height;
+        private int _infiniteMovesCount;
 
         // PUBLIC METHODS: -----------------------------------------------------------------------
 
-        public void Initialize(int[,] levelMatrix, int[,] tilesMatrix)
+        public void Initialize(int[,] levelMatrix, int[,] tilesMatrix, int infiniteMovesCount)
         {
             _levelMatrix = levelMatrix;
             _tilesMatrix = tilesMatrix;
 
             _width = _levelMatrix.GetLength(0);
             _height = _levelMatrix.GetLength(1);
+            _infiniteMovesCount = infiniteMovesCount > 0 ? infiniteMovesCount : 11;
         }
 
         public MoveAction CalculateMoveAction(Tile tile, Direction direction, Swipe swipe)
@@ -42,7 +44,7 @@ namespace LabraxStudio.Game.Tiles
                     moves = 2;
                     break;
                 case Swipe.Infinite:
-                    moves = 11;
+                    moves = _infiniteMovesCount;
                     break;
             }
 

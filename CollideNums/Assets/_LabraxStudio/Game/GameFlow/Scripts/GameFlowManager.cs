@@ -70,7 +70,7 @@ namespace LabraxStudio.Game
             _gameFieldController.GenerateField(levelMeta);
             _gatesController.GenerateGates(levelMeta);
             _tilesController.Initialize(levelMeta);
-            _cameraController.Initialize(levelMeta.Width, levelMeta.Height);
+            _cameraController.Initialize(levelMeta);
 
             _gatesController.CheckGatesState();
             ServicesProvider.GameFlowService.GameOverTracker.ResetFailFlag();
@@ -106,7 +106,7 @@ namespace LabraxStudio.Game
             _gameFieldController.GenerateField(levelMeta);
             _gatesController.GenerateGates(levelMeta);
             _tilesController.Initialize(levelMeta);
-            _cameraController.Initialize(levelMeta.Width, levelMeta.Height);
+            _cameraController.Initialize(levelMeta);
 
             _gatesController.CheckGatesState();
             ServicesProvider.GameFlowService.GameOverTracker.ResetFailFlag();

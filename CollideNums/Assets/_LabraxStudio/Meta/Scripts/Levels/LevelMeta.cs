@@ -4,6 +4,7 @@ using LabraxStudio.Game.GameField;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace LabraxStudio.Meta.Levels
 {
@@ -30,6 +31,10 @@ namespace LabraxStudio.Meta.Levels
         [SerializeField, InlineProperty, HideLabel]
         private TaskSettings _taskSettings;
 
+        [TabGroup("For ads settings")]
+        [SerializeField, InlineProperty, HideLabel]
+        private ForAdsSettings forAdsSettings;
+
         // PROPERTIES: ----------------------------------------------------------------------------
 
         public string LevelName => _levelName;
@@ -37,12 +42,10 @@ namespace LabraxStudio.Meta.Levels
         public int Height => _levelTemplate.Height;
         public int[,] LevelMatrix => GetLevelMatrix();
         public int[,] TilesMatrix => GetTileMatrix();
-
         public List<BoostersSettings> BoostersSettings => _boostersSettings;
-
         public int Reward => _reward;
-
         public TaskSettings TaskSettings => _taskSettings;
+        public ForAdsSettings ForAdsSettings => forAdsSettings;
 
         // FIELDS: --------------------------------------------------------------------------------
 
@@ -56,8 +59,6 @@ namespace LabraxStudio.Meta.Levels
 
         // PRIVATE METHODS: -----------------------------------------------------------------------
 
-        [TabGroup("Level checker")]
-        [Button]
         private void CheckLevel()
         {
             LevelBot bot = new LevelBot();

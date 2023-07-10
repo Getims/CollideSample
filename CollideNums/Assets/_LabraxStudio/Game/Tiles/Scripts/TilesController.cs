@@ -43,7 +43,13 @@ namespace LabraxStudio.Game.Tiles
             _tilesGenerator.Initialize();
             _tiles = _tilesGenerator.GenerateTiles(levelMeta.Width, levelMeta.Height, _tilesMatrix);
 
-            _tilesMover.Initialize(levelMeta.LevelMatrix, _tilesMatrix);
+            if (levelMeta.ForAdsSettings.OverrideMoveDistance)
+                _tilesMover.Initialize(levelMeta.LevelMatrix, _tilesMatrix,
+                    levelMeta.ForAdsSettings.TileMoveMaxDistance);
+            else
+                _tilesMover.Initialize(levelMeta.LevelMatrix, _tilesMatrix,
+                    -1);
+
             _tilesMerger.Initialize(_tilesMatrix);
         }
 

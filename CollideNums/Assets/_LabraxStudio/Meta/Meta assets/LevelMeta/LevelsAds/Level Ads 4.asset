@@ -33,6 +33,13 @@ MonoBehaviour:
       _tilesCount: 10
     - _tileNumber: 6
       _tilesCount: 10
+  forAdsSettings:
+    _levelForAds: 1
+    _cameraSize: 7.15
+    _moveCamera: 0
+    _cameraOffset: {x: 0, y: 8.5}
+    _overrideTileMoveDistance: 1
+    _tileMoveMaxDistance: 40
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 

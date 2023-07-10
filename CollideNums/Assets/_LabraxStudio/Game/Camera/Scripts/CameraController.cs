@@ -1,6 +1,7 @@
 using LabraxStudio.App;
 using LabraxStudio.App.Services;
 using LabraxStudio.Meta.GameField;
+using LabraxStudio.Meta.Levels;
 using UnityEngine;
 
 namespace LabraxStudio.Game.Camera
@@ -21,15 +22,24 @@ namespace LabraxStudio.Game.Camera
 
         // PUBLIC METHODS: -----------------------------------------------------------------------
 
-        public void Initialize(int levelWidth, int levelHeight)
+        public void Initialize(LevelMeta levelMeta)
         {
-            SetPosition(levelWidth, levelHeight);
-            SetupCameraSize();
+            if (levelMeta.ForAdsSettings.LevelForAds)
+            {
+                SetPosition(levelMeta.Width, levelMeta.Height, levelMeta.ForAdsSettings.CameraOffset);
+                SetupCameraSize(levelMeta.ForAdsSettings.CameraSize);
+            }
+            else
+            {
+                SetPosition(levelMeta.Width, levelMeta.Height);
+                SetupCameraSize(-1);
+            }
 
             GameFieldSprites gameFieldSprites =
                 ServicesProvider.GameSettingsService.GetGameSettings().GameFieldSprites;
             _camera.backgroundColor = gameFieldSprites.BackgroundColor;
         }
+
 
         // PRIVATE METHODS: -----------------------------------------------------------------------
 
@@ -48,9 +58,19 @@ namespace LabraxStudio.Game.Camera
             transform.localPosition = newPosition;
         }
 
-        private void SetupCameraSize()
+        private void SetPosition(int levelWidth, int levelHeight, Vector2 cameraOffset)
         {
-            _cameraZoom.Setup(this);
+            SetPosition(levelWidth, levelHeight);
+
+            Vector3 newPosition = transform.localPosition;
+            newPosition.x += cameraOffset.x;
+            newPosition.y += cameraOffset.y;
+            transform.localPosition = newPosition;
+        }
+
+        private void SetupCameraSize(float cameraSize)
+        {
+            _cameraZoom.Setup(this, cameraSize);
             float screenFactor = 1;
 
             if (ScreenManager.Instance.IsPhone)
