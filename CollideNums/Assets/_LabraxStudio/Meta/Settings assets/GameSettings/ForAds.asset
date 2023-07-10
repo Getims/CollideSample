@@ -28,7 +28,7 @@ MonoBehaviour:
   _swipeSettings:
     _baseSwipeForce: 0.1
     _accelSwipeForce: 1
-    _tileSpeed: 10
-    _tileAcceleration: 15
+    _tileSpeed: 5
+    _tileAcceleration: 10
     _dragInsensitivity: 5
     _dragMinSpeed: 1
