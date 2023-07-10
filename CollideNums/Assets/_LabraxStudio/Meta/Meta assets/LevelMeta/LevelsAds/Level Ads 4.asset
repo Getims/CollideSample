@@ -35,7 +35,8 @@ MonoBehaviour:
     _levelForAds: 1
     _cameraSize: 7.5
     _moveCamera: 1
-    _cameraOffset: {x: 0, y: 8.5}
+    _moveEase: 4
+    _cameraOffset: {x: 0, y: -20}
     _overrideTileMoveDistance: 1
     _tileMoveMaxDistance: 100
   serializationData:

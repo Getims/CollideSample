@@ -164,3 +164,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _camera: {fileID: 824409820985246682}
+  _cameraZoom:
+    _startSize: 7.15
+  _cameraMover:
+    _moveTime: 0.3
+    _moveEase: 3

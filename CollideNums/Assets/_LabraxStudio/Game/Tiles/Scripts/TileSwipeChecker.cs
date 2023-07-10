@@ -129,7 +129,7 @@ namespace LabraxStudio.Game.Tiles
             else
                 delta = Math.Abs(inputDelta.x);
 
-            Utils.ReworkPoint("Delta: " + delta);
+            //Utils.ReworkPoint("Delta: " + delta);
             if (delta < 0.5f)
                 return Swipe.Null;
 
@@ -167,7 +167,7 @@ namespace LabraxStudio.Game.Tiles
                     {
                         float avgSpeed = speedSumm / checksCount;
                         avgSpeed = Math.Abs(avgSpeed * 100);
-                        Utils.ReworkPoint("Avg speed: " + avgSpeed);
+                        //Utils.ReworkPoint("Avg speed: " + avgSpeed);
                         if (avgSpeed <= minSpeed)
                         {
                             OnDragStop();

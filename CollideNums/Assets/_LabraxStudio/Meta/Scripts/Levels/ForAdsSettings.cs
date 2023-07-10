@@ -1,4 +1,5 @@
 using System;
+using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -18,6 +19,9 @@ namespace LabraxStudio.Meta.Levels
 
         [SerializeField, ShowIf(nameof(_levelForAds))]
         private bool _moveCamera = false;
+
+        [SerializeField, ShowIf(nameof(_levelForAds))]
+        private Ease _moveEase = Ease.InOutSine;
 
         [SerializeField, ShowIf(nameof(_levelForAds))]
         private Vector2 _cameraOffset = new Vector2(0, 0);
@@ -41,5 +45,6 @@ namespace LabraxStudio.Meta.Levels
         public int TileMoveMaxDistance => _tileMoveMaxDistance;
 
         public Vector2 CameraOffset => _cameraOffset;
+        public Ease MoveEase => _moveEase;
     }
 }

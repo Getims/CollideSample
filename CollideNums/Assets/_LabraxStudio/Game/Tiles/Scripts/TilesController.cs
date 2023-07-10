@@ -140,6 +140,7 @@ namespace LabraxStudio.Game.Tiles
             else
             {
                 TilesAnimator tilesAnimator = new TilesAnimator();
+                GameEvents.SendPreMergeTile(mergeAction);
                 tilesAnimator.Play(mergeAction, () => CheckChainMerges(mergeAction.MergeTo));
             }
 
@@ -167,6 +168,7 @@ namespace LabraxStudio.Game.Tiles
                 CheckAllMerges();
             else
             {
+                GameEvents.SendPreMergeTile(mergeAction);
                 TilesAnimator tilesAnimator = new TilesAnimator();
                 tilesAnimator.Play(mergeAction, () => CheckChainMerges(mergeAction.MergeTo));
             }

@@ -10,6 +10,7 @@ namespace LabraxStudio.Events
 
         public static UnityEvent OnTileAction = new UnityEvent();
         public static UnityEvent<MoveAction> OnPreMoveTile = new UnityEvent<MoveAction> ();
+        public static UnityEvent<MergeAction> OnPreMergeTile = new UnityEvent<MergeAction> ();
         public static UnityEvent<Tile> OnTileSelectForBooster = new UnityEvent<Tile>();
         public static UnityEvent OnGenerateLevel = new UnityEvent();
         public static UnityEvent<bool> OnGameOver = new UnityEvent<bool>();
@@ -28,6 +29,7 @@ namespace LabraxStudio.Events
         public static void SendTileMergesComplete() => OnTileMergesComplete?.Invoke();
         public static void SendMoveTileInGate(int tileNumber) => OnMoveTileInGate?.Invoke(tileNumber);
         public static void SendPreMoveTile(MoveAction moveAction) => OnPreMoveTile?.Invoke(moveAction);
+        public static void SendPreMergeTile(MergeAction mergeAction) => OnPreMergeTile?.Invoke(mergeAction);
         public static void SendTileSelectForBooster(Tile tile) => OnTileSelectForBooster?.Invoke(tile);
 
         public static void SendGameOver(bool isWin, FailReason failReason = FailReason.None)

@@ -1,4 +1,3 @@
-using System;
 using LabraxStudio.App;
 using LabraxStudio.App.Services;
 using LabraxStudio.Events;
@@ -32,12 +31,14 @@ namespace LabraxStudio.Game.Camera
         {
             GameEvents.OnTileAction.AddListener(OnTileAction);
             GameEvents.OnPreMoveTile.AddListener(OnPreMoveTile);
+            GameEvents.OnPreMergeTile.AddListener(OnPreMergeTile);
         }
 
         private void OnDestroy()
         {
             GameEvents.OnTileAction.RemoveListener(OnTileAction);
             GameEvents.OnPreMoveTile.RemoveListener(OnPreMoveTile);
+            GameEvents.OnPreMergeTile.AddListener(OnPreMergeTile);
             _cameraMover.OnDestroy();
         }
 
@@ -56,7 +57,8 @@ namespace LabraxStudio.Game.Camera
                 SetupCameraSize(-1);
             }
 
-            _cameraMover.Initialize(levelMeta.ForAdsSettings.MoveCamera, _camera, _cameraZoom.CurrentSize, levelMeta.Height);
+            _cameraMover.Initialize(levelMeta.ForAdsSettings.MoveCamera, _camera, _cameraZoom.CurrentSize,
+                levelMeta.Height, levelMeta.ForAdsSettings.MoveEase);
             GameFieldSprites gameFieldSprites =
                 ServicesProvider.GameSettingsService.GetGameSettings().GameFieldSprites;
             _camera.backgroundColor = gameFieldSprites.BackgroundColor;
@@ -112,5 +114,6 @@ namespace LabraxStudio.Game.Camera
 
         private void OnPreMoveTile(MoveAction moveAction) => _cameraMover.FixCameraPosition(moveAction);
 
+        private void OnPreMergeTile(MergeAction mergeAction) => _cameraMover.FixCameraPositionMerge(mergeAction);
     }
 }

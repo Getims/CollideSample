@@ -4,7 +4,6 @@ using DG.Tweening;
 using LabraxStudio.App.Services;
 using LabraxStudio.Game.Tiles;
 using LabraxStudio.Meta.GameField;
-using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace LabraxStudio.Game.Camera
@@ -28,22 +27,29 @@ namespace LabraxStudio.Game.Camera
         private float _minPosition;
         private float _cameraSize;
         private Tweener _moveTW;
-        private const float SIZE_PERCENT = 0.6f;
+        private float sizePercent = 0.1f;
+        private float _tileOffset = 0.05f;
+        private Tile _lastMoveTile = null;
 
         // PUBLIC METHODS: -----------------------------------------------------------------------
 
-        public void Initialize(bool moveCamera, UnityEngine.Camera camera, float cameraSize, float levelHeight)
+        public void Initialize(bool moveCamera, UnityEngine.Camera camera, float cameraSize, float levelHeight, Ease moveEase)
         {
             _camera = camera;
             _cameraSize = cameraSize;
-
+            _moveEase = moveEase;
+            
             GameFieldSettings gameFieldSettings =
                 ServicesProvider.GameSettingsService.GetGameSettings().GameFieldSettings;
 
             _cellSize = gameFieldSettings.CellSize;
-            float extra = cameraSize * SIZE_PERCENT;
+            float extra = cameraSize * 0.6f;
             _minPosition = levelHeight * (-1) * _cellSize + extra;
             _maxPosition = 0 - extra;
+            _tileOffset = _cellSize;
+            if (sizePercent * cameraSize < _tileOffset)
+                sizePercent = _tileOffset / cameraSize;
+
             _isSetuped = moveCamera;
         }
 
@@ -52,22 +58,44 @@ namespace LabraxStudio.Game.Camera
             if (!_isSetuped)
                 return;
 
-            List<Tile> tiles = ServicesProvider.GameFlowService.TilesController.Tiles;
             float avgPosition = 0;
-            int count = 0;
 
-            if (tiles.Count == 0)
-                return;
+            if (moveAction != null)
+                avgPosition = CalculatePosition(moveAction);
+            else
+            {
+                if (_lastMoveTile != null)
+                    return;
 
-            avgPosition = CalculateAvgPosition(moveAction, tiles, avgPosition, ref count);
-            avgPosition = avgPosition / count;
+                List<Tile> tiles = ServicesProvider.GameFlowService.TilesController.Tiles;
+                avgPosition = CalculatePosition(tiles);
+            }
 
+            avgPosition += _tileOffset;
             bool inBorders = CheckTilesInBorders(avgPosition);
             if (inBorders)
                 return;
 
             float moveTime = moveAction == null ? _moveTime : moveAction.GetTime();
             MoveCamera(avgPosition, moveTime);
+        }
+
+        public void FixCameraPositionMerge(MergeAction mergeAction)
+        {
+            if (!_isSetuped)
+                return;
+            if (mergeAction == null)
+                return;
+
+            float avgPosition = mergeAction.MergeTo.Position.y;
+            avgPosition += _tileOffset;
+            bool inBorders = CheckTilesInBorders(avgPosition);
+            if (inBorders)
+                return;
+
+            _lastMoveTile = mergeAction.MergeTo;
+
+            MoveCamera(avgPosition, _moveTime);
         }
 
         public void OnDestroy()
@@ -77,26 +105,36 @@ namespace LabraxStudio.Game.Camera
 
         // PRIVATE METHODS: -----------------------------------------------------------------------
 
-        private float CalculateAvgPosition(MoveAction moveAction, List<Tile> tiles, float avgPosition, ref int count)
+        private float CalculatePosition(MoveAction moveAction)
         {
+            _lastMoveTile = moveAction.Tile;
+            Vector2 matrixToPosition =
+                GameTypesConverter.MatrixPositionToGamePosition(moveAction.MoveTo, _cellSize);
+
+            return matrixToPosition.y;
+        }
+
+        private float CalculatePosition(List<Tile> tiles)
+        {
+            float minPosition = 1000;
+            float cameraPosition = _camera.transform.position.y + _tileOffset;
+            float result = cameraPosition;
+
             foreach (var tile in tiles)
             {
                 if (tile != null)
                 {
-                    if (moveAction != null && tile == moveAction.Tile)
+                    float tilePosition = tile.Position.y;
+                    float distance = Math.Abs(cameraPosition - tilePosition);
+                    if (distance < minPosition)
                     {
-                        Vector2 matrixToPosition =
-                            GameTypesConverter.MatrixPositionToGamePosition(moveAction.MoveTo, _cellSize);
-                        avgPosition += matrixToPosition.y;
+                        minPosition = distance;
+                        result = tilePosition;
                     }
-                    else
-                        avgPosition += tile.Position.y;
-
-                    count++;
                 }
             }
 
-            return avgPosition;
+            return result;
         }
 
         private void MoveCamera(float avgPosition, float moveTime)
@@ -117,8 +155,8 @@ namespace LabraxStudio.Game.Camera
         private bool CheckTilesInBorders(float avgPosition)
         {
             var position = _camera.transform.position;
-            float maxBorder = position.y + _cameraSize * SIZE_PERCENT;
-            float minBorder = position.y - _cameraSize * SIZE_PERCENT;
+            float maxBorder = position.y + _cameraSize * sizePercent;
+            float minBorder = position.y - _cameraSize * sizePercent;
 
             return avgPosition <= maxBorder && avgPosition >= minBorder;
         }
