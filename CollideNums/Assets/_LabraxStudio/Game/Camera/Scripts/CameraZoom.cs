@@ -11,6 +11,10 @@ namespace LabraxStudio.Game.Camera
         [SerializeField]
         private float _startSize = 7.15f;
 
+        // PROPERTIES: ----------------------------------------------------------------------------
+        
+        public float CurrentSize => _currentSize;
+
         // FIELDS: -------------------------------------------------------------------
 
         private CameraController _cameraController;

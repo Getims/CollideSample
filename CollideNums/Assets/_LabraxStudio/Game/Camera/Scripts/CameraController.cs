@@ -1,5 +1,8 @@
+using System;
 using LabraxStudio.App;
 using LabraxStudio.App.Services;
+using LabraxStudio.Events;
+using LabraxStudio.Game.Tiles;
 using LabraxStudio.Meta.GameField;
 using LabraxStudio.Meta.Levels;
 using UnityEngine;
@@ -16,9 +19,27 @@ namespace LabraxStudio.Game.Camera
         [SerializeField]
         private CameraZoom _cameraZoom;
 
+        [SerializeField]
+        private CameraMover _cameraMover;
+
         // PROPERTIES: ----------------------------------------------------------------------------
 
         public UnityEngine.Camera Camera => _camera;
+
+        // GAME ENGINE METHODS: -------------------------------------------------------------------
+
+        private void Awake()
+        {
+            GameEvents.OnTileAction.AddListener(OnTileAction);
+            GameEvents.OnPreMoveTile.AddListener(OnPreMoveTile);
+        }
+
+        private void OnDestroy()
+        {
+            GameEvents.OnTileAction.RemoveListener(OnTileAction);
+            GameEvents.OnPreMoveTile.RemoveListener(OnPreMoveTile);
+            _cameraMover.OnDestroy();
+        }
 
         // PUBLIC METHODS: -----------------------------------------------------------------------
 
@@ -35,6 +56,7 @@ namespace LabraxStudio.Game.Camera
                 SetupCameraSize(-1);
             }
 
+            _cameraMover.Initialize(levelMeta.ForAdsSettings.MoveCamera, _camera, _cameraZoom.CurrentSize, levelMeta.Height);
             GameFieldSprites gameFieldSprites =
                 ServicesProvider.GameSettingsService.GetGameSettings().GameFieldSprites;
             _camera.backgroundColor = gameFieldSprites.BackgroundColor;
@@ -83,5 +105,12 @@ namespace LabraxStudio.Game.Camera
             else
                 _cameraZoom.SetSize(screenFactor);
         }
+
+        // EVENTS RECEIVERS: ----------------------------------------------------------------------
+
+        private void OnTileAction() => _cameraMover.FixCameraPosition(null);
+
+        private void OnPreMoveTile(MoveAction moveAction) => _cameraMover.FixCameraPosition(moveAction);
+
     }
 }

@@ -80,6 +80,7 @@ namespace LabraxStudio.Game.Tiles
                     CheckChainMerges(mergeAction.MergeTo));
             }
 
+            GameEvents.SendPreMoveTile(moveAction);
             //GameEvents.SendTileAction();
         }
 

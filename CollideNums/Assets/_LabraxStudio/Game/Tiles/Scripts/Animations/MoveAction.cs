@@ -27,6 +27,7 @@ namespace LabraxStudio.Game.Tiles
 
         public Vector2Int MoveTo => _moveTo;
         private TilesController TilesController => ServicesProvider.GameFlowService.TilesController;
+        public Tile Tile => _tile;
 
         // FIELDS: -------------------------------------------------------------------
 
@@ -83,6 +84,8 @@ namespace LabraxStudio.Game.Tiles
             }
         }
 
+        public float GetTime() => CalculateTime(_swipeSettings.TileSpeed, _swipe);
+        
         // PRIVATE METHODS: -----------------------------------------------------------------------
 
         private float CalculateTime(float tileSpeed, Swipe swipe)

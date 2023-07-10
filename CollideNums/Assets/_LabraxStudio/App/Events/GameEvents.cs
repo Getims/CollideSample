@@ -9,6 +9,7 @@ namespace LabraxStudio.Events
         // EVENTS RECEIVERS: ----------------------------------------------------------------------
 
         public static UnityEvent OnTileAction = new UnityEvent();
+        public static UnityEvent<MoveAction> OnPreMoveTile = new UnityEvent<MoveAction> ();
         public static UnityEvent<Tile> OnTileSelectForBooster = new UnityEvent<Tile>();
         public static UnityEvent OnGenerateLevel = new UnityEvent();
         public static UnityEvent<bool> OnGameOver = new UnityEvent<bool>();
@@ -25,6 +26,8 @@ namespace LabraxStudio.Events
 
         public static void SendTileAction() => OnTileAction?.Invoke();
         public static void SendTileMergesComplete() => OnTileMergesComplete?.Invoke();
+        public static void SendMoveTileInGate(int tileNumber) => OnMoveTileInGate?.Invoke(tileNumber);
+        public static void SendPreMoveTile(MoveAction moveAction) => OnPreMoveTile?.Invoke(moveAction);
         public static void SendTileSelectForBooster(Tile tile) => OnTileSelectForBooster?.Invoke(tile);
 
         public static void SendGameOver(bool isWin, FailReason failReason = FailReason.None)
@@ -36,7 +39,6 @@ namespace LabraxStudio.Events
 
         public static void SendLevelGenerated() => OnGenerateLevel?.Invoke();
         public static void SendLevelRestartBoosterUse() => OnLevelRestartBoosterUse?.Invoke();
-        public static void SendMoveTileInGate(int tileNumber) => OnMoveTileInGate?.Invoke(tileNumber);
         public static void SendLevelTaskProgress(int tileNumber) => OnLevelTaskProgress?.Invoke(tileNumber);
         public static void SendLevelTaskComplete(int tileNumber) => OnLevelTaskComplete?.Invoke(tileNumber);
         public static void SendAllTasksComplete() => OnAllTasksComplete?.Invoke();
