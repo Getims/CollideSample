@@ -19,9 +19,12 @@ MonoBehaviour:
     width: 7
     height: 7
     _brushMode: 1
-    _rightClickSize: 1
+    _enableFieldPalette: 0
+    _enableTilePalette: 0
     _fieldBrushMode: 2
+    _fieldBrushModeRight: 0
     _tilesBrushMode: 2
+    _tilesBrushModeRight: 0
   _boostersSettings:
   - _boosterMeta: {fileID: 11400000, guid: 3b85c5d335e9ce344b42fbcac79b97cd, type: 2}
   _taskSettings:
@@ -32,6 +35,14 @@ MonoBehaviour:
       _tilesCount: 10
     - _tileNumber: 4
       _tilesCount: 10
+  forAdsSettings:
+    _levelForAds: 0
+    _cameraSize: 7.15
+    _moveCamera: 0
+    _moveEase: 4
+    _cameraOffset: {x: 0, y: 0}
+    _overrideTileMoveDistance: 0
+    _tileMoveMaxDistance: 8
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
@@ -53,15 +64,24 @@ MonoBehaviour:
     - Name: _brushMode
       Entry: 3
       Data: 1
-    - Name: _rightClickSize
-      Entry: 3
-      Data: 1
+    - Name: _enableFieldPalette
+      Entry: 5
+      Data: false
+    - Name: _enableTilePalette
+      Entry: 5
+      Data: false
     - Name: _fieldBrushMode
       Entry: 3
       Data: 2
+    - Name: _fieldBrushModeRight
+      Entry: 3
+      Data: 0
     - Name: _tilesBrushMode
       Entry: 3
       Data: 2
+    - Name: _tilesBrushModeRight
+      Entry: 3
+      Data: 0
     - Name: _levelMatrix
       Entry: 7
       Data: 1|System.Int32[,], mscorlib

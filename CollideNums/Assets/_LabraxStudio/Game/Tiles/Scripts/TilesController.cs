@@ -4,7 +4,6 @@ using LabraxStudio.App.Services;
 using LabraxStudio.Events;
 using LabraxStudio.Meta.Levels;
 using LabraxStudio.Sound;
-using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace LabraxStudio.Game.Tiles
@@ -24,14 +23,11 @@ namespace LabraxStudio.Game.Tiles
 
         // PROPERTIES: ----------------------------------------------------------------------------
 
-        public int[,] TilesMatrix => _tilesMatrix;
         public List<Tile> Tiles => _tiles;
 
         // FIELDS: -------------------------------------------------------------------
 
-        [ShowInInspector]
         private int[,] _tilesMatrix;
-
         private List<Tile> _tiles = new List<Tile>();
         private int _animations = 0;
 
@@ -53,7 +49,7 @@ namespace LabraxStudio.Game.Tiles
             _tilesMerger.Initialize(_tilesMatrix);
         }
 
-        public void MoveTile(Tile tile, Direction direction, Swipe swipe, float swipeSpeed)
+        public void MoveTile(Tile tile, Direction direction, Swipe swipe)
         {
             _animations++;
             TilesAnimator tilesAnimator = new TilesAnimator();
@@ -95,7 +91,7 @@ namespace LabraxStudio.Game.Tiles
             return null;
         }
 
-        public void CheckTileValue(Tile tile)
+        public void UpdateTileValue(Tile tile)
         {
             int newValue = _tilesMatrix[tile.Cell.x, tile.Cell.y];
             tile.SetValue(newValue, _tilesGenerator.GetSprite(newValue));
@@ -112,7 +108,7 @@ namespace LabraxStudio.Game.Tiles
             ServicesProvider.GameFlowService.GameOverTracker.CheckForWin();
         }
 
-        public void ClearTiles()
+        public void RemoveAllTiles()
         {
             RemoveAllTiles(new List<Tile>(_tiles));
             _tiles.Clear();

@@ -123,10 +123,6 @@ namespace LabraxStudio.UI
 
         private void OnGameOver(bool isWin)
         {
-            /*
-            if (isWin)
-                InitializeMenuUI();
-            */
             if (isWin)
             {
                 ServicesProvider.MusicService.PlayWinScreenMusic();

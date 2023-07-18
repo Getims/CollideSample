@@ -106,22 +106,22 @@ namespace LabraxStudio.Game.Gates
             var cell = gate.Cell;
             var gateType = gate.GateType;
 
-            if (HasBadTile(cell, gateType, Direction.Left))
+            if (HasIncorrectTile(cell, gateType, Direction.Left))
                 return true;
 
-            if (HasBadTile(cell, gateType, Direction.Up))
+            if (HasIncorrectTile(cell, gateType, Direction.Up))
                 return true;
 
-            if (HasBadTile(cell, gateType, Direction.Right))
+            if (HasIncorrectTile(cell, gateType, Direction.Right))
                 return true;
 
-            if (HasBadTile(cell, gateType, Direction.Down))
+            if (HasIncorrectTile(cell, gateType, Direction.Down))
                 return true;
 
             return false;
         }
 
-        private bool HasBadTile(Vector2Int cell, GameCellType gateType, Direction direction)
+        private bool HasIncorrectTile(Vector2Int cell, GameCellType gateType, Direction direction)
         {
             var checkVector = GameTypesConverter.DirectionToVector2Int(direction);
             cell += checkVector;

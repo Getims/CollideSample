@@ -59,13 +59,18 @@ namespace LabraxStudio.Game.Camera
 
             _cameraMover.Initialize(levelMeta.ForAdsSettings.MoveCamera, _camera, _cameraZoom.CurrentSize,
                 levelMeta.Height, levelMeta.ForAdsSettings.MoveEase);
+
+            SetBackground();
+        }
+        
+        // PRIVATE METHODS: -----------------------------------------------------------------------
+
+        private void SetBackground()
+        {
             GameFieldSprites gameFieldSprites =
                 ServicesProvider.GameSettingsService.GetGameSettings().GameFieldSprites;
             _camera.backgroundColor = gameFieldSprites.BackgroundColor;
         }
-
-
-        // PRIVATE METHODS: -----------------------------------------------------------------------
 
         private void SetPosition(int levelWidth, int levelHeight)
         {

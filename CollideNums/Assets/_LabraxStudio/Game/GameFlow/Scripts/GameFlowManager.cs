@@ -84,7 +84,7 @@ namespace LabraxStudio.Game
             LockTouch();
             LevelMeta levelMeta = ServicesProvider.LevelMetaService.GetCurrentLevelMeta();
 
-            _tilesController.ClearTiles();
+            _tilesController.RemoveAllTiles();
             _tilesController.Initialize(levelMeta);
 
             _gatesController.CheckGatesState();
@@ -101,7 +101,7 @@ namespace LabraxStudio.Game
 
             _gameFieldController.ClearField();
             _gatesController.ClearGates();
-            _tilesController.ClearTiles();
+            _tilesController.RemoveAllTiles();
 
             _gameFieldController.GenerateField(levelMeta);
             _gatesController.GenerateGates(levelMeta);

@@ -2,7 +2,6 @@
 using UnityEngine;
 using Sirenix.OdinInspector;
 using LabraxEditor;
-using LabraxStudio.Base;
 
 namespace LabraxStudio.Meta
 {

@@ -1,7 +1,5 @@
 using LabraxStudio.App.Services;
 using LabraxStudio.Events;
-using LabraxStudio.Game.Gates;
-using LabraxStudio.Sound;
 using UnityEngine;
 
 namespace LabraxStudio.Game.Tiles
@@ -63,12 +61,12 @@ namespace LabraxStudio.Game.Tiles
         public void SetMergeFlag(bool isMerging)
         {
             _isMerging = isMerging;
-            if(_isMerging)
+            if (_isMerging)
                 _swipeChecker.StopDragging();
         }
 
         public void SetMoveFlag(bool isMoving) => _swipeChecker.SetPause(isMoving);
-        
+
         public void SetGateFlag()
         {
             _movedToGate = true;
@@ -79,8 +77,15 @@ namespace LabraxStudio.Game.Tiles
 
         public void PlayCollideEffect(Direction direction)
         {
-            if (!_isMerging)
-                _tileEffectsController.PlayCollideEffect(direction);
+            if (_isMerging)
+                return;
+
+            _tileEffectsController.PlayCollideEffect(direction);
+        }
+
+        public void DestroySelf()
+        {
+            Destroy(gameObject);
         }
 
         // EVENTS RECEIVERS: ----------------------------------------------------------------------
@@ -90,10 +95,10 @@ namespace LabraxStudio.Game.Tiles
             if (BoostersController.IsBoosterActive)
             {
                 bool lockedByTutorial = !ServicesProvider.TutorialService.CanUseBoosterOnTile(this);
-                
-                if(lockedByTutorial)
+
+                if (lockedByTutorial)
                     return;
-                
+
                 GameEvents.SendTileSelectForBooster(this);
                 return;
             }
@@ -103,23 +108,18 @@ namespace LabraxStudio.Game.Tiles
 
         public void OnDeselect() => _swipeChecker.OnDeselect();
 
-        private void OnSwipe(Direction direction, Swipe swipe, float swipeSpeed)
+        private void OnSwipe(Direction direction, Swipe swipe)
         {
             bool lockedByTutorial = !ServicesProvider.TutorialService.CanMoveTile(_cell, direction, swipe);
-            if(lockedByTutorial)
+            if (lockedByTutorial)
                 return;
-            
+
             if (swipe == Swipe.Infinite)
                 _tileEffectsController.PlayInfiniteMoveEffect();
             else
                 _tileEffectsController.StopInfiniteMoveEffect();
 
-            TilesController.MoveTile(this, direction, swipe, swipeSpeed);
-        }
-
-        public void DestroySelf()
-        {
-            Destroy(gameObject);
+            TilesController.MoveTile(this, direction, swipe);
         }
     }
 }

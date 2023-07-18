@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -14,8 +13,7 @@ namespace LabraxStudio.Meta.Levels
         [SerializeField]
         [ValueDropdown("FriendlyTextureSizes")]
         private int _tileNumber = 0;
-
-
+        
         [SerializeField]
         private int _tilesCount;
 
@@ -46,7 +44,6 @@ namespace LabraxStudio.Meta.Levels
             { "32K", 15 },
             { "64K", 16 }
         };
-        
       
     }
     

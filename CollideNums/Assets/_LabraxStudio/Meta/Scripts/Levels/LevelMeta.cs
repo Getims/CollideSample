@@ -59,12 +59,6 @@ namespace LabraxStudio.Meta.Levels
 
         // PRIVATE METHODS: -----------------------------------------------------------------------
 
-        private void CheckLevel()
-        {
-            LevelBot bot = new LevelBot();
-            //bot.CalculateWinRate(_levelMatrix, _tilesMatrix, width, height);
-        }
-
         private int[,] GetLevelMatrix()
         {
             int[,] levelMatrix = new int[_levelTemplate.Width, _levelTemplate.Height];

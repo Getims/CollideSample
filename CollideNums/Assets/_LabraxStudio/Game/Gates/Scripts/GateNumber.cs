@@ -1,4 +1,3 @@
-using System;
 using DG.Tweening;
 using UnityEngine;
 
@@ -74,13 +73,6 @@ namespace LabraxStudio.Game.Gates.Visual
             _number.color = _baseColor;
             _leftNumber.color = _baseColor;
             _rightNumber.color = _baseColor;
-        }
-
-        private void SetGlowColor()
-        {
-            _number.color = _glowColor;
-            _leftNumber.color = _glowColor;
-            _rightNumber.color = _glowColor;
         }
 
     }

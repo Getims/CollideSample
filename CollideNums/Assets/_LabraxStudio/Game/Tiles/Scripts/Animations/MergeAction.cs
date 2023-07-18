@@ -60,14 +60,7 @@ namespace LabraxStudio.Game.Tiles
         private void OnMoveComplete()
         {
             TilesController.DestroyTile(_mergeFrom);
-            TilesController.CheckTileValue(_mergeTo);
-            /*
-            Vector3 punch = new Vector3(0, 0.3f, 0);
-
-            _mergeTo.transform.DOPunchScale(Vector3.one * 0.1f, 0.5f, 1, 0);
-            _mergeTo.transform.DOPunchPosition(punch, 0.5f, 1, 0f)
-                .OnComplete(OnComplete);
-                */
+            TilesController.UpdateTileValue(_mergeTo);
         }
 
         private void OnComplete()
