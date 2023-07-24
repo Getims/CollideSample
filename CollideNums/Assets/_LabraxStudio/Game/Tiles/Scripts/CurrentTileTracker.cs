@@ -42,12 +42,12 @@ namespace LabraxStudio.Game.Tiles
         {
             float avgPosition = 0;
             Tile tile = null;
-            
+
             if (moveAction != null)
             {
                 tile = moveAction.Tile;
                 var time = moveAction.GetTime();
-                _trackedTile = new TrackedTile(tile, true, time,CalculatePosition(moveAction));
+                _trackedTile = new TrackedTile(tile, true, time, CalculatePosition(moveAction));
             }
             else
             {
@@ -56,7 +56,9 @@ namespace LabraxStudio.Game.Tiles
                     List<Tile> tiles = ServicesProvider.GameFlowService.TilesController.Tiles;
                     tile = CalculateTile(tiles);
                 }
-                
+                else
+                    tile = _trackedTile.Tile;
+
                 _trackedTile = new TrackedTile(tile, false);
             }
 
@@ -96,6 +98,7 @@ namespace LabraxStudio.Game.Tiles
 
             return result;
         }
+
         private float CalculatePosition(MoveAction moveAction)
         {
             Vector2 matrixToPosition =
