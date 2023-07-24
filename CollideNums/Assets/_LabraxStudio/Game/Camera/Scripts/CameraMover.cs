@@ -10,13 +10,6 @@ namespace LabraxStudio.Game.Camera
     [Serializable]
     public class CameraMover
     {
-        // MEMBERS: -------------------------------------------------------------------------------
-        [SerializeField]
-        private float _moveTime = 0.25f;
-
-        [SerializeField]
-        private Ease _moveEase = Ease.OutSine;
-
         // FIELDS: -------------------------------------------------------------------
 
         private bool _isSetuped = false;
@@ -28,15 +21,18 @@ namespace LabraxStudio.Game.Camera
         private Tweener _moveTW;
         private float sizePercent = 0.1f;
         private float _tileOffset = 0.05f;
+        private float _moveTime = 0.25f;
+        private Ease _moveEase = Ease.OutSine;
 
         // PUBLIC METHODS: -----------------------------------------------------------------------
 
-        public void Initialize(bool moveCamera, UnityEngine.Camera camera, float cameraSize, float levelHeight,
-            Ease moveEase)
+        public void Initialize(UnityEngine.Camera camera, float cameraSize, float levelHeight, bool moveCamera,
+            Ease moveEase, float moveTime)
         {
             _camera = camera;
             _cameraSize = cameraSize;
             _moveEase = moveEase;
+            _moveTime = moveTime;
 
             GameFieldSettings gameFieldSettings =
                 ServicesProvider.GameSettingsService.GetGameSettings().GameFieldSettings;
@@ -82,6 +78,7 @@ namespace LabraxStudio.Game.Camera
             if (inBorders)
                 return;
 
+            Utils.ReworkPoint("Move camera");
             MoveCamera(avgPosition, moveTime);
         }
 

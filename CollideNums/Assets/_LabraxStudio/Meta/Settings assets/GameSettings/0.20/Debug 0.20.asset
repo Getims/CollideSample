@@ -26,9 +26,15 @@ MonoBehaviour:
   - {fileID: 11400000, guid: dff646fc1bb29af4ebfdb3e5de049847, type: 2}
   - {fileID: 11400000, guid: 5132c8c59affe4c4db420315430bd3a4, type: 2}
   _swipeSettings:
+    _useShortSwipes: 0
     _baseSwipeForce: 0.1
     _accelSwipeForce: 0.2
     _tileSpeed: 7
     _tileAcceleration: 10
     _dragInsensitivity: 5
     _dragMinSpeed: 1
+  _cameraSettings:
+    _cameraSize: 7.15
+    _moveCamera: 1
+    _moveEase: 9
+    _moveTime: 0.3

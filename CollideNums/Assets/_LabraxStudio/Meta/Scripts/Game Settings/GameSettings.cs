@@ -36,6 +36,10 @@ namespace LabraxStudio.Meta
         [SerializeField]
         private SwipeSettings _swipeSettings;
 
+        [TitleGroup("Camera settings")]
+        [SerializeField]
+        private CameraSettings _cameraSettings;
+
         // PROPERTIES: ----------------------------------------------------------------------------
 
         public LaunchSettings LaunchSettings => _launchSettings;
@@ -45,5 +49,6 @@ namespace LabraxStudio.Meta
         public LevelsListMeta LevelsList => _levelsList;
         public List<LevelsListMeta> SelectableLevelsLists => _selectableLevelsLists;
         public SwipeSettings SwipeSettings => _swipeSettings;
+        public CameraSettings CameraSettings => _cameraSettings;
     }
 }

@@ -76,7 +76,7 @@ namespace LabraxStudio.Game.Tiles
         {
             _isDragPause = isPause;
         }
-        
+
         // PRIVATE METHODS: -----------------------------------------------------------------------
 
         private Vector2 GetMousePosition()
@@ -93,7 +93,7 @@ namespace LabraxStudio.Game.Tiles
             int checksCount = _swipeSettings.DragInsensitivity;
             float minSpeed = _swipeSettings.DragMinSpeed;
             int currentCheck = 0;
-            float speedSumm = minSpeed+1f;
+            float speedSumm = minSpeed + 1f;
 
             while (_isDragging)
             {
@@ -124,7 +124,7 @@ namespace LabraxStudio.Game.Tiles
                 yield return new WaitForEndOfFrame();
             }
         }
-        
+
         private Direction CalculateDirection(Vector2 inputDelta)
         {
             Direction _result = Direction.Null;
@@ -151,11 +151,19 @@ namespace LabraxStudio.Game.Tiles
 
         private Swipe CalculateSwipe(float swipeSpeed)
         {
-            if (swipeSpeed < _swipeSettings.BaseSwipeForce)
-                return Swipe.Null;
+            if (_swipeSettings.UseShortSwipes)
+            {
+                if (swipeSpeed < _swipeSettings.BaseSwipeForce)
+                    return Swipe.Null;
 
-            if (swipeSpeed < _swipeSettings.AccelSwipeForce)
-                return Swipe.OneTile;
+                if (swipeSpeed < _swipeSettings.AccelSwipeForce)
+                    return Swipe.OneTile;
+            }
+            else
+            {
+                if (swipeSpeed < _swipeSettings.AccelSwipeForce)
+                    return Swipe.Null;
+            }
 
             return Swipe.Infinite;
         }
@@ -168,13 +176,21 @@ namespace LabraxStudio.Game.Tiles
             else
                 delta = Math.Abs(inputDelta.x);
 
-            if (delta < 0.5f)
-                return Swipe.Null;
+            if (_swipeSettings.UseShortSwipes)
+            {
+                if (delta < 0.5f)
+                    return Swipe.Null;
 
-            if (delta > 1.5f)
+                if (delta > 1.5f)
+                    return Swipe.Infinite;
+
+                return Swipe.OneTile;
+            }
+
+            if (delta > 1.0f)
                 return Swipe.Infinite;
-            
-            return Swipe.OneTile;
+
+            return Swipe.Null;
         }
 
         private void OnDragStop()
@@ -196,6 +212,5 @@ namespace LabraxStudio.Game.Tiles
             if (_onSwipe != null)
                 _onSwipe.Invoke(moveDirection, swipe);
         }
-
     }
 }

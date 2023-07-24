@@ -1,4 +1,5 @@
 using System;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace LabraxStudio.Meta.GameField
@@ -7,8 +8,12 @@ namespace LabraxStudio.Meta.GameField
     public class SwipeSettings
     {
         // MEMBERS: -------------------------------------------------------------------------------
+
+        [SerializeField]
+        private bool _useShortSwipes = true;
         
         [SerializeField]
+        [ShowIf(nameof(_useShortSwipes))]
         private float _baseSwipeForce = 1.8f;
         
         [SerializeField]
@@ -65,5 +70,7 @@ namespace LabraxStudio.Meta.GameField
             get => _dragMinSpeed;
             set => _dragMinSpeed = value;
         }
+
+        public bool UseShortSwipes => _useShortSwipes;
     }
 }

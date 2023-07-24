@@ -32,3 +32,8 @@ MonoBehaviour:
     _tileAcceleration: 10
     _dragInsensitivity: 5
     _dragMinSpeed: 1
+  _cameraSettings:
+    _cameraSize: 7.15
+    _moveCamera: 1
+    _moveEase: 9
+    _moveTime: 0.3

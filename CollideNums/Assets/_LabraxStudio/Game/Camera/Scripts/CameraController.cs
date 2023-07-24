@@ -2,6 +2,7 @@ using LabraxStudio.App;
 using LabraxStudio.App.Services;
 using LabraxStudio.Events;
 using LabraxStudio.Game.Tiles;
+using LabraxStudio.Meta;
 using LabraxStudio.Meta.GameField;
 using LabraxStudio.Meta.Levels;
 using UnityEngine;
@@ -42,6 +43,8 @@ namespace LabraxStudio.Game.Camera
 
         public void Initialize(LevelMeta levelMeta)
         {
+            CameraSettings cameraSettings = ServicesProvider.GameSettingsService.GetGameSettings().CameraSettings;
+
             if (levelMeta.ForAdsSettings.LevelForAds)
             {
                 SetPosition(levelMeta.Width, levelMeta.Height, levelMeta.ForAdsSettings.CameraOffset);
@@ -50,11 +53,11 @@ namespace LabraxStudio.Game.Camera
             else
             {
                 SetPosition(levelMeta.Width, levelMeta.Height);
-                SetupCameraSize(-1);
+                SetupCameraSize(cameraSettings.CameraSize);
             }
 
-            _cameraMover.Initialize(levelMeta.ForAdsSettings.MoveCamera, _camera, _cameraZoom.CurrentSize,
-                levelMeta.Height, levelMeta.ForAdsSettings.MoveEase);
+            _cameraMover.Initialize(_camera, _cameraZoom.CurrentSize, levelMeta.Height,
+                cameraSettings.MoveCamera, cameraSettings.MoveEase, cameraSettings.MoveTime);
 
             SetBackground();
         }

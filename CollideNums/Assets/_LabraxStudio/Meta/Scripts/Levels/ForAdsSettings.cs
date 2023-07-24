@@ -1,5 +1,4 @@
 using System;
-using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -16,14 +15,8 @@ namespace LabraxStudio.Meta.Levels
         [Title("Camera")]
         [SerializeField, ShowIf(nameof(_levelForAds))]
         private float _cameraSize = 7.15f;
-
-        [SerializeField, ShowIf(nameof(_levelForAds))]
-        private bool _moveCamera = false;
-
-        [SerializeField, ShowIf(nameof(_levelForAds))]
-        private Ease _moveEase = Ease.InOutSine;
-
-        [SerializeField, ShowIf(nameof(_levelForAds))]
+        
+        [SerializeField]
         private Vector2 _cameraOffset = new Vector2(0, 0);
 
         [Title("Tile")]
@@ -36,15 +29,10 @@ namespace LabraxStudio.Meta.Levels
         // PROPERTIES: ----------------------------------------------------------------------------
 
         public bool OverrideMoveDistance => _levelForAds && _overrideTileMoveDistance;
-
         public bool LevelForAds => _levelForAds;
         public float CameraSize => _cameraSize;
-
-        public bool MoveCamera => _levelForAds && _moveCamera;
-
         public int TileMoveMaxDistance => _tileMoveMaxDistance;
-
         public Vector2 CameraOffset => _cameraOffset;
-        public Ease MoveEase => _moveEase;
+
     }
 }
