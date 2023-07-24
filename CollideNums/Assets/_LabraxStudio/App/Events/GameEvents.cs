@@ -9,12 +9,12 @@ namespace LabraxStudio.Events
         // EVENTS RECEIVERS: ----------------------------------------------------------------------
 
         public static UnityEvent OnTileAction = new UnityEvent();
-        public static UnityEvent<MoveAction> OnPreMoveTile = new UnityEvent<MoveAction> ();
-        public static UnityEvent<MergeAction> OnPreMergeTile = new UnityEvent<MergeAction> ();
+        public static UnityEvent<MoveAction> OnPreMoveTile = new UnityEvent<MoveAction>();
+        public static UnityEvent<MergeAction> OnPreMergeTile = new UnityEvent<MergeAction>();
         public static UnityEvent<Tile> OnTileSelectForBooster = new UnityEvent<Tile>();
         public static UnityEvent OnGenerateLevel = new UnityEvent();
         public static UnityEvent<bool> OnGameOver = new UnityEvent<bool>();
-        public static UnityEvent<FailReason> OnGameFail = new UnityEvent< FailReason>();
+        public static UnityEvent<FailReason> OnGameFail = new UnityEvent<FailReason>();
         public static UnityEvent OnLevelRestartBoosterUse = new UnityEvent();
         public static UnityEvent<int> OnMoveTileInGate = new UnityEvent<int>();
         public static UnityEvent<int> OnLevelTaskProgress = new UnityEvent<int>();
@@ -22,6 +22,7 @@ namespace LabraxStudio.Events
         public static UnityEvent OnAllTasksComplete = new UnityEvent();
         public static UnityEvent OnTileMergesComplete = new UnityEvent();
         public static UnityEvent OnLevelCanBePassedAgain = new UnityEvent();
+        public static UnityEvent<TrackedTile> OnTrackedTileUpdate = new UnityEvent<TrackedTile>();
 
         // PUBLIC METHODS: ------------------------------------------------------------------------
 
@@ -45,5 +46,6 @@ namespace LabraxStudio.Events
         public static void SendLevelTaskComplete(int tileNumber) => OnLevelTaskComplete?.Invoke(tileNumber);
         public static void SendAllTasksComplete() => OnAllTasksComplete?.Invoke();
         public static void SendLevelCanBePassedAgain() => OnLevelCanBePassedAgain?.Invoke();
+        public static void SendTrackedTileUpdate(TrackedTile tile) => OnTrackedTileUpdate?.Invoke(tile);
     }
 }

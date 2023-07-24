@@ -29,16 +29,12 @@ namespace LabraxStudio.Game.Camera
 
         private void Awake()
         {
-            GameEvents.OnTileAction.AddListener(OnTileAction);
-            GameEvents.OnPreMoveTile.AddListener(OnPreMoveTile);
-            GameEvents.OnPreMergeTile.AddListener(OnPreMergeTile);
+            GameEvents.OnTrackedTileUpdate.AddListener(OnTrackedTileUpdate);
         }
 
         private void OnDestroy()
         {
-            GameEvents.OnTileAction.RemoveListener(OnTileAction);
-            GameEvents.OnPreMoveTile.RemoveListener(OnPreMoveTile);
-            GameEvents.OnPreMergeTile.AddListener(OnPreMergeTile);
+            GameEvents.OnTrackedTileUpdate.RemoveListener(OnTrackedTileUpdate);
             _cameraMover.OnDestroy();
         }
 
@@ -62,7 +58,7 @@ namespace LabraxStudio.Game.Camera
 
             SetBackground();
         }
-        
+
         // PRIVATE METHODS: -----------------------------------------------------------------------
 
         private void SetBackground()
@@ -115,10 +111,6 @@ namespace LabraxStudio.Game.Camera
 
         // EVENTS RECEIVERS: ----------------------------------------------------------------------
 
-        private void OnTileAction() => _cameraMover.FixCameraPosition(null);
-
-        private void OnPreMoveTile(MoveAction moveAction) => _cameraMover.FixCameraPosition(moveAction);
-
-        private void OnPreMergeTile(MergeAction mergeAction) => _cameraMover.FixCameraPositionMerge(mergeAction);
+        private void OnTrackedTileUpdate(TrackedTile tile) => _cameraMover.FixCameraPosition(tile);
     }
 }

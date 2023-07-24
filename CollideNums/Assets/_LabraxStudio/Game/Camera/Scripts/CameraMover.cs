@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using DG.Tweening;
 using LabraxStudio.App.Services;
 using LabraxStudio.Game.Tiles;
@@ -29,16 +28,16 @@ namespace LabraxStudio.Game.Camera
         private Tweener _moveTW;
         private float sizePercent = 0.1f;
         private float _tileOffset = 0.05f;
-        private Tile _lastMoveTile = null;
 
         // PUBLIC METHODS: -----------------------------------------------------------------------
 
-        public void Initialize(bool moveCamera, UnityEngine.Camera camera, float cameraSize, float levelHeight, Ease moveEase)
+        public void Initialize(bool moveCamera, UnityEngine.Camera camera, float cameraSize, float levelHeight,
+            Ease moveEase)
         {
             _camera = camera;
             _cameraSize = cameraSize;
             _moveEase = moveEase;
-            
+
             GameFieldSettings gameFieldSettings =
                 ServicesProvider.GameSettingsService.GetGameSettings().GameFieldSettings;
 
@@ -53,22 +52,29 @@ namespace LabraxStudio.Game.Camera
             _isSetuped = moveCamera;
         }
 
-        public void FixCameraPosition(MoveAction moveAction)
+        public void FixCameraPosition(TrackedTile tile)
         {
             if (!_isSetuped)
                 return;
 
             float avgPosition = 0;
+            float moveTime = _moveTime;
 
-            if (moveAction != null)
-                avgPosition = CalculatePosition(moveAction);
-            else
+            if (tile != null)
             {
-                if (_lastMoveTile != null)
-                    return;
-                
-                List<Tile> tiles = ServicesProvider.GameFlowService.TilesController.Tiles;
-                avgPosition = CalculatePosition(tiles);
+                if (tile.IsMoving)
+                {
+                    avgPosition = tile.MovePosition;
+                    moveTime = tile.MoveTime;
+                    if (moveTime < 0)
+                        return;
+                }
+                else
+                {
+                    if (tile.Tile == null)
+                        return;
+                    avgPosition = tile.Tile.Position.y;
+                }
             }
 
             avgPosition += _tileOffset;
@@ -76,25 +82,7 @@ namespace LabraxStudio.Game.Camera
             if (inBorders)
                 return;
 
-            float moveTime = moveAction == null ? _moveTime : moveAction.GetTime();
             MoveCamera(avgPosition, moveTime);
-        }
-
-        public void FixCameraPositionMerge(MergeAction mergeAction)
-        {
-            if (!_isSetuped)
-                return;
-            if (mergeAction == null)
-                return;
-            
-            float avgPosition = mergeAction.MergeTo.Position.y;
-            avgPosition += _tileOffset;
-            _lastMoveTile = mergeAction.MergeTo;
-            bool inBorders = CheckTilesInBorders(avgPosition);
-            if (inBorders)
-                return;
-
-            MoveCamera(avgPosition, _moveTime);
         }
 
         public void OnDestroy()
@@ -103,38 +91,6 @@ namespace LabraxStudio.Game.Camera
         }
 
         // PRIVATE METHODS: -----------------------------------------------------------------------
-
-        private float CalculatePosition(MoveAction moveAction)
-        {
-            _lastMoveTile = moveAction.Tile;
-            Vector2 matrixToPosition =
-                GameTypesConverter.MatrixPositionToGamePosition(moveAction.MoveTo, _cellSize);
-
-            return matrixToPosition.y;
-        }
-
-        private float CalculatePosition(List<Tile> tiles)
-        {
-            float minPosition = 1000;
-            float cameraPosition = _camera.transform.position.y + _tileOffset;
-            float result = cameraPosition;
-
-            foreach (var tile in tiles)
-            {
-                if (tile != null)
-                {
-                    float tilePosition = tile.Position.y;
-                    float distance = Math.Abs(cameraPosition - tilePosition);
-                    if (distance < minPosition)
-                    {
-                        minPosition = distance;
-                        result = tilePosition;
-                    }
-                }
-            }
-
-            return result;
-        }
 
         private void MoveCamera(float avgPosition, float moveTime)
         {

@@ -8,11 +8,6 @@ namespace LabraxStudio.Game.Tiles
 {
     public class TilesAnimator
     {
-        public TilesAnimator()
-        {
-            //_coroutineRunner = TilesController.Instance.gameObject;
-        }
-
         // FIELDS: -------------------------------------------------------------------
 
         private GameObject _coroutineRunner;
@@ -31,14 +26,14 @@ namespace LabraxStudio.Game.Tiles
                 animation.Play(Unpause);
                 while (_isPaused)
                     await Task.Delay(10);
-                
+
                 GameEvents.SendTileAction();
             }
-            
-            if(onComplete != null)
+
+            if (onComplete != null)
                 onComplete.Invoke();
         }
-        
+
         public async void Play(AnimationAction animation, Action onComplete = null)
         {
             if (animation != null)
@@ -46,10 +41,10 @@ namespace LabraxStudio.Game.Tiles
                 _isPaused = true;
                 animation.Play(Unpause);
                 while (_isPaused)
-                    await Task.Delay(100); 
+                    await Task.Delay(100);
             }
-            
-            if(onComplete != null)
+
+            if (onComplete != null)
                 onComplete.Invoke();
         }
 

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using DG.Tweening;
 using LabraxStudio.App.Services;
+using LabraxStudio.Events;
 using LabraxStudio.Meta.GameField;
 using LabraxStudio.Sound;
 using UnityEngine;

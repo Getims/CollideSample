@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using LabraxStudio.App.Services;
@@ -30,6 +31,14 @@ namespace LabraxStudio.Game.Tiles
         private int[,] _tilesMatrix;
         private List<Tile> _tiles = new List<Tile>();
         private int _animations = 0;
+        private CurrentTileTracker _currentTileTracker = new CurrentTileTracker();
+
+        // GAME ENGINE METHODS: -------------------------------------------------------------------
+
+        private void OnDestroy()
+        {
+            _currentTileTracker.OnDestroy();
+        }
 
         // PUBLIC METHODS: -----------------------------------------------------------------------
 
@@ -47,6 +56,7 @@ namespace LabraxStudio.Game.Tiles
                     -1);
 
             _tilesMerger.Initialize(_tilesMatrix);
+            _currentTileTracker.Initialize();
         }
 
         public void MoveTile(Tile tile, Direction direction, Swipe swipe)
@@ -152,6 +162,8 @@ namespace LabraxStudio.Game.Tiles
 
             return false;
         }
+
+        public TrackedTile GetTrackedTile() => _currentTileTracker.GetTile();
 
         // PRIVATE METHODS: -----------------------------------------------------------------------
 
