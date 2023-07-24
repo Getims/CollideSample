@@ -108,7 +108,7 @@ namespace LabraxStudio.Game.Tiles
 
         public void OnDeselect() => _swipeChecker.OnDeselect();
 
-        private void OnSwipe(Direction direction, Swipe swipe)
+        public void OnSwipe(Direction direction, Swipe swipe)
         {
             bool lockedByTutorial = !ServicesProvider.TutorialService.CanMoveTile(_cell, direction, swipe);
             if (lockedByTutorial)
