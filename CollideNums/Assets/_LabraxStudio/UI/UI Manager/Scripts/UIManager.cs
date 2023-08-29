@@ -1,5 +1,6 @@
 using LabraxStudio.App.Services;
 using LabraxStudio.Events;
+using LabraxStudio.Game;
 using LabraxStudio.Managers;
 using LabraxStudio.UI.Common;
 using LabraxStudio.UI.Common.Factory;
@@ -20,6 +21,7 @@ namespace LabraxStudio.UI
         // FIELDS: -------------------------------------------------------------------
 
         private GameObject _currencies;
+        private GameObject _swipePanel;
         private LevelIndexPanel _levelIndexPanelMenu;
         private LevelIndexPanel _levelIndexPanelGame;
 
@@ -50,15 +52,15 @@ namespace LabraxStudio.UI
                 _levelIndexPanelGame = _gameUIFactory.Create<LevelIndexPanel>(MenuType.LevelIndexPanel);
             _gameUIFactory.Create(MenuType.BoostersPanel);
 
-            int currentLevel = ServicesProvider.PlayerDataService.CurrentLevel;
-            if (currentLevel > 1)
-                _gameUIFactory.Create(MenuType.TasksPanel);
-            _gameUIFactory.Create(MenuType.TutorialPanel);
+            CreateTaskPanel();
 
+            _gameUIFactory.Create(MenuType.TutorialPanel);
             if (!_currencies)
                 _gameUIFactory.Create(MenuType.CurrenciesBase, out _currencies);
-        }
 
+            CreateSwipePanel();
+        }
+        
         public void InitializeMenuUI()
         {
             ServicesProvider.MusicService.PlayMainMenuMusic();
@@ -79,6 +81,43 @@ namespace LabraxStudio.UI
 
         // PRIVATE METHODS: -----------------------------------------------------------------------
 
+        private void CreateTaskPanel()
+        {
+            int currentLevel = ServicesProvider.PlayerDataService.CurrentLevel;
+            if (currentLevel > 1)
+                _gameUIFactory.Create(MenuType.TasksPanel);
+        }
+
+        private void CreateSwipePanel()
+        {
+            bool enableSwipePanel = ServicesProvider.GameSettingsService.GetGameSettings().SwipeSettings.SwipeMode ==
+                                    SwipeMode.SwipeOnScreen;
+            if(!enableSwipePanel)
+                return;
+            
+            if(_swipePanel)
+                return;
+            
+            _gameUIFactory.Create(MenuType.SwipePanel, out _swipePanel);
+        }
+
+        private void CreateTaskWindow()
+        {
+            ServicesProvider.MusicService.PlayGameMusic();
+
+            if (_levelIndexPanelMenu != null)
+            {
+                _levelIndexPanelMenu.HideAndDestroy();
+                _levelIndexPanelMenu = null;
+            }
+
+            if (_levelIndexPanelGame == null)
+                _levelIndexPanelGame = _gameUIFactory.Create<LevelIndexPanel>(MenuType.LevelIndexPanel);
+            _gameUIFactory.Create(MenuType.TaskPopupWindow);
+        }
+
+        // EVENTS RECEIVERS: ----------------------------------------------------------------------
+        
         private void OnMainMenuTapToPlay()
         {
             int currentLevel = ServicesProvider.PlayerDataService.CurrentLevel;
@@ -99,27 +138,9 @@ namespace LabraxStudio.UI
             InitializeGameUI();
         }
 
-        private void CreateTaskWindow()
-        {
-            ServicesProvider.MusicService.PlayGameMusic();
-
-            if (_levelIndexPanelMenu != null)
-            {
-                _levelIndexPanelMenu.HideAndDestroy();
-                _levelIndexPanelMenu = null;
-            }
-
-            if (_levelIndexPanelGame == null)
-                _levelIndexPanelGame = _gameUIFactory.Create<LevelIndexPanel>(MenuType.LevelIndexPanel);
-            _gameUIFactory.Create(MenuType.TaskPopupWindow);
-        }
-
         private void OnTaskWindowClosed() => InitializeGameUI();
 
-        private void OnWinScreenClaimClicked()
-        {
-            InitializeMenuUI();
-        }
+        private void OnWinScreenClaimClicked() => InitializeMenuUI();
 
         private void OnGameOver(bool isWin)
         {

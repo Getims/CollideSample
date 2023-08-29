@@ -1,4 +1,5 @@
 using System;
+using LabraxStudio.Game;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -8,7 +9,9 @@ namespace LabraxStudio.Meta.GameField
     public class SwipeSettings
     {
         // MEMBERS: -------------------------------------------------------------------------------
-
+        [SerializeField]
+        private SwipeMode _swipeMode = SwipeMode.SwipeTiles;
+            
         [SerializeField]
         private bool _useShortSwipes = true;
         
@@ -72,5 +75,6 @@ namespace LabraxStudio.Meta.GameField
         }
 
         public bool UseShortSwipes => _useShortSwipes;
+        public SwipeMode SwipeMode => _swipeMode;
     }
 }

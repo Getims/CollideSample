@@ -90,7 +90,6 @@ namespace LabraxStudio.Game
             {
                 _isFail = false;
                 GameEvents.SendLevelCanBePassedAgain();
-                Utils.ReworkPoint("Fail revert");
             }
         }
         

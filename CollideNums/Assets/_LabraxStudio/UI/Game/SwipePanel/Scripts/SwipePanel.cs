@@ -15,13 +15,12 @@ namespace LabraxStudio.UI.GameScene.Swipes
 
         private bool _isSelected = false;
         private bool _isDragging = false;
-        private bool _isDragPause = false;
         private Camera _camera;
         private SwipeSettings _swipeSettings;
         private Vector2 _mouseDownPos;
         private float _mouseDownTime;
         private TilesController _tilesController;
-        
+
         // GAME ENGINE METHODS: -------------------------------------------------------------------
 
         protected override void Awake()
@@ -43,9 +42,9 @@ namespace LabraxStudio.UI.GameScene.Swipes
             if (GameFlowManager.IsLevelGenerated)
                 OnLevelGenerate();
         }
-        
+
         // PUBLIC METHODS: -----------------------------------------------------------------------
-        
+
         public void OnSelect()
         {
             if (!ServicesProvider.TouchService.IsTouchEnabled)
@@ -66,35 +65,25 @@ namespace LabraxStudio.UI.GameScene.Swipes
 
             _isSelected = false;
 
-            Vector2 _mouseUpPos = GetMousePosition();
-            float _mouseUpTime = Time.realtimeSinceStartup;
-            Vector2 inputDelta = _mouseUpPos - _mouseDownPos;
+            Vector2 mouseUpPos = GetMousePosition();
+            float mouseUpTime = Time.realtimeSinceStartup;
+            Vector2 inputDelta = ConvertPositionToWorld(mouseUpPos) - ConvertPositionToWorld(_mouseDownPos);
             Direction moveDirection = CalculateDirection(inputDelta);
 
-            float swipeTime = _mouseUpTime - _mouseDownTime;
+            float swipeTime = mouseUpTime - _mouseDownTime;
             float swipeSpeed = CalculateSwipeSpeed(inputDelta, moveDirection, swipeTime);
             Swipe swipe = CalculateSwipe(swipeSpeed);
 
             if (swipe == Swipe.Null)
                 return;
-            
+
             OnSwipe(moveDirection, swipe);
         }
 
-        public void StopDragging()
-        {
-            _isDragging = false;
-        }
-
-        public void SetPause(bool isPause)
-        {
-            _isDragPause = isPause;
-        }
-        
         // PRIVATE METHODS: -----------------------------------------------------------------------
 
         private void Initialize()
-        { 
+        {
             _camera = Camera.main;
             _swipeSettings = ServicesProvider.GameSettingsService.GetGameSettings().SwipeSettings;
             _tilesController = ServicesProvider.GameFlowService.TilesController;
@@ -106,9 +95,16 @@ namespace LabraxStudio.UI.GameScene.Swipes
         private Vector2 GetMousePosition()
         {
             var position = Input.mousePosition;
-            position.z = 30;
-            position = _camera.ScreenToWorldPoint(position);
+            //position.z = 30;
+            //position = _camera.ScreenToWorldPoint(position);
             return position;
+        }
+
+        private Vector2 ConvertPositionToWorld(Vector2 position)
+        {
+            Vector3 newPosition = new Vector3(position.x, position.y, 30);
+            newPosition = _camera.ScreenToWorldPoint(position);
+            return newPosition;
         }
 
         IEnumerator DragTracker()
@@ -117,36 +113,32 @@ namespace LabraxStudio.UI.GameScene.Swipes
             int checksCount = _swipeSettings.DragInsensitivity;
             float minSpeed = _swipeSettings.DragMinSpeed;
             int currentCheck = 0;
-            float speedSumm = minSpeed + 1f;
+            float speedSumm = 0f;
 
             while (_isDragging)
             {
-                if (!_isDragPause)
+                if (currentCheck < checksCount)
                 {
-                    if (currentCheck < checksCount)
-                    {
-                        float speedX = Input.GetAxis("Mouse X");
-                        float speedY = Input.GetAxis("Mouse Y");
-                        float avgSpeed = (speedX + speedY) * 0.5f;
-                        speedSumm += avgSpeed;
-                        currentCheck++;
-                    }
-                    else
-                    {
-                        float avgSpeed = speedSumm / checksCount;
-                        avgSpeed = Math.Abs(avgSpeed * 100);
-                        if (avgSpeed <= minSpeed)
-                        {
-                            OnDragStop();
-                        }
+                    float speedX = Input.GetAxis("Mouse X");
+                    float speedY = Input.GetAxis("Mouse Y");
+                    float avgSpeed = (speedX + speedY) * 0.5f;
+                    speedSumm += avgSpeed;
+                    currentCheck++;
+                }
+                else
+                {
+                    float avgSpeed = speedSumm / checksCount;
+                    avgSpeed = Math.Abs(avgSpeed * 100);
+                    if (avgSpeed >= minSpeed)
+                        OnDragStop();
 
-                        speedSumm = 0;
-                        currentCheck = 0;
-                    }
+                    speedSumm = 0;
+                    currentCheck = 0;
                 }
 
                 yield return new WaitForEndOfFrame();
             }
+            
         }
 
         private Direction CalculateDirection(Vector2 inputDelta)
@@ -202,16 +194,16 @@ namespace LabraxStudio.UI.GameScene.Swipes
 
             if (_swipeSettings.UseShortSwipes)
             {
-                if (delta < 0.5f)
+                if (delta < 0.3f)
                     return Swipe.Null;
 
-                if (delta > 1.5f)
+                if (delta > 1.0f)
                     return Swipe.Infinite;
 
                 return Swipe.OneTile;
             }
 
-            if (delta > 1.0f)
+            if (delta > 0.3f)
                 return Swipe.Infinite;
 
             return Swipe.Null;
@@ -223,19 +215,18 @@ namespace LabraxStudio.UI.GameScene.Swipes
                 return;
 
             _isSelected = false;
-            Vector2 _tilePos = _mouseDownPos;
-            Vector2 _mouseUpPos = GetMousePosition();
-            Vector2 inputDelta = _mouseUpPos - _tilePos;
+            Vector2 mouseUpPos = GetMousePosition();
+            Vector2 inputDelta = ConvertPositionToWorld(mouseUpPos) - ConvertPositionToWorld(_mouseDownPos);
             Direction moveDirection = CalculateDirection(inputDelta);
-
             Swipe swipe = CalculateSwipe(inputDelta, moveDirection);
 
+            _mouseDownPos = mouseUpPos;
             if (swipe == Swipe.Null)
                 return;
 
             OnSwipe(moveDirection, swipe);
         }
-        
+
         // EVENTS RECEIVERS: ----------------------------------------------------------------------
 
         private void OnGameOver(bool isWin)
@@ -251,14 +242,17 @@ namespace LabraxStudio.UI.GameScene.Swipes
 
         private void OnSwipe(Direction direction, Swipe swipe)
         {
-            TrackedTile trackedTile = _tilesController.GetTrackedTile();
-            if(trackedTile==null)
+            if (_tilesController.IsAnyTileMove)
                 return;
-            
+
+            TrackedTile trackedTile = _tilesController.GetTrackedTile();
+            if (trackedTile == null)
+                return;
+
             Tile tile = trackedTile.Tile;
             if (tile == null)
                 return;
-            
+
             tile.OnSwipe(direction, swipe);
         }
     }

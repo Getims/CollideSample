@@ -25,6 +25,7 @@ namespace LabraxStudio.Game.Tiles
         // PROPERTIES: ----------------------------------------------------------------------------
 
         public List<Tile> Tiles => _tiles;
+        public bool IsAnyTileMove => _isAnyTileMove || _animations > 0;
 
         // FIELDS: -------------------------------------------------------------------
 
@@ -32,6 +33,7 @@ namespace LabraxStudio.Game.Tiles
         private List<Tile> _tiles = new List<Tile>();
         private int _animations = 0;
         private CurrentTileTracker _currentTileTracker = new CurrentTileTracker();
+        private bool _isAnyTileMove = false;
 
         // GAME ENGINE METHODS: -------------------------------------------------------------------
 
@@ -62,11 +64,13 @@ namespace LabraxStudio.Game.Tiles
         public void MoveTile(Tile tile, Direction direction, Swipe swipe)
         {
             _animations++;
+            _isAnyTileMove = true;
             TilesAnimator tilesAnimator = new TilesAnimator();
             List<AnimationAction> actions = new List<AnimationAction>();
 
             MoveAction moveAction = _tilesMover.CalculateMoveAction(tile, direction, swipe);
             actions.Add(moveAction);
+
             MergeAction mergeAction = _tilesMerger.CheckMerge(tile, direction);
 
             if (tile.MovedToGate)
@@ -203,17 +207,18 @@ namespace LabraxStudio.Game.Tiles
                 actions.Add(mergeAction);
             }
 
-            if (actions.Count == 0)
+            if (actions.Count != 0)
             {
-                GameEvents.SendTileMergesComplete();
-                CheckForFail();
+                TilesAnimator tilesAnimator = new TilesAnimator();
+                tilesAnimator.Play(actions, CheckAllMerges);
+
+                GameEvents.SendTileAction();
                 return;
             }
 
-            TilesAnimator tilesAnimator = new TilesAnimator();
-            tilesAnimator.Play(actions, CheckAllMerges);
-
-            GameEvents.SendTileAction();
+            _isAnyTileMove = false;
+            GameEvents.SendTileMergesComplete();
+            CheckForFail();
         }
 
         private void CheckForFail() => ServicesProvider.GameFlowService.GameOverTracker.CheckForFail();

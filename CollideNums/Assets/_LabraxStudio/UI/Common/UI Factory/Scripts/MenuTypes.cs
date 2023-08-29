@@ -12,6 +12,7 @@
         TasksPanel = 7,
         TutorialPanel = 8,
         TaskPopupWindow = 9,
-        DebugMenu = 10
+        DebugMenu = 10,
+        SwipePanel = 11
     }
 }

@@ -1,5 +1,11 @@
 namespace LabraxStudio.Game
 {
+    public enum SwipeMode
+    {
+        SwipeTiles = 0,
+        SwipeOnScreen = 1
+    }
+    
     public enum GameCellType
     {
         Locked = 0,

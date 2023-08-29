@@ -78,7 +78,6 @@ namespace LabraxStudio.Game.Camera
             if (inBorders)
                 return;
 
-            Utils.ReworkPoint("Move camera");
             MoveCamera(avgPosition, moveTime);
         }
 

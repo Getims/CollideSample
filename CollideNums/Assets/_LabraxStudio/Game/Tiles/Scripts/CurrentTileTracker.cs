@@ -22,6 +22,7 @@ namespace LabraxStudio.Game.Tiles
             GameEvents.OnPreMoveTile.AddListener(OnPreMoveTile);
             GameEvents.OnPreMergeTile.AddListener(OnPreMergeTile);
             _cellSize = ServicesProvider.GameSettingsService.GetGameSettings().GameFieldSettings.CellSize;
+            SetFirstTileForSwipePanel();
         }
 
         public TrackedTile GetTile()
@@ -37,6 +38,34 @@ namespace LabraxStudio.Game.Tiles
         }
 
         // PRIVATE METHODS: -----------------------------------------------------------------------
+
+        private void SetFirstTileForSwipePanel()
+        {
+            bool enableSwipePanel = ServicesProvider.GameSettingsService.GetGameSettings().SwipeSettings.SwipeMode ==
+                                    SwipeMode.SwipeOnScreen;
+            if (!enableSwipePanel)
+                return;
+
+            List<Tile> tiles = ServicesProvider.GameFlowService.TilesController.Tiles;
+            Tile selectedTile = null;
+            float minPosition = 1000;
+
+            foreach (var tile in tiles)
+            {
+                if (tile != null)
+                {
+                    float tilePosition = tile.Position.y;
+                    if (tilePosition < minPosition)
+                    {
+                        minPosition = tilePosition;
+                        selectedTile = tile;
+                    }
+                }
+            }
+
+            _trackedTile = new TrackedTile(selectedTile, false);
+            GameEvents.SendTrackedTileUpdate(_trackedTile);
+        }
 
         private void CheckTile(MoveAction moveAction)
         {

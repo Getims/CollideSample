@@ -16,5 +16,6 @@ namespace LabraxStudio.App.Services
         {
             _isTouchEnabled = enabled;
         }
+        
     }
 }

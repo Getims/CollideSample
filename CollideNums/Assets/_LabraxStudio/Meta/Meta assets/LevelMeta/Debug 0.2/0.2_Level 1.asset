@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8b17105f1a8c435faa2e04174549aa6a, type: 3}
-  m_Name: Debug 1
+  m_Name: 0.2_Level 1
   m_EditorClassIdentifier: 
-  FileName: Debug 1
+  FileName: 0.2_Level 1
   _levelName: Level 1
   _reward: 10
   _levelTemplate:
@@ -34,8 +34,6 @@ MonoBehaviour:
   forAdsSettings:
     _levelForAds: 1
     _cameraSize: 5
-    _moveCamera: 1
-    _moveEase: 9
     _cameraOffset: {x: 0, y: -20}
     _overrideTileMoveDistance: 1
     _tileMoveMaxDistance: 100
