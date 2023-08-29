@@ -15,9 +15,6 @@ namespace LabraxStudio.Meta.Levels
         [Title("Camera")]
         [SerializeField, ShowIf(nameof(_levelForAds))]
         private float _cameraSize = 7.15f;
-        
-        [SerializeField]
-        private Vector2 _cameraOffset = new Vector2(0, 0);
 
         [Title("Tile")]
         [SerializeField, ShowIf(nameof(_levelForAds))]
@@ -32,7 +29,6 @@ namespace LabraxStudio.Meta.Levels
         public bool LevelForAds => _levelForAds;
         public float CameraSize => _cameraSize;
         public int TileMoveMaxDistance => _tileMoveMaxDistance;
-        public Vector2 CameraOffset => _cameraOffset;
 
     }
 }

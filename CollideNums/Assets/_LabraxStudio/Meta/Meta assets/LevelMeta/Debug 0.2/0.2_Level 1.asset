@@ -15,9 +15,10 @@ MonoBehaviour:
   FileName: 0.2_Level 1
   _levelName: Level 1
   _reward: 10
+  _cameraOffset: {x: 0, y: -20}
   _levelTemplate:
     width: 9
-    height: 50
+    height: 44
     _brushMode: 0
     _enableFieldPalette: 1
     _enableTilePalette: 0
@@ -32,9 +33,8 @@ MonoBehaviour:
     - _tileNumber: 16
       _tilesCount: 1
   forAdsSettings:
-    _levelForAds: 1
+    _levelForAds: 0
     _cameraSize: 5
-    _cameraOffset: {x: 0, y: -20}
     _overrideTileMoveDistance: 1
     _tileMoveMaxDistance: 100
   serializationData:
@@ -54,7 +54,7 @@ MonoBehaviour:
       Data: 9
     - Name: height
       Entry: 3
-      Data: 50
+      Data: 44
     - Name: _brushMode
       Entry: 3
       Data: 0
@@ -81,43 +81,10 @@ MonoBehaviour:
       Data: 1|System.Int32[,], mscorlib
     - Name: 
       Entry: 12
-      Data: 450
+      Data: 396
     - Name: ranks
       Entry: 1
-      Data: 9|50
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
+      Data: 9|44
     - Name: 
       Entry: 3
       Data: 1
@@ -402,24 +369,6 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
       Data: 2
     - Name: 
       Entry: 3
@@ -552,24 +501,6 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
       Data: 2
     - Name: 
       Entry: 3
@@ -643,24 +574,6 @@ MonoBehaviour:
     - Name: 
       Entry: 3
       Data: 2
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
     - Name: 
       Entry: 3
       Data: 1
@@ -849,24 +762,6 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
       Data: 2
     - Name: 
       Entry: 3
@@ -999,24 +894,6 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
       Data: 2
     - Name: 
       Entry: 3
@@ -1099,24 +976,6 @@ MonoBehaviour:
     - Name: 
       Entry: 3
       Data: 2
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
     - Name: 
       Entry: 3
       Data: 1
@@ -1249,27 +1108,6 @@ MonoBehaviour:
     - Name: 
       Entry: 3
       Data: 2
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
     - Name: 
       Entry: 3
       Data: 1

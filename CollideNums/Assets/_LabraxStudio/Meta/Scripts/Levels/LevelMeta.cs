@@ -17,6 +17,10 @@ namespace LabraxStudio.Meta.Levels
 
         [SerializeField, Min(0)]
         private int _reward = 0;
+        
+        [TabGroup("Level template")]
+        [SerializeField]
+        private Vector2 _cameraOffset = new Vector2(0, 0);
 
         [TabGroup("Level template")]
         [OdinSerialize]
@@ -38,6 +42,7 @@ namespace LabraxStudio.Meta.Levels
         // PROPERTIES: ----------------------------------------------------------------------------
 
         public string LevelName => _levelName;
+        public Vector2 CameraOffset => _cameraOffset;
         public int Width => _levelTemplate.Width;
         public int Height => _levelTemplate.Height;
         public int[,] LevelMatrix => GetLevelMatrix();

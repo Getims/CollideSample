@@ -15,21 +15,19 @@ namespace LabraxStudio.Meta
         [BoxGroup("Launch Settings/In", showLabel: false), SerializeField]
         private LaunchSettings _launchSettings;
 
-        [TitleGroup("Balance Settings")]
         [BoxGroup("Balance Settings/In", showLabel: false), SerializeField]
         private BalanceSettings _balanceSettings;
 
-        [TitleGroup("Game level settings")]
-        [BoxGroup("Game level settings/In", showLabel: false), SerializeField]
+        [FoldoutGroup (LEVELS_SETTINGS), SerializeField]
         private GameFieldSprites _gameFieldSprites;
 
-        [BoxGroup("Game level settings/In", showLabel: false), SerializeField]
+        [FoldoutGroup (LEVELS_SETTINGS), SerializeField]
         private GameFieldSettings _gameFieldSettings;
-
-        [BoxGroup("Game level settings/In", showLabel: false), SerializeField]
+        
+        [FoldoutGroup (LEVELS_SETTINGS), SerializeField]
         private LevelsListMeta _levelsList;
-
-        [BoxGroup("Game level settings/In"), SerializeField]
+        
+        [FoldoutGroup (LEVELS_SETTINGS), SerializeField]
         private List<LevelsListMeta> _selectableLevelsLists;
 
         [TitleGroup("Swipe settings")]
@@ -50,5 +48,7 @@ namespace LabraxStudio.Meta
         public List<LevelsListMeta> SelectableLevelsLists => _selectableLevelsLists;
         public SwipeSettings SwipeSettings => _swipeSettings;
         public CameraSettings CameraSettings => _cameraSettings;
+
+        private const string LEVELS_SETTINGS = "Game level settings";
     }
 }

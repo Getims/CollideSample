@@ -45,16 +45,12 @@ namespace LabraxStudio.Game.Camera
         {
             CameraSettings cameraSettings = ServicesProvider.GameSettingsService.GetGameSettings().CameraSettings;
 
+            SetPosition(levelMeta.Width, levelMeta.Height, levelMeta.CameraOffset);
+            
             if (levelMeta.ForAdsSettings.LevelForAds)
-            {
-                SetPosition(levelMeta.Width, levelMeta.Height, levelMeta.ForAdsSettings.CameraOffset);
                 SetupCameraSize(levelMeta.ForAdsSettings.CameraSize);
-            }
             else
-            {
-                SetPosition(levelMeta.Width, levelMeta.Height);
                 SetupCameraSize(cameraSettings.CameraSize);
-            }
 
             _cameraMover.Initialize(_camera, _cameraZoom.CurrentSize, levelMeta.Height,
                 cameraSettings.MoveCamera, cameraSettings.MoveEase, cameraSettings.MoveTime);

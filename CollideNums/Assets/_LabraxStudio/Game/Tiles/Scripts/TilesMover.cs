@@ -23,7 +23,7 @@ namespace LabraxStudio.Game.Tiles
 
             _width = _levelMatrix.GetLength(0);
             _height = _levelMatrix.GetLength(1);
-            _infiniteMovesCount = infiniteMovesCount > 0 ? infiniteMovesCount : 11;
+            _infiniteMovesCount = infiniteMovesCount > 0 ? infiniteMovesCount : 25;
         }
 
         public MoveAction CalculateMoveAction(Tile tile, Direction direction, Swipe swipe)

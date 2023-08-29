@@ -15,6 +15,7 @@ MonoBehaviour:
   FileName: Level Ads 4
   _levelName: Level 4
   _reward: 10
+  _cameraOffset: {x: 0, y: -20}
   _levelTemplate:
     width: 9
     height: 50
@@ -34,9 +35,6 @@ MonoBehaviour:
   forAdsSettings:
     _levelForAds: 1
     _cameraSize: 5
-    _moveCamera: 1
-    _moveEase: 9
-    _cameraOffset: {x: 0, y: -20}
     _overrideTileMoveDistance: 1
     _tileMoveMaxDistance: 100
   serializationData:
