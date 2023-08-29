@@ -12,10 +12,11 @@ namespace LabraxStudio.Game.Tiles
 
         private TrackedTile _trackedTile = new TrackedTile(null);
         private float _cellSize;
+        private bool _forAds = false;
 
         // PUBLIC METHODS: -----------------------------------------------------------------------
 
-        public void Initialize()
+        public void Initialize(bool forAds)
         {
             OnDestroy();
             GameEvents.OnTileAction.AddListener(OnTileAction);
@@ -23,6 +24,7 @@ namespace LabraxStudio.Game.Tiles
             GameEvents.OnPreMergeTile.AddListener(OnPreMergeTile);
             _cellSize = ServicesProvider.GameSettingsService.GetGameSettings().GameFieldSettings.CellSize;
             SetFirstTileForSwipePanel();
+            _forAds = forAds;
         }
 
         public TrackedTile GetTile()
@@ -47,23 +49,8 @@ namespace LabraxStudio.Game.Tiles
                 return;
 
             List<Tile> tiles = ServicesProvider.GameFlowService.TilesController.Tiles;
-            Tile selectedTile = null;
-            float minPosition = 1000;
-
-            foreach (var tile in tiles)
-            {
-                if (tile != null)
-                {
-                    float tilePosition = tile.Position.y;
-                    if (tilePosition < minPosition)
-                    {
-                        minPosition = tilePosition;
-                        selectedTile = tile;
-                    }
-                }
-            }
-
-            _trackedTile = new TrackedTile(selectedTile, false);
+            Tile tile = _forAds ? CalculateTileForAds(tiles) : CalculateTile(tiles);
+            _trackedTile = new TrackedTile(tile, false);
             GameEvents.SendTrackedTileUpdate(_trackedTile);
         }
 
@@ -83,7 +70,7 @@ namespace LabraxStudio.Game.Tiles
                 if (_trackedTile.Tile == null)
                 {
                     List<Tile> tiles = ServicesProvider.GameFlowService.TilesController.Tiles;
-                    tile = CalculateTile(tiles);
+                    tile = _forAds ? CalculateTileForAds(tiles) : CalculateTile(tiles);
                 }
                 else
                     tile = _trackedTile.Tile;
@@ -103,7 +90,7 @@ namespace LabraxStudio.Game.Tiles
             GameEvents.SendTrackedTileUpdate(_trackedTile);
         }
 
-        private Tile CalculateTile(List<Tile> tiles)
+        private Tile CalculateTileForAds(List<Tile> tiles)
         {
             float minPosition = 1000;
             UnityEngine.Camera camera = ServicesProvider.GameFlowService.CameraController.Camera;
@@ -126,6 +113,27 @@ namespace LabraxStudio.Game.Tiles
             }
 
             return result;
+        }
+        
+        private Tile CalculateTile(List<Tile> tiles)
+        {
+            Tile selectedTile = null;
+            float minPosition = 1000;
+
+            foreach (var tile in tiles)
+            {
+                if (tile != null)
+                {
+                    float tilePosition = tile.Position.y;
+                    if (tilePosition < minPosition)
+                    {
+                        minPosition = tilePosition;
+                        selectedTile = tile;
+                    }
+                }
+            }
+            
+            return selectedTile;
         }
 
         private float CalculatePosition(MoveAction moveAction)

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using LabraxStudio.App.Services;
 using LabraxStudio.Events;
+using LabraxStudio.Game.Tiles;
 using LabraxStudio.Meta.Levels;
 using LabraxStudio.Sound;
 
@@ -41,6 +42,20 @@ namespace LabraxStudio.Game
             GameEvents.OnMoveTileInGate.RemoveListener(OnTileMovedToGate);
         }
 
+        public List<int> GetUncompleteTilesNumbers()
+        {
+            List<int> result = new List<int>();
+            int i = -1;
+            foreach (var levelTask in _taskSettings.LevelTasks)
+            {
+                i++;
+                if (levelTask.TilesCount != _tasksProgress[i])
+                    result.Add(levelTask.TileNumber);
+            }
+
+            return result;
+        }
+        
         // PRIVATE METHODS: -----------------------------------------------------------------------
 
         private bool CheckTaskProgress(int tileNumber)
@@ -119,5 +134,6 @@ namespace LabraxStudio.Game
             else
                 GameSoundMediator.Instance.PlayTilesGatePassSFX();
         }
+
     }
 }

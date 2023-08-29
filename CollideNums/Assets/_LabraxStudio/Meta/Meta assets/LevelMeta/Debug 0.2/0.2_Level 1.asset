@@ -29,9 +29,7 @@ MonoBehaviour:
   _boostersSettings:
   - _boosterMeta: {fileID: 11400000, guid: 3b85c5d335e9ce344b42fbcac79b97cd, type: 2}
   _taskSettings:
-    _levelTasks:
-    - _tileNumber: 16
-      _tilesCount: 1
+    _levelTasks: []
   forAdsSettings:
     _levelForAds: 0
     _cameraSize: 5

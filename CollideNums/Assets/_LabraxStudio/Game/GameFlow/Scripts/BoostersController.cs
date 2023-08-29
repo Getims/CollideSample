@@ -1,3 +1,5 @@
+using LabraxStudio.Events;
+
 namespace LabraxStudio.Game
 {
     public class BoostersController
@@ -15,6 +17,7 @@ namespace LabraxStudio.Game
         public void SetBoosterState(bool isActive)
         {
             _isBoosterActive = isActive;
+            GameEvents.SendBoosterStateChange(isActive);
         }
     }
 }

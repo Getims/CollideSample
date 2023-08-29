@@ -15,7 +15,7 @@ MonoBehaviour:
   FileName: Debug 0.20
   _launchSettings:
     _enableDebug: 1
-    _enableTutorial: 1
+    _enableTutorial: 0
   _balanceSettings:
     _startMoney: 100
   _gameFieldSprites: {fileID: 11400000, guid: b6bc31775dbdf2842a216ba923c0d3a2, type: 2}

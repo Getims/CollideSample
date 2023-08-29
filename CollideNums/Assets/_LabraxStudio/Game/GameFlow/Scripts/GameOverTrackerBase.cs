@@ -6,7 +6,7 @@ using LabraxStudio.Game.Tiles;
 
 namespace LabraxStudio.Game
 {
-    public class GameOverTracker
+    public class GameOverTrackerBase : AGameOverTracker
     {
         // PROPERTIES: ----------------------------------------------------------------------------
 
@@ -15,10 +15,10 @@ namespace LabraxStudio.Game
         // FIELDS: -------------------------------------------------------------------
 
         private bool _isFail = false;
-        
+
         // PUBLIC METHODS: -----------------------------------------------------------------------
 
-        public void CheckForFail()
+        public override void CheckForFail()
         {
             List<Tile> tiles = ServicesProvider.GameFlowService.TilesController.Tiles;
 
@@ -33,7 +33,7 @@ namespace LabraxStudio.Game
                 CheckForFailRevert();
                 return;
             }
-            
+
             if (HasTileOverflow(tiles))
             {
                 Utils.InfoPoint("Overflow");
@@ -49,11 +49,11 @@ namespace LabraxStudio.Game
                 GameEvents.SendGameOver(false, FailReason.NoGatesForTiles);
                 return;
             }
-            
+
             //CheckForFailRevert();
         }
 
-        public void CheckForWin()
+        public override void CheckForWin()
         {
             if (HasTiles())
                 return;
@@ -77,7 +77,7 @@ namespace LabraxStudio.Game
             GameEvents.SendGameOver(true);
         }
 
-        public void ResetFailFlag()
+        public override void ResetFailFlag()
         {
             _isFail = false;
         }
@@ -92,7 +92,7 @@ namespace LabraxStudio.Game
                 GameEvents.SendLevelCanBePassedAgain();
             }
         }
-        
+
         private bool HasTiles()
         {
             List<Tile> tiles = ServicesProvider.GameFlowService.TilesController.Tiles;
@@ -161,5 +161,6 @@ namespace LabraxStudio.Game
 
             return !taskController.IsAllTasksComplete;
         }
+
     }
 }

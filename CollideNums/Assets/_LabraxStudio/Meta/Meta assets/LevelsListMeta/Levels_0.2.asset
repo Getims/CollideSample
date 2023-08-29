@@ -16,3 +16,5 @@ MonoBehaviour:
   _tutorialSettingsMeta: {fileID: 0}
   _levelsMetaList:
   - {fileID: 11400000, guid: 04c9cb04ffd11b84db3ff73133746d54, type: 2}
+  - {fileID: 11400000, guid: c499ef9d6e0260540aa188bc3a801126, type: 2}
+  - {fileID: 11400000, guid: 4102eefe206877f4aad082271d69ea43, type: 2}

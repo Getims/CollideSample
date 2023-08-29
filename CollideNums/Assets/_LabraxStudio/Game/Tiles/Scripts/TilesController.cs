@@ -58,7 +58,7 @@ namespace LabraxStudio.Game.Tiles
                     -1);
 
             _tilesMerger.Initialize(_tilesMatrix);
-            _currentTileTracker.Initialize();
+            _currentTileTracker.Initialize(levelMeta.ForAdsSettings.LevelForAds);
         }
 
         public void MoveTile(Tile tile, Direction direction, Swipe swipe)

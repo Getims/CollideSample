@@ -28,6 +28,7 @@ namespace LabraxStudio.UI.GameScene.Swipes
             base.Awake();
             GameEvents.OnGenerateLevel.AddListener(OnLevelGenerate);
             GameEvents.OnGameOver.AddListener(OnGameOver);
+            GameEvents.OnBoosterStateChange.AddListener(OnBoosterStateChange);
         }
 
         protected override void OnDestroy()
@@ -35,6 +36,7 @@ namespace LabraxStudio.UI.GameScene.Swipes
             base.OnDestroy();
             GameEvents.OnGenerateLevel.RemoveListener(OnLevelGenerate);
             GameEvents.OnGameOver.RemoveListener(OnGameOver);
+            GameEvents.OnBoosterStateChange.RemoveListener(OnBoosterStateChange);
         }
 
         private void Start()
@@ -138,7 +140,6 @@ namespace LabraxStudio.UI.GameScene.Swipes
 
                 yield return new WaitForEndOfFrame();
             }
-            
         }
 
         private Direction CalculateDirection(Vector2 inputDelta)
@@ -254,6 +255,14 @@ namespace LabraxStudio.UI.GameScene.Swipes
                 return;
 
             tile.OnSwipe(direction, swipe);
+        }
+
+        private void OnBoosterStateChange(bool isActive)
+        {
+            if (isActive)
+                Hide(true);
+            else
+                Show(true);
         }
     }
 }
