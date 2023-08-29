@@ -8,10 +8,10 @@ namespace LabraxStudio.Editor
     public static class LevelMatrixDrawer
     {
 #if UNITY_EDITOR
-        public static int ColorsCount => MatrixHelper.SpritesCount;
+        public static int SpritesCount => MatrixHelper.SpritesCount;
 #endif
 
-        public static int DrawLevelEnumElement(Rect rect, int value, bool brushMode, bool isFieldMode, int brushSize,
+        public static int DrawLevelEnumElement(Rect rect, int value, bool brushMode, bool isFieldMode, int leftClickSize,
             int rightClickSize)
         {
 #if UNITY_EDITOR
@@ -26,7 +26,7 @@ namespace LabraxStudio.Editor
                 bool increaseHeight = currentEvent.button == 0;
 
                 if (increaseHeight)
-                    value = GetLeftValue(brushMode, brushSize, value, isFieldMode);
+                    value = GetLeftValue(brushMode, leftClickSize, value, isFieldMode);
                 else
                     value = GetRightValue(brushMode, rightClickSize, value, isFieldMode);
 
@@ -46,14 +46,14 @@ namespace LabraxStudio.Editor
             return value;
         }
 
-        private static int GetLeftValue(bool brushMode, int brushSize, int value, bool isFieldMode)
+        private static int GetLeftValue(bool brushMode, int leftClickSize, int value, bool isFieldMode)
         {
 #if !UNITY_EDITOR
             return value;
 #else
 
             if (brushMode)
-                return Mathf.Min(brushSize + 1, ColorsCount);
+                return Mathf.Min(leftClickSize + 1, SpritesCount);
 
             int newValue = value + 1;
 
@@ -68,7 +68,7 @@ namespace LabraxStudio.Editor
                 return newValue;
             if (newValue == 3)
                 return 19;
-            if (newValue < 19 || newValue > ColorsCount)
+            if (newValue < 19 || newValue > SpritesCount)
                 return 1;
 
             return newValue;
@@ -81,7 +81,7 @@ namespace LabraxStudio.Editor
             return value;
 #else
             if (brushMode)
-                return Mathf.Min(rightClickSize + 1, ColorsCount);
+                return Mathf.Min(rightClickSize + 1, SpritesCount);
 
             int newValue = value - 1;
 
@@ -97,7 +97,7 @@ namespace LabraxStudio.Editor
             }
 
             if (newValue < 1)
-                return ColorsCount;
+                return SpritesCount;
             if (newValue == 18)
                 return 2;
             if (newValue > 2 && newValue < 18)

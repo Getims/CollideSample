@@ -19,6 +19,7 @@ namespace LabraxStudio.Editor
         private const string SpritesPath = "Assets/_LabraxStudio/Meta/ForEditor/Levels/Sprites/";
         private const string GatesPath = "Assets/_LabraxStudio/Meta/ForEditor/Levels/Sprites/Gates/";
         private const string TilesPath = "Assets/_LabraxStudio/Meta/ForEditor/Levels/Sprites/Tiles/";
+        private const string ObstaclesPath = "Assets/_LabraxStudio/Meta/ForEditor/Levels/Sprites/Obstacles/";
 
         private static bool _isInitialized;
 
@@ -44,6 +45,7 @@ namespace LabraxStudio.Editor
             LoadUnlockedTypes(ref idCount);
             LoadGatesTypes(ref idCount);
             LoadTiles(ref idCount);
+            LoadObstacles(ref idCount);
         }
 
         private static void LoadLockedTypes(ref int idCount)
@@ -72,6 +74,15 @@ namespace LabraxStudio.Editor
             for (int i = 0; i < 16; i++)
             {
                 AddKeyAndValue(idCount, "Tile_" + i, TilesPath);
+                idCount++;
+            }
+        }
+        
+        private static void LoadObstacles(ref int idCount)
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                AddKeyAndValue(idCount, "Obstacle_" + i, ObstaclesPath);
                 idCount++;
             }
         }

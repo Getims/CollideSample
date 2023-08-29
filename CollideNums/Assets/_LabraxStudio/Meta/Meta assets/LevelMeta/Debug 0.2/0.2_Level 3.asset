@@ -19,13 +19,16 @@ MonoBehaviour:
   _levelTemplate:
     width: 9
     height: 15
-    _brushMode: 0
-    _enableFieldPalette: 1
-    _enableTilePalette: 1
+    _brushMode: 2
+    _enableFieldPalette: 0
+    _enableTilePalette: 0
+    _enableObstaclesPalette: 1
     _fieldBrushMode: 4
     _fieldBrushModeRight: 0
-    _tilesBrushMode: 2
-    _tilesBrushModeRight: 3
+    _tilesBrushMode: 13
+    _tilesBrushModeRight: -1
+    _obstaclesBrushMode: 1
+    _obstaclesBrushModeRight: 0
   _boostersSettings:
   - _boosterMeta: {fileID: 11400000, guid: 3b85c5d335e9ce344b42fbcac79b97cd, type: 2}
   - _boosterMeta: {fileID: 11400000, guid: e7863cc6e7c2d6448af41b8478f28cef, type: 2}
@@ -61,11 +64,14 @@ MonoBehaviour:
       Data: 15
     - Name: _brushMode
       Entry: 3
-      Data: 0
+      Data: 2
     - Name: _enableFieldPalette
       Entry: 5
-      Data: true
+      Data: false
     - Name: _enableTilePalette
+      Entry: 5
+      Data: false
+    - Name: _enableObstaclesPalette
       Entry: 5
       Data: true
     - Name: _fieldBrushMode
@@ -76,10 +82,16 @@ MonoBehaviour:
       Data: 0
     - Name: _tilesBrushMode
       Entry: 3
-      Data: 2
+      Data: 13
     - Name: _tilesBrushModeRight
       Entry: 3
-      Data: 3
+      Data: 18446744073709551615
+    - Name: _obstaclesBrushMode
+      Entry: 3
+      Data: 1
+    - Name: _obstaclesBrushModeRight
+      Entry: 3
+      Data: 0
     - Name: _levelMatrix
       Entry: 7
       Data: 1|System.Int32[,], mscorlib
