@@ -15,6 +15,7 @@ namespace LabraxStudio.Meta
         [BoxGroup("Launch Settings/In", showLabel: false), SerializeField]
         private LaunchSettings _launchSettings;
 
+        [TitleGroup("Balance Settings")]
         [BoxGroup("Balance Settings/In", showLabel: false), SerializeField]
         private BalanceSettings _balanceSettings;
 
