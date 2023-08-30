@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using DG.Tweening;
 using LabraxStudio.App.Services;
-using LabraxStudio.Events;
 using LabraxStudio.Meta.GameField;
 using LabraxStudio.Sound;
 using UnityEngine;
@@ -13,13 +12,16 @@ namespace LabraxStudio.Game.Tiles
     {
         // CONSTRUCTORS: -------------------------------------------------------------------------------
 
-        public MoveAction(Tile tile, Vector2Int moveTo, Swipe swipe, Direction direction, bool collideWithGate)
+        public MoveAction(Tile tile, Vector2Int moveTo, Swipe swipe, Direction direction, bool collideWithGate,
+            ObstacleType obstacle)
         {
             _tile = tile;
             _moveTo = moveTo;
             _swipe = swipe;
             _direction = direction;
             _collideWithGate = collideWithGate;
+            _obstacle = obstacle;
+
             _gameFieldSettings = ServicesProvider.GameSettingsService.GetGameSettings().GameFieldSettings;
             _swipeSettings = ServicesProvider.GameSettingsService.GetGameSettings().SwipeSettings;
         }
@@ -29,18 +31,20 @@ namespace LabraxStudio.Game.Tiles
         public Vector2Int MoveTo => _moveTo;
         private TilesController TilesController => ServicesProvider.GameFlowService.TilesController;
         public Tile Tile => _tile;
+        public ObstacleType Obstacle => _obstacle;
 
         // FIELDS: -------------------------------------------------------------------
 
         private readonly Tile _tile;
         private readonly Vector2Int _moveTo;
         private readonly Swipe _swipe;
-        private Direction _direction;
+        private readonly Direction _direction;
         private readonly bool _collideWithGate;
+        private readonly ObstacleType _obstacle;
         private readonly GameFieldSettings _gameFieldSettings;
+        private readonly SwipeSettings _swipeSettings;
         private Action _onMoveComplete;
-        private SwipeSettings _swipeSettings;
-
+        
         // PUBLIC METHODS: -----------------------------------------------------------------------
 
         public override void Play(Action onComplete)
@@ -86,7 +90,7 @@ namespace LabraxStudio.Game.Tiles
         }
 
         public float GetTime() => CalculateTime(_swipeSettings.TileSpeed, _swipe);
-        
+
         // PRIVATE METHODS: -----------------------------------------------------------------------
 
         private float CalculateTime(float tileSpeed, Swipe swipe)
@@ -142,14 +146,17 @@ namespace LabraxStudio.Game.Tiles
                     yield return new WaitForSeconds(timeStep);
             }
 
-            _tile.PlayCollideEffect(_direction);
-
-            if (_collideWithGate)
-                GameSoundMediator.Instance.PlayTileCollideGateSFX();
-            else
+            if (_obstacle == ObstacleType.Null)
             {
-                if (!_tile.IsMerging && !_tile.MovedToGate)
-                    GameSoundMediator.Instance.PlayTileCollideSFX();
+                _tile.PlayCollideEffect(_direction);
+
+                if (_collideWithGate)
+                    GameSoundMediator.Instance.PlayTileCollideGateSFX();
+                else
+                {
+                    if (!_tile.IsMerging && !_tile.MovedToGate)
+                        GameSoundMediator.Instance.PlayTileCollideSFX();
+                }
             }
 
             OnMoveComplete();

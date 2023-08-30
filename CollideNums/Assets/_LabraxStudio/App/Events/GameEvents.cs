@@ -24,6 +24,7 @@ namespace LabraxStudio.Events
         public static UnityEvent OnTileMergesComplete = new UnityEvent();
         public static UnityEvent OnLevelCanBePassedAgain = new UnityEvent();
         public static UnityEvent<TrackedTile> OnTrackedTileUpdate = new UnityEvent<TrackedTile>();
+        public static UnityEvent OnTileDestroyedByObstacle = new UnityEvent();
 
         // PUBLIC METHODS: ------------------------------------------------------------------------
 
@@ -49,5 +50,6 @@ namespace LabraxStudio.Events
         public static void SendAllTasksComplete() => OnAllTasksComplete?.Invoke();
         public static void SendLevelCanBePassedAgain() => OnLevelCanBePassedAgain?.Invoke();
         public static void SendTrackedTileUpdate(TrackedTile tile) => OnTrackedTileUpdate?.Invoke(tile);
+        public static void SendTileDestroyedByObstacle() => OnTileDestroyedByObstacle?.Invoke();
     }
 }

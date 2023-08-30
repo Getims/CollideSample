@@ -41,6 +41,13 @@ namespace LabraxStudio.Game.Camera
             float extra = cameraSize * 0.6f;
             _minPosition = levelHeight * (-1) * _cellSize + extra;
             _maxPosition = 0 - extra;
+            if (_minPosition > _maxPosition)
+            {
+                var buffer = _minPosition;
+                _minPosition = _maxPosition;
+                _maxPosition = buffer;
+            }
+
             _tileOffset = _cellSize;
             if (sizePercent * cameraSize < _tileOffset)
                 sizePercent = _tileOffset / cameraSize;
@@ -72,6 +79,8 @@ namespace LabraxStudio.Game.Camera
                     avgPosition = tile.Tile.Position.y;
                 }
             }
+            else
+                return;
 
             avgPosition += _tileOffset;
             bool inBorders = CheckTilesInBorders(avgPosition);

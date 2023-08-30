@@ -40,6 +40,7 @@ namespace LabraxStudio.Game
         {
             GameEvents.OnGameOver.AddListener(OnGameOver);
             GameEvents.OnLevelRestartBoosterUse.AddListener(OnLevelRestartBoosterUse);
+            GameEvents.OnTileDestroyedByObstacle.AddListener(OnTileDestroyedByObstacle);
             UIEvents.OnWinScreenClaimClicked.AddListener(OnWinScreenClaimClicked);
         }
 
@@ -48,6 +49,7 @@ namespace LabraxStudio.Game
             GameEvents.OnGameOver.RemoveListener(OnGameOver);
             UIEvents.OnWinScreenClaimClicked.AddListener(OnWinScreenClaimClicked);
             GameEvents.OnLevelRestartBoosterUse.RemoveListener(OnLevelRestartBoosterUse);
+            GameEvents.OnTileDestroyedByObstacle.RemoveListener(OnTileDestroyedByObstacle);
             ServicesProvider.GameFlowService.OnDestroy();
         }
 
@@ -72,11 +74,11 @@ namespace LabraxStudio.Game
             _gatesController.Initialize();
             _obstaclesController.Initialize();
 
+            _cameraController.Initialize(levelMeta);
             _gameFieldController.GenerateField(levelMeta);
             _gatesController.GenerateGates(levelMeta);
             _obstaclesController.GenerateObstacles(levelMeta);
             _tilesController.Initialize(levelMeta);
-            _cameraController.Initialize(levelMeta);
 
             _gatesController.CheckGatesState();
             ServicesProvider.GameFlowService.GameOverTracker.ResetFailFlag();
@@ -110,11 +112,11 @@ namespace LabraxStudio.Game
             _obstaclesController.ClearObstacles();
             _tilesController.RemoveAllTiles();
 
+            _cameraController.Initialize(levelMeta);
             _gameFieldController.GenerateField(levelMeta);
             _gatesController.GenerateGates(levelMeta);
             _obstaclesController.GenerateObstacles(levelMeta);
             _tilesController.Initialize(levelMeta);
-            _cameraController.Initialize(levelMeta);
 
             _gatesController.CheckGatesState();
             ServicesProvider.GameFlowService.GameOverTracker.ResetFailFlag();
@@ -153,5 +155,6 @@ namespace LabraxStudio.Game
 
         private void OnWinScreenClaimClicked() => LoadNewLevel();
         private void OnLevelRestartBoosterUse() => ReloadLevel();
+        private void OnTileDestroyedByObstacle() => ReloadLevel();
     }
 }

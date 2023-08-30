@@ -75,7 +75,7 @@ namespace LabraxStudio.Game.Tiles
                 tile.SetGateFlag();
             }
 
-            return new MoveAction(tile, movePoint, swipe, direction, result.CollideWithGate);
+            return new MoveAction(tile, movePoint, swipe, direction, result.CollideWithGate, result.Obstacle);
         }
 
         // PRIVATE METHODS: -----------------------------------------------------------------------

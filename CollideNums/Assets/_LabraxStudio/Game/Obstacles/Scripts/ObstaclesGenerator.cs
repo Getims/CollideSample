@@ -86,7 +86,7 @@ namespace LabraxStudio.Game.Obstacles
                 case ObstacleType.Push:
                     aObstacle = Object.Instantiate(_pushPrefab, _obstacleContainer);
                     break;
-                case ObstacleType.Stop:
+                case ObstacleType.Stopper:
                     aObstacle = Object.Instantiate(_stopperPrefab, _obstacleContainer);
                     break;
             }

@@ -73,6 +73,16 @@ namespace LabraxStudio.Game.Tiles
 
             MergeAction mergeAction = _tilesMerger.CheckMerge(tile, direction);
 
+            if (moveAction.Obstacle != ObstacleType.Null)
+            {
+                if (moveAction.Obstacle != ObstacleType.Stopper)
+                    mergeAction = null;
+
+                CollideWithObstacleAction collideWithObstacleAction =
+                    new CollideWithObstacleAction(tile, direction, moveAction.MoveTo, moveAction.Obstacle);
+                actions.Add(collideWithObstacleAction);
+            }
+
             if (tile.MovedToGate)
             {
                 mergeAction = null;
@@ -241,7 +251,8 @@ namespace LabraxStudio.Game.Tiles
         {
             foreach (var tile in tiles)
             {
-                tile.DestroySelf();
+                if (tile != null)
+                    tile.DestroySelf();
                 await Task.Delay(1);
             }
         }

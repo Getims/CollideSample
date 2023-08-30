@@ -7,7 +7,7 @@ namespace LabraxStudio.Game.Obstacles
 {
     public class ObstaclesController : MonoBehaviour
     {
-         // MEMBERS: -------------------------------------------------------------------------------
+        // MEMBERS: -------------------------------------------------------------------------------
 
         [SerializeField]
         private ObstaclesGenerator _obstaclesGenerator = new ObstaclesGenerator();
@@ -25,13 +25,23 @@ namespace LabraxStudio.Game.Obstacles
 
         public void GenerateObstacles(LevelMeta levelMeta)
         {
-            _obstacles = _obstaclesGenerator.GenerateObstacles(levelMeta.Width, levelMeta.Height, levelMeta.ObstaclesMatrix);
+            _obstacles =
+                _obstaclesGenerator.GenerateObstacles(levelMeta.Width, levelMeta.Height, levelMeta.ObstaclesMatrix);
         }
-        
+
         public void ClearObstacles()
         {
             RemoveGameField(new List<AObstacle>(_obstacles));
             _obstacles.Clear();
+        }
+
+        public void PlayObstacleEffect(Vector2Int obstaclePosition)
+        {
+            AObstacle obstacle = GetObstacle(obstaclePosition);
+            if (obstacle == null)
+                return;
+
+            obstacle.PlayTileCollideEffect();
         }
 
         // PRIVATE METHODS: -----------------------------------------------------------------------

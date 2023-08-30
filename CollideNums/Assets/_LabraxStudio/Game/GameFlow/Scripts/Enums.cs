@@ -34,7 +34,7 @@ namespace LabraxStudio.Game
         Saw = 1,
         Hole = 2,
         Push = 3,
-        Stop = 4
+        Stopper = 4
     }
     
     public enum Direction

@@ -15,17 +15,20 @@ MonoBehaviour:
   FileName: 0.2_Level 1
   _levelName: Level 1
   _reward: 10
-  _cameraOffset: {x: 0, y: -20}
+  _cameraOffset: {x: 0, y: 0}
   _levelTemplate:
     width: 9
     height: 44
     _brushMode: 0
     _enableFieldPalette: 1
     _enableTilePalette: 0
+    _enableObstaclesPalette: 0
     _fieldBrushMode: 1
     _fieldBrushModeRight: 0
     _tilesBrushMode: 5
     _tilesBrushModeRight: 0
+    _obstaclesBrushMode: 0
+    _obstaclesBrushModeRight: 0
   _boostersSettings:
   - _boosterMeta: {fileID: 11400000, guid: 3b85c5d335e9ce344b42fbcac79b97cd, type: 2}
   _taskSettings:
@@ -62,6 +65,9 @@ MonoBehaviour:
     - Name: _enableTilePalette
       Entry: 5
       Data: false
+    - Name: _enableObstaclesPalette
+      Entry: 5
+      Data: false
     - Name: _fieldBrushMode
       Entry: 3
       Data: 1
@@ -72,6 +78,12 @@ MonoBehaviour:
       Entry: 3
       Data: 5
     - Name: _tilesBrushModeRight
+      Entry: 3
+      Data: 0
+    - Name: _obstaclesBrushMode
+      Entry: 3
+      Data: 0
+    - Name: _obstaclesBrushModeRight
       Entry: 3
       Data: 0
     - Name: _levelMatrix
