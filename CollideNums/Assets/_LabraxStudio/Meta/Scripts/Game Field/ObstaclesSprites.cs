@@ -18,12 +18,16 @@ namespace LabraxStudio.Meta.GameField
 
         [SerializeField]
         private Sprite _sawShadow;
+        
+        [Title("Stopper")]
+        [SerializeField]
+        private Sprite _stopperMain;
 
         // PROPERTIES: ----------------------------------------------------------------------------
         
         public Sprite SawMain => _sawMain;
         public Sprite SawPin => _sawPin;
         public Sprite SawShadow => _sawShadow;
-        
+        public Sprite StopperMain => _stopperMain;
     }
 }

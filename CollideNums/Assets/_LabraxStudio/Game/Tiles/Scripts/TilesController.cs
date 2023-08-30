@@ -32,7 +32,7 @@ namespace LabraxStudio.Game.Tiles
         private int[,] _tilesMatrix;
         private List<Tile> _tiles = new List<Tile>();
         private int _animations = 0;
-        private CurrentTileTracker _currentTileTracker = new CurrentTileTracker();
+        private readonly CurrentTileTracker _currentTileTracker = new CurrentTileTracker();
         private bool _isAnyTileMove = false;
 
         // GAME ENGINE METHODS: -------------------------------------------------------------------
@@ -51,10 +51,10 @@ namespace LabraxStudio.Game.Tiles
             _tiles = _tilesGenerator.GenerateTiles(levelMeta.Width, levelMeta.Height, _tilesMatrix);
 
             if (levelMeta.ForAdsSettings.OverrideMoveDistance)
-                _tilesMover.Initialize(levelMeta.LevelMatrix, _tilesMatrix,
+                _tilesMover.Initialize(levelMeta.LevelMatrix, _tilesMatrix, levelMeta.ObstaclesMatrix,
                     levelMeta.ForAdsSettings.TileMoveMaxDistance);
             else
-                _tilesMover.Initialize(levelMeta.LevelMatrix, _tilesMatrix,
+                _tilesMover.Initialize(levelMeta.LevelMatrix, _tilesMatrix, levelMeta.ObstaclesMatrix,
                     -1);
 
             _tilesMerger.Initialize(_tilesMatrix);
@@ -197,10 +197,9 @@ namespace LabraxStudio.Game.Tiles
 
             ResetMergeFlag();
             List<AnimationAction> actions = new List<AnimationAction>();
-            MergeAction mergeAction = null;
             foreach (var tile in _tiles)
             {
-                mergeAction = _tilesMerger.CheckMerge(tile);
+                var mergeAction = _tilesMerger.CheckMerge(tile);
                 if (mergeAction == null)
                     continue;
 

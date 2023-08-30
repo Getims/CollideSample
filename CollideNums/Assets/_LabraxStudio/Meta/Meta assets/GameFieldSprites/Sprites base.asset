@@ -137,3 +137,4 @@ MonoBehaviour:
     _sawMain: {fileID: 21300000, guid: 31e239ed663d95f488e40c26d0eb00c6, type: 3}
     _sawPin: {fileID: 21300000, guid: 96421febe82aa184a94d340471990d37, type: 3}
     _sawShadow: {fileID: 21300000, guid: 3e76ece647767b644b0b047c83f7bf57, type: 3}
+    _stopperMain: {fileID: 21300000, guid: 86278126bb72e0b46bf6a575d82bb390, type: 3}

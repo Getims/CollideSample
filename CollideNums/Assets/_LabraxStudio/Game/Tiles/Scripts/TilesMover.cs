@@ -10,16 +10,18 @@ namespace LabraxStudio.Game.Tiles
 
         private int[,] _tilesMatrix;
         private int[,] _levelMatrix;
+        private int[,] _obstaclesMatrix;
         private int _width;
         private int _height;
         private int _infiniteMovesCount;
 
         // PUBLIC METHODS: -----------------------------------------------------------------------
 
-        public void Initialize(int[,] levelMatrix, int[,] tilesMatrix, int infiniteMovesCount)
+        public void Initialize(int[,] levelMatrix, int[,] tilesMatrix, int[,] obstaclesMatrix, int infiniteMovesCount)
         {
             _levelMatrix = levelMatrix;
             _tilesMatrix = tilesMatrix;
+            _obstaclesMatrix = obstaclesMatrix;
 
             _width = _levelMatrix.GetLength(0);
             _height = _levelMatrix.GetLength(1);
@@ -28,8 +30,7 @@ namespace LabraxStudio.Game.Tiles
 
         public MoveAction CalculateMoveAction(Tile tile, Direction direction, Swipe swipe)
         {
-            bool needMoveToGate = false;
-            bool collideWithGate = false;
+            CheckResult result = new CheckResult();
             int moves = 0;
             Vector2Int startPoint = tile.Cell;
             Vector2Int movePoint = startPoint;
@@ -53,53 +54,62 @@ namespace LabraxStudio.Game.Tiles
                 var tempPoint = movePoint;
                 tempPoint += moveVector;
 
-                if (IsPlayableCell(tempPoint.x, tempPoint.y, tile.Value, ref needMoveToGate, ref collideWithGate))
-                {
-                    if (HasTile(tempPoint.x, tempPoint.y))
-                        break;
+                CheckCell(tempPoint.x, tempPoint.y, tile.Value, ref result);
+                if (!result.IsPlayableCell)
+                    break;
 
-                    movePoint = tempPoint;
-                }
+                if (HasTile(tempPoint.x, tempPoint.y))
+                    break;
+
+                movePoint = tempPoint;
+                if (result.Obstacle != ObstacleType.Null)
+                    break;
             }
 
             RemoveTileFromMatrix(tile.Cell.x, tile.Cell.y);
             SetTileToMatrix(movePoint.x, movePoint.y, tile.Value);
             tile.SetCell(movePoint);
-            if (needMoveToGate)
+            if (result.NeedMoveToGate)
             {
-                collideWithGate = false;
+                result.CollideWithGate = false;
                 tile.SetGateFlag();
             }
 
-            return new MoveAction(tile, movePoint, swipe, direction, collideWithGate);
+            return new MoveAction(tile, movePoint, swipe, direction, result.CollideWithGate);
         }
 
         // PRIVATE METHODS: -----------------------------------------------------------------------
 
-        private bool IsPlayableCell(int x, int y, int tileValue, ref bool needMoveToGate, ref bool collideWithGate)
+        private CheckResult CheckCell(int x, int y, int tileValue, ref CheckResult result)
         {
-            if (x < 0 || y < 0)
-                return false;
+            if (x < 0 || y < 0 || x >= _width || y >= _height)
+            {
+                result.IsPlayableCell = false;
+                return result;
+            }
 
-            if (x >= _width || y >= _height)
-                return false;
-
-            GameCellType gameCellType = GameTypesConverter.MatrixValueToCellType(_levelMatrix[x, y]);
-
-            switch (gameCellType)
+            result.GameCellType = GameTypesConverter.MatrixValueToCellType(_levelMatrix[x, y]);
+            switch (result.GameCellType)
             {
                 case GameCellType.Locked:
-                    return false;
+                    result.IsPlayableCell = false;
+                    break;
                 case GameCellType.Unlocked:
-                    return true;
+                    result.IsPlayableCell = true;
+                    result.Obstacle = (ObstacleType) _obstaclesMatrix[x, y];
+                    break;
                 default:
                     GameCellType tileGate = GameTypesConverter.TileValueToGateType(tileValue);
-                    bool isEqualType = tileGate == gameCellType;
-                    collideWithGate = true;
+                    bool isEqualType = tileGate == result.GameCellType;
+                    result.CollideWithGate = true;
                     if (isEqualType)
-                        needMoveToGate = true;
-                    return isEqualType;
+                        result.NeedMoveToGate = true;
+
+                    result.IsPlayableCell = isEqualType;
+                    break;
             }
+
+            return result;
         }
 
         private bool HasTile(int x, int y)
@@ -116,6 +126,11 @@ namespace LabraxStudio.Game.Tiles
             return false;
         }
 
+        private ObstacleType HasObstacle(int x, int y)
+        {
+            return ObstacleType.Null;
+        }
+
         private void RemoveTileFromMatrix(int x, int y)
         {
             _tilesMatrix[x, y] = 0;
@@ -124,6 +139,25 @@ namespace LabraxStudio.Game.Tiles
         private void SetTileToMatrix(int x, int y, int value)
         {
             _tilesMatrix[x, y] = value;
+        }
+
+        private struct CheckResult
+        {
+            public bool IsPlayableCell;
+            public GameCellType GameCellType;
+            public bool NeedMoveToGate;
+            public bool CollideWithGate;
+            public ObstacleType Obstacle;
+
+            public CheckResult(bool isPlayableCell = false, GameCellType gameCellType = GameCellType.Locked,
+                bool needMoveToGate = false, bool collideWithGate = false, ObstacleType obstacle = ObstacleType.Null)
+            {
+                IsPlayableCell = isPlayableCell;
+                GameCellType = gameCellType;
+                NeedMoveToGate = needMoveToGate;
+                CollideWithGate = collideWithGate;
+                Obstacle = obstacle;
+            }
         }
     }
 }
