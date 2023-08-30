@@ -2,6 +2,7 @@ using LabraxStudio.Game;
 using LabraxStudio.Game.Camera;
 using LabraxStudio.Game.GameField;
 using LabraxStudio.Game.Gates;
+using LabraxStudio.Game.Obstacles;
 using LabraxStudio.Game.Tiles;
 
 namespace LabraxStudio.App.Services
@@ -12,6 +13,7 @@ namespace LabraxStudio.App.Services
 
         public GameFieldController FieldController => _gameFieldController;
         public GatesController GatesController => _gatesController;
+        public ObstaclesController ObstaclesController => _obstaclesController;
         public TilesController TilesController => _tilesController;
         public CameraController CameraController => _cameraController;
         public AGameOverTracker GameOverTracker => _gameOverTracker;
@@ -22,6 +24,7 @@ namespace LabraxStudio.App.Services
 
         private GameFieldController _gameFieldController;
         private GatesController _gatesController;
+        private ObstaclesController _obstaclesController;
         private TilesController _tilesController;
         private CameraController _cameraController;
         private AGameOverTracker _gameOverTracker;
@@ -31,10 +34,11 @@ namespace LabraxStudio.App.Services
         // PUBLIC METHODS: -----------------------------------------------------------------------
 
         public void Setup(GameFieldController gameFieldController, GatesController gatesController,
-            TilesController tilesController, CameraController cameraController)
+            ObstaclesController obstaclesController, TilesController tilesController, CameraController cameraController)
         {
             _gameFieldController = gameFieldController;
             _gatesController = gatesController;
+            _obstaclesController = obstaclesController;
             _tilesController = tilesController;
             _cameraController = cameraController;
 

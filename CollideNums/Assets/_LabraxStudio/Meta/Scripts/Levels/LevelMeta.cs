@@ -47,6 +47,7 @@ namespace LabraxStudio.Meta.Levels
         public int Height => _levelTemplate.Height;
         public int[,] LevelMatrix => GetLevelMatrix();
         public int[,] TilesMatrix => GetTileMatrix();
+        public int[,] ObstaclesMatrix => GetObstaclesMatrix();
         public List<BoostersSettings> BoostersSettings => _boostersSettings;
         public int Reward => _reward;
         public TaskSettings TaskSettings => _taskSettings;
@@ -73,7 +74,7 @@ namespace LabraxStudio.Meta.Levels
                 {
                     int tile = _levelTemplate.LevelMatrix[i, j];
                     if (tile > GameConstants.TileStartValue)
-                        tile = 2;
+                        tile = 2; 
                     levelMatrix[i, j] = tile;
                 }
             }
@@ -88,13 +89,32 @@ namespace LabraxStudio.Meta.Levels
             {
                 for (int j = 0; j < _levelTemplate.Height; j++)
                 {
-                    int tile = _levelTemplate.LevelMatrix[i, j] - GameConstants.TileStartValue;
+                    int tile = 0;
+                    if(_levelTemplate.LevelMatrix[i, j]< GameConstants.ObstaclesStartValue)
+                        tile = _levelTemplate.LevelMatrix[i, j] - GameConstants.TileStartValue;
+                    
                     tile = tile < 0 ? 0 : tile;
                     tileMatrix[i, j] = tile;
                 }
             }
 
             return tileMatrix;
+        }
+        
+        private int[,]GetObstaclesMatrix()
+        {
+            int[,] obstaclesMatrix = new int[_levelTemplate.Width, _levelTemplate.Height];
+            for (int i = 0; i < _levelTemplate.Width; i++)
+            {
+                for (int j = 0; j < _levelTemplate.Height; j++)
+                {
+                    int obstacle = _levelTemplate.LevelMatrix[i, j] - GameConstants.ObstaclesStartValue;
+                    obstacle = obstacle < 0 ? 0 : obstacle;
+                    obstaclesMatrix[i, j] = obstacle;
+                }
+            }
+
+            return obstaclesMatrix;
         }
 
         // SAVE FIX: ------------------------------------------------------------------------

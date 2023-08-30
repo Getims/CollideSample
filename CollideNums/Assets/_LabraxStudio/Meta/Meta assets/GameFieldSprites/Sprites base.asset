@@ -133,3 +133,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 779b5323f3d12844199b86b5a0c737c9, type: 3}
   - {fileID: 21300000, guid: 72a546c31a877d74284091a9721fb665, type: 3}
   - {fileID: 21300000, guid: 83b8c0ed99d42954dbf27e7436f6f3e5, type: 3}
+  _obstaclesSprites:
+    _sawMain: {fileID: 21300000, guid: 31e239ed663d95f488e40c26d0eb00c6, type: 3}
+    _sawPin: {fileID: 21300000, guid: 96421febe82aa184a94d340471990d37, type: 3}
+    _sawShadow: {fileID: 21300000, guid: 3e76ece647767b644b0b047c83f7bf57, type: 3}

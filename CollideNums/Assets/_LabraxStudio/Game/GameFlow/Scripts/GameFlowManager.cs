@@ -3,6 +3,7 @@ using LabraxStudio.Events;
 using LabraxStudio.Game.Camera;
 using LabraxStudio.Game.GameField;
 using LabraxStudio.Game.Gates;
+using LabraxStudio.Game.Obstacles;
 using LabraxStudio.Game.Tiles;
 using LabraxStudio.Managers;
 using LabraxStudio.Meta.Levels;
@@ -25,6 +26,9 @@ namespace LabraxStudio.Game
 
         [SerializeField]
         private GatesController _gatesController;
+
+        [SerializeField]
+        private ObstaclesController _obstaclesController;
 
         // FIELDS: -------------------------------------------------------------------
 
@@ -51,8 +55,8 @@ namespace LabraxStudio.Game
 
         public void Initialize()
         {
-            ServicesProvider.GameFlowService.Setup(_gameFieldController,
-                _gatesController, _tilesController, _cameraController);
+            ServicesProvider.GameFlowService.Setup(_gameFieldController, _gatesController,
+                _obstaclesController, _tilesController, _cameraController);
 
             LoadLevel();
         }
@@ -66,9 +70,11 @@ namespace LabraxStudio.Game
 
             _gameFieldController.Initialize();
             _gatesController.Initialize();
+            _obstaclesController.Initialize();
 
             _gameFieldController.GenerateField(levelMeta);
             _gatesController.GenerateGates(levelMeta);
+            _obstaclesController.GenerateObstacles(levelMeta);
             _tilesController.Initialize(levelMeta);
             _cameraController.Initialize(levelMeta);
 
@@ -101,10 +107,12 @@ namespace LabraxStudio.Game
 
             _gameFieldController.ClearField();
             _gatesController.ClearGates();
+            _obstaclesController.ClearObstacles();
             _tilesController.RemoveAllTiles();
 
             _gameFieldController.GenerateField(levelMeta);
             _gatesController.GenerateGates(levelMeta);
+            _obstaclesController.GenerateObstacles(levelMeta);
             _tilesController.Initialize(levelMeta);
             _cameraController.Initialize(levelMeta);
 

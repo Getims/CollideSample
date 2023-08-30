@@ -23,7 +23,9 @@ namespace LabraxStudio.Game.GameField
         private GameFieldSettings _gameFieldSettings;
         private GameFieldSprites _gameFieldSprites;
         private int[,] _levelMatrix;
-       
+        private int _width;
+        private int _height;
+
         // PUBLIC METHODS: -----------------------------------------------------------------------
 
         public void Initialize()
@@ -31,18 +33,20 @@ namespace LabraxStudio.Game.GameField
             _gameFieldSettings = ServicesProvider.GameSettingsService.GetGameSettings().GameFieldSettings;
             _gameFieldSprites = ServicesProvider.GameSettingsService.GetGameSettings().GameFieldSprites;
         }
-        
+
         public List<FieldCell> GenerateFieldSprites(int levelWidth, int levelHeight, int[,] levelMatrix)
         {
             List<FieldCell> gameField = new List<FieldCell>();
             _levelMatrix = levelMatrix;
+            _width = levelWidth;
+            _height = levelHeight;
 
             for (int i = 0; i < levelWidth; i++)
             {
                 for (int j = 0; j < levelHeight; j++)
                 {
                     var fieldCell = CreateCell(i, j, levelMatrix[i, j] - 1);
-                    if(fieldCell!=null)
+                    if (fieldCell != null)
                         gameField.Add(fieldCell);
                 }
             }
@@ -80,10 +84,10 @@ namespace LabraxStudio.Game.GameField
 
         private Sprite GetPlayableSprite(int x, int y)
         {
-            int checkLeft = _levelMatrix[x - 1, y];
-            int checkTop = _levelMatrix[x, y - 1];
-            int checkRight = _levelMatrix[x + 1, y];
-            int checkBottom = _levelMatrix[x, y + 1];
+            int checkLeft = GetMatrixValue(x - 1, y);
+            int checkTop = GetMatrixValue(x, y - 1);
+            int checkRight = GetMatrixValue(x + 1, y);
+            int checkBottom = GetMatrixValue(x, y + 1);
 
             int type = 0;
             type += checkLeft == 1 ? 1 : 0;
@@ -153,8 +157,18 @@ namespace LabraxStudio.Game.GameField
             Sprite sprite = _gameFieldSprites.NotPlayableSprites.GetSpriteByRule(type);
             if (sprite != null)
                 return sprite;
-            
+
             return _gameFieldSprites.NotPlayableSprites.Background;
+        }
+
+        private int GetMatrixValue(int x, int y)
+        {
+            if (x < 0 || x >= _width)
+                return 0;
+            if (y < 0 || y >= _height)
+                return 0;
+
+            return _levelMatrix[x, y];
         }
 
         private string GenerateName(int x, int y)

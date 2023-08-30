@@ -27,6 +27,15 @@ namespace LabraxStudio.Game
         Gate32K = 16,
         Gate64K = 17
     }
+
+    public enum ObstacleType
+    {
+        Null = 0,
+        Saw = 1,
+        Hole = 2,
+        Push = 3,
+        Stop = 4
+    }
     
     public enum Direction
     {
