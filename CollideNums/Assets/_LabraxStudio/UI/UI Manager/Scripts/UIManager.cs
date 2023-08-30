@@ -60,7 +60,7 @@ namespace LabraxStudio.UI
 
             CreateSwipePanel();
         }
-        
+
         public void InitializeMenuUI()
         {
             ServicesProvider.MusicService.PlayMainMenuMusic();
@@ -84,7 +84,13 @@ namespace LabraxStudio.UI
         private void CreateTaskPanel()
         {
             int currentLevel = ServicesProvider.PlayerDataService.CurrentLevel;
-            if (currentLevel > 1)
+
+            if (ServicesProvider.GameSettingsService.GetGameSettings().LaunchSettings.EnableTutorial)
+            {
+                if (currentLevel > 1)
+                    _gameUIFactory.Create(MenuType.TasksPanel);
+            }
+            else
                 _gameUIFactory.Create(MenuType.TasksPanel);
         }
 
@@ -92,12 +98,12 @@ namespace LabraxStudio.UI
         {
             bool enableSwipePanel = ServicesProvider.GameSettingsService.GetGameSettings().SwipeSettings.SwipeMode ==
                                     SwipeMode.SwipeOnScreen;
-            if(!enableSwipePanel)
+            if (!enableSwipePanel)
                 return;
-            
-            if(_swipePanel)
+
+            if (_swipePanel)
                 return;
-            
+
             _gameUIFactory.Create(MenuType.SwipePanel, out _swipePanel);
         }
 
@@ -117,11 +123,20 @@ namespace LabraxStudio.UI
         }
 
         // EVENTS RECEIVERS: ----------------------------------------------------------------------
-        
+
         private void OnMainMenuTapToPlay()
         {
             int currentLevel = ServicesProvider.PlayerDataService.CurrentLevel;
-            if (currentLevel > 1)
+
+            if (ServicesProvider.GameSettingsService.GetGameSettings().LaunchSettings.EnableTutorial)
+            {
+                if (currentLevel > 1)
+                {
+                    CreateTaskWindow();
+                    return;
+                }
+            }
+            else
             {
                 CreateTaskWindow();
                 return;
