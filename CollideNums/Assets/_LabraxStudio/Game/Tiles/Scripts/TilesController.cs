@@ -79,7 +79,7 @@ namespace LabraxStudio.Game.Tiles
                     mergeAction = null;
 
                 CollideWithObstacleAction collideWithObstacleAction =
-                    new CollideWithObstacleAction(tile, direction, moveAction.MoveTo, moveAction.Obstacle);
+                    new CollideWithObstacleAction(tile, direction, moveAction.ObstaclePosition, moveAction.Obstacle);
                 actions.Add(collideWithObstacleAction);
             }
 

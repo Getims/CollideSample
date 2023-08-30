@@ -8,13 +8,16 @@ namespace LabraxStudio.UiAnimator
     {
         // MEMBERS: -------------------------------------------------------------------------------
 
-        [SerializeField] 
+        [SerializeField]
         private Transform _transform;
-        
-        [SerializeField] 
+
+        [SerializeField]
+        private bool _useLocalPosition = false;
+
+        [SerializeField]
         private Vector3 _movePosition;
-        
-        [SerializeField] 
+
+        [SerializeField]
         private MoveType _moveType;
 
         // FIELDS: -------------------------------------------------------------------
@@ -45,7 +48,7 @@ namespace LabraxStudio.UiAnimator
         {
             _moveTW.Kill();
         }
-        
+
         // PRIVATE METHODS: -----------------------------------------------------------------------
 
         private void PlayForRectTransform()
@@ -71,21 +74,30 @@ namespace LabraxStudio.UiAnimator
         private void PlayForTransform()
         {
             var newPosition = _movePosition;
+            var objectPosition = _useLocalPosition ? _transform.localPosition : _transform.position;
 
             if (_moveType == MoveType.AddPosition)
             {
-                newPosition = _transform.position + _movePosition;
+                newPosition = objectPosition + _movePosition;
             }
 
             if (_instant)
             {
-                _transform.position = newPosition;
+                if (_useLocalPosition)
+                    _transform.localPosition = newPosition;
+                else
+                    _transform.position = newPosition;
                 return;
             }
 
-            _moveTW = _transform.DOMove(newPosition, _animationTime)
-                .SetEase(_animationEase)
-                .SetDelay(StartDelay);
+            if (_useLocalPosition)
+                _moveTW = _transform.DOLocalMove(newPosition, _animationTime)
+                    .SetEase(_animationEase)
+                    .SetDelay(StartDelay);
+            else
+                _moveTW = _transform.DOMove(newPosition, _animationTime)
+                    .SetEase(_animationEase)
+                    .SetDelay(StartDelay);
         }
     }
 }

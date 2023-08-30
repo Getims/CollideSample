@@ -143,10 +143,29 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hole
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8796611319367853122, guid: 6f6a278fd95873643ba96005c3721ba5, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 6f6a278fd95873643ba96005c3721ba5, type: 3}
 --- !u!4 &1586948148925034229 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6337905561813552885, guid: 6f6a278fd95873643ba96005c3721ba5, type: 3}
   m_PrefabInstance: {fileID: 4751644406870532096}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &4051835161090064410 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8775890548906745882, guid: 6f6a278fd95873643ba96005c3721ba5, type: 3}
+  m_PrefabInstance: {fileID: 4751644406870532096}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5737976949499868667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4051835161090064410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3c82c50a56542b4acf1c676408d832e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _holeMain: {fileID: 8615258387539801197}

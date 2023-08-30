@@ -48,8 +48,8 @@ MonoBehaviour:
   _obstaclesGenerator:
     _obstacleContainer: {fileID: 3901799024911882394}
     _sawPrefab: {fileID: 1381218387299043212, guid: c78976cd66febb34cba96b3d5785239e, type: 3}
-    _holePrefab: {fileID: 4315270924365759554, guid: 82b249496cdb68b4598d1e3615644c25, type: 3}
-    _pushPrefab: {fileID: 4315270924365759554, guid: 4e4d5f7f5450554499f377eaafdf5425, type: 3}
+    _holePrefab: {fileID: 5737976949499868667, guid: 82b249496cdb68b4598d1e3615644c25, type: 3}
+    _pushPrefab: {fileID: 1349793766472499922, guid: 4e4d5f7f5450554499f377eaafdf5425, type: 3}
     _stopperPrefab: {fileID: 786360681990470380, guid: c80250f2831d8d348a4032906848f510, type: 3}
 --- !u!1 &3270227807124855881
 GameObject:

@@ -24,7 +24,7 @@ namespace LabraxStudio.Game.Obstacles
         }
 
         public abstract void SetupObstacle(ObstacleType obstacleType, Vector2Int cell,
-            ObstaclesSprites obstaclesSprites, Direction gateDirection);
+            ObstaclesSprites obstaclesSprites, Direction obstacleDirection);
 
         public abstract void PlayTileCollideEffect();
     }

@@ -1,5 +1,71 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2012470350774714369
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7379833907756068333}
+  - component: {fileID: 4282221846732977072}
+  m_Layer: 6
+  m_Name: HoleFall Effect
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7379833907756068333
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2012470350774714369}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6337905561813552885}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4282221846732977072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2012470350774714369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 870b98e0ce8bf6f46bbcb51b8d103e20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animations:
+  - _groupName: AnimationGroup
+    _playStartTime: 0
+    _playEndTime: 0.25
+    _playDelay: 0
+    _animations:
+    - rid: 7871108663261003776
+  _isLooped: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 7871108663261003776
+      type: {class: Scale, ns: LabraxStudio.UiAnimator, asm: Assembly-CSharp}
+      data:
+        _instant: 0
+        _startDelay: 0
+        _animationTime: 0.25
+        _animationEase: 3
+        _transform: {fileID: 6337905561813552885}
+        _useStartScale: 0
+        _startScale: {x: 1, y: 1, z: 1}
+        _targetScale: {x: 0.1, y: 0.1, z: 0.1}
 --- !u!1 &2314431442019262186
 GameObject:
   m_ObjectHideFlags: 0
@@ -254,7 +320,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 9140608198889924274}
   - {fileID: 6285011288768065006}
@@ -262,6 +328,7 @@ Transform:
   - {fileID: 1374170021512628930}
   - {fileID: 3189573643133117266}
   - {fileID: 8760998422272512544}
+  - {fileID: 7379833907756068333}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -282,6 +349,7 @@ MonoBehaviour:
     _infiniteMoveParticles: {fileID: 2528916591500325764}
     _mergeEffect: {fileID: 2782924967133460341}
     _collideParticles: {fileID: 525937476770200496}
+    _holeFallEffect: {fileID: 4282221846732977072}
 --- !u!114 &6426299516912197899
 MonoBehaviour:
   m_ObjectHideFlags: 0

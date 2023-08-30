@@ -13,7 +13,7 @@ namespace LabraxStudio.Game.Obstacles
         // PUBLIC METHODS: -----------------------------------------------------------------------
 
         public override void SetupObstacle(ObstacleType obstacleType, Vector2Int cell,
-            ObstaclesSprites obstaclesSprites, Direction gateDirection)
+            ObstaclesSprites obstaclesSprites, Direction obstacleDirection)
         {
             _cell = cell;
             _obstacleType = obstacleType;

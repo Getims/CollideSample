@@ -26,7 +26,8 @@ namespace LabraxStudio.Game.Obstacles
         public void GenerateObstacles(LevelMeta levelMeta)
         {
             _obstacles =
-                _obstaclesGenerator.GenerateObstacles(levelMeta.Width, levelMeta.Height, levelMeta.ObstaclesMatrix);
+                _obstaclesGenerator.GenerateObstacles(levelMeta.Width, levelMeta.Height, levelMeta.ObstaclesMatrix,
+                    levelMeta.LevelMatrix);
         }
 
         public void ClearObstacles()

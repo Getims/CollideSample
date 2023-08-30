@@ -75,7 +75,8 @@ namespace LabraxStudio.Game.Tiles
                 tile.SetGateFlag();
             }
 
-            return new MoveAction(tile, movePoint, swipe, direction, result.CollideWithGate, result.Obstacle);
+            return new MoveAction(tile, movePoint, swipe, direction, result.CollideWithGate, result.Obstacle,
+                result.ObstaclePosition);
         }
 
         // PRIVATE METHODS: -----------------------------------------------------------------------
@@ -96,7 +97,7 @@ namespace LabraxStudio.Game.Tiles
                     break;
                 case GameCellType.Unlocked:
                     result.IsPlayableCell = true;
-                    result.Obstacle = (ObstacleType) _obstaclesMatrix[x, y];
+                    CheckObstacle(x, y, ref result);
                     break;
                 default:
                     GameCellType tileGate = GameTypesConverter.TileValueToGateType(tileValue);
@@ -126,9 +127,48 @@ namespace LabraxStudio.Game.Tiles
             return false;
         }
 
-        private ObstacleType HasObstacle(int x, int y)
+        private void CheckObstacle(int x, int y, ref CheckResult checkResult)
         {
-            return ObstacleType.Null;
+            checkResult.Obstacle = (ObstacleType) _obstaclesMatrix[x, y];
+            checkResult.ObstaclePosition = new Vector2Int(x, y);
+
+            if (checkResult.Obstacle == ObstacleType.Saw || checkResult.Obstacle == ObstacleType.Hole)
+                return;
+
+            if ((ObstacleType) GetValue(x - 1, y) == ObstacleType.Push)
+            {
+                checkResult.Obstacle = ObstacleType.Push;
+                checkResult.ObstaclePosition = new Vector2Int(x - 1, y);
+                return;
+            }
+
+            if ((ObstacleType) GetValue(x + 1, y) == ObstacleType.Push)
+            {
+                checkResult.Obstacle = ObstacleType.Push;
+                checkResult.ObstaclePosition = new Vector2Int(x + 1, y);
+                return;
+            }
+
+            if ((ObstacleType) GetValue(x, y - 1) == ObstacleType.Push)
+            {
+                checkResult.Obstacle = ObstacleType.Push;
+                checkResult.ObstaclePosition = new Vector2Int(x, y - 1);
+                return;
+            }
+
+            if ((ObstacleType) GetValue(x, y + 1) == ObstacleType.Push)
+            {
+                checkResult.Obstacle = ObstacleType.Push;
+                checkResult.ObstaclePosition = new Vector2Int(x, y + 1);
+            }
+
+            int GetValue(int x, int y)
+            {
+                if (x < 0 || y < 0 || x >= _width || y >= _height)
+                    return 0;
+
+                return _obstaclesMatrix[x, y];
+            }
         }
 
         private void RemoveTileFromMatrix(int x, int y)
@@ -148,15 +188,18 @@ namespace LabraxStudio.Game.Tiles
             public bool NeedMoveToGate;
             public bool CollideWithGate;
             public ObstacleType Obstacle;
+            public Vector2Int ObstaclePosition;
 
             public CheckResult(bool isPlayableCell = false, GameCellType gameCellType = GameCellType.Locked,
-                bool needMoveToGate = false, bool collideWithGate = false, ObstacleType obstacle = ObstacleType.Null)
+                bool needMoveToGate = false, bool collideWithGate = false, ObstacleType obstacle = ObstacleType.Null,
+                Vector2Int obstaclePosition = new Vector2Int())
             {
                 IsPlayableCell = isPlayableCell;
                 GameCellType = gameCellType;
                 NeedMoveToGate = needMoveToGate;
                 CollideWithGate = collideWithGate;
                 Obstacle = obstacle;
+                ObstaclePosition = obstaclePosition;
             }
         }
     }

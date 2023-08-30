@@ -87,6 +87,24 @@ namespace LabraxStudio.Game.Tiles
         {
             Destroy(gameObject);
         }
+        
+        public void DestroyByObstacle(ObstacleType obstacleType)
+        {
+            switch (obstacleType)
+            {
+                case ObstacleType.Null:
+                case ObstacleType.Push:
+                case ObstacleType.Stopper:
+                    break;
+                case ObstacleType.Saw:
+                    Destroy(gameObject);
+                    break;
+                case ObstacleType.Hole:
+                    _tileEffectsController.PlayHoleFallEffect(_spriteRenderer, DestroySelf);
+                    _tileEffectsController.StopInfiniteMoveEffect();
+                    break;
+            }
+        }
 
         // EVENTS RECEIVERS: ----------------------------------------------------------------------
 
@@ -121,5 +139,6 @@ namespace LabraxStudio.Game.Tiles
 
             TilesController.MoveTile(this, direction, swipe);
         }
+
     }
 }

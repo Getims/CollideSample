@@ -32,6 +32,7 @@ namespace LabraxStudio.Game.Obstacles
         private GameFieldSettings _gameFieldSettings;
         private GameFieldSprites _gameFieldSprites;
         private int[,] _levelMatrix;
+        private int[,] _obstaclesMatrix;
         private bool _isInitialized = false;
 
         // PUBLIC METHODS: -----------------------------------------------------------------------
@@ -43,19 +44,21 @@ namespace LabraxStudio.Game.Obstacles
             _isInitialized = true;
         }
 
-        public List<AObstacle> GenerateObstacles(int levelWidth, int levelHeight, int[,] levelMatrix)
+        public List<AObstacle> GenerateObstacles(int levelWidth, int levelHeight, int[,] obstaclesMatrix,
+            int[,] levelMatrix)
         {
             if (!_isInitialized)
                 return null;
 
             List<AObstacle> obstacles = new List<AObstacle>();
+            _obstaclesMatrix = obstaclesMatrix;
             _levelMatrix = levelMatrix;
 
             for (int i = 0; i < levelWidth; i++)
             {
                 for (int j = 0; j < levelHeight; j++)
                 {
-                    AObstacle _AObstacle = CreateObstacle(i, j, levelMatrix[i, j]);
+                    AObstacle _AObstacle = CreateObstacle(i, j, obstaclesMatrix[i, j]);
                     if (_AObstacle != null)
                         obstacles.Add(_AObstacle);
                 }
@@ -99,8 +102,9 @@ namespace LabraxStudio.Game.Obstacles
             position.y = _gameFieldSettings.CellSize * (-y);
             aObstacle.transform.localPosition = position;
 
-            var gateDirection = GetObstacleDirection(x, y);
-            aObstacle.SetupObstacle(obstacleType, new Vector2Int(x, y), _gameFieldSprites.ObstaclesSprites, gateDirection);
+            var obstacleDirection = GetObstacleDirection(x, y);
+            aObstacle.SetupObstacle(obstacleType, new Vector2Int(x, y), _gameFieldSprites.ObstaclesSprites,
+                obstacleDirection);
 
             return aObstacle;
         }

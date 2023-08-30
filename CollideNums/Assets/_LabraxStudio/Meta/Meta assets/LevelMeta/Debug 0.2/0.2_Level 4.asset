@@ -17,17 +17,17 @@ MonoBehaviour:
   _reward: 10
   _cameraOffset: {x: 0, y: 0}
   _levelTemplate:
-    width: 5
-    height: 9
-    _brushMode: 2
+    width: 9
+    height: 10
+    _brushMode: 0
     _enableFieldPalette: 1
     _enableTilePalette: 1
     _enableObstaclesPalette: 1
     _fieldBrushMode: 2
     _fieldBrushModeRight: 0
     _tilesBrushMode: 1
-    _tilesBrushModeRight: -1
-    _obstaclesBrushMode: 2
+    _tilesBrushModeRight: 0
+    _obstaclesBrushMode: 0
     _obstaclesBrushModeRight: -1
   _boostersSettings:
   - _boosterMeta: {fileID: 11400000, guid: 3b85c5d335e9ce344b42fbcac79b97cd, type: 2}
@@ -56,13 +56,13 @@ MonoBehaviour:
       Data: 0|LabraxStudio.Meta.Levels.LevelTemplate, Assembly-CSharp
     - Name: width
       Entry: 3
-      Data: 5
+      Data: 9
     - Name: height
       Entry: 3
-      Data: 9
+      Data: 10
     - Name: _brushMode
       Entry: 3
-      Data: 2
+      Data: 0
     - Name: _enableFieldPalette
       Entry: 5
       Data: true
@@ -83,10 +83,10 @@ MonoBehaviour:
       Data: 1
     - Name: _tilesBrushModeRight
       Entry: 3
-      Data: 18446744073709551615
+      Data: 0
     - Name: _obstaclesBrushMode
       Entry: 3
-      Data: 2
+      Data: 0
     - Name: _obstaclesBrushModeRight
       Entry: 3
       Data: 18446744073709551615
@@ -95,10 +95,10 @@ MonoBehaviour:
       Data: 1|System.Int32[,], mscorlib
     - Name: 
       Entry: 12
-      Data: 45
+      Data: 90
     - Name: ranks
       Entry: 1
-      Data: 5|9
+      Data: 9|10
     - Name: 
       Entry: 3
       Data: 1
@@ -111,6 +111,42 @@ MonoBehaviour:
     - Name: 
       Entry: 3
       Data: 1
+    - Name: 
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 3
+      Data: 37
     - Name: 
       Entry: 3
       Data: 1
@@ -143,7 +179,10 @@ MonoBehaviour:
       Data: 2
     - Name: 
       Entry: 3
-      Data: 36
+      Data: 1
+    - Name: 
+      Entry: 3
+      Data: 1
     - Name: 
       Entry: 3
       Data: 1
@@ -185,7 +224,10 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 3
-      Data: 19
+      Data: 37
+    - Name: 
+      Entry: 3
+      Data: 2
     - Name: 
       Entry: 3
       Data: 2
@@ -204,6 +246,99 @@ MonoBehaviour:
     - Name: 
       Entry: 3
       Data: 35
+    - Name: 
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 3
+      Data: 2
+    - Name: 
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 3
+      Data: 2
+    - Name: 
+      Entry: 3
+      Data: 36
+    - Name: 
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 3
+      Data: 3
+    - Name: 
+      Entry: 3
+      Data: 2
+    - Name: 
+      Entry: 3
+      Data: 2
+    - Name: 
+      Entry: 3
+      Data: 2
+    - Name: 
+      Entry: 3
+      Data: 2
+    - Name: 
+      Entry: 3
+      Data: 2
+    - Name: 
+      Entry: 3
+      Data: 19
+    - Name: 
+      Entry: 3
+      Data: 2
+    - Name: 
+      Entry: 3
+      Data: 37
+    - Name: 
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 3
+      Data: 37
+    - Name: 
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 3
+      Data: 1
     - Name: 
       Entry: 3
       Data: 1

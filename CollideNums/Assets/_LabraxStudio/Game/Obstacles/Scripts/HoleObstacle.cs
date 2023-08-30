@@ -3,8 +3,13 @@ using UnityEngine;
 
 namespace LabraxStudio.Game.Obstacles
 {
-    public class MockObstacle : AObstacle
+    public class HoleObstacle : AObstacle
     {
+        // MEMBERS: -------------------------------------------------------------------------------
+
+        [SerializeField]
+        private SpriteRenderer _holeMain;
+
         // PUBLIC METHODS: -----------------------------------------------------------------------
 
         public override void SetupObstacle(ObstacleType obstacleType, Vector2Int cell,
@@ -12,6 +17,7 @@ namespace LabraxStudio.Game.Obstacles
         {
             _cell = cell;
             _obstacleType = obstacleType;
+            _holeMain.sprite = obstaclesSprites.HoleMain;
         }
 
         public override void PlayTileCollideEffect()

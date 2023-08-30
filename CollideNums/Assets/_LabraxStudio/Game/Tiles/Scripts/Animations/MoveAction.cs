@@ -13,7 +13,7 @@ namespace LabraxStudio.Game.Tiles
         // CONSTRUCTORS: -------------------------------------------------------------------------------
 
         public MoveAction(Tile tile, Vector2Int moveTo, Swipe swipe, Direction direction, bool collideWithGate,
-            ObstacleType obstacle)
+            ObstacleType obstacle, Vector2Int obstaclePosition)
         {
             _tile = tile;
             _moveTo = moveTo;
@@ -21,6 +21,7 @@ namespace LabraxStudio.Game.Tiles
             _direction = direction;
             _collideWithGate = collideWithGate;
             _obstacle = obstacle;
+            _obstaclePosition = obstaclePosition;
 
             _gameFieldSettings = ServicesProvider.GameSettingsService.GetGameSettings().GameFieldSettings;
             _swipeSettings = ServicesProvider.GameSettingsService.GetGameSettings().SwipeSettings;
@@ -32,6 +33,7 @@ namespace LabraxStudio.Game.Tiles
         private TilesController TilesController => ServicesProvider.GameFlowService.TilesController;
         public Tile Tile => _tile;
         public ObstacleType Obstacle => _obstacle;
+        public Vector2Int ObstaclePosition => _obstaclePosition;
 
         // FIELDS: -------------------------------------------------------------------
 
@@ -43,6 +45,7 @@ namespace LabraxStudio.Game.Tiles
         private readonly ObstacleType _obstacle;
         private readonly GameFieldSettings _gameFieldSettings;
         private readonly SwipeSettings _swipeSettings;
+        private readonly Vector2Int _obstaclePosition;
         private Action _onMoveComplete;
         
         // PUBLIC METHODS: -----------------------------------------------------------------------
