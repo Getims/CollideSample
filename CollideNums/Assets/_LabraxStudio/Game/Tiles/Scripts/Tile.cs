@@ -1,3 +1,4 @@
+using System;
 using LabraxStudio.App.Services;
 using LabraxStudio.Events;
 using UnityEngine;
@@ -39,12 +40,20 @@ namespace LabraxStudio.Game.Tiles
         private bool _isMerging = false;
         private bool _movedToGate = false;
 
+        // GAME ENGINE METHODS: -------------------------------------------------------------------
+        
+        private void OnDestroy()
+        {
+            GameEvents.OnTrackedTileUpdate.RemoveListener(OnTrackedTileUpdate);
+        }
+        
         // PUBLIC METHODS: -----------------------------------------------------------------------
 
         public void Initialize(string tileName)
         {
-            gameObject.name = tileName;
+            gameObject.name = tileName; 
             _swipeChecker.Initialize(this, UnityEngine.Camera.main, OnSwipe);
+            GameEvents.OnTrackedTileUpdate.AddListener(OnTrackedTileUpdate);
         }
 
         public void SetCell(Vector2Int cell)
@@ -139,6 +148,17 @@ namespace LabraxStudio.Game.Tiles
                 _tileEffectsController.StopInfiniteMoveEffect();
 
             TilesController.MoveTile(this, direction, swipe);
+        }
+        
+        private void OnTrackedTileUpdate(TrackedTile trackedTile)
+        {
+            if (trackedTile == null || trackedTile.Tile == null)
+            {
+                _tileEffectsController.SetHighlight(false);
+                return;
+            }
+
+            _tileEffectsController.SetHighlight(trackedTile.Tile == this);
         }
 
     }

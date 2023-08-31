@@ -27,6 +27,9 @@ namespace LabraxStudio.Game.Tiles
         [SerializeField]
         private SpriteMask _sawMask;
 
+        [SerializeField]
+        private SpriteRenderer _highLight;
+
         // FIELDS: -------------------------------------------------------------------
 
         private Tweener _obstacleTW;
@@ -93,5 +96,7 @@ namespace LabraxStudio.Game.Tiles
             _obstacleTW = maskTransform.DOLocalMove(startPosition, 0.2f)
                 .OnComplete(onComplete.Invoke);
         }
+
+        public void SetHighlight(bool enabled) => _highLight.enabled = enabled;
     }
 }

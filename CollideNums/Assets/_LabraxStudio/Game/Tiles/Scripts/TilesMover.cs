@@ -59,7 +59,7 @@ namespace LabraxStudio.Game.Tiles
                     var tempPoint = movePoint;
                     tempPoint += moveVector;
 
-                    CheckCell(tempPoint.x, tempPoint.y, tile.Value, moveVector, ref result);
+                    CheckCell(tempPoint.x, tempPoint.y, tile.Value, ref result);
                     if (!result.IsPlayableCell)
                         break;
 
@@ -67,6 +67,9 @@ namespace LabraxStudio.Game.Tiles
                         break;
 
                     movePoint = tempPoint;
+
+                    CheckObstacle(tempPoint.x, tempPoint.y, ref result);
+                    CheckObstacleOnMovePath(tempPoint.x, tempPoint.y, moveVector, ref result);
                     if (result.Obstacle != ObstacleType.Null)
                         break;
                 }
@@ -90,7 +93,7 @@ namespace LabraxStudio.Game.Tiles
 
         // PRIVATE METHODS: -----------------------------------------------------------------------
 
-        private CheckResult CheckCell(int x, int y, int tileValue, Vector2Int moveVector, ref CheckResult result)
+        private CheckResult CheckCell(int x, int y, int tileValue, ref CheckResult result)
         {
             if (x < 0 || y < 0 || x >= _width || y >= _height)
             {
@@ -106,8 +109,6 @@ namespace LabraxStudio.Game.Tiles
                     break;
                 case GameCellType.Unlocked:
                     result.IsPlayableCell = true;
-                    CheckObstacle(x, y, ref result);
-                    CheckObstacleOnMovePath(x, y, moveVector, ref result);
                     break;
                 default:
                     GameCellType tileGate = GameTypesConverter.TileValueToGateType(tileValue);
