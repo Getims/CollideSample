@@ -33,7 +33,6 @@ namespace LabraxStudio.Game.Tiles
         public override void Play(Action onComplete)
         {
             _onActionComplete = onComplete;
-            ServicesProvider.GameFlowService.ObstaclesController.PlayObstacleEffect(_obstaclePosition);
             switch (_obstacleType)
             {
                 case ObstacleType.Null:
@@ -41,16 +40,20 @@ namespace LabraxStudio.Game.Tiles
                     onComplete.Invoke();
                     break;
                 case ObstacleType.Saw:
+                    ServicesProvider.CoroutineService.RunCoroutine(Sawing());
+                    /*
+                    ServicesProvider.GameFlowService.ObstaclesController.PlayObstacleEffect(_obstaclePosition);
                     _tile.DestroyByObstacle(_obstacleType);
                     ServicesProvider.CoroutineService.RunCoroutine(Restart(0.35f));
-                    break;
+                    */
+                    return;
                 case ObstacleType.Hole:
                     MoveTile();
                     _tile.DestroyByObstacle(_obstacleType);
                     ServicesProvider.CoroutineService.RunCoroutine(Restart(0.45f));
-                    
                     return;
                 case ObstacleType.Push:
+                    ServicesProvider.GameFlowService.ObstaclesController.PlayObstacleEffect(_obstaclePosition);
                     ServicesProvider.CoroutineService.RunCoroutine(Push(0.02f));
                     break;
             }
@@ -72,7 +75,38 @@ namespace LabraxStudio.Game.Tiles
             _onActionComplete?.Invoke();
             GameEvents.SendTileDestroyedByObstacle();
         }
-        
+
+        private IEnumerator Sawing()
+        {
+            Vector3 extraMove = Vector3.zero;
+            switch (_direction)
+            {
+                case Direction.Left:
+                    extraMove.x = -1f;
+                    break;
+                case Direction.Right:
+                    extraMove.x = 1f;
+                    break;
+                case Direction.Up:
+                    extraMove.y = 1f;
+                    break;
+                case Direction.Down:
+                    extraMove.y = -1f;
+                    break;
+            }
+
+            ServicesProvider.GameFlowService.ObstaclesController.PlayObstacleEffect(_obstaclePosition);
+            _tile.DestroyByObstacle(_obstacleType, _direction);
+            Vector3 newPosition = _tile.Position + extraMove;
+            _extraMoveTW.Kill();
+            _extraMoveTW = _tile.transform.DOMove(newPosition, 0.2f)
+                .SetEase(Ease.OutQuad);
+
+            yield return new WaitForSeconds(.25f);
+            _onActionComplete?.Invoke();
+            GameEvents.SendTileDestroyedByObstacle();
+        }
+
         private IEnumerator Push(float delay)
         {
             yield return new WaitForSeconds(delay);

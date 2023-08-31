@@ -24,9 +24,12 @@ namespace LabraxStudio.Game.Tiles
         [SerializeField]
         private UIAnimator _holeFallEffect;
 
+        [SerializeField]
+        private SpriteMask _sawMask;
+
         // FIELDS: -------------------------------------------------------------------
 
-        private Tweener _fallTW;
+        private Tweener _obstacleTW;
 
         // PUBLIC METHODS: -----------------------------------------------------------------------
 
@@ -56,8 +59,38 @@ namespace LabraxStudio.Game.Tiles
             _holeFallEffect.Play();
             Color newColor = Color.white;
             newColor.a = .2f;
-            _fallTW = tileSprite.DOColor(newColor, _holeFallEffect.GetAnimatorWorkTime())
+            _obstacleTW = tileSprite.DOColor(newColor, _holeFallEffect.GetAnimatorWorkTime())
                 .SetEase(Ease.InSine)
+                .OnComplete(onComplete.Invoke);
+        }
+
+        public void PlaySawEffect(Direction direction, Action onComplete)
+        {
+            Vector3 sawMaskPosition = Vector3.zero;
+            switch (direction)
+            {
+                case Direction.Left:
+                    sawMaskPosition.x = -1f;
+                    break;
+                case Direction.Right:
+                    sawMaskPosition.x = 1f;
+                    break;
+                case Direction.Up:
+                    sawMaskPosition.y = 1f;
+                    break;
+                case Direction.Down:
+                    sawMaskPosition.y = -1.2f;
+                    break;
+            }
+
+            var maskTransform = _sawMask.transform;
+            Vector3 localPosition = maskTransform.localPosition;
+            Vector3 startPosition = localPosition;
+            localPosition += sawMaskPosition;
+            maskTransform.localPosition = localPosition;
+
+            _sawMask.enabled = true;
+            _obstacleTW = maskTransform.DOLocalMove(startPosition, 0.2f)
                 .OnComplete(onComplete.Invoke);
         }
     }

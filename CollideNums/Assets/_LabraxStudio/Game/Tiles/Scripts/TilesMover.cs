@@ -49,26 +49,35 @@ namespace LabraxStudio.Game.Tiles
                     break;
             }
 
-            for (int i = 0; i < moves; i++)
+            // Check start near saw and push
+            CheckObstacleOnMovePath(movePoint.x, movePoint.y, moveVector, ref result);
+            if (result.Obstacle != ObstacleType.Saw)
             {
-                var tempPoint = movePoint;
-                tempPoint += moveVector;
+                //Check move path
+                for (int i = 0; i < moves; i++)
+                {
+                    var tempPoint = movePoint;
+                    tempPoint += moveVector;
 
-                CheckCell(tempPoint.x, tempPoint.y, tile.Value, ref result);
-                if (!result.IsPlayableCell)
-                    break;
+                    CheckCell(tempPoint.x, tempPoint.y, tile.Value, moveVector, ref result);
+                    if (!result.IsPlayableCell)
+                        break;
 
-                if (HasTile(tempPoint.x, tempPoint.y))
-                    break;
+                    if (HasTile(tempPoint.x, tempPoint.y))
+                        break;
 
-                movePoint = tempPoint;
-                if (result.Obstacle != ObstacleType.Null)
-                    break;
+                    movePoint = tempPoint;
+                    if (result.Obstacle != ObstacleType.Null)
+                        break;
+                }
             }
 
+            // Replace tile position in matrix
             RemoveTileFromMatrix(tile.Cell.x, tile.Cell.y);
             SetTileToMatrix(movePoint.x, movePoint.y, tile.Value);
             tile.SetCell(movePoint);
+
+            //Check gate move
             if (result.NeedMoveToGate)
             {
                 result.CollideWithGate = false;
@@ -81,7 +90,7 @@ namespace LabraxStudio.Game.Tiles
 
         // PRIVATE METHODS: -----------------------------------------------------------------------
 
-        private CheckResult CheckCell(int x, int y, int tileValue, ref CheckResult result)
+        private CheckResult CheckCell(int x, int y, int tileValue, Vector2Int moveVector, ref CheckResult result)
         {
             if (x < 0 || y < 0 || x >= _width || y >= _height)
             {
@@ -98,6 +107,7 @@ namespace LabraxStudio.Game.Tiles
                 case GameCellType.Unlocked:
                     result.IsPlayableCell = true;
                     CheckObstacle(x, y, ref result);
+                    CheckObstacleOnMovePath(x, y, moveVector, ref result);
                     break;
                 default:
                     GameCellType tileGate = GameTypesConverter.TileValueToGateType(tileValue);
@@ -131,35 +141,37 @@ namespace LabraxStudio.Game.Tiles
         {
             checkResult.Obstacle = (ObstacleType) _obstaclesMatrix[x, y];
             checkResult.ObstaclePosition = new Vector2Int(x, y);
+        }
 
-            if (checkResult.Obstacle == ObstacleType.Saw || checkResult.Obstacle == ObstacleType.Hole)
+        private void CheckObstacleOnMovePath(int x, int y, Vector2Int moveVector, ref CheckResult checkResult)
+        {
+            if (checkResult.Obstacle == ObstacleType.Hole)
                 return;
 
-            if ((ObstacleType) GetValue(x - 1, y) == ObstacleType.Push)
+            //Check saw on path
+            if (checkResult.Obstacle != ObstacleType.Stopper)
             {
-                checkResult.Obstacle = ObstacleType.Push;
-                checkResult.ObstaclePosition = new Vector2Int(x - 1, y);
-                return;
+                if (CheckCustom(x + moveVector.x, y + moveVector.y, ObstacleType.Saw, ref checkResult))
+                    return;
             }
 
-            if ((ObstacleType) GetValue(x + 1, y) == ObstacleType.Push)
-            {
-                checkResult.Obstacle = ObstacleType.Push;
-                checkResult.ObstaclePosition = new Vector2Int(x + 1, y);
+            //Check push on path
+            if (CheckCustom(x - 1, y, ObstacleType.Push, ref checkResult)
+                || CheckCustom(x + 1, y, ObstacleType.Push, ref checkResult)
+                || CheckCustom(x, y - 1, ObstacleType.Push, ref checkResult)
+                || CheckCustom(x, y + 1, ObstacleType.Push, ref checkResult))
                 return;
-            }
 
-            if ((ObstacleType) GetValue(x, y - 1) == ObstacleType.Push)
+            bool CheckCustom(int x, int y, ObstacleType type, ref CheckResult checkResult)
             {
-                checkResult.Obstacle = ObstacleType.Push;
-                checkResult.ObstaclePosition = new Vector2Int(x, y - 1);
-                return;
-            }
+                if ((ObstacleType) GetValue(x, y) == type)
+                {
+                    checkResult.Obstacle = type;
+                    checkResult.ObstaclePosition = new Vector2Int(x, y);
+                    return true;
+                }
 
-            if ((ObstacleType) GetValue(x, y + 1) == ObstacleType.Push)
-            {
-                checkResult.Obstacle = ObstacleType.Push;
-                checkResult.ObstaclePosition = new Vector2Int(x, y + 1);
+                return false;
             }
 
             int GetValue(int x, int y)

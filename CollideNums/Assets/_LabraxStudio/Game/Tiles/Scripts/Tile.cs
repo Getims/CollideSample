@@ -88,7 +88,7 @@ namespace LabraxStudio.Game.Tiles
             Destroy(gameObject);
         }
         
-        public void DestroyByObstacle(ObstacleType obstacleType)
+        public void DestroyByObstacle(ObstacleType obstacleType, Direction direction = Direction.Null)
         {
             switch (obstacleType)
             {
@@ -97,7 +97,8 @@ namespace LabraxStudio.Game.Tiles
                 case ObstacleType.Stopper:
                     break;
                 case ObstacleType.Saw:
-                    Destroy(gameObject);
+                    //Destroy(gameObject);
+                    _tileEffectsController.PlaySawEffect(direction, DestroySelf);
                     break;
                 case ObstacleType.Hole:
                     _tileEffectsController.PlayHoleFallEffect(_spriteRenderer, DestroySelf);

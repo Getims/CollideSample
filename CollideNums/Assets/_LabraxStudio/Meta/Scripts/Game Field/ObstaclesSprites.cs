@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -18,6 +19,10 @@ namespace LabraxStudio.Meta.GameField
 
         [SerializeField]
         private Sprite _sawShadow;
+        
+        [SerializeField]
+        [ListDrawerSettings(NumberOfItemsPerPage = 10)]
+        private List<Color> _particalsColors = new List<Color>();
         
         [Title("Hole")]
         [SerializeField]
@@ -47,5 +52,6 @@ namespace LabraxStudio.Meta.GameField
         public Sprite PushMetal => _pushMetal;
         public Sprite PushButton => _pushButton;
         public Sprite StopperMain => _stopperMain;
+        public List<Color> ParticalsColors => _particalsColors;
     }
 }
