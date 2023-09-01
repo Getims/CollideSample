@@ -41,11 +41,6 @@ namespace LabraxStudio.Game.Tiles
                     break;
                 case ObstacleType.Saw:
                     ServicesProvider.CoroutineService.RunCoroutine(Sawing());
-                    /*
-                    ServicesProvider.GameFlowService.ObstaclesController.PlayObstacleEffect(_obstaclePosition);
-                    _tile.DestroyByObstacle(_obstacleType);
-                    ServicesProvider.CoroutineService.RunCoroutine(Restart(0.35f));
-                    */
                     return;
                 case ObstacleType.Hole:
                     MoveTile();
@@ -65,7 +60,6 @@ namespace LabraxStudio.Game.Tiles
 
         private void OnMoveComplete()
         {
-            //_destroyAction?.Invoke(_tile);
             _onActionComplete?.Invoke();
         }
 

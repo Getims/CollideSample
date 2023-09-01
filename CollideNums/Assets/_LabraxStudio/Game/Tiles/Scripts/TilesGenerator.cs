@@ -59,6 +59,14 @@ namespace LabraxStudio.Game.Tiles
                 return null;
             
             return _gameFieldSprites.GetTileSprite(spriteIndex);
+        } 
+        
+        public Sprite GetHighlightSprite(int spriteIndex)
+        {
+            if (!_isInitialized)
+                return null;
+            
+            return _gameFieldSprites.GetTileHighlight(spriteIndex);
         }
 
         // PRIVATE METHODS: -----------------------------------------------------------------------
@@ -80,7 +88,7 @@ namespace LabraxStudio.Game.Tiles
             int value = GameTypesConverter.MatrixValueToTile(matrixValue);
             newTile.Initialize("Tile " + value);
             newTile.SetCell(new Vector2Int(x, y));
-            newTile.SetValue(matrixValue, GetSprite(matrixValue));
+            newTile.SetValue(matrixValue, GetSprite(matrixValue), GetHighlightSprite(matrixValue));
 
             return newTile;
         }

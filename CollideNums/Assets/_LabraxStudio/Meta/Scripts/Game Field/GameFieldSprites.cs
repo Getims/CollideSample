@@ -30,7 +30,9 @@ namespace LabraxStudio.Meta.GameField
         
         [Space(10)]
         [SerializeField]
-        private List<Sprite> _tilesSprites = new List<Sprite>();
+        private List<Sprite> _tilesSprites = new List<Sprite>(); 
+        [SerializeField]
+        private List<Sprite> _tilesHighlights = new List<Sprite>();
         
         [Space(10)]
         [SerializeField]
@@ -66,6 +68,19 @@ namespace LabraxStudio.Meta.GameField
                 return _errorSprite;
 
             Sprite sprite = _tilesSprites[spriteIndex];
+            if (sprite == null)
+                return _errorSprite;
+
+            return sprite;
+        } 
+        
+        public Sprite GetTileHighlight(int spriteIndex)
+        {
+            spriteIndex -= 1;
+            if (spriteIndex >= _tilesHighlights.Count || spriteIndex < 0)
+                return _errorSprite;
+
+            Sprite sprite = _tilesHighlights[spriteIndex];
             if (sprite == null)
                 return _errorSprite;
 

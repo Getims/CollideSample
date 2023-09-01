@@ -90,7 +90,7 @@ namespace LabraxStudio.Meta.Levels
                 for (int j = 0; j < _levelTemplate.Height; j++)
                 {
                     int tile = 0;
-                    if(_levelTemplate.LevelMatrix[i, j]< GameConstants.ObstaclesStartValue)
+                    if(_levelTemplate.LevelMatrix[i, j]<= GameConstants.ObstaclesStartValue)
                         tile = _levelTemplate.LevelMatrix[i, j] - GameConstants.TileStartValue;
                     
                     tile = tile < 0 ? 0 : tile;

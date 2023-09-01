@@ -1,6 +1,8 @@
 using System;
+using DG.Tweening;
 using LabraxStudio.App.Services;
 using LabraxStudio.Events;
+using LabraxStudio.UiAnimator;
 using UnityEngine;
 
 namespace LabraxStudio.Game.Tiles
@@ -15,6 +17,12 @@ namespace LabraxStudio.Game.Tiles
         [SerializeField]
         private TileEffectsController _tileEffectsController;
 
+        [SerializeField]
+        private SpriteRenderer _highlight;
+
+        [SerializeField]
+        private UIAnimator _highlightAnimator;
+        
         // PROPERTIES: ----------------------------------------------------------------------------
 
         public Vector2Int Cell => _cell;
@@ -45,6 +53,7 @@ namespace LabraxStudio.Game.Tiles
         private void OnDestroy()
         {
             GameEvents.OnTrackedTileUpdate.RemoveListener(OnTrackedTileUpdate);
+            _tileEffectsController.OnDestroy();
         }
         
         // PUBLIC METHODS: -----------------------------------------------------------------------
@@ -61,10 +70,11 @@ namespace LabraxStudio.Game.Tiles
             _cell = cell;
         }
 
-        public void SetValue(int value, Sprite sprite)
+        public void SetValue(int value, Sprite sprite, Sprite highLight)
         {
             _value = value;
             _spriteRenderer.sprite = sprite;
+            _highlight.sprite = highLight;
         }
 
         public void SetMergeFlag(bool isMerging)
@@ -116,6 +126,15 @@ namespace LabraxStudio.Game.Tiles
             }
         }
 
+        private void SetHighlight(bool enabled)
+        {
+            _highlight.enabled = enabled; 
+            if(enabled)
+                _highlightAnimator.Play();
+            else
+                _highlightAnimator.Stop();
+        }
+        
         // EVENTS RECEIVERS: ----------------------------------------------------------------------
 
         public void OnSelect()
@@ -154,11 +173,11 @@ namespace LabraxStudio.Game.Tiles
         {
             if (trackedTile == null || trackedTile.Tile == null)
             {
-                _tileEffectsController.SetHighlight(false);
+                SetHighlight(false);
                 return;
             }
 
-            _tileEffectsController.SetHighlight(trackedTile.Tile == this);
+            SetHighlight(trackedTile.Tile == this);
         }
 
     }

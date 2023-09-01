@@ -27,9 +27,28 @@ namespace LabraxStudio.Game.Obstacles
         [SerializeField]
         private List<ParticleSystem> _particleSystems;
 
+        [Title("Layers settings")]
+        [SerializeField]
+        private int _shadowBaseLayer = 2;
+
+        [SerializeField]
+        private int _mainBaseLayer = 3;
+
+        [SerializeField]
+        private int _shadowAnimationLayer = 4;
+
+        [SerializeField]
+        private int _mainAnimationLayer = 5;
+
         // FIELDS: -------------------------------------------------------------------
 
         private List<Color> _colors = new List<Color>() {Color.white};
+
+        // GAME ENGINE METHODS: -------------------------------------------------------------------
+        private void OnDestroy()
+        {
+            CancelInvoke(nameof(SwitchOffAnimation));
+        }
 
         // PUBLIC METHODS: -----------------------------------------------------------------------
 
@@ -57,6 +76,11 @@ namespace LabraxStudio.Game.Obstacles
                 mainModule.startColor = particlesColor;
                 system.Play();
             }
+
+            CancelInvoke(nameof(SwitchOffAnimation));
+            _sawShadow.sortingOrder = _shadowAnimationLayer;
+            _sawMain.sortingOrder = _mainAnimationLayer;
+            Invoke(nameof(SwitchOffAnimation), 0.35f);
         }
 
         // PRIVATE METHODS: -----------------------------------------------------------------------
@@ -77,6 +101,12 @@ namespace LabraxStudio.Game.Obstacles
                 return _colors[0];
 
             return _colors[tile];
+        }
+
+        private void SwitchOffAnimation()
+        {
+            _sawShadow.sortingOrder = _shadowBaseLayer;
+            _sawMain.sortingOrder = _mainBaseLayer;
         }
     }
 }

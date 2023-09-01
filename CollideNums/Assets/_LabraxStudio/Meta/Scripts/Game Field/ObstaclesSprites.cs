@@ -9,7 +9,7 @@ namespace LabraxStudio.Meta.GameField
     public class ObstaclesSprites
     {
         // MEMBERS: -------------------------------------------------------------------------------
-        
+
         [Title("Saw")]
         [SerializeField]
         private Sprite _sawMain;
@@ -19,39 +19,58 @@ namespace LabraxStudio.Meta.GameField
 
         [SerializeField]
         private Sprite _sawShadow;
-        
+
         [SerializeField]
         [ListDrawerSettings(NumberOfItemsPerPage = 10)]
         private List<Color> _particalsColors = new List<Color>();
-        
+
         [Title("Hole")]
         [SerializeField]
-        private Sprite _holeMain; 
-        
+        private Sprite _holeMain;
+
         [Title("Push")]
         [SerializeField]
-        private Sprite _pushMain;
-        
-        [SerializeField]
         private Sprite _pushMetal;
-        
+
         [SerializeField]
-        private Sprite _pushButton;
-        
+        private Sprite _pushUpButton;
+
+        [SerializeField]
+        private Sprite _pushUpMain;
+
+        [SerializeField]
+        private Sprite _pushHorizontalButton;
+
+        [SerializeField]
+        private Sprite _pushHorizontalMain;
+
+        [SerializeField]
+        private Sprite _pushDownButton;
+
+        [SerializeField]
+        private Sprite _pushDownMain;
+
         [Title("Stopper")]
         [SerializeField]
         private Sprite _stopperMain;
-        
+
         // PROPERTIES: ----------------------------------------------------------------------------
-        
+
         public Sprite SawMain => _sawMain;
         public Sprite SawPin => _sawPin;
         public Sprite SawShadow => _sawShadow;
-        public Sprite HoleMain => _holeMain;
-        public Sprite PushMain => _pushMain;
-        public Sprite PushMetal => _pushMetal;
-        public Sprite PushButton => _pushButton;
-        public Sprite StopperMain => _stopperMain;
         public List<Color> ParticalsColors => _particalsColors;
+
+        public Sprite HoleMain => _holeMain;
+
+        public Sprite PushMetal => _pushMetal;
+        public Sprite PushUpButton => _pushUpButton;
+        public Sprite PushUpMain => _pushUpMain;
+        public Sprite PushHorizontalButton => _pushHorizontalButton;
+        public Sprite PushHorizontalMain => _pushHorizontalMain;
+        public Sprite PushDownButton => _pushDownButton;
+        public Sprite PushDownMain => _pushDownMain;
+
+        public Sprite StopperMain => _stopperMain;
     }
 }

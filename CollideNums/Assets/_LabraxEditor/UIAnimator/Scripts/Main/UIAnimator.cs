@@ -35,6 +35,8 @@ namespace LabraxStudio.UiAnimator
         [Button]
         public void Play()
         {
+            if (_playCO != null)
+                StopCoroutine(_playCO);
             if (isActiveAndEnabled)
                 _playCO = StartCoroutine(PlayCO());
         }
@@ -78,11 +80,14 @@ namespace LabraxStudio.UiAnimator
 
         private void StopPlay()
         {
+            bool saveLoop = _isLooped;
+            _isLooped = false;
             if (_playCO != null)
                 StopCoroutine(_playCO);
 
             foreach (var animationGroup in _animations)
                 animationGroup.Stop();
+            _isLooped = saveLoop;
         }
 
         #region EDITOR_METHODS

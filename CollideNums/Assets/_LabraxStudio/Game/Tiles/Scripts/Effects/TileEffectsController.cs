@@ -1,7 +1,5 @@
 using System;
-using System.Collections;
 using DG.Tweening;
-using LabraxStudio.App.Services;
 using LabraxStudio.UiAnimator;
 using UnityEngine;
 
@@ -27,15 +25,17 @@ namespace LabraxStudio.Game.Tiles
         [SerializeField]
         private SpriteMask _sawMask;
 
-        [SerializeField]
-        private SpriteRenderer _highLight;
-
         // FIELDS: -------------------------------------------------------------------
 
         private Tweener _obstacleTW;
 
         // PUBLIC METHODS: -----------------------------------------------------------------------
-
+        
+        public void OnDestroy()
+        {
+            _obstacleTW.Kill();
+        }
+        
         public void PlayMergeEffect()
         {
             _mergeEffect.PlayAnimation();
@@ -97,6 +97,5 @@ namespace LabraxStudio.Game.Tiles
                 .OnComplete(onComplete.Invoke);
         }
 
-        public void SetHighlight(bool enabled) => _highLight.enabled = enabled;
     }
 }
