@@ -39,6 +39,9 @@ namespace LabraxStudio.Meta.GameField
         private Sprite _pushUpMain;
 
         [SerializeField]
+        private Sprite _pushHorizontalMetal;
+        
+        [SerializeField]
         private Sprite _pushHorizontalButton;
 
         [SerializeField]
@@ -66,6 +69,7 @@ namespace LabraxStudio.Meta.GameField
         public Sprite PushMetal => _pushMetal;
         public Sprite PushUpButton => _pushUpButton;
         public Sprite PushUpMain => _pushUpMain;
+        public Sprite PushHorizontalMetal => _pushHorizontalMetal;
         public Sprite PushHorizontalButton => _pushHorizontalButton;
         public Sprite PushHorizontalMain => _pushHorizontalMain;
         public Sprite PushDownButton => _pushDownButton;

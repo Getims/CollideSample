@@ -176,6 +176,7 @@ MonoBehaviour:
     _pushMetal: {fileID: 21300000, guid: 060c663bc5511484b85b2135426298ed, type: 3}
     _pushUpButton: {fileID: 21300000, guid: 4be9db5df8d211240aaa0f5cb304c7c8, type: 3}
     _pushUpMain: {fileID: 21300000, guid: 569bf5cb13dfbc64f8e3897e4d143d41, type: 3}
+    _pushHorizontalMetal: {fileID: 21300000, guid: 03d8ca0579e0707408dc7b1b705efd39, type: 3}
     _pushHorizontalButton: {fileID: 21300000, guid: 90ad817a79b173b4ca34319fad5907a2, type: 3}
     _pushHorizontalMain: {fileID: 21300000, guid: 436e131dc7bd09746be96bf802f3a4e6, type: 3}
     _pushDownButton: {fileID: 21300000, guid: f1e6a72525b5473499bb8ed69b0f102d, type: 3}

@@ -366,7 +366,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 4
   m_Sprite: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.5019608}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.6}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -424,7 +424,7 @@ MonoBehaviour:
         _animationEase: 3
         _renderer: {fileID: 1901668454203319079}
         _fadeType: 2
-        _alphaValue: 0.5
+        _alphaValue: 0.6
 --- !u!1 &8607242462202754094
 GameObject:
   m_ObjectHideFlags: 0

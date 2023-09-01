@@ -1,5 +1,6 @@
 using LabraxStudio.Meta.GameField;
 using LabraxStudio.UiAnimator;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace LabraxStudio.Game.Obstacles
@@ -8,19 +9,56 @@ namespace LabraxStudio.Game.Obstacles
     {
         // MEMBERS: -------------------------------------------------------------------------------
 
+        [Title("Sprites")]
         [SerializeField]
-        private SpriteRenderer _pushMain;
+        private SpriteRenderer _pushUpMain;
 
         [SerializeField]
-        private SpriteRenderer _pushMetal;
+        private SpriteRenderer _pushUpMetal;
 
         [SerializeField]
-        private SpriteRenderer _pushButton;
+        private SpriteRenderer _pushUpButton;
 
         [SerializeField]
-        private Transform _rotateContainer;
-        
+        private SpriteRenderer _pushSideMain;
+
         [SerializeField]
+        private SpriteRenderer _pushSideMetal;
+
+        [SerializeField]
+        private SpriteRenderer _pushSideButton;
+
+        [SerializeField]
+        private SpriteRenderer _pushDownMain;
+
+        [SerializeField]
+        private SpriteRenderer _pushDownMetal;
+
+        [SerializeField]
+        private SpriteRenderer _pushDownButton;
+
+        [Title("Containers")]
+        [SerializeField]
+        private GameObject _pushUpContainer;
+
+        [SerializeField]
+        private GameObject _pushDownContainer;
+
+        [SerializeField]
+        private GameObject _pushSideContainer;
+
+        [Title("Animators")]
+        [SerializeField]
+        private UIAnimator _pushUpAnimator;
+
+        [SerializeField]
+        private UIAnimator _pushDownAnimator;
+
+        [SerializeField]
+        private UIAnimator _pushSideAnimator;
+
+        // FIELDS: -------------------------------------------------------------------
+
         private UIAnimator _pushAnimator;
 
         // PUBLIC METHODS: -----------------------------------------------------------------------
@@ -30,7 +68,7 @@ namespace LabraxStudio.Game.Obstacles
         {
             _cell = cell;
             _obstacleType = obstacleType;
-            SetupSprites(obstaclesSprites);
+            SetupSprites(obstaclesSprites, obstacleDirection);
             SetupDirection(obstacleDirection);
         }
 
@@ -41,37 +79,57 @@ namespace LabraxStudio.Game.Obstacles
 
         // PRIVATE METHODS: -----------------------------------------------------------------------
 
-        private void SetupSprites(ObstaclesSprites obstaclesSprites)
+        private void SetupSprites(ObstaclesSprites obstaclesSprites, Direction obstacleDirection)
         {
-            _pushMain.sprite = obstaclesSprites.PushMain;
-            _pushMetal.sprite = obstaclesSprites.PushMetal;
-            _pushButton.sprite = obstaclesSprites.PushButton;
+            _pushUpMain.sprite = obstaclesSprites.PushUpMain;
+            _pushUpMetal.sprite = obstaclesSprites.PushMetal;
+            _pushUpButton.sprite = obstaclesSprites.PushUpButton;
+
+            _pushSideMain.sprite = obstaclesSprites.PushHorizontalMain;
+            _pushSideMetal.sprite = obstaclesSprites.PushHorizontalMetal;
+            _pushSideButton.sprite = obstaclesSprites.PushHorizontalButton;
+
+            _pushDownMain.sprite = obstaclesSprites.PushDownMain;
+            _pushDownMetal.sprite = obstaclesSprites.PushMetal;
+            _pushDownButton.sprite = obstaclesSprites.PushDownButton;
         }
 
         private void SetupDirection(Direction obstacleDirection)
-        { 
-            int angle = 0;
+        {
+            _pushSideContainer.SetActive(false);
+            _pushUpContainer.SetActive(false);
+            _pushDownContainer.SetActive(false);
 
             switch (obstacleDirection)
             {
                 case Direction.Left:
-                    angle = 90;
+                    _pushAnimator = _pushSideAnimator;
+                    _pushSideContainer.SetActive(true);
                     break;
+
                 case Direction.Right:
-                    angle = -90;
+                    _pushSideContainer.SetActive(true);
+                    _pushAnimator = _pushSideAnimator;
+
+                    var newScale = _pushSideContainer.transform.localScale;
+                    newScale.y *= -1;
+                    _pushSideContainer.transform.localScale = newScale;
                     break;
+
                 case Direction.Up:
-                    angle = 0;
+                    _pushUpContainer.SetActive(true);
+                    _pushAnimator = _pushUpAnimator;
                     break;
+
                 case Direction.Down:
-                    angle = 180;
+                    _pushDownContainer.SetActive(true);
+                    _pushAnimator = _pushDownAnimator;
                     break;
+
                 default:
-                    angle = 0;
+                    _pushAnimator = _pushUpAnimator;
                     break;
             }
-
-            _rotateContainer.localEulerAngles = new Vector3(0, 0, angle);
         }
     }
 }
