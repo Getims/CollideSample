@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fdcb5f4c920c4071a0f401bb129addc4, type: 3}
-  m_Name: Levels_0.2
+  m_Name: Levels_debug_0.2
   m_EditorClassIdentifier: 
-  FileName: Levels_0.2
+  FileName: Levels_debug_0.2
   _tutorialSettingsMeta: {fileID: 0}
   _levelsMetaList:
-  - {fileID: 11400000, guid: 20b04d68401c7418a90a0f92ef1d6c51, type: 2}
-  - {fileID: 11400000, guid: b5bac3fe876b54060a607f7faebfa92d, type: 2}
-  - {fileID: 11400000, guid: 7f1a62c19761e4cd89b949f6fd652f72, type: 2}
-  - {fileID: 11400000, guid: 6e6f851610fe345d69db8b25127429ba, type: 2}
+  - {fileID: 11400000, guid: 04c9cb04ffd11b84db3ff73133746d54, type: 2}
+  - {fileID: 11400000, guid: c499ef9d6e0260540aa188bc3a801126, type: 2}
+  - {fileID: 11400000, guid: 4102eefe206877f4aad082271d69ea43, type: 2}
+  - {fileID: 11400000, guid: 9b388f480615ba046a1814d358196171, type: 2}
