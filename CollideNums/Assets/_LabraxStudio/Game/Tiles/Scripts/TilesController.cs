@@ -73,11 +73,8 @@ namespace LabraxStudio.Game.Tiles
 
             MergeAction mergeAction = _tilesMerger.CheckMerge(tile, direction);
 
-            if (moveAction.Obstacle != ObstacleType.Null)
+            if (mergeAction == null && moveAction.Obstacle != ObstacleType.Null)
             {
-                if (moveAction.Obstacle != ObstacleType.Stopper)
-                    mergeAction = null;
-
                 CollideWithObstacleAction collideWithObstacleAction =
                     new CollideWithObstacleAction(tile, direction, moveAction.ObstaclePosition, moveAction.Obstacle);
                 actions.Add(collideWithObstacleAction);

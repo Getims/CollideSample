@@ -53,6 +53,7 @@ namespace LabraxStudio.Game.Tiles
             CheckObstacleOnMovePath(movePoint.x, movePoint.y, moveVector, ref result);
             if (result.Obstacle != ObstacleType.Saw)
             {
+                result = new CheckResult();
                 //Check move path
                 for (int i = 0; i < moves; i++)
                 {

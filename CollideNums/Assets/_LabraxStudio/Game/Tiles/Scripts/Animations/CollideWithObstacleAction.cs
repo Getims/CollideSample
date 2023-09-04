@@ -41,19 +41,17 @@ namespace LabraxStudio.Game.Tiles
                     break;
                 case ObstacleType.Saw:
                     ServicesProvider.CoroutineService.RunCoroutine(Sawing());
-                    return;
+                    break;
                 case ObstacleType.Hole:
-                    MoveTile();
+                    MoveToHole();
                     _tile.DestroyByObstacle(_obstacleType);
                     ServicesProvider.CoroutineService.RunCoroutine(Restart(0.45f));
-                    return;
+                    break;
                 case ObstacleType.Push:
                     ServicesProvider.GameFlowService.ObstaclesController.PlayObstacleEffect(_obstaclePosition);
                     ServicesProvider.CoroutineService.RunCoroutine(Push(0.02f));
                     break;
             }
-
-            onComplete.Invoke();
         }
 
         // PRIVATE METHODS: -----------------------------------------------------------------------
@@ -66,7 +64,7 @@ namespace LabraxStudio.Game.Tiles
         private IEnumerator Restart(float delay)
         {
             yield return new WaitForSeconds(delay);
-            _onActionComplete?.Invoke();
+            OnMoveComplete();
             GameEvents.SendTileDestroyedByObstacle();
         }
 
@@ -97,7 +95,7 @@ namespace LabraxStudio.Game.Tiles
                 .SetEase(Ease.OutQuad);
 
             yield return new WaitForSeconds(.25f);
-            _onActionComplete?.Invoke();
+            OnMoveComplete();
             GameEvents.SendTileDestroyedByObstacle();
         }
 
@@ -106,9 +104,10 @@ namespace LabraxStudio.Game.Tiles
             yield return new WaitForSeconds(delay);
             ServicesProvider.GameFlowService.TilesController.MoveTile(_tile, CalculatePushDirection(),
                 Swipe.Infinite);
+            OnMoveComplete();
         }
 
-        private void MoveTile()
+        private void MoveToHole()
         {
             if (_tile == null)
                 return;
