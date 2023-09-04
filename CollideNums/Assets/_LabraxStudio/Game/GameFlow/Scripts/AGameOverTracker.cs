@@ -4,12 +4,26 @@ namespace LabraxStudio.Game
     {
         // PROPERTIES: ----------------------------------------------------------------------------
 
-        public bool IsFail = false;
+        public bool IsFail => _isFail;
+
+        // FIELDS: -------------------------------------------------------------------
+        
+        protected bool _isFail = false;
+        protected bool _isWin = false;
 
         // PUBLIC METHODS: -----------------------------------------------------------------------
 
         public abstract void CheckForFail();
         public abstract void CheckForWin();
-        public abstract void ResetFailFlag();
+        
+        public void ResetFailFlag()
+        {
+            _isFail = false;
+        }
+
+        public void ResetWinFlag()
+        {
+            _isWin = false;
+        }
     }
 }

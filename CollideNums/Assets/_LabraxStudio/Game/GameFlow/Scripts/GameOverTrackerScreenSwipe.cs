@@ -8,14 +8,6 @@ namespace LabraxStudio.Game
 {
     public class GameOverTrackerScreenSwipe : AGameOverTracker
     {
-        // PROPERTIES: ----------------------------------------------------------------------------
-
-        public bool IsFail => _isFail;
-
-        // FIELDS: -------------------------------------------------------------------
-
-        private bool _isFail = false;
-
         // PUBLIC METHODS: -----------------------------------------------------------------------
 
         public override void CheckForFail()
@@ -65,6 +57,9 @@ namespace LabraxStudio.Game
 
         public override void CheckForWin()
         {
+            if (_isWin)
+                return;
+
             TasksController taskController = ServicesProvider.GameFlowService.TasksController;
 
             if (!taskController.HasTasks)
@@ -81,12 +76,8 @@ namespace LabraxStudio.Game
                 return;
             }
 
+            _isWin = true;
             GameEvents.SendGameOver(true);
-        }
-
-        public override void ResetFailFlag()
-        {
-            _isFail = false;
         }
 
         // PRIVATE METHODS: -----------------------------------------------------------------------
@@ -177,6 +168,8 @@ namespace LabraxStudio.Game
                 return false;
 
             List<int> tilesFromTasks = taskController.GetUncompleteTilesNumbers();
+            if (tilesFromTasks.Count == 0)
+                return false;
 
             foreach (var tileValue in tilesFromTasks)
             {
