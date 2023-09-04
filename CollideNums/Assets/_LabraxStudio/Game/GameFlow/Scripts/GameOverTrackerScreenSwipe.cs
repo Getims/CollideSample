@@ -13,7 +13,19 @@ namespace LabraxStudio.Game
         public override void CheckForFail()
         {
             List<Tile> tiles = ServicesProvider.GameFlowService.TilesController.Tiles;
-
+            
+            if (HasTilesForGates(tiles))
+            {
+                CheckForFailRevert();
+                return;
+            }
+            
+            if (HasMerges(tiles))
+            {
+                CheckForFailRevert();
+                return;
+            }
+            
             if (HasUncompletableTask(tiles))
             {
                 Utils.InfoPoint("Not complete all tasks");
@@ -21,28 +33,6 @@ namespace LabraxStudio.Game
                 GameEvents.SendGameOver(false, FailReason.NotCompleteAllTasks);
                 return;
             }
-
-            if (HasTilesForGates(tiles))
-            {
-                CheckForFailRevert();
-                return;
-            }
-
-            if (HasMerges(tiles))
-            {
-                CheckForFailRevert();
-                return;
-            }
-
-            /*
-            if (HasTileOverflow(tiles))
-            {
-                Utils.InfoPoint("Overflow");
-                _isFail = true;
-                GameEvents.SendGameOver(false, FailReason.NumbersOverflow);
-                return;
-            }
-            */
 
             if (!HasGateForEachTile(tiles))
             {
