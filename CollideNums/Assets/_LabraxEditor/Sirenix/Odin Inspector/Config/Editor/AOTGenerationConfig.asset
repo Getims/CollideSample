@@ -16,7 +16,7 @@ MonoBehaviour:
   deleteDllAfterBuilds: 1
   AutomateForAllAOTPlatforms: 1
   automateForPlatforms: 09000000140000000d000000
-  lastScan: 638242689202208450
+  lastScan: 638292677012974550
   supportSerializedTypes:
   - TypeName: System.Int32, mscorlib
     IsCustom: 1
@@ -36,6 +36,12 @@ MonoBehaviour:
   - TypeName: System.Boolean, mscorlib
     IsCustom: 0
     Emit: 1
+  - TypeName: LabraxStudio.Meta.Levels.Enums.BrushMode, Assembly-CSharp
+    IsCustom: 0
+    Emit: 1
+  - TypeName: LabraxStudio.Meta.Levels.Enums.FieldBrushMode, Assembly-CSharp
+    IsCustom: 0
+    Emit: 1
   - TypeName: System.Int32, mscorlib
     IsCustom: 0
     Emit: 1
@@ -45,12 +51,9 @@ MonoBehaviour:
   - TypeName: LabraxStudio.Meta.Levels.LevelTemplate, Assembly-CSharp
     IsCustom: 0
     Emit: 1
-  - TypeName: LabraxStudio.Meta.Levels.LevelTemplate+BrushMode, Assembly-CSharp
+  - TypeName: LabraxStudio.Meta.Levels.Enums.ObstaclesBrushMode, Assembly-CSharp
     IsCustom: 0
     Emit: 1
-  - TypeName: LabraxStudio.Meta.Levels.LevelTemplate+FieldBrushMode, Assembly-CSharp
-    IsCustom: 0
-    Emit: 1
-  - TypeName: LabraxStudio.Meta.Levels.LevelTemplate+TileBrushMode, Assembly-CSharp
+  - TypeName: LabraxStudio.Meta.Levels.Enums.TileBrushMode, Assembly-CSharp
     IsCustom: 0
     Emit: 1
