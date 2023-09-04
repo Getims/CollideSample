@@ -82,6 +82,7 @@ namespace LabraxStudio.Game
 
             _gatesController.CheckGatesState();
             ServicesProvider.GameFlowService.GameOverTracker.ResetFailFlag();
+            ServicesProvider.GameFlowService.GameOverTracker.ResetWinFlag();
             ServicesProvider.GameFlowService.TasksController.Initialize(levelMeta.TaskSettings);
 
             SetLevelGenerated();
@@ -97,6 +98,7 @@ namespace LabraxStudio.Game
 
             _gatesController.CheckGatesState();
             ServicesProvider.GameFlowService.GameOverTracker.ResetFailFlag();
+            ServicesProvider.GameFlowService.GameOverTracker.ResetWinFlag();
             ServicesProvider.GameFlowService.TasksController.Initialize(levelMeta.TaskSettings);
 
             SetLevelGenerated();
@@ -120,6 +122,7 @@ namespace LabraxStudio.Game
 
             _gatesController.CheckGatesState();
             ServicesProvider.GameFlowService.GameOverTracker.ResetFailFlag();
+            ServicesProvider.GameFlowService.GameOverTracker.ResetWinFlag();
             ServicesProvider.GameFlowService.TasksController.Initialize(levelMeta.TaskSettings);
 
             SetLevelGenerated();

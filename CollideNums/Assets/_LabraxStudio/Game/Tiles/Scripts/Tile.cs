@@ -117,6 +117,7 @@ namespace LabraxStudio.Game.Tiles
                     break;
                 case ObstacleType.Saw:
                     //Destroy(gameObject);
+                    _spriteRenderer.maskInteraction = SpriteMaskInteraction.VisibleOutsideMask;
                     _tileEffectsController.PlaySawEffect(direction, DestroySelf);
                     break;
                 case ObstacleType.Hole:

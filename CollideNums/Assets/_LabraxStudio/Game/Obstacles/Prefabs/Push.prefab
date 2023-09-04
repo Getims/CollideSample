@@ -383,12 +383,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animations:
+  - _groupName: Setup
+    _playStartTime: 0
+    _playEndTime: 0
+    _playDelay: 0
+    _animations:
+    - rid: 2674509355591663620
   - _groupName: Push
     _playStartTime: 0
     _playEndTime: 0.09
     _playDelay: 0
     _animations:
-    - rid: 7871108667274166276
+    - rid: 2674509355591663619
   - _groupName: GoBack
     _playStartTime: 0
     _playEndTime: 0.3
@@ -399,6 +405,28 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: 2674509355591663619
+      type: {class: Move, ns: LabraxStudio.UiAnimator, asm: Assembly-CSharp}
+      data:
+        _instant: 0
+        _startDelay: 0
+        _animationTime: 0.09
+        _animationEase: 6
+        _transform: {fileID: 9205545223846738144}
+        _useLocalPosition: 1
+        _movePosition: {x: 0, y: 0.35, z: 0}
+        _moveType: 0
+    - rid: 2674509355591663620
+      type: {class: Move, ns: LabraxStudio.UiAnimator, asm: Assembly-CSharp}
+      data:
+        _instant: 1
+        _startDelay: 0
+        _animationTime: 0
+        _animationEase: 6
+        _transform: {fileID: 4021447584146232212}
+        _useLocalPosition: 1
+        _movePosition: {x: 0, y: 0, z: 0}
+        _moveType: 1
     - rid: 7871108667274166275
       type: {class: Move, ns: LabraxStudio.UiAnimator, asm: Assembly-CSharp}
       data:
@@ -409,17 +437,6 @@ MonoBehaviour:
         _transform: {fileID: 9205545223846738144}
         _useLocalPosition: 1
         _movePosition: {x: 0, y: -0.35, z: 0}
-        _moveType: 0
-    - rid: 7871108667274166276
-      type: {class: Move, ns: LabraxStudio.UiAnimator, asm: Assembly-CSharp}
-      data:
-        _instant: 0
-        _startDelay: 0
-        _animationTime: 0.09
-        _animationEase: 6
-        _transform: {fileID: 9205545223846738144}
-        _useLocalPosition: 1
-        _movePosition: {x: 0, y: 0.35, z: 0}
         _moveType: 0
 --- !u!1 &4062306132642660166
 GameObject:
@@ -786,12 +803,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animations:
+  - _groupName: Setup
+    _playStartTime: 0
+    _playEndTime: 0
+    _playDelay: 0
+    _animations:
+    - rid: 2674509355591663618
   - _groupName: Push
     _playStartTime: 0
     _playEndTime: 0.09
     _playDelay: 0
     _animations:
-    - rid: 7871108667274166276
+    - rid: 2674509355591663617
   - _groupName: GoBack
     _playStartTime: 0
     _playEndTime: 0.3
@@ -802,6 +825,28 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: 2674509355591663617
+      type: {class: Move, ns: LabraxStudio.UiAnimator, asm: Assembly-CSharp}
+      data:
+        _instant: 0
+        _startDelay: 0
+        _animationTime: 0.09
+        _animationEase: 6
+        _transform: {fileID: 2246504429164413390}
+        _useLocalPosition: 1
+        _movePosition: {x: 0, y: 0.5, z: 0}
+        _moveType: 0
+    - rid: 2674509355591663618
+      type: {class: Move, ns: LabraxStudio.UiAnimator, asm: Assembly-CSharp}
+      data:
+        _instant: 1
+        _startDelay: 0
+        _animationTime: 0
+        _animationEase: 6
+        _transform: {fileID: 4021447584146232212}
+        _useLocalPosition: 1
+        _movePosition: {x: 0.033, y: 0, z: 0}
+        _moveType: 1
     - rid: 7871108667274166275
       type: {class: Move, ns: LabraxStudio.UiAnimator, asm: Assembly-CSharp}
       data:
@@ -812,17 +857,6 @@ MonoBehaviour:
         _transform: {fileID: 2246504429164413390}
         _useLocalPosition: 1
         _movePosition: {x: 0, y: -0.5, z: 0}
-        _moveType: 0
-    - rid: 7871108667274166276
-      type: {class: Move, ns: LabraxStudio.UiAnimator, asm: Assembly-CSharp}
-      data:
-        _instant: 0
-        _startDelay: 0
-        _animationTime: 0.09
-        _animationEase: 6
-        _transform: {fileID: 2246504429164413390}
-        _useLocalPosition: 1
-        _movePosition: {x: 0, y: 0.5, z: 0}
         _moveType: 0
 --- !u!1 &6977338080829688029
 GameObject:
@@ -848,7 +882,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6977338080829688029}
-  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.14, y: 1.14, z: 1.14}
   m_ConstrainProportionsScale: 1
@@ -857,7 +891,7 @@ Transform:
   - {fileID: 4021447584146232212}
   m_Father: {fileID: 1586948148925034229}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6794956972652003040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -871,12 +905,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animations:
+  - _groupName: Setup
+    _playStartTime: 0
+    _playEndTime: 0
+    _playDelay: 0
+    _animations:
+    - rid: 7871108667274166276
   - _groupName: Push
     _playStartTime: 0
     _playEndTime: 0.09
     _playDelay: 0
     _animations:
-    - rid: 7871108667274166276
+    - rid: 2674509355591663616
   - _groupName: GoBack
     _playStartTime: 0
     _playEndTime: 0.3
@@ -887,6 +927,17 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: 2674509355591663616
+      type: {class: Move, ns: LabraxStudio.UiAnimator, asm: Assembly-CSharp}
+      data:
+        _instant: 0
+        _startDelay: 0
+        _animationTime: 0.09
+        _animationEase: 6
+        _transform: {fileID: 4021447584146232212}
+        _useLocalPosition: 1
+        _movePosition: {x: 0, y: 0.5, z: 0}
+        _moveType: 0
     - rid: 7871108667274166275
       type: {class: Move, ns: LabraxStudio.UiAnimator, asm: Assembly-CSharp}
       data:
@@ -901,14 +952,14 @@ MonoBehaviour:
     - rid: 7871108667274166276
       type: {class: Move, ns: LabraxStudio.UiAnimator, asm: Assembly-CSharp}
       data:
-        _instant: 0
+        _instant: 1
         _startDelay: 0
-        _animationTime: 0.09
+        _animationTime: 0
         _animationEase: 6
         _transform: {fileID: 4021447584146232212}
         _useLocalPosition: 1
-        _movePosition: {x: 0, y: 0.5, z: 0}
-        _moveType: 0
+        _movePosition: {x: 0, y: 0, z: 0}
+        _moveType: 1
 --- !u!1 &7269303192274403216
 GameObject:
   m_ObjectHideFlags: 0

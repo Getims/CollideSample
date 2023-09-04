@@ -8,14 +8,6 @@ namespace LabraxStudio.Game
 {
     public class GameOverTrackerBase : AGameOverTracker
     {
-        // PROPERTIES: ----------------------------------------------------------------------------
-
-        public bool IsFail => _isFail;
-
-        // FIELDS: -------------------------------------------------------------------
-
-        private bool _isFail = false;
-
         // PUBLIC METHODS: -----------------------------------------------------------------------
 
         public override void CheckForFail()
@@ -75,11 +67,6 @@ namespace LabraxStudio.Game
             }
 
             GameEvents.SendGameOver(true);
-        }
-
-        public override void ResetFailFlag()
-        {
-            _isFail = false;
         }
 
         // PRIVATE METHODS: -----------------------------------------------------------------------

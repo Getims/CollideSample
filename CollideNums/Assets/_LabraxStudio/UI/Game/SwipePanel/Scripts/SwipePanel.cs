@@ -20,6 +20,7 @@ namespace LabraxStudio.UI.GameScene.Swipes
         private Vector2 _mouseDownPos;
         private float _mouseDownTime;
         private TilesController _tilesController;
+        private Coroutine _drugCO;
 
         // GAME ENGINE METHODS: -------------------------------------------------------------------
 
@@ -37,6 +38,8 @@ namespace LabraxStudio.UI.GameScene.Swipes
             GameEvents.OnGenerateLevel.RemoveListener(OnLevelGenerate);
             GameEvents.OnGameOver.RemoveListener(OnGameOver);
             GameEvents.OnBoosterStateChange.RemoveListener(OnBoosterStateChange);
+            if(_drugCO!=null)
+                StopCoroutine(_drugCO);
         }
 
         private void Start()
@@ -56,7 +59,10 @@ namespace LabraxStudio.UI.GameScene.Swipes
             _isDragging = true;
             _mouseDownPos = GetMousePosition();
             _mouseDownTime = Time.realtimeSinceStartup;
-            ServicesProvider.CoroutineService.RunCoroutine(DragTracker());
+            
+            if(_drugCO!=null)
+                StopCoroutine(_drugCO);
+            _drugCO = StartCoroutine(DragTracker());
         }
 
         public void OnDeselect()

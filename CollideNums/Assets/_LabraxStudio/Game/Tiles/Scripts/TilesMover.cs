@@ -49,10 +49,18 @@ namespace LabraxStudio.Game.Tiles
                     break;
             }
 
+            ObstaclesChecker obstaclesChecker = new ObstaclesChecker(_obstaclesMatrix);
+
             // Check start near saw and push
-            CheckObstacleOnMovePath(movePoint.x, movePoint.y, moveVector, ref result);
-            if (result.Obstacle != ObstacleType.Saw)
+            var obstacleResult = obstaclesChecker.CheckObstacle(movePoint.x, movePoint.y, moveVector, result.Obstacle);
+            if (obstacleResult.Item1 == ObstacleType.Saw)
             {
+                result.Obstacle = ObstacleType.Saw;
+                result.ObstaclePosition = obstacleResult.Item2;
+            }
+            else
+            {
+                result = new CheckResult();
                 //Check move path
                 for (int i = 0; i < moves; i++)
                 {
@@ -68,8 +76,17 @@ namespace LabraxStudio.Game.Tiles
 
                     movePoint = tempPoint;
 
-                    CheckObstacle(tempPoint.x, tempPoint.y, ref result);
-                    CheckObstacleOnMovePath(tempPoint.x, tempPoint.y, moveVector, ref result);
+                    //Check current cell for obstacle
+                    obstacleResult = obstaclesChecker.CheckObstacle(movePoint.x, movePoint.y);
+                    result.Obstacle = obstacleResult.Item1;
+                    result.ObstaclePosition = obstacleResult.Item2;
+
+                    //Check near cells
+                    obstacleResult =
+                        obstaclesChecker.CheckObstacle(movePoint.x, movePoint.y, moveVector, result.Obstacle);
+                    result.Obstacle = obstacleResult.Item1;
+                    result.ObstaclePosition = obstacleResult.Item2;
+
                     if (result.Obstacle != ObstacleType.Null)
                         break;
                 }
@@ -138,51 +155,6 @@ namespace LabraxStudio.Game.Tiles
             return false;
         }
 
-        private void CheckObstacle(int x, int y, ref CheckResult checkResult)
-        {
-            checkResult.Obstacle = (ObstacleType) _obstaclesMatrix[x, y];
-            checkResult.ObstaclePosition = new Vector2Int(x, y);
-        }
-
-        private void CheckObstacleOnMovePath(int x, int y, Vector2Int moveVector, ref CheckResult checkResult)
-        {
-            if (checkResult.Obstacle == ObstacleType.Hole)
-                return;
-
-            //Check saw on path
-            if (checkResult.Obstacle != ObstacleType.Stopper)
-            {
-                if (CheckCustom(x + moveVector.x, y + moveVector.y, ObstacleType.Saw, ref checkResult))
-                    return;
-            }
-
-            //Check push on path
-            if (CheckCustom(x - 1, y, ObstacleType.Push, ref checkResult)
-                || CheckCustom(x + 1, y, ObstacleType.Push, ref checkResult)
-                || CheckCustom(x, y - 1, ObstacleType.Push, ref checkResult)
-                || CheckCustom(x, y + 1, ObstacleType.Push, ref checkResult))
-                return;
-
-            bool CheckCustom(int x, int y, ObstacleType type, ref CheckResult checkResult)
-            {
-                if ((ObstacleType) GetValue(x, y) == type)
-                {
-                    checkResult.Obstacle = type;
-                    checkResult.ObstaclePosition = new Vector2Int(x, y);
-                    return true;
-                }
-
-                return false;
-            }
-
-            int GetValue(int x, int y)
-            {
-                if (x < 0 || y < 0 || x >= _width || y >= _height)
-                    return 0;
-
-                return _obstaclesMatrix[x, y];
-            }
-        }
 
         private void RemoveTileFromMatrix(int x, int y)
         {
