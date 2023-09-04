@@ -34,6 +34,7 @@ namespace LabraxStudio.Game.Tiles
         private int _animations = 0;
         private readonly CurrentTileTracker _currentTileTracker = new CurrentTileTracker();
         private bool _isAnyTileMove = false;
+        private LevelMeta _levelMeta;
 
         // GAME ENGINE METHODS: -------------------------------------------------------------------
 
@@ -46,6 +47,7 @@ namespace LabraxStudio.Game.Tiles
 
         public void Initialize(LevelMeta levelMeta)
         {
+            _levelMeta = levelMeta;
             _tilesMatrix = (int[,]) levelMeta.TilesMatrix.Clone();
             _tilesGenerator.Initialize();
             _tiles = _tilesGenerator.GenerateTiles(levelMeta.Width, levelMeta.Height, _tilesMatrix);
@@ -93,6 +95,8 @@ namespace LabraxStudio.Game.Tiles
             else
             {
                 actions.Add(mergeAction);
+                CheckForPusher(mergeAction.MergeTo, ref actions);
+
                 tilesAnimator.Play(actions, () =>
                     CheckChainMerges(mergeAction.MergeTo));
             }
@@ -115,7 +119,7 @@ namespace LabraxStudio.Game.Tiles
         public void UpdateTileValue(Tile tile)
         {
             int newValue = _tilesMatrix[tile.Cell.x, tile.Cell.y];
-            tile.SetValue(newValue, _tilesGenerator.GetSprite(newValue),_tilesGenerator.GetHighlightSprite(newValue));
+            tile.SetValue(newValue, _tilesGenerator.GetSprite(newValue), _tilesGenerator.GetHighlightSprite(newValue));
         }
 
         public void DestroyTile(Tile tile)
@@ -187,7 +191,12 @@ namespace LabraxStudio.Game.Tiles
             else
             {
                 TilesAnimator tilesAnimator = new TilesAnimator();
-                tilesAnimator.Play(mergeAction, () => CheckChainMerges(mergeAction.MergeTo));
+                List<AnimationAction> actions = new List<AnimationAction>();
+                actions.Add(mergeAction);
+
+                CheckForPusher(mergeAction.MergeTo, ref actions);
+
+                tilesAnimator.Play(actions, () => CheckChainMerges(mergeAction.MergeTo));
             }
 
             GameEvents.SendTileAction();
@@ -225,6 +234,22 @@ namespace LabraxStudio.Game.Tiles
             _isAnyTileMove = false;
             GameEvents.SendTileMergesComplete();
             CheckForFail();
+        }
+
+        private void CheckForPusher(Tile tile, ref List<AnimationAction> actions)
+        {
+            if (tile == null)
+                return;
+
+            ObstaclesChecker obstaclesChecker = new ObstaclesChecker(_levelMeta);
+            var obstacleResult = obstaclesChecker.CheckObstacle(tile.Cell,
+                new Vector2Int(0, 0), ObstacleType.Null);
+            if (obstacleResult.Item1 == ObstacleType.Push)
+            {
+                CollideWithObstacleAction collideWithObstacleAction =
+                    new CollideWithObstacleAction(tile, Direction.Null, obstacleResult.Item2, obstacleResult.Item1);
+                actions.Add(collideWithObstacleAction);
+            }
         }
 
         private void CheckForFail() => ServicesProvider.GameFlowService.GameOverTracker.CheckForFail();
