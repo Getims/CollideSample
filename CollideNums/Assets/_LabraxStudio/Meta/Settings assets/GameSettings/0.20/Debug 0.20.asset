@@ -26,6 +26,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: dff646fc1bb29af4ebfdb3e5de049847, type: 2}
   - {fileID: 11400000, guid: 5132c8c59affe4c4db420315430bd3a4, type: 2}
   - {fileID: 11400000, guid: 02ce6e1c1ae5beb42bb820cf9dd40b53, type: 2}
+  - {fileID: 11400000, guid: c5ab95d488a6c4da1a3dc0e96cef8e6e, type: 2}
   _swipeSettings:
     _swipeMode: 1
     _useShortSwipes: 0
