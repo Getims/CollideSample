@@ -29,13 +29,23 @@ namespace LabraxStudio.Sound
 
         [SerializeField, Required, AssetsOnly]
         private SFXMeta _tilesMergeSFX;
-        
+
         [SerializeField, Required, AssetsOnly]
         private SFXMeta _tileSplitBoosterSFX;
-        
+
         [SerializeField, Required, AssetsOnly]
         private SFXMeta _tileMultiplyBoosterSFX;
-        
+
+        [Title("Obstacles")]
+        [SerializeField, Required, AssetsOnly]
+        private SFXMeta _tileCollidePusherSFX;
+
+        [SerializeField, Required, AssetsOnly]
+        private SFXMeta _tileCollideSawSFX;
+
+        [SerializeField, Required, AssetsOnly]
+        private SFXMeta _tileCollideHoleSFX;
+
         // FIELDS: --------------------------------------------------------------------------------
 
         private SoundManager _soundManager;
@@ -64,17 +74,26 @@ namespace LabraxStudio.Sound
 
         [Button, DisableInEditorMode]
         public void PlayTilesGatePassSFX() => _soundManager.PlaySound(_tilesGatePassSFX);
-        
+
         [Button, DisableInEditorMode]
         public void PlayTaskGatePassSFX() => _soundManager.PlaySound(_taskGatePassSFX);
 
         [Button, DisableInEditorMode]
         public void PlayTilesMergeSFX() => _soundManager.PlaySound(_tilesMergeSFX);
-        
+
         [Button, DisableInEditorMode]
         public void PlayTileSplitByBoosterSFX() => _soundManager.PlaySound(_tileSplitBoosterSFX);
-        
+
         [Button, DisableInEditorMode]
         public void PlayTileMultiplyByBoosterSFX() => _soundManager.PlaySound(_tileMultiplyBoosterSFX);
+
+        [Button, DisableInEditorMode]
+        public void PlayTileCollidePusherSFX() => _soundManager.PlaySound(_tileCollidePusherSFX);
+
+        [Button, DisableInEditorMode]
+        public void PlayTileCollideSawSFX() => _soundManager.PlaySound(_tileCollideSawSFX);
+
+        [Button, DisableInEditorMode]
+        public void PlayTileCollideHoleSFX() => _soundManager.PlaySound(_tileCollideHoleSFX);
     }
 }

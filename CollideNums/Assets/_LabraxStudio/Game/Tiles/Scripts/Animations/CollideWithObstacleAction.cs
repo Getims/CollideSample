@@ -44,7 +44,8 @@ namespace LabraxStudio.Game.Tiles
                     break;
                 case ObstacleType.Hole:
                     MoveToHole();
-                    _tile.DestroyByObstacle(_obstacleType);
+                    _tile.DestroyByObstacle(_obstacleType);   
+                    ServicesProvider.GameFlowService.ObstaclesController.PlayObstacleEffect(_obstaclePosition);
                     ServicesProvider.CoroutineService.RunCoroutine(Restart(0.45f));
                     break;
                 case ObstacleType.Push:

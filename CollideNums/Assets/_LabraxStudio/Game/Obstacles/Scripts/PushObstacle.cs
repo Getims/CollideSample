@@ -1,4 +1,5 @@
 using LabraxStudio.Meta.GameField;
+using LabraxStudio.Sound;
 using LabraxStudio.UiAnimator;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -74,6 +75,7 @@ namespace LabraxStudio.Game.Obstacles
 
         public override void PlayTileCollideEffect()
         {
+            GameSoundMediator.Instance.PlayTileCollidePusherSFX();
             _pushAnimator.Play();
         }
 

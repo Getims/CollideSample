@@ -1,4 +1,5 @@
 using LabraxStudio.Meta.GameField;
+using LabraxStudio.Sound;
 using UnityEngine;
 
 namespace LabraxStudio.Game.Obstacles
@@ -22,6 +23,7 @@ namespace LabraxStudio.Game.Obstacles
 
         public override void PlayTileCollideEffect()
         {
+            GameSoundMediator.Instance.PlayTileCollideHoleSFX();
         }
     }
 }

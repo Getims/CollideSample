@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: NotPlayable5
   m_EditorClassIdentifier: 
   FileName: NotPlayable5
-  _sprite: {fileID: 21300000, guid: 31b00f1cd0ba0ad44be14e679e7f259b, type: 3}
   _rules:
   - _t2: 0
     _t1: 0
@@ -55,6 +54,16 @@ MonoBehaviour:
     _t16: 0
     _t32: 1
     _needNumber: 99
+  - _t2: 0
+    _t1: 0
+    _t128: 0
+    _t4: 1
+    _result: 100
+    _t64: 1
+    _t8: 0
+    _t16: 0
+    _t32: 1
+    _needNumber: 100
   - _t2: 0
     _t1: 0
     _t128: 0
