@@ -28,6 +28,10 @@ namespace LabraxStudio.Meta.Tutorial
         [SerializeField]
         [ShowIf(nameof(TileSwipe))]
         private Vector2Int _tilePosition;
+        
+        [SerializeField]
+        [ShowIf(nameof(TileSwipe))]
+        private Vector2 _tilePositionOffset = Vector2.zero;
 
         [SerializeField]
         [ShowIf(nameof(TileSwipe))]
@@ -61,6 +65,7 @@ namespace LabraxStudio.Meta.Tutorial
         public Sprite NewTitle => _newTitle;
         public bool ShowHand => _showHand;
         public Vector2Int TilePosition => _tilePosition;
+        public Vector2 TilePositionOffset => _tilePositionOffset;
         public BoosterType BoosterType => _boosterType;
         public Vector2Int BoosterTargetTile => _boosterTargetTile;
         public Direction SwipeDirection => _swipeDirection;
@@ -81,5 +86,6 @@ namespace LabraxStudio.Meta.Tutorial
             $"{_ruleType} | " +
             $"{(BoosterUse ? (_boosterType + " | ") : string.Empty)}" +
             $"{(TileSwipe ? (_swipeType + " | ") : string.Empty)}";
+
     }
 }

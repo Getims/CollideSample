@@ -22,7 +22,7 @@ namespace LabraxStudio.UI.GameScene.Tutorial
 
         [SerializeField]
         private Image _handIcon;
-        
+
         // FIELDS: -------------------------------------------------------------------
 
         private HandMover _currentMover;
@@ -46,19 +46,23 @@ namespace LabraxStudio.UI.GameScene.Tutorial
             Show(true);
             _handClick.StartPulse();
         }
-        
-        public void PlaySwipeAnimation(Vector2Int tilePosition, Direction swipeDirection, Swipe swipeType)
+
+        public void PlaySwipeAnimation(Vector2Int tilePosition, Direction swipeDirection, Swipe swipeType,
+            Vector2 tilePositionOffset)
         {
             StopAnimations();
             _handIcon.enabled = true;
             Vector3 startPosition = CalculateStartPosition(tilePosition);
+            startPosition.x += tilePositionOffset.x;
+            startPosition.y += tilePositionOffset.y;
+
             _currentMover = _shortMove;
             if (swipeType == Swipe.Infinite)
                 _currentMover = _longMove;
 
             _currentMover.StartMove(startPosition, swipeDirection, _targetCG);
         }
-        
+
         public void StopAnimations()
         {
             _handClick.StopPulse();
@@ -67,9 +71,9 @@ namespace LabraxStudio.UI.GameScene.Tutorial
             _targetCG.alpha = 0;
             _handIcon.enabled = false;
         }
-        
+
         // PRIVATE METHODS: -----------------------------------------------------------------------
-        
+
         private void DebugMove(Vector3 tilePosition, Direction swipeDirection, Swipe swipeType)
         {
             StopAnimations();
@@ -80,7 +84,7 @@ namespace LabraxStudio.UI.GameScene.Tutorial
 
             _currentMover.StartMove(startPosition, swipeDirection, _targetCG);
         }
-        
+
 
         private Vector3 CalculateStartPosition(Vector2Int tilePosition)
         {

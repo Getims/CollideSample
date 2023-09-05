@@ -10,7 +10,7 @@ namespace LabraxStudio.UI.GameScene.Tutorial
         // CONSTRUCTORS: -------------------------------------------------------------------------------
 
         public SwipeTracker(Vector2Int tilePosition, Direction swipeDirection, Swipe swipeType,
-            TutorialHand tutorialHand, Action checkRules)
+            TutorialHand tutorialHand, Action checkRules, Vector2 tilePositionOffset)
         {
             _type = RuleType.TileSwipe;
             _tilePosition = tilePosition;
@@ -19,7 +19,7 @@ namespace LabraxStudio.UI.GameScene.Tutorial
             _tutorialHand = tutorialHand;
             _checkRules = checkRules;
 
-            _tutorialHand.PlaySwipeAnimation(tilePosition, swipeDirection, swipeType);
+            _tutorialHand.PlaySwipeAnimation(tilePosition, swipeDirection, swipeType,  tilePositionOffset);
         }
 
         // FIELDS: -------------------------------------------------------------------

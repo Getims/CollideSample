@@ -118,7 +118,7 @@ namespace LabraxStudio.UI.GameScene.Tutorial
             {
                 case RuleType.TileSwipe:
                     _ruleTrackers.Add(new SwipeTracker(rule.TilePosition, rule.SwipeDirection, rule.SwipeType,
-                        _tutorialHand, CheckRules));
+                        _tutorialHand, CheckRules, rule.TilePositionOffset));
                     if (rule.WaitForMerge)
                         _ruleTrackers.Add(new MergeTracker(CheckRules));
                     if (rule.WaitForGateMove)
