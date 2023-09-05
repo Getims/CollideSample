@@ -10,14 +10,46 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5329abb61fd782b4f8519c9d83ad03a8, type: 3}
-  m_Name: Debug
+  m_Name: Tutorial_0.2
   m_EditorClassIdentifier: 
-  FileName: Debug
+  FileName: Tutorial_0.2
   mSource:
     UserAgreesToHaveItOnTheScene: 0
     UserAgreesToHaveItInsideThePluginsFolder: 0
     GoogleLiveSyncIsUptoDate: 1
-    mTerms: []
+    mTerms:
+    - Term: SwipeUp
+      TermType: 0
+      Description: 
+      Languages:
+      - swipe up
+      - "\u0441\u0432\u0430\u0439\u043F\u0430\u0439 \u0432\u0432\u0435\u0440\u0445 "
+      Flags: 0000
+      Languages_Touch: []
+    - Term: SwipeLeft
+      TermType: 0
+      Description: 
+      Languages:
+      - swipe left
+      - "\u0441\u0432\u0430\u0439\u043F\u0430\u0439 \u0432\u043B\u0435\u0432\u043E"
+      Flags: 0000
+      Languages_Touch: []
+    - Term: SwipeRight
+      TermType: 0
+      Description: 
+      Languages:
+      - swipe right
+      - "\u0441\u0432\u0430\u0439\u043F\u0430\u0439 \u0432\u043F\u0440\u0430\u0432\u043E "
+      Flags: 0000
+      Languages_Touch: []
+    - Term: CompleteTask
+      TermType: 0
+      Description: 
+      Languages:
+      - Complete Task
+      - Complete Task
+      Flags: 0000
+      Languages_Touch: []
     CaseInsensitiveTerms: 0
     OnMissingTranslation: 1
     mTerm_AppName: 

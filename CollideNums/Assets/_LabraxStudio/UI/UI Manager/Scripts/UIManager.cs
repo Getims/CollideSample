@@ -2,6 +2,8 @@ using LabraxStudio.App.Services;
 using LabraxStudio.Events;
 using LabraxStudio.Game;
 using LabraxStudio.Managers;
+using LabraxStudio.Meta.Levels;
+using LabraxStudio.Meta.Tutorial;
 using LabraxStudio.UI.Common;
 using LabraxStudio.UI.Common.Factory;
 using UnityEngine;
@@ -85,12 +87,7 @@ namespace LabraxStudio.UI
         {
             int currentLevel = ServicesProvider.PlayerDataService.CurrentLevel;
 
-            if (ServicesProvider.GameSettingsService.GetGameSettings().LaunchSettings.EnableTutorial)
-            {
-                if (currentLevel > 1)
-                    _gameUIFactory.Create(MenuType.TasksPanel);
-            }
-            else
+            if (!HideTaskByTutorial(currentLevel))
                 _gameUIFactory.Create(MenuType.TasksPanel);
         }
 
@@ -122,21 +119,30 @@ namespace LabraxStudio.UI
             _gameUIFactory.Create(MenuType.TaskPopupWindow);
         }
 
+        private bool HideTaskByTutorial(int levelNumber)
+        {
+            if (!ServicesProvider.GameSettingsService.GetGameSettings().LaunchSettings.EnableTutorial)
+                return false;
+
+            LevelsListMeta levelsListMeta = ServicesProvider.LevelMetaService.SelectedLevelsList;
+            TutorialSettingsMeta tutorialSettings = levelsListMeta.TutorialSettingsMeta;
+            if (tutorialSettings == null)
+                return false;
+
+            var rules = tutorialSettings.GetRules(levelNumber);
+            if (rules == null)
+                return false;
+
+            return rules.HideTaskPanel;
+        }
+
         // EVENTS RECEIVERS: ----------------------------------------------------------------------
 
         private void OnMainMenuTapToPlay()
         {
             int currentLevel = ServicesProvider.PlayerDataService.CurrentLevel;
 
-            if (ServicesProvider.GameSettingsService.GetGameSettings().LaunchSettings.EnableTutorial)
-            {
-                if (currentLevel > 1)
-                {
-                    CreateTaskWindow();
-                    return;
-                }
-            }
-            else
+            if (!HideTaskByTutorial(currentLevel))
             {
                 CreateTaskWindow();
                 return;

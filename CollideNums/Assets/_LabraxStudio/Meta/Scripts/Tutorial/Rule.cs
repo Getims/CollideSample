@@ -14,6 +14,9 @@ namespace LabraxStudio.Meta.Tutorial
 
         [SerializeField, ShowIf(nameof(_replaceTitle))]
         private Sprite _newTitle;
+        
+        [SerializeField, ShowIf(nameof(_replaceTitle))]
+        private String _newTitleString;
 
         [SerializeField, HideIf(nameof(_replaceTitle))]
         private bool _hideTitle = false;
@@ -63,6 +66,7 @@ namespace LabraxStudio.Meta.Tutorial
         public bool ReplaceTitle => _replaceTitle;
         public bool HideTitle => _hideTitle;
         public Sprite NewTitle => _newTitle;
+        public string NewTitleString => _newTitleString;
         public bool ShowHand => _showHand;
         public Vector2Int TilePosition => _tilePosition;
         public Vector2 TilePositionOffset => _tilePositionOffset;

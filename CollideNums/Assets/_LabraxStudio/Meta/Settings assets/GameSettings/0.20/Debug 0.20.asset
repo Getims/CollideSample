@@ -41,3 +41,5 @@ MonoBehaviour:
     _moveCamera: 1
     _moveEase: 9
     _moveTime: 0.3
+  _localizationSettings:
+  - {fileID: 11400000, guid: f3ca042bc304f164d9edf7f42564e776, type: 2}

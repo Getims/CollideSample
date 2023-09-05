@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using LabraxEditor;
 using Sirenix.OdinInspector;
 using UnityEngine;
 

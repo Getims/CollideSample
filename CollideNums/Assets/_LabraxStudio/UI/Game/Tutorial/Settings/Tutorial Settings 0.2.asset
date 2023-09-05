@@ -14,15 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _levelsRules:
   - _levelIndex: 1
+    _useSpriteTitle: 0
     _tutorialTitleSprite: {fileID: 21300000, guid: 5a6ddd414585aec4abab09b69d72aed3, type: 3}
+    _tutorialTitleString: SwipeUp
+    _hideTaskPanel: 1
     _rules:
     - _replaceTitle: 0
       _newTitle: {fileID: 0}
+      _newTitleString: 
       _hideTitle: 0
       _ruleType: 1
       _showHand: 1
       _tilePosition: {x: 4, y: 26}
-      _tilePositionOffset: {x: 250, y: 0}
+      _tilePositionOffset: {x: -300, y: 0}
       _swipeDirection: 3
       _swipeType: 3
       _waitForMerge: 1
@@ -31,30 +35,63 @@ MonoBehaviour:
       _boosterTargetTile: {x: 0, y: 0}
     - _replaceTitle: 0
       _newTitle: {fileID: 0}
+      _newTitleString: 
       _hideTitle: 0
       _ruleType: 1
       _showHand: 1
       _tilePosition: {x: 4, y: 19}
-      _tilePositionOffset: {x: 0, y: 0}
+      _tilePositionOffset: {x: -300, y: 0}
       _swipeDirection: 3
       _swipeType: 3
       _waitForMerge: 0
       _waitForGateMove: 0
       _boosterType: 0
       _boosterTargetTile: {x: 0, y: 0}
-    - _replaceTitle: 0
+    - _replaceTitle: 1
       _newTitle: {fileID: 0}
+      _newTitleString: SwipeLeft
       _hideTitle: 0
       _ruleType: 1
       _showHand: 1
       _tilePosition: {x: 4, y: 14}
-      _tilePositionOffset: {x: 0, y: 0}
+      _tilePositionOffset: {x: 0, y: -200}
       _swipeDirection: 1
       _swipeType: 3
       _waitForMerge: 1
       _waitForGateMove: 0
       _boosterType: 0
       _boosterTargetTile: {x: 0, y: 0}
+    - _replaceTitle: 1
+      _newTitle: {fileID: 0}
+      _newTitleString: SwipeRight
+      _hideTitle: 0
+      _ruleType: 1
+      _showHand: 1
+      _tilePosition: {x: 1, y: 12}
+      _tilePositionOffset: {x: 0, y: -200}
+      _swipeDirection: 2
+      _swipeType: 3
+      _waitForMerge: 1
+      _waitForGateMove: 0
+      _boosterType: 0
+      _boosterTargetTile: {x: 0, y: 0}
   - _levelIndex: 2
+    _useSpriteTitle: 0
     _tutorialTitleSprite: {fileID: 21300000, guid: 36daa7ad500f2024dafc0d97e4ce5eeb, type: 3}
-    _rules: []
+    _tutorialTitleString: CompleteTask
+    _hideTaskPanel: 0
+    _rules:
+    - _replaceTitle: 0
+      _newTitle: {fileID: 0}
+      _newTitleString: 
+      _hideTitle: 0
+      _ruleType: 0
+      _showHand: 1
+      _tilePosition: {x: 0, y: 0}
+      _tilePositionOffset: {x: 0, y: 0}
+      _swipeDirection: 0
+      _swipeType: 0
+      _waitForMerge: 0
+      _waitForGateMove: 0
+      _boosterType: 0
+      _boosterTargetTile: {x: 0, y: 0}

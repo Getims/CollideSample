@@ -1,5 +1,6 @@
 ﻿using System;
 using LabraxStudio.App.Services;
+using LabraxStudio.Localization;
 using LabraxStudio.Meta;
 using LabraxStudio.Meta.Levels;
 using LabraxStudio.Sound;
@@ -67,6 +68,7 @@ namespace LabraxStudio.App
             GameManager.Instance.Initialize();
             ServicesProvider.RemoteDataService.Initialize();
             ServicesProvider.AnalyticsService.Initialize();
+            GameLocalization.Initialize(gameSettings.LocalizationSettings);
 
             if (!gameSettings.LaunchSettings.EnableTutorial)
                 ServicesProvider.PlayerDataService.SetTutorialState(true);

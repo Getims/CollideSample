@@ -3,7 +3,6 @@ using LabraxStudio.Events;
 using LabraxStudio.Game;
 using LabraxStudio.Meta.Levels;
 using LabraxStudio.Meta.Tutorial;
-using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,7 +13,7 @@ namespace LabraxStudio.UI.GameScene.Tutorial
         // MEMBERS: -------------------------------------------------------------------------------
 
         [SerializeField]
-        private Image _tutorialTitleText;
+        private TutorialTextController _tutorialTextController;
 
         [SerializeField]
         private TutorialHand _tutorialHand;
@@ -76,7 +75,7 @@ namespace LabraxStudio.UI.GameScene.Tutorial
 
             SetupTitle();
             
-            _tutorialController.Initialize(_currentRules, _tutorialTitleText, _tutorialHand, OnTutorialComplete);
+            _tutorialController.Initialize(_currentRules, _tutorialTextController, _tutorialHand, OnTutorialComplete);
             ServicesProvider.TutorialService.Initialize(_tutorialController);
             
             return true;
@@ -84,7 +83,7 @@ namespace LabraxStudio.UI.GameScene.Tutorial
 
         private void SetupTitle()
         {
-            _tutorialTitleText.sprite = _currentRules.TutorialTitleSprite;
+            _tutorialTextController.SetupTitle(_currentRules);
         }
 
         private void StartTutorial() => _tutorialController.StartTutorial();

@@ -15,6 +15,7 @@ MonoBehaviour:
   _levelsRules:
   - _levelIndex: 1
     _tutorialTitleSprite: {fileID: 21300000, guid: 7885a157a1cf91d4494cfb0e155996bd, type: 3}
+    _hideTaskPanel: 1
     _rules:
     - _replaceTitle: 0
       _newTitle: {fileID: 0}
@@ -22,6 +23,7 @@ MonoBehaviour:
       _ruleType: 1
       _showHand: 1
       _tilePosition: {x: 4, y: 1}
+      _tilePositionOffset: {x: 0, y: 0}
       _swipeDirection: 1
       _swipeType: 3
       _waitForMerge: 0
@@ -34,6 +36,7 @@ MonoBehaviour:
       _ruleType: 1
       _showHand: 1
       _tilePosition: {x: 4, y: 4}
+      _tilePositionOffset: {x: 0, y: 0}
       _swipeDirection: 3
       _swipeType: 1
       _waitForMerge: 0
@@ -46,6 +49,7 @@ MonoBehaviour:
       _ruleType: 1
       _showHand: 1
       _tilePosition: {x: 4, y: 3}
+      _tilePositionOffset: {x: 0, y: 0}
       _swipeDirection: 2
       _swipeType: 0
       _waitForMerge: 0
@@ -54,6 +58,7 @@ MonoBehaviour:
       _boosterTargetTile: {x: 0, y: 0}
   - _levelIndex: 2
     _tutorialTitleSprite: {fileID: 21300000, guid: ab9888a4856926041a43e8e5b0d0d43e, type: 3}
+    _hideTaskPanel: 1
     _rules:
     - _replaceTitle: 0
       _newTitle: {fileID: 0}
@@ -61,6 +66,7 @@ MonoBehaviour:
       _ruleType: 1
       _showHand: 1
       _tilePosition: {x: 4, y: 3}
+      _tilePositionOffset: {x: 0, y: 0}
       _swipeDirection: 3
       _swipeType: 3
       _waitForMerge: 1
@@ -73,6 +79,7 @@ MonoBehaviour:
       _ruleType: 1
       _showHand: 1
       _tilePosition: {x: 4, y: 1}
+      _tilePositionOffset: {x: 0, y: 0}
       _swipeDirection: 3
       _swipeType: 0
       _waitForMerge: 0
@@ -85,6 +92,7 @@ MonoBehaviour:
       _ruleType: 1
       _showHand: 1
       _tilePosition: {x: 2, y: 2}
+      _tilePositionOffset: {x: 0, y: 0}
       _swipeDirection: 1
       _swipeType: 0
       _waitForMerge: 0
@@ -97,6 +105,7 @@ MonoBehaviour:
       _ruleType: 5
       _showHand: 1
       _tilePosition: {x: 0, y: 0}
+      _tilePositionOffset: {x: 0, y: 0}
       _swipeDirection: 0
       _swipeType: 0
       _waitForMerge: 1
@@ -109,6 +118,7 @@ MonoBehaviour:
       _ruleType: 1
       _showHand: 1
       _tilePosition: {x: 1, y: 4}
+      _tilePositionOffset: {x: 0, y: 0}
       _swipeDirection: 4
       _swipeType: 0
       _waitForMerge: 0
@@ -117,6 +127,7 @@ MonoBehaviour:
       _boosterTargetTile: {x: 0, y: 0}
   - _levelIndex: 3
     _tutorialTitleSprite: {fileID: 21300000, guid: 36daa7ad500f2024dafc0d97e4ce5eeb, type: 3}
+    _hideTaskPanel: 0
     _rules:
     - _replaceTitle: 0
       _newTitle: {fileID: 0}
@@ -124,6 +135,7 @@ MonoBehaviour:
       _ruleType: 1
       _showHand: 1
       _tilePosition: {x: 1, y: 1}
+      _tilePositionOffset: {x: 0, y: 0}
       _swipeDirection: 3
       _swipeType: 0
       _waitForMerge: 0
@@ -136,6 +148,7 @@ MonoBehaviour:
       _ruleType: 2
       _showHand: 1
       _tilePosition: {x: 0, y: 0}
+      _tilePositionOffset: {x: 0, y: 0}
       _swipeDirection: 0
       _swipeType: 0
       _waitForMerge: 0
@@ -144,6 +157,7 @@ MonoBehaviour:
       _boosterTargetTile: {x: 0, y: 0}
   - _levelIndex: 10
     _tutorialTitleSprite: {fileID: 21300000, guid: 1a9d7fd0886c2cd48903a84164ecefb8, type: 3}
+    _hideTaskPanel: 0
     _rules:
     - _replaceTitle: 0
       _newTitle: {fileID: 0}
@@ -151,6 +165,7 @@ MonoBehaviour:
       _ruleType: 3
       _showHand: 1
       _tilePosition: {x: 0, y: 0}
+      _tilePositionOffset: {x: 0, y: 0}
       _swipeDirection: 0
       _swipeType: 0
       _waitForMerge: 0
@@ -163,6 +178,7 @@ MonoBehaviour:
       _ruleType: 4
       _showHand: 1
       _tilePosition: {x: 0, y: 0}
+      _tilePositionOffset: {x: 0, y: 0}
       _swipeDirection: 0
       _swipeType: 0
       _waitForMerge: 0
@@ -175,6 +191,7 @@ MonoBehaviour:
       _ruleType: 5
       _showHand: 1
       _tilePosition: {x: 0, y: 0}
+      _tilePositionOffset: {x: 0, y: 0}
       _swipeDirection: 0
       _swipeType: 0
       _waitForMerge: 1
@@ -187,6 +204,7 @@ MonoBehaviour:
       _ruleType: 3
       _showHand: 1
       _tilePosition: {x: 0, y: 0}
+      _tilePositionOffset: {x: 0, y: 0}
       _swipeDirection: 0
       _swipeType: 0
       _waitForMerge: 0
@@ -199,6 +217,7 @@ MonoBehaviour:
       _ruleType: 4
       _showHand: 1
       _tilePosition: {x: 0, y: 0}
+      _tilePositionOffset: {x: 0, y: 0}
       _swipeDirection: 0
       _swipeType: 0
       _waitForMerge: 0
@@ -211,6 +230,7 @@ MonoBehaviour:
       _ruleType: 1
       _showHand: 1
       _tilePosition: {x: 2, y: 1}
+      _tilePositionOffset: {x: 0, y: 0}
       _swipeDirection: 1
       _swipeType: 3
       _waitForMerge: 0
@@ -223,6 +243,7 @@ MonoBehaviour:
       _ruleType: 0
       _showHand: 1
       _tilePosition: {x: 0, y: 0}
+      _tilePositionOffset: {x: 0, y: 0}
       _swipeDirection: 0
       _swipeType: 0
       _waitForMerge: 0

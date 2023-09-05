@@ -15,7 +15,7 @@ namespace LabraxStudio.UI.GameScene.Tutorial
         // FIELDS: -------------------------------------------------------------------
 
         private LevelRules _currentRules;
-        private Image _tutorialTitleText;
+        private TutorialTextController _tutorialTextController;
         private TutorialHand _tutorialHand;
         private Action _onTutorialComplete;
         private int _currentStep = 0;
@@ -31,13 +31,13 @@ namespace LabraxStudio.UI.GameScene.Tutorial
             _ruleTrackers.Clear();
         }
 
-        public void Initialize(LevelRules currentRules, Image tutorialTitleText, TutorialHand tutorialHand,
+        public void Initialize(LevelRules currentRules, TutorialTextController tutorialTextController, TutorialHand tutorialHand,
             Action onTutorialComplete)
         {
             OnDestroy();
             _currentRules = currentRules;
-            _tutorialTitleText = tutorialTitleText;
-            SetTitleState(null, true);
+            _tutorialTextController = tutorialTextController;
+            SetTitleState(null, null, true);
             _tutorialHand = tutorialHand;
             _onTutorialComplete = onTutorialComplete;
             _currentStep = 0;
@@ -109,10 +109,10 @@ namespace LabraxStudio.UI.GameScene.Tutorial
                 return;
 
             if (rule.HideTitle)
-                SetTitleState(null, false);
+                SetTitleState(null, null, false);
 
             if (rule.ReplaceTitle)
-                SetTitleState(rule.NewTitle, true);
+                SetTitleState(rule.NewTitle, rule.NewTitleString, true);
 
             switch (rule.RuleType)
             {
@@ -146,12 +146,10 @@ namespace LabraxStudio.UI.GameScene.Tutorial
                 _onTutorialComplete.Invoke();
         }
 
-        private void SetTitleState(Sprite sprite, bool isEnabled)
+        private void SetTitleState(Sprite sprite, string text, bool isEnabled)
         {
-            if (sprite != null)
-                _tutorialTitleText.sprite = sprite;
-
-            _tutorialTitleText.enabled = isEnabled;
+            _tutorialTextController.SetTitle( text, sprite);
+            _tutorialTextController.SetState(isEnabled);
         }
 
         // EVENTS RECEIVERS: ----------------------------------------------------------------------

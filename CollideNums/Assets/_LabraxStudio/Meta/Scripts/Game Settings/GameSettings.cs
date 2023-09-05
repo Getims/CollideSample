@@ -39,6 +39,10 @@ namespace LabraxStudio.Meta
         [SerializeField]
         private CameraSettings _cameraSettings;
 
+        [TitleGroup("Localization settings")]
+        [SerializeField]
+        private List<LocalizationSettingsMeta> _localizationSettings;
+        
         // PROPERTIES: ----------------------------------------------------------------------------
 
         public LaunchSettings LaunchSettings => _launchSettings;
@@ -49,6 +53,7 @@ namespace LabraxStudio.Meta
         public List<LevelsListMeta> SelectableLevelsLists => _selectableLevelsLists;
         public SwipeSettings SwipeSettings => _swipeSettings;
         public CameraSettings CameraSettings => _cameraSettings;
+        public List<LocalizationSettingsMeta> LocalizationSettings => _localizationSettings;
 
         private const string LEVELS_SETTINGS = "Game level settings";
     }
