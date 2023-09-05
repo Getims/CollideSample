@@ -35,7 +35,7 @@ namespace LabraxStudio.UiAnimator
 
         public override void Play()
         {
-            _moveTW.Kill();
+            _moveTW?.Kill();
             _rectTransform = _transform.GetComponent<RectTransform>();
 
             if (_rectTransform == null)
@@ -46,7 +46,7 @@ namespace LabraxStudio.UiAnimator
 
         public override void Stop()
         {
-            _moveTW.Kill();
+            _moveTW?.Kill();
         }
 
         // PRIVATE METHODS: -----------------------------------------------------------------------

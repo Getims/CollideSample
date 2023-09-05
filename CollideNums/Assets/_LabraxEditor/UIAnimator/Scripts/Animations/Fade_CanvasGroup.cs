@@ -40,7 +40,7 @@ namespace LabraxStudio.UiAnimator
                 return;
             }
 
-            _fadeTW.Kill();
+            _fadeTW?.Kill();
             float endValue = 1;
             _canvasGroup.alpha = 0;
 
@@ -57,7 +57,7 @@ namespace LabraxStudio.UiAnimator
 
         public override void Stop()
         {
-            _fadeTW.Kill();
+            _fadeTW?.Kill();
         }
     }
 }

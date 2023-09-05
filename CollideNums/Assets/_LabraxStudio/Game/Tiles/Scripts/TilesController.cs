@@ -153,6 +153,7 @@ namespace LabraxStudio.Game.Tiles
 
             await Task.Delay(200);
             tile.SetValue(newValue, _tilesGenerator.GetSprite(newValue), _tilesGenerator.GetHighlightSprite(newValue));
+            
             await Task.Delay(100);
 
             MergeAction mergeAction = _tilesMerger.CheckMerge(tile);

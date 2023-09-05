@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using LabraxStudio.App.Services;
 using UnityEngine;
 using LabraxStudio.Meta.GameField;
+using LabraxStudio.Sound;
 using LabraxStudio.UiAnimator;
 using Sirenix.OdinInspector;
 
@@ -67,6 +68,7 @@ namespace LabraxStudio.Game.Obstacles
             if (currentTile == null || currentTile.Tile == null)
                 return;
 
+            GameSoundMediator.Instance.PlayTileCollideSawSFX();
             Color particlesColor = GetColor(currentTile.Tile.Value);
 
             foreach (var system in _particleSystems)

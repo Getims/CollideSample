@@ -53,3 +53,6 @@ MonoBehaviour:
   _tilesMergeSFX: {fileID: 11400000, guid: 7bc09a121fd785d47a31bd13ab2bf5d9, type: 2}
   _tileSplitBoosterSFX: {fileID: 11400000, guid: cf3a8a4e6307f9f45ab7dc4c30d38857, type: 2}
   _tileMultiplyBoosterSFX: {fileID: 11400000, guid: 8c0e62569877c024b9ba34715e73a61d, type: 2}
+  _tileCollidePusherSFX: {fileID: 11400000, guid: 1c93f60e5b9390447ac5fd55b56d4d4f, type: 2}
+  _tileCollideSawSFX: {fileID: 11400000, guid: 1f073dd7136422643bd68a97e70460cb, type: 2}
+  _tileCollideHoleSFX: {fileID: 11400000, guid: fc78de4fc434a0f438d2539881ac1249, type: 2}

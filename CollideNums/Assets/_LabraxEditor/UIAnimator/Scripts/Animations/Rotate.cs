@@ -37,7 +37,7 @@ namespace LabraxStudio.UiAnimator
                 return;
             }
 
-            _rotateTW.Kill();
+            _rotateTW?.Kill();
             if (_useStartRotation)
             {
                 _transform.localEulerAngles = _startRotation;
@@ -50,7 +50,7 @@ namespace LabraxStudio.UiAnimator
 
         public override void Stop()
         {
-            _rotateTW.Kill();
+            _rotateTW?.Kill();
         }
     }
 }

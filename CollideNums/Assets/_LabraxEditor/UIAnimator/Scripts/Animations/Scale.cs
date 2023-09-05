@@ -37,7 +37,7 @@ namespace LabraxStudio.UiAnimator
                 return;
             }
 
-            _scaleTW.Kill();
+            _scaleTW?.Kill();
             if (_useStartScale)
             {
                 _transform.localScale = _startScale;
@@ -50,7 +50,7 @@ namespace LabraxStudio.UiAnimator
 
         public override void Stop()
         {
-            _scaleTW.Kill();
+            _scaleTW?.Kill();
         }
     }
 }
