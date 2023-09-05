@@ -2,6 +2,7 @@
 using LabraxStudio.App.Services;
 using LabraxStudio.Localization;
 using LabraxStudio.Meta;
+using LabraxStudio.Meta.GameField;
 using LabraxStudio.Meta.Levels;
 using LabraxStudio.Sound;
 using UnityEngine;
@@ -69,6 +70,7 @@ namespace LabraxStudio.App
             ServicesProvider.RemoteDataService.Initialize();
             ServicesProvider.AnalyticsService.Initialize();
             GameLocalization.Initialize(gameSettings.LocalizationSettings);
+            SetupGameTheme(gameSettings);
 
             if (!gameSettings.LaunchSettings.EnableTutorial)
                 ServicesProvider.PlayerDataService.SetTutorialState(true);
@@ -100,6 +102,20 @@ namespace LabraxStudio.App
             ServicesProvider.LevelMetaService.SetSelectedLevelsList(levelsListMeta);
 
             return levelsListMeta;
+        }
+
+        private void SetupGameTheme(GameSettings gameSettings)
+        {
+            string themeID = ServicesProvider.PlayerDataService.GameThemeId;
+            GameTheme gameTheme = gameSettings.GameThemes.Find(gt => gt.ThemeId == themeID);
+            if (gameTheme == null)
+            {
+                Utils.ReworkPoint("Game theme not found! Select default theme");
+                gameTheme = gameSettings.GameThemes[0];
+            }
+
+            ServicesProvider.PlayerDataService.SetGameThemeID(gameTheme.ThemeId);
+            ServicesProvider.GameSettingsService.SetGameTheme(gameTheme);
         }
 
         protected override void OnApplicationQuit()

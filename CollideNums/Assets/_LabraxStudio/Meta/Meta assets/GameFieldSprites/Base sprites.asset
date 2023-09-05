@@ -10,11 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 51babd71894d4fd084f49b05f2b15822, type: 3}
-  m_Name: Base theme
+  m_Name: Base sprites
   m_EditorClassIdentifier: 
-  FileName: Base theme
-  _backgroundColor: {r: 0.6, g: 0.89019614, b: 0.9568628, a: 1}
+  FileName: Base sprites
   _errorSprite: {fileID: 21300000, guid: 64c1b4579bc53b743befa4ac43c48621, type: 3}
+  _backgroundColor: {r: 0.6, g: 0.89019614, b: 0.9568628, a: 1}
+  _backgroundSprite: {fileID: 0}
+  _useBackgroundGlow: 0
   _playableSprites:
     _baseBackground: {fileID: 21300000, guid: 1822b031f64efa441bf03ca9eaa7190e, type: 3}
     _topBackground: {fileID: 21300000, guid: 19089b8210ad36648ad344a6fac49097, type: 3}

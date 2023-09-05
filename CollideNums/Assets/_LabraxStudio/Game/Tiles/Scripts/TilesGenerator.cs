@@ -29,7 +29,7 @@ namespace LabraxStudio.Game.Tiles
         {
             var _gameFieldSettings = ServicesProvider.GameSettingsService.GetGameSettings().GameFieldSettings;
             _cellSize = _gameFieldSettings.CellSize;
-            _gameFieldSprites = ServicesProvider.GameSettingsService.GetGameSettings().GameFieldSprites;
+            _gameFieldSprites = ServicesProvider.GameSettingsService.SelectedGameTheme.GameSprites;
             _isInitialized = true;
         }
 

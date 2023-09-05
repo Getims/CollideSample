@@ -30,7 +30,7 @@ namespace LabraxStudio.Game.Gates
         public void Initialize()
         {
             _gameFieldSettings = ServicesProvider.GameSettingsService.GetGameSettings().GameFieldSettings;
-            _gameFieldSprites = ServicesProvider.GameSettingsService.GetGameSettings().GameFieldSprites;
+            _gameFieldSprites = ServicesProvider.GameSettingsService.SelectedGameTheme.GameSprites;
             _isInitialized = true;
         }
 
