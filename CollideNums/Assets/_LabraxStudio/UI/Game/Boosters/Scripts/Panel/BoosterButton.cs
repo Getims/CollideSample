@@ -23,7 +23,7 @@ namespace LabraxStudio.UI.GameScene.Boosters
         [SerializeField]
         private Image _clickBlocker;
 
-        [SerializeField] 
+        [SerializeField]
         private BoosterTutorialHand _tutorialHand;
 
         // PROPERTIES: ----------------------------------------------------------------------------
@@ -34,6 +34,7 @@ namespace LabraxStudio.UI.GameScene.Boosters
 
         private BoosterMeta _boosterMeta;
         private Action<BoosterButton> _onClickAction;
+        private SwipeMode _swipeMode = SwipeMode.SwipeTiles;
 
         // GAME ENGINE METHODS: -------------------------------------------------------------------
         private void Awake()
@@ -49,8 +50,9 @@ namespace LabraxStudio.UI.GameScene.Boosters
 
         // PUBLIC METHODS: -----------------------------------------------------------------------
 
-        public void Initialize(BoosterMeta boosterMeta, Action<BoosterButton> onClickAction)
+        public void Initialize(BoosterMeta boosterMeta, Action<BoosterButton> onClickAction, SwipeMode swipeMode)
         {
+            _swipeMode = swipeMode;
             _onClickAction = onClickAction;
             _boosterMeta = boosterMeta;
             _buttonVisualizer.SetState(boosterMeta.BoosterCost);
@@ -66,19 +68,9 @@ namespace LabraxStudio.UI.GameScene.Boosters
                 return;
 
             BoosterType boosterType = _boosterMeta.BoosterType;
-            bool canUseBooster = false;
-            switch (boosterType)
-            {
-                case BoosterType.Split:
-                    canUseBooster = ServicesProvider.GameFlowService.TilesController.HasTilesExceptTile(1);
-                    break;
-                case BoosterType.Multiply:
-                    canUseBooster = ServicesProvider.GameFlowService.TilesController.HasTilesExceptTile(16);
-                    break;
-                case BoosterType.LevelRestart:
-                    canUseBooster = true;
-                    break;
-            }
+            bool canUseBooster = _swipeMode == SwipeMode.SwipeTiles
+                ? BoosterStateChecker.CanUseBoosterBase(boosterType)
+                : BoosterStateChecker.CanUseBoosterSwipe(boosterType);
 
             _clickBlocker.enabled = !canUseBooster;
             _buttonVisualizer.SetInteractable(canUseBooster);
@@ -94,11 +86,11 @@ namespace LabraxStudio.UI.GameScene.Boosters
             if (!_pulsation.IsPulsing)
                 _pulsation.StartPulse();
         }
-        
+
         public void StopPulsation() => _pulsation.StopPulse();
 
         // PRIVATE METHODS: -----------------------------------------------------------------------
-        
+
         private void UseBooster()
         {
             if (_onClickAction != null)
@@ -110,7 +102,7 @@ namespace LabraxStudio.UI.GameScene.Boosters
         private void OnButtonClick()
         {
             bool canUseBooster = ServicesProvider.TutorialService.CanUseBooster(_boosterMeta.BoosterType);
-            if(!canUseBooster)
+            if (!canUseBooster)
                 return;
 
             _tutorialHand.OnBoosterClick();

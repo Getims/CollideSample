@@ -46,7 +46,7 @@ namespace LabraxStudio.UiAnimator
                 return;
             }
 
-            _fadeTW.Kill();
+            _fadeTW?.Kill();
             float endValue = _alphaValue;
 
             if (_fadeType != Fade.FadeTo)
@@ -62,7 +62,7 @@ namespace LabraxStudio.UiAnimator
 
         public override void Stop()
         {
-            _fadeTW.Kill();
+            _fadeTW?.Kill();
         }
     }
 }

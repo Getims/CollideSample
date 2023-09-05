@@ -25,7 +25,7 @@ namespace LabraxStudio.UI.GameScene.Boosters
 
         // FIELDS: -------------------------------------------------------------------
 
-        private BoostersHandler _boostersHandler;
+        private ABoostersHandler _boostersHandler;
 
         // GAME ENGINE METHODS: -------------------------------------------------------------------
 
@@ -67,13 +67,15 @@ namespace LabraxStudio.UI.GameScene.Boosters
             if (boostersCount == 0)
                 return false;
 
+            SwipeMode swipeMode = ServicesProvider.GameSettingsService.GetGameSettings().SwipeSettings.SwipeMode;
+                
             for (int i = 0; i < 5; i++)
             {
                 if (i >= boostersCount)
                     break;
 
                 BoostersSettings settings = boostersSettings[i];
-                _boosterButtons[i].Initialize(settings.BoosterMeta, TryToUseBooster);
+                _boosterButtons[i].Initialize(settings.BoosterMeta, TryToUseBooster, swipeMode);
             }
 
             SetBoostersCount(boostersCount);
@@ -151,7 +153,11 @@ namespace LabraxStudio.UI.GameScene.Boosters
 
         private void OnLevelGenerate()
         {
-            _boostersHandler = new BoostersHandler(_chooseTileText, _targetCG);
+            SwipeMode swipeMode = ServicesProvider.GameSettingsService.GetGameSettings().SwipeSettings.SwipeMode;
+            _boostersHandler = swipeMode == SwipeMode.SwipeTiles
+                ? (ABoostersHandler) new DefaultBoostersHandler(_chooseTileText, _targetCG)
+                : new SwipeBoostersHandler(_chooseTileText, _targetCG);
+
             bool hasBoosters = SetupButtons();
             if (hasBoosters)
                 Show();

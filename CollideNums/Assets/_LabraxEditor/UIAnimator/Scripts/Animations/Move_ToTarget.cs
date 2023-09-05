@@ -31,7 +31,7 @@ namespace LabraxStudio.UiAnimator
 
         public override void Play()
         {
-            _moveTW.Kill();
+            _moveTW?.Kill();
             Transform target = null;
 
             if (_useLinker)
@@ -55,7 +55,7 @@ namespace LabraxStudio.UiAnimator
 
         public override void Stop()
         {
-            _moveTW.Kill();
+            _moveTW?.Kill();
         }
 
     }
