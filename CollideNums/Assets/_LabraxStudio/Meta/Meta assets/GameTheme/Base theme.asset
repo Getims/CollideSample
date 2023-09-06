@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FileName: Base theme
   _themeID: BaseTheme
-  _themeIcon: {fileID: 21300000, guid: dcfe538bee2507b4e821dcd53a56d90e, type: 3}
+  _themeIcon: {fileID: 21300000, guid: ab06ac5f7fd3cb54d82a2639694c8c8c, type: 3}
   _gameSprites: {fileID: 11400000, guid: b6bc31775dbdf2842a216ba923c0d3a2, type: 2}

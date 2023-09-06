@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FileName: Wood theme
   _themeID: WoodTheme
-  _themeIcon: {fileID: 21300000, guid: 3c6f795159865d34497e7eaf8e60be6a, type: 3}
+  _themeIcon: {fileID: 21300000, guid: bbff79c4272151e4abad84b1184d1291, type: 3}
   _gameSprites: {fileID: 11400000, guid: 6ed010847676f844388d925b4ef918e0, type: 2}

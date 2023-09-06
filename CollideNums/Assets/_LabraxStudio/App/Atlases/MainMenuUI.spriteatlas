@@ -74,11 +74,21 @@ SpriteAtlas:
     cachedData: {fileID: 0}
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
+  - {fileID: 21300000, guid: e0e905c0865bcb14c8deec2a32696d2d, type: 3}
   - {fileID: 21300000, guid: 7979f9d2443bb6b4e88452288570f79e, type: 3}
+  - {fileID: 21300000, guid: bbff79c4272151e4abad84b1184d1291, type: 3}
+  - {fileID: 21300000, guid: a53bafc8aa98f5a4588479dd35122e06, type: 3}
   - {fileID: 21300000, guid: 0a985feab1f6acd42b2288c6bed21fa4, type: 3}
+  - {fileID: 21300000, guid: 30b5817d04950c94ca68af3ad96e7d56, type: 3}
+  - {fileID: 21300000, guid: ab06ac5f7fd3cb54d82a2639694c8c8c, type: 3}
   m_PackedSpriteNamesToIndex:
+  - theme_button_active
   - darken_gradient
+  - theme_wooden
+  - check_theme
   - tap_to_play_text
+  - theme_brush_icon
+  - theme_standart
   m_RenderDataMap: {}
   m_Tag: MainMenuUI
   m_IsVariant: 0
