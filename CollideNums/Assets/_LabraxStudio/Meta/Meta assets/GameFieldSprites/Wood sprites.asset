@@ -15,7 +15,7 @@ MonoBehaviour:
   FileName: Wood sprites
   _errorSprite: {fileID: 21300000, guid: 64c1b4579bc53b743befa4ac43c48621, type: 3}
   _backgroundColor: {r: 0.6415094, g: 0.2506817, b: 0.009077947, a: 1}
-  _backgroundSprite: {fileID: 21300000, guid: 61ab77b7f31a8054c886c1290680fac6, type: 3}
+  _backgroundSprite: {fileID: 21300000, guid: 84f9ef5a340b4b74aa97b17353119d2e, type: 3}
   _useBackgroundGlow: 1
   _playableSprites:
     _baseBackground: {fileID: 21300000, guid: 2643267883d5bbd4caa19461920b294e, type: 3}

@@ -25,9 +25,9 @@ MonoBehaviour:
     _enableObstaclesPalette: 1
     _fieldBrushMode: 2
     _fieldBrushModeRight: 0
-    _tilesBrushMode: 12
+    _tilesBrushMode: 2
     _tilesBrushModeRight: 0
-    _obstaclesBrushMode: 0
+    _obstaclesBrushMode: 3
     _obstaclesBrushModeRight: -1
   _boostersSettings:
   - _boosterMeta: {fileID: 11400000, guid: 3b85c5d335e9ce344b42fbcac79b97cd, type: 2}
@@ -80,13 +80,13 @@ MonoBehaviour:
       Data: 0
     - Name: _tilesBrushMode
       Entry: 3
-      Data: 12
+      Data: 2
     - Name: _tilesBrushModeRight
       Entry: 3
       Data: 0
     - Name: _obstaclesBrushMode
       Entry: 3
-      Data: 0
+      Data: 3
     - Name: _obstaclesBrushModeRight
       Entry: 3
       Data: 18446744073709551615
@@ -143,7 +143,7 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 3
-      Data: 1
+      Data: 3
     - Name: 
       Entry: 3
       Data: 1
@@ -170,7 +170,7 @@ MonoBehaviour:
       Data: 3
     - Name: 
       Entry: 3
-      Data: 19
+      Data: 20
     - Name: 
       Entry: 3
       Data: 2
@@ -245,7 +245,7 @@ MonoBehaviour:
       Data: 2
     - Name: 
       Entry: 3
-      Data: 1
+      Data: 3
     - Name: 
       Entry: 3
       Data: 1
@@ -329,16 +329,16 @@ MonoBehaviour:
       Data: 35
     - Name: 
       Entry: 3
-      Data: 2
+      Data: 20
+    - Name: 
+      Entry: 3
+      Data: 19
     - Name: 
       Entry: 3
       Data: 2
     - Name: 
       Entry: 3
-      Data: 30
-    - Name: 
-      Entry: 3
-      Data: 1
+      Data: 37
     - Name: 
       Entry: 3
       Data: 1
@@ -359,7 +359,7 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 3
-      Data: 1
+      Data: 3
     - Name: 
       Entry: 3
       Data: 1
