@@ -91,6 +91,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: f81a2a72ea4a03d42b59c6233ec54b5f, type: 3}
   - {fileID: 21300000, guid: 175b6ea2608df734aaec8b0b6df0b454, type: 3}
   - {fileID: 21300000, guid: b9c52433ca6c2264e83fffdf93e4461e, type: 3}
+  - {fileID: 21300000, guid: 1f26b263189523f45b96cb0108f84155, type: 3}
   - {fileID: 21300000, guid: 4eb25d8381d255741a456c58c6f0586d, type: 3}
   - {fileID: 21300000, guid: 084bd6c30dcf64948b4505b960b087b8, type: 3}
   - {fileID: 21300000, guid: 4a547cd3e90b54342a49f911c5d1ca2e, type: 3}
@@ -155,6 +156,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 1cbcc49da329eb741a08fafcc15091a5, type: 3}
   - {fileID: 21300000, guid: 5b1365adc20b9d34cbd638d2a6d70588, type: 3}
   - {fileID: 21300000, guid: 511e6abd11c7472428d57ea74bc508a2, type: 3}
+  - {fileID: 21300000, guid: e218f30e9824a5c47ab94e68fd0c2ca7, type: 3}
   - {fileID: 21300000, guid: 2b29d06ee86a15f409619384960d4002, type: 3}
   - {fileID: 21300000, guid: f1c12a7e0441b634c84eb1bc3540dd50, type: 3}
   - {fileID: 21300000, guid: 7270fb7eec5ee3542b3bc61c27afffd4, type: 3}
@@ -185,6 +187,7 @@ SpriteAtlas:
   - tile_icon16
   - full_top_corner
   - gate_n_256
+  - vertical_gate_open
   - not_playable_1
   - horizontal_gate_bottom
   - top_right_corner
@@ -249,6 +252,7 @@ SpriteAtlas:
   - tile_icon8k
   - gate_n_2
   - gate_n_32
+  - vertical_gate_cut
   - tile_icon16k
   - gate_n_4
   - horizontal_gate_2
