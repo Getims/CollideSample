@@ -42,6 +42,9 @@ namespace LabraxStudio.Meta.GameField
         [SerializeField]
         private List<Sprite> _tilesHighlights = new List<Sprite>();
 
+        [SerializeField]
+        private Sprite _tileShadow;
+
         [Space(10)]
         [SerializeField]
         private List<Sprite> _tasksSprites = new List<Sprite>();
@@ -70,6 +73,7 @@ namespace LabraxStudio.Meta.GameField
 
         public ObstaclesSprites ObstaclesSprites => _obstaclesSprites;
 
+        public Sprite TileShadow => _tileShadow;
 
         // PUBLIC METHODS: -----------------------------------------------------------------------
 

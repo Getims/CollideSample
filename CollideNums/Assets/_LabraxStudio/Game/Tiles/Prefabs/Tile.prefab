@@ -571,6 +571,7 @@ MonoBehaviour:
     _holeFallEffect: {fileID: 4282221846732977072}
     _sawMask: {fileID: 9001479134302104712}
   _highlight: {fileID: 1901668454203319079}
+  _shadow: {fileID: 7531336708110161889}
   _highlightAnimator: {fileID: 4290508536909505701}
 --- !u!114 &6426299516912197899
 MonoBehaviour:

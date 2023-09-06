@@ -135,6 +135,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 86a41ad501cd18f42a3a3381fe942e7a, type: 3}
   - {fileID: 21300000, guid: 9400927c8bca94a4eae16e2021b0e7c3, type: 3}
   - {fileID: 21300000, guid: cde09280155dd94408a4cb634fe9f98b, type: 3}
+  _tileShadow: {fileID: 21300000, guid: 0659092f1f575804b92948157293ed69, type: 3}
   _tasksSprites:
   - {fileID: 21300000, guid: 1423787801e40e24c8bd756a186a2636, type: 3}
   - {fileID: 21300000, guid: 8762a33890491354481622dc45ade361, type: 3}

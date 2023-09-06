@@ -119,7 +119,8 @@ namespace LabraxStudio.Game.Tiles
         public void UpdateTileValue(Tile tile)
         {
             int newValue = _tilesMatrix[tile.Cell.x, tile.Cell.y];
-            tile.SetValue(newValue, _tilesGenerator.GetSprite(newValue), _tilesGenerator.GetHighlightSprite(newValue));
+            tile.SetValue(newValue, _tilesGenerator.GetSprite(newValue), _tilesGenerator.GetHighlightSprite(newValue),
+                _tilesGenerator.GetShadowSprite());
         }
 
         public void DestroyTile(Tile tile)
@@ -152,8 +153,9 @@ namespace LabraxStudio.Game.Tiles
                 GameSoundMediator.Instance.PlayTileSplitByBoosterSFX();
 
             await Task.Delay(200);
-            tile.SetValue(newValue, _tilesGenerator.GetSprite(newValue), _tilesGenerator.GetHighlightSprite(newValue));
-            
+            tile.SetValue(newValue, _tilesGenerator.GetSprite(newValue), _tilesGenerator.GetHighlightSprite(newValue),
+                _tilesGenerator.GetShadowSprite());
+
             await Task.Delay(100);
 
             MergeAction mergeAction = _tilesMerger.CheckMerge(tile);
