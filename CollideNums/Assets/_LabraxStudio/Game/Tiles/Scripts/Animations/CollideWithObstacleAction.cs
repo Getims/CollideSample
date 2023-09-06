@@ -18,7 +18,12 @@ namespace LabraxStudio.Game.Tiles
             _direction = direction;
             _obstaclePosition = obstaclePosition;
             _obstacleType = obstacleType;
+            if (_obstacleType == ObstacleType.Push)
+                _direction = CalculatePushDirection();
         }
+
+        // PROPERTIES: ----------------------------------------------------------------------------
+        public Direction Direction => _direction;
 
         // FIELDS: -------------------------------------------------------------------
         private Tile _tile;

@@ -143,8 +143,7 @@ namespace LabraxStudio.Game.Gates.Visual
                 openLine.enabled = false;
                 openLine.gameObject.SetActive(!useColor);
             }
-
-
+            
             foreach (var openLine in _verticalOpenLine)
             {
                 openLine.sprite = verticalOpenLineSprite;

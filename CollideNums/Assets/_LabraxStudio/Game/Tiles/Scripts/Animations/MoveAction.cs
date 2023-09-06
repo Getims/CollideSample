@@ -47,11 +47,14 @@ namespace LabraxStudio.Game.Tiles
         private readonly SwipeSettings _swipeSettings;
         private readonly Vector2Int _obstaclePosition;
         private Action _onMoveComplete;
-        
+
         // PUBLIC METHODS: -----------------------------------------------------------------------
 
         public override void Play(Action onComplete)
         {
+            if (_tile == null)
+                return;
+
             Vector2 matrixToPosition =
                 GameTypesConverter.MatrixPositionToGamePosition(_moveTo, _gameFieldSettings.CellSize);
             Vector3 newPosition = _tile.Position;
@@ -143,13 +146,15 @@ namespace LabraxStudio.Game.Tiles
             {
                 currentTime += timeStep + currentAcceleration;
                 currentAcceleration += acceleration;
+                if (tile == null)
+                    break;
                 tile.position = Vector3.Lerp(startPosition, endPosition, currentTime / timeToMaxCoord);
 
                 if (currentTime < timeToMaxCoord)
                     yield return new WaitForSeconds(timeStep);
             }
 
-            if (_obstacle == ObstacleType.Null)
+            if (tile != null && _obstacle == ObstacleType.Null)
             {
                 _tile.PlayCollideEffect(_direction);
 
