@@ -19,9 +19,9 @@ namespace LabraxStudio.Meta
         [BoxGroup("Balance Settings/In", showLabel: false), SerializeField]
         private BalanceSettings _balanceSettings;
 
-        [FoldoutGroup (LEVELS_SETTINGS), SerializeField]
-        private GameFieldSprites _gameFieldSprites;
-
+        [FoldoutGroup(LEVELS_SETTINGS), SerializeField]
+        private List<GameTheme> _gameThemes;
+       
         [FoldoutGroup (LEVELS_SETTINGS), SerializeField]
         private GameFieldSettings _gameFieldSettings;
         
@@ -47,13 +47,14 @@ namespace LabraxStudio.Meta
 
         public LaunchSettings LaunchSettings => _launchSettings;
         public BalanceSettings BalanceSettings => _balanceSettings;
-        public GameFieldSprites GameFieldSprites => _gameFieldSprites;
+        public List<GameTheme> GameThemes => _gameThemes;
         public GameFieldSettings GameFieldSettings => _gameFieldSettings;
         public LevelsListMeta LevelsList => _levelsList;
         public List<LevelsListMeta> SelectableLevelsLists => _selectableLevelsLists;
         public SwipeSettings SwipeSettings => _swipeSettings;
         public CameraSettings CameraSettings => _cameraSettings;
         public List<LocalizationSettingsMeta> LocalizationSettings => _localizationSettings;
+
 
         private const string LEVELS_SETTINGS = "Game level settings";
     }

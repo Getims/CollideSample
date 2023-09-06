@@ -21,8 +21,11 @@ namespace LabraxStudio.Game.Tiles
         private SpriteRenderer _highlight;
 
         [SerializeField]
+        private SpriteRenderer _shadow;
+
+        [SerializeField]
         private UIAnimator _highlightAnimator;
-        
+
         // PROPERTIES: ----------------------------------------------------------------------------
 
         public Vector2Int Cell => _cell;
@@ -49,18 +52,18 @@ namespace LabraxStudio.Game.Tiles
         private bool _movedToGate = false;
 
         // GAME ENGINE METHODS: -------------------------------------------------------------------
-        
+
         private void OnDestroy()
         {
             GameEvents.OnTrackedTileUpdate.RemoveListener(OnTrackedTileUpdate);
             _tileEffectsController.OnDestroy();
         }
-        
+
         // PUBLIC METHODS: -----------------------------------------------------------------------
 
         public void Initialize(string tileName)
         {
-            gameObject.name = tileName; 
+            gameObject.name = tileName;
             _swipeChecker.Initialize(this, UnityEngine.Camera.main, OnSwipe);
             GameEvents.OnTrackedTileUpdate.AddListener(OnTrackedTileUpdate);
         }
@@ -70,11 +73,12 @@ namespace LabraxStudio.Game.Tiles
             _cell = cell;
         }
 
-        public void SetValue(int value, Sprite sprite, Sprite highLight)
+        public void SetValue(int value, Sprite sprite, Sprite highlightSprite, Sprite shadowSprite)
         {
             _value = value;
             _spriteRenderer.sprite = sprite;
-            _highlight.sprite = highLight;
+            _highlight.sprite = highlightSprite;
+            _shadow.sprite = shadowSprite;
         }
 
         public void SetMergeFlag(bool isMerging)
@@ -106,7 +110,7 @@ namespace LabraxStudio.Game.Tiles
         {
             Destroy(gameObject);
         }
-        
+
         public void DestroyByObstacle(ObstacleType obstacleType, Direction direction = Direction.Null)
         {
             switch (obstacleType)
@@ -129,13 +133,13 @@ namespace LabraxStudio.Game.Tiles
 
         private void SetHighlight(bool enabled)
         {
-            _highlight.enabled = enabled; 
-            if(enabled)
+            _highlight.enabled = enabled;
+            if (enabled)
                 _highlightAnimator.Play();
             else
                 _highlightAnimator.Stop();
         }
-        
+
         // EVENTS RECEIVERS: ----------------------------------------------------------------------
 
         public void OnSelect()
@@ -169,7 +173,7 @@ namespace LabraxStudio.Game.Tiles
 
             TilesController.MoveTile(this, direction, swipe);
         }
-        
+
         private void OnTrackedTileUpdate(TrackedTile trackedTile)
         {
             if (trackedTile == null || trackedTile.Tile == null)
@@ -180,6 +184,5 @@ namespace LabraxStudio.Game.Tiles
 
             SetHighlight(trackedTile.Tile == this);
         }
-
     }
 }

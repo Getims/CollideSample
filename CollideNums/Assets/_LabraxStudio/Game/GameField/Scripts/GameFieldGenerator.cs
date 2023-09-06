@@ -31,7 +31,7 @@ namespace LabraxStudio.Game.GameField
         public void Initialize()
         {
             _gameFieldSettings = ServicesProvider.GameSettingsService.GetGameSettings().GameFieldSettings;
-            _gameFieldSprites = ServicesProvider.GameSettingsService.GetGameSettings().GameFieldSprites;
+            _gameFieldSprites = ServicesProvider.GameSettingsService.SelectedGameTheme.GameSprites;
         }
 
         public List<FieldCell> GenerateFieldSprites(int levelWidth, int levelHeight, int[,] levelMatrix)

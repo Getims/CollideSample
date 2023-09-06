@@ -12,6 +12,7 @@ namespace LabraxStudio.App.Services
         public bool IsMusicOn => _playerData.IsMusicOn;
         public int CurrentLevel => _playerData.CurrentLevel;
         public int Money => _playerData.Money;
+        public string GameThemeId => _playerData.GameThemeID;
 
         // FIELDS: --------------------------------------------------------------------------------
 
@@ -117,6 +118,12 @@ namespace LabraxStudio.App.Services
         public void SetFirstStartState(bool state)
         {
             _gameData.IsFirstStart = state;
+            _gameDataService.SaveGameData();
+        }
+        
+        public void SetGameThemeID(string themeID)
+        {
+            _playerData.SetGameThemeID(themeID);
             _gameDataService.SaveGameData();
         }
     }

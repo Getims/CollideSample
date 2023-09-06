@@ -33,7 +33,7 @@ namespace LabraxStudio.Game.Gates.Visual
                 gameFieldSprites.NotPlayableSprites.HorizontalGateExtension,
                 direction);
 
-            _gateLine.Setup(gatesSprites.UnlockedColor, gatesSprites.LockedColor, direction, gateType);
+            _gateLine.Setup( gatesSprites, direction, gateType);
         }
 
         public void SetState(bool isLocked) => _gateLine.SetState(isLocked);

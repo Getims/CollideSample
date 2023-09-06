@@ -40,7 +40,7 @@ namespace LabraxStudio.UI.GameScene.Tasks
             _isBackSwitched = false;
             _background.sprite = _normalBackground;
             List<Sprite> tasksSprites =
-                ServicesProvider.GameSettingsService.GetGameSettings().GameFieldSprites.TasksSprites;
+                ServicesProvider.GameSettingsService.SelectedGameTheme.GameSprites.TasksSprites;
 
             int tasksCount = levelTasks.Count;
             for (int i = 0; i < tasksCount; i++)
@@ -112,7 +112,7 @@ namespace LabraxStudio.UI.GameScene.Tasks
         private Sprite GetSprite(int tileNumber, List<Sprite> tasksSprites)
         {
             if (tileNumber - 1 >= tasksSprites.Count)
-                return ServicesProvider.GameSettingsService.GetGameSettings().GameFieldSprites.ErrorSprite;
+                return ServicesProvider.GameSettingsService.SelectedGameTheme.GameSprites.ErrorSprite;
 
             return tasksSprites[tileNumber - 1];
         }

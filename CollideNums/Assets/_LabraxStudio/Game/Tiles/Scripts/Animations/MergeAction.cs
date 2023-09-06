@@ -11,10 +11,11 @@ namespace LabraxStudio.Game.Tiles
     {
         // CONSTRUCTORS: -------------------------------------------------------------------------------
 
-        public MergeAction(Tile mergeFrom, Tile mergeTo)
+        public MergeAction(Tile mergeFrom, Tile mergeTo, Direction direction)
         {
             _mergeFrom = mergeFrom;
             _mergeTo = mergeTo;
+            _direction = direction;
         }
 
         // PROPERTIES: ----------------------------------------------------------------------------
@@ -22,12 +23,14 @@ namespace LabraxStudio.Game.Tiles
         public Tile MergeFrom => _mergeFrom;
         public Tile MergeTo => _mergeTo;
         private TilesController TilesController => ServicesProvider.GameFlowService.TilesController;
+        public Direction MergeDirection => _direction;
 
         // FIELDS: -------------------------------------------------------------------
 
         private Tile _mergeFrom;
         private Tile _mergeTo;
         private Action _onComplete;
+        private Direction _direction;
 
         // PUBLIC METHODS: -----------------------------------------------------------------------
 

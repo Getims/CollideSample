@@ -11,10 +11,17 @@ namespace LabraxStudio.Meta.GameField
         // MEMBERS: -------------------------------------------------------------------------------
 
         [SerializeField]
-        private Color _backgroundColor = Color.white;
-        
-        [SerializeField]
         private Sprite _errorSprite;
+
+        [Space(10)]
+        [SerializeField]
+        private Color _backgroundColor = Color.white;
+
+        [SerializeField]
+        private Sprite _backgroundSprite;
+
+        [SerializeField]
+        private bool _useBackgroundGlow = false;
 
         [Space(10)]
         [SerializeField]
@@ -23,17 +30,21 @@ namespace LabraxStudio.Meta.GameField
         [Space(10)]
         [SerializeField]
         private NotPlayableSprites _notPlayableSprites;
-        
+
         [Space(10)]
         [SerializeField]
         private GatesSprites _gatesSprites;
-        
+
         [Space(10)]
         [SerializeField]
-        private List<Sprite> _tilesSprites = new List<Sprite>(); 
+        private List<Sprite> _tilesSprites = new List<Sprite>();
+
         [SerializeField]
         private List<Sprite> _tilesHighlights = new List<Sprite>();
-        
+
+        [SerializeField]
+        private Sprite _tileShadow;
+
         [Space(10)]
         [SerializeField]
         private List<Sprite> _tasksSprites = new List<Sprite>();
@@ -43,11 +54,15 @@ namespace LabraxStudio.Meta.GameField
         private ObstaclesSprites _obstaclesSprites;
 
         // PROPERTIES: ----------------------------------------------------------------------------
-        
-        public Color BackgroundColor => _backgroundColor;
-        
+
         public Sprite ErrorSprite => _errorSprite;
-        
+
+        public Color BackgroundColor => _backgroundColor;
+
+        public Sprite BackgroundSprite => _backgroundSprite;
+
+        public bool UseBackgroundGlow => _useBackgroundGlow;
+
         public PlayableSprites PlayableSprites => _playableSprites;
 
         public NotPlayableSprites NotPlayableSprites => _notPlayableSprites;
@@ -58,6 +73,7 @@ namespace LabraxStudio.Meta.GameField
 
         public ObstaclesSprites ObstaclesSprites => _obstaclesSprites;
 
+        public Sprite TileShadow => _tileShadow;
 
         // PUBLIC METHODS: -----------------------------------------------------------------------
 
@@ -72,8 +88,8 @@ namespace LabraxStudio.Meta.GameField
                 return _errorSprite;
 
             return sprite;
-        } 
-        
+        }
+
         public Sprite GetTileHighlight(int spriteIndex)
         {
             spriteIndex -= 1;

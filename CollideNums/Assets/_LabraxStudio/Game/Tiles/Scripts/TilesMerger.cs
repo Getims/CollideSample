@@ -37,7 +37,7 @@ namespace LabraxStudio.Game.Tiles
                 {
                     tile.SetMergeFlag(true);
                     otherTile.SetMergeFlag(true);
-                    return new MergeAction(tile, otherTile);
+                    return new MergeAction(tile, otherTile, direction);
                 }
             }
 
@@ -46,7 +46,7 @@ namespace LabraxStudio.Game.Tiles
             {
                 tile.SetMergeFlag(true);
                 otherTile.SetMergeFlag(true);
-                return new MergeAction(tile, otherTile);
+                return new MergeAction(tile, otherTile, Direction.Right);
             }
 
             otherTile = CanMerge(tile, Direction.Down);
@@ -54,7 +54,7 @@ namespace LabraxStudio.Game.Tiles
             {
                 tile.SetMergeFlag(true);
                 otherTile.SetMergeFlag(true);
-                return new MergeAction(tile, otherTile);
+                return new MergeAction(tile, otherTile, Direction.Down);
             }
 
             otherTile = CanMerge(tile, Direction.Left);
@@ -62,7 +62,7 @@ namespace LabraxStudio.Game.Tiles
             {
                 tile.SetMergeFlag(true);
                 otherTile.SetMergeFlag(true);
-                return new MergeAction(tile, otherTile);
+                return new MergeAction(tile, otherTile, Direction.Left);
             }
 
             otherTile = CanMerge(tile, Direction.Up);
@@ -70,7 +70,7 @@ namespace LabraxStudio.Game.Tiles
             {
                 tile.SetMergeFlag(true);
                 otherTile.SetMergeFlag(true);
-                return new MergeAction(tile, otherTile);
+                return new MergeAction(tile, otherTile, Direction.Up);
             }
 
             return null;

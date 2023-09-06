@@ -10,11 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 51babd71894d4fd084f49b05f2b15822, type: 3}
-  m_Name: Base theme
+  m_Name: Base sprites
   m_EditorClassIdentifier: 
-  FileName: Base theme
-  _backgroundColor: {r: 0.6, g: 0.89019614, b: 0.9568628, a: 1}
+  FileName: Base sprites
   _errorSprite: {fileID: 21300000, guid: 64c1b4579bc53b743befa4ac43c48621, type: 3}
+  _backgroundColor: {r: 0.6, g: 0.89019614, b: 0.9568628, a: 1}
+  _backgroundSprite: {fileID: 0}
+  _useBackgroundGlow: 0
   _playableSprites:
     _baseBackground: {fileID: 21300000, guid: 1822b031f64efa441bf03ca9eaa7190e, type: 3}
     _topBackground: {fileID: 21300000, guid: 19089b8210ad36648ad344a6fac49097, type: 3}
@@ -78,8 +80,20 @@ MonoBehaviour:
   _gatesSprites:
     _gateVerticalBackground: {fileID: 21300000, guid: b71fe6beef559c042a6122ae36b3b156, type: 3}
     _gateHorizontalBackground: {fileID: 21300000, guid: dcfe538bee2507b4e821dcd53a56d90e, type: 3}
+    _useColor: 1
     _unlockedColor: {r: 0.3254902, g: 0.8627451, b: 0.37254903, a: 1}
     _lockedColor: {r: 0.9529412, g: 0.47058824, b: 0.45490196, a: 1}
+    _horizontalOpenLine: {fileID: 0}
+    _verticalOpenLine: {fileID: 0}
+    _gateHorizontal: {fileID: 21300000, guid: b1ec999b4e26f0c408aa4213c567e571, type: 3}
+    _gateHorizontalBottom1: {fileID: 21300000, guid: 54c3baf0ba197c74caea9f3e63a80dd7, type: 3}
+    _gateHorizontalBottom2: {fileID: 21300000, guid: 3920f1ec4b92769488bd622c7f4be86d, type: 3}
+    _gateHorizontalBottom3: {fileID: 21300000, guid: a53fa41886410894da0c1a07915094bf, type: 3}
+    _gateHorizontalBottom4: {fileID: 21300000, guid: 8e764d83d7e4bef41b7ba8b8d77d526c, type: 3}
+    _gateVertical: {fileID: 21300000, guid: 53bc4e1ba9fc57d45861193fbf113c51, type: 3}
+    _gateVerticalTop: {fileID: 21300000, guid: 3c09a394592f11a4588cbcbdec8a5afa, type: 3}
+    _gateVerticalBottom: {fileID: 21300000, guid: 642ef5203d7408d429c39086832ed4fb, type: 3}
+    _gateVerticalCut: {fileID: 21300000, guid: aa6f98a91fdb633498e0951051802e96, type: 3}
     _numberBaseColor: {r: 0.5294118, g: 0.8235294, b: 0.8980392, a: 1}
     _numberGlowColor: {r: 0.8235294, g: 0.93333334, b: 0.9647059, a: 1}
     _gatesNumbers:
@@ -133,6 +147,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 86a41ad501cd18f42a3a3381fe942e7a, type: 3}
   - {fileID: 21300000, guid: 9400927c8bca94a4eae16e2021b0e7c3, type: 3}
   - {fileID: 21300000, guid: cde09280155dd94408a4cb634fe9f98b, type: 3}
+  _tileShadow: {fileID: 21300000, guid: 0659092f1f575804b92948157293ed69, type: 3}
   _tasksSprites:
   - {fileID: 21300000, guid: 1423787801e40e24c8bd756a186a2636, type: 3}
   - {fileID: 21300000, guid: 8762a33890491354481622dc45ade361, type: 3}

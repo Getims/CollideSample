@@ -1,5 +1,6 @@
 using LabraxStudio.App.Services;
 using LabraxStudio.Events;
+using LabraxStudio.Game.Background;
 using LabraxStudio.Game.Camera;
 using LabraxStudio.Game.GameField;
 using LabraxStudio.Game.Gates;
@@ -29,6 +30,9 @@ namespace LabraxStudio.Game
 
         [SerializeField]
         private ObstaclesController _obstaclesController;
+
+        [SerializeField]
+        private BackgroundController _backgroundController;
 
         // FIELDS: -------------------------------------------------------------------
 
@@ -75,6 +79,7 @@ namespace LabraxStudio.Game
             _obstaclesController.Initialize();
 
             _cameraController.Initialize(levelMeta);
+            _backgroundController.Initialize();
             _gameFieldController.GenerateField(levelMeta);
             _gatesController.GenerateGates(levelMeta);
             _obstaclesController.GenerateObstacles(levelMeta);
@@ -115,6 +120,7 @@ namespace LabraxStudio.Game
             _tilesController.RemoveAllTiles();
 
             _cameraController.Initialize(levelMeta);
+            _backgroundController.Initialize();
             _gameFieldController.GenerateField(levelMeta);
             _gatesController.GenerateGates(levelMeta);
             _obstaclesController.GenerateObstacles(levelMeta);

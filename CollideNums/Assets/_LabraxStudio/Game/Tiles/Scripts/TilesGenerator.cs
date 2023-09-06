@@ -29,7 +29,7 @@ namespace LabraxStudio.Game.Tiles
         {
             var _gameFieldSettings = ServicesProvider.GameSettingsService.GetGameSettings().GameFieldSettings;
             _cellSize = _gameFieldSettings.CellSize;
-            _gameFieldSprites = ServicesProvider.GameSettingsService.GetGameSettings().GameFieldSprites;
+            _gameFieldSprites = ServicesProvider.GameSettingsService.SelectedGameTheme.GameSprites;
             _isInitialized = true;
         }
 
@@ -69,6 +69,7 @@ namespace LabraxStudio.Game.Tiles
             return _gameFieldSprites.GetTileHighlight(spriteIndex);
         }
 
+        public Sprite GetShadowSprite() => _gameFieldSprites.TileShadow;
         // PRIVATE METHODS: -----------------------------------------------------------------------
 
         private Tile CreateTile(int x, int y, int matrixValue)
@@ -88,7 +89,7 @@ namespace LabraxStudio.Game.Tiles
             int value = GameTypesConverter.MatrixValueToTile(matrixValue);
             newTile.Initialize("Tile " + value);
             newTile.SetCell(new Vector2Int(x, y));
-            newTile.SetValue(matrixValue, GetSprite(matrixValue), GetHighlightSprite(matrixValue));
+            newTile.SetValue(matrixValue, GetSprite(matrixValue), GetHighlightSprite(matrixValue),GetShadowSprite());
 
             return newTile;
         }

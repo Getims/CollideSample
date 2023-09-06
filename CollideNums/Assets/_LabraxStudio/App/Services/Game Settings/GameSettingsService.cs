@@ -1,4 +1,5 @@
 ﻿using LabraxStudio.Meta;
+using LabraxStudio.Meta.GameField;
 using UnityEngine;
 
 namespace LabraxStudio.App.Services
@@ -11,8 +12,9 @@ namespace LabraxStudio.App.Services
             _allGlobalSettings = Resources.Load<AllGlobalSettings>("GlobalSettings");
 
         // FIELDS: --------------------------------------------------------------------------------
-        
+
         private readonly AllGlobalSettings _allGlobalSettings;
+        private GameTheme _selectedGameTheme;
 
         // PROPERTIES: ----------------------------------------------------------------------------
 
@@ -21,5 +23,11 @@ namespace LabraxStudio.App.Services
         public GameSettings GetGameSettings() => _allGlobalSettings.GameSettings;
 
         public SoundSettings GetSoundSettings => _allGlobalSettings.SoundSettings;
+
+        public GameTheme SelectedGameTheme => _selectedGameTheme;
+
+        // PUBLIC METHODS: -----------------------------------------------------------------------
+
+        public void SetGameTheme(GameTheme gameTheme) => _selectedGameTheme = gameTheme;
     }
 }

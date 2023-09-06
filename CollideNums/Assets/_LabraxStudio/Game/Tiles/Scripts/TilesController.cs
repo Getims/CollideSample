@@ -75,11 +75,25 @@ namespace LabraxStudio.Game.Tiles
 
             MergeAction mergeAction = _tilesMerger.CheckMerge(tile, direction);
 
-            if (mergeAction == null && moveAction.Obstacle != ObstacleType.Null)
+            bool canPlayObstacleAction = moveAction.Obstacle != ObstacleType.Null;
+            if (canPlayObstacleAction)
+            {
+                if (mergeAction != null && moveAction.Obstacle == ObstacleType.Stopper)
+                    canPlayObstacleAction = false;
+            }
+
+            if (canPlayObstacleAction)
             {
                 CollideWithObstacleAction collideWithObstacleAction =
                     new CollideWithObstacleAction(tile, direction, moveAction.ObstaclePosition, moveAction.Obstacle);
+
                 actions.Add(collideWithObstacleAction);
+
+                bool clearMerge = !(moveAction.Obstacle == ObstacleType.Push &&
+                                    collideWithObstacleAction.Direction == mergeAction?.MergeDirection);
+
+                if (clearMerge)
+                    mergeAction = null;
             }
 
             if (tile.MovedToGate)
@@ -119,7 +133,8 @@ namespace LabraxStudio.Game.Tiles
         public void UpdateTileValue(Tile tile)
         {
             int newValue = _tilesMatrix[tile.Cell.x, tile.Cell.y];
-            tile.SetValue(newValue, _tilesGenerator.GetSprite(newValue), _tilesGenerator.GetHighlightSprite(newValue));
+            tile.SetValue(newValue, _tilesGenerator.GetSprite(newValue), _tilesGenerator.GetHighlightSprite(newValue),
+                _tilesGenerator.GetShadowSprite());
         }
 
         public void DestroyTile(Tile tile)
@@ -152,8 +167,9 @@ namespace LabraxStudio.Game.Tiles
                 GameSoundMediator.Instance.PlayTileSplitByBoosterSFX();
 
             await Task.Delay(200);
-            tile.SetValue(newValue, _tilesGenerator.GetSprite(newValue), _tilesGenerator.GetHighlightSprite(newValue));
-            
+            tile.SetValue(newValue, _tilesGenerator.GetSprite(newValue), _tilesGenerator.GetHighlightSprite(newValue),
+                _tilesGenerator.GetShadowSprite());
+
             await Task.Delay(100);
 
             MergeAction mergeAction = _tilesMerger.CheckMerge(tile);

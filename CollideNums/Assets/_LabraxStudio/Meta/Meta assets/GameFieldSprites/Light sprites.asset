@@ -10,11 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 51babd71894d4fd084f49b05f2b15822, type: 3}
-  m_Name: Light theme
+  m_Name: Light sprites
   m_EditorClassIdentifier: 
-  FileName: Light theme
-  _backgroundColor: {r: 0.92549026, g: 0.9568628, b: 0.98823535, a: 1}
+  FileName: Light sprites
   _errorSprite: {fileID: 21300000, guid: 64c1b4579bc53b743befa4ac43c48621, type: 3}
+  _backgroundColor: {r: 0.92549026, g: 0.9568628, b: 0.98823535, a: 1}
+  _backgroundSprite: {fileID: 0}
+  _useBackgroundGlow: 0
   _playableSprites:
     _baseBackground: {fileID: 21300000, guid: 97b4fb1370a34dc4d9239e48626d32ce, type: 3}
     _topBackground: {fileID: 21300000, guid: 2f81cd4f2161fab4db463e164f0d49a5, type: 3}
@@ -116,6 +118,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: fb8baef7af7fe024180544e99631d48d, type: 3}
   - {fileID: 21300000, guid: a1fae4860a4239241905161a4c0e6df4, type: 3}
   - {fileID: 21300000, guid: 7dcfd7b766bebc746a638288feb7736b, type: 3}
+  _tilesHighlights: []
   _tasksSprites:
   - {fileID: 21300000, guid: 1423787801e40e24c8bd756a186a2636, type: 3}
   - {fileID: 21300000, guid: 8762a33890491354481622dc45ade361, type: 3}
@@ -156,7 +159,12 @@ MonoBehaviour:
     - {r: 0.96862745, g: 0.5568628, b: 0.42352942, a: 1}
     - {r: 0.8784314, g: 0.48235294, b: 0.88235295, a: 1}
     _holeMain: {fileID: 21300000, guid: 35c20093d9a253541a8d2d03aebad68b, type: 3}
-    _pushMain: {fileID: 21300000, guid: 569bf5cb13dfbc64f8e3897e4d143d41, type: 3}
     _pushMetal: {fileID: 21300000, guid: 060c663bc5511484b85b2135426298ed, type: 3}
-    _pushButton: {fileID: 21300000, guid: 4be9db5df8d211240aaa0f5cb304c7c8, type: 3}
+    _pushUpButton: {fileID: 0}
+    _pushUpMain: {fileID: 0}
+    _pushHorizontalMetal: {fileID: 0}
+    _pushHorizontalButton: {fileID: 0}
+    _pushHorizontalMain: {fileID: 0}
+    _pushDownButton: {fileID: 0}
+    _pushDownMain: {fileID: 0}
     _stopperMain: {fileID: 21300000, guid: 86278126bb72e0b46bf6a575d82bb390, type: 3}

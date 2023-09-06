@@ -22,6 +22,9 @@ namespace LabraxStudio.Game.Camera
         [SerializeField]
         private CameraMover _cameraMover;
 
+        [SerializeField]
+        private SpriteRenderer _backgroundGlow;
+
         // PROPERTIES: ----------------------------------------------------------------------------
 
         public UnityEngine.Camera Camera => _camera;
@@ -46,7 +49,7 @@ namespace LabraxStudio.Game.Camera
             CameraSettings cameraSettings = ServicesProvider.GameSettingsService.GetGameSettings().CameraSettings;
 
             SetPosition(levelMeta.Width, levelMeta.Height, levelMeta.CameraOffset);
-            
+
             if (levelMeta.ForAdsSettings.LevelForAds)
                 SetupCameraSize(levelMeta.ForAdsSettings.CameraSize);
             else
@@ -63,8 +66,10 @@ namespace LabraxStudio.Game.Camera
         private void SetBackground()
         {
             GameFieldSprites gameFieldSprites =
-                ServicesProvider.GameSettingsService.GetGameSettings().GameFieldSprites;
+                ServicesProvider.GameSettingsService.SelectedGameTheme.GameSprites;
+
             _camera.backgroundColor = gameFieldSprites.BackgroundColor;
+            _backgroundGlow.enabled = gameFieldSprites.UseBackgroundGlow;
         }
 
         private void SetPosition(int levelWidth, int levelHeight)
