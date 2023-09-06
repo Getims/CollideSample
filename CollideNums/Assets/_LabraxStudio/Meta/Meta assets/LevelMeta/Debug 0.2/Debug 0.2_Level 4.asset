@@ -23,7 +23,7 @@ MonoBehaviour:
     _enableFieldPalette: 1
     _enableTilePalette: 0
     _enableObstaclesPalette: 1
-    _fieldBrushMode: 2
+    _fieldBrushMode: 3
     _fieldBrushModeRight: 0
     _tilesBrushMode: 1
     _tilesBrushModeRight: 0
@@ -74,7 +74,7 @@ MonoBehaviour:
       Data: true
     - Name: _fieldBrushMode
       Entry: 3
-      Data: 2
+      Data: 3
     - Name: _fieldBrushModeRight
       Entry: 3
       Data: 0
@@ -167,7 +167,7 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 3
-      Data: 3
+      Data: 4
     - Name: 
       Entry: 3
       Data: 19
@@ -176,34 +176,34 @@ MonoBehaviour:
       Data: 2
     - Name: 
       Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
+      Data: 2
     - Name: 
       Entry: 3
       Data: 2
+    - Name: 
+      Entry: 3
+      Data: 2
+    - Name: 
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 3
+      Data: 35
     - Name: 
       Entry: 3
       Data: 35
@@ -212,40 +212,40 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 3
+      Data: 2
+    - Name: 
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 3
       Data: 37
     - Name: 
       Entry: 3
-      Data: 1
+      Data: 2
     - Name: 
       Entry: 3
-      Data: 1
+      Data: 2
     - Name: 
       Entry: 3
-      Data: 1
+      Data: 2
+    - Name: 
+      Entry: 3
+      Data: 2
+    - Name: 
+      Entry: 3
+      Data: 2
+    - Name: 
+      Entry: 3
+      Data: 2
     - Name: 
       Entry: 3
       Data: 37
-    - Name: 
-      Entry: 3
-      Data: 2
-    - Name: 
-      Entry: 3
-      Data: 2
-    - Name: 
-      Entry: 3
-      Data: 2
-    - Name: 
-      Entry: 3
-      Data: 2
-    - Name: 
-      Entry: 3
-      Data: 2
-    - Name: 
-      Entry: 3
-      Data: 2
-    - Name: 
-      Entry: 3
-      Data: 1
     - Name: 
       Entry: 3
       Data: 1
