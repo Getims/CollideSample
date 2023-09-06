@@ -11,7 +11,10 @@ namespace LabraxStudio.UI.MainMenu.Themes
         private Image _iconIMG;
 
         [SerializeField]
-        private Image _selectedIcon;
+        private Image _iconIMGActive;
+
+        [SerializeField]
+        private GameObject _activeContainer;
 
         // FIELDS: -------------------------------------------------------------------
 
@@ -33,12 +36,13 @@ namespace LabraxStudio.UI.MainMenu.Themes
 
         private void SetState(bool isSelected)
         {
-            _selectedIcon.enabled = isSelected;
+            _activeContainer.SetActive(isSelected);
         }
 
         private void SetIcon(Sprite themeIcon)
         {
             _iconIMG.sprite = themeIcon;
+            _iconIMGActive.sprite = themeIcon;
         }
 
         // EVENTS RECEIVERS: ----------------------------------------------------------------------
