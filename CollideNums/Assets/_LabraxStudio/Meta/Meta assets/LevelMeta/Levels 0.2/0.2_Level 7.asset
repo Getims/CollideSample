@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FileName: 0.2_Level 7
   _levelName: Level 7
-  _reward: 10
+  _reward: 20
   _cameraOffset: {x: 0, y: 0}
   _levelTemplate:
     width: 9

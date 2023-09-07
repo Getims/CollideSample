@@ -31,8 +31,6 @@ MonoBehaviour:
     _obstaclesBrushModeRight: -1
   _boostersSettings:
   - _boosterMeta: {fileID: 11400000, guid: 3b85c5d335e9ce344b42fbcac79b97cd, type: 2}
-  - _boosterMeta: {fileID: 11400000, guid: e7863cc6e7c2d6448af41b8478f28cef, type: 2}
-  - _boosterMeta: {fileID: 11400000, guid: 5b66877e936794c3e8e26d963c0b3074, type: 2}
   _taskSettings:
     _levelTasks:
     - _tileNumber: 6
