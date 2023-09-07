@@ -164,6 +164,12 @@ namespace LabraxStudio.Game
 
         private void OnWinScreenClaimClicked() => LoadNewLevel();
         private void OnLevelRestartBoosterUse() => ReloadLevel();
-        private void OnTileDestroyedByObstacle() => ReloadLevel();
+
+        private void OnTileDestroyedByObstacle()
+        {
+            int currentLevel = ServicesProvider.PlayerDataService.CurrentLevel + 1;
+            ServicesProvider.AnalyticsService.EventsCore.TrackLevelFail(currentLevel);
+            ReloadLevel();
+        }
     }
 }
