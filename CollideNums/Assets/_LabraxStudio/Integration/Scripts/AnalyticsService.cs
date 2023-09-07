@@ -55,6 +55,9 @@ namespace LabraxStudio.AnalyticsIntegration
             IsIAPEnabled = _labraxAnalyticsSettings.IsIAPEnabled;
 
             _analyticsData = ServicesProvider.GameDataService.GetGameData().AnalyticsData;
+            if (_isInitialized)
+                return;
+
             _startSessionTime = UnixTime.Now;
             _lastSessionTime = _analyticsData.SessionTime;
             RegisterEvents();

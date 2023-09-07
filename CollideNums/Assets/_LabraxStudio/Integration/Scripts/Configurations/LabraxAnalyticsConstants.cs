@@ -24,6 +24,7 @@ namespace LabraxStudio.AnalyticsIntegration
         internal const string SESSION_DURATION_PROPERTY = "sessionDuration";
         internal const string LEVEL_PLAY_TIME_PROPERTY = "playTime";
         internal const string BOOSTER_NAME_PROPERTY = "boosterName";
+        internal const string GAME_THEME_PROPERTY = "gameTheme";
 
         internal const string REWARD_TYPE_PROPERTY = "rewardType";
         internal const string INTERSTITIAL_PLACEMENT_PROPERTY = "placement";

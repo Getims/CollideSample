@@ -70,18 +70,19 @@ namespace LabraxStudio.AnalyticsIntegration.AnalyticsEvents
             Mixpanel.Track(LabraxAnalyticsConstants.LEVEL_RESTART_EVENT_NAME, props);
         }
 
-        public void SendLevelFailEvent(int level)
+        public void SendLevelFailEvent(int level, string themeName)
         {
             if (!_isSetuped)
                 return;
 
             var props = new Value();
             props[LabraxAnalyticsConstants.LEVEL_NUMBER_PROPERTY] = level;
+            props[LabraxAnalyticsConstants.GAME_THEME_PROPERTY] = themeName;
 
             Mixpanel.Track(LabraxAnalyticsConstants.LEVEL_FAIL_EVENT_NAME, props);
         }
         
-        public void SendLevelCompleteEvent(int level, float time)
+        public void SendLevelCompleteEvent(int level, float time, string themeName)
         {
             if (!_isSetuped)
                 return;
@@ -89,6 +90,7 @@ namespace LabraxStudio.AnalyticsIntegration.AnalyticsEvents
             var props = new Value();
             props[LabraxAnalyticsConstants.LEVEL_NUMBER_PROPERTY] = level;
             props[LabraxAnalyticsConstants.LEVEL_PLAY_TIME_PROPERTY] = time;
+            props[LabraxAnalyticsConstants.GAME_THEME_PROPERTY] = themeName;
 
             Mixpanel.Track(LabraxAnalyticsConstants.LEVEL_COMPLETE_EVENT_NAME, props);
         }
