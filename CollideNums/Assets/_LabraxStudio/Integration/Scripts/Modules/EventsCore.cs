@@ -92,10 +92,14 @@ namespace LabraxStudio.AnalyticsIntegration.AnalyticsEvents
             if (!_isInitialized)
                 return;
 
-            _mixpanelManager.SendLevelFailEvent(level);
+            string themeName = null;
+            if (ServicesProvider.GameSettingsService.SelectedGameTheme != null)
+                themeName=ServicesProvider.GameSettingsService.SelectedGameTheme.FileName;
+
+            _mixpanelManager.SendLevelFailEvent(level,  themeName);
             SuperSonicManager.SendLevelFailEvent(level);
 
-            AnalyticsService.DebugEvent(string.Format("Level {0} fail", level));
+            AnalyticsService.DebugEvent(string.Format("Level {0} fail, {1}", level, themeName));
             AnalyticsService.SaveSessionTime();
         }
 
@@ -104,11 +108,15 @@ namespace LabraxStudio.AnalyticsIntegration.AnalyticsEvents
             if (!_isInitialized)
                 return;
             
-            _mixpanelManager.SendLevelCompleteEvent(level, time);
+            string themeName = null;
+            if (ServicesProvider.GameSettingsService.SelectedGameTheme != null)
+                themeName=ServicesProvider.GameSettingsService.SelectedGameTheme.FileName;
+            
+            _mixpanelManager.SendLevelCompleteEvent(level, time,  themeName);
             SuperSonicManager.SendLevelCompleteEvent(level);
             
             AnalyticsService.DebugEvent(string.Format(
-                "Level {0} Comlete. Level time {1}", level, time.ToString()));
+                "Level {0} Comlete. Level time {1}. {2}", level, time.ToString(), themeName));
             AnalyticsService.SaveSessionTime();
         }
 
