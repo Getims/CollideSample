@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d5eacf6b1578904bb8af5ea903ab7b6, type: 3}
+  m_Name: Release 0.20
+  m_EditorClassIdentifier: 
+  FileName: Release 0.20
+  _launchSettings:
+    _enableDebug: 0
+    _enableTutorial: 1
+  _balanceSettings:
+    _startMoney: 100
+  _gameThemes:
+  - {fileID: 11400000, guid: 407b415447392b74da0bf1fdbb2b0feb, type: 2}
+  - {fileID: 11400000, guid: 6d5055890d9440744b5de3cc092b361b, type: 2}
+  _gameFieldSettings: {fileID: 11400000, guid: cd9f634cfe3db7d4fb9f12cee5a603fa, type: 2}
+  _levelsList: {fileID: 11400000, guid: 02ce6e1c1ae5beb42bb820cf9dd40b53, type: 2}
+  _selectableLevelsLists:
+  - {fileID: 11400000, guid: 53e4c40bdceae5d46b0da80f9b92baa9, type: 2}
+  - {fileID: 11400000, guid: dff646fc1bb29af4ebfdb3e5de049847, type: 2}
+  - {fileID: 11400000, guid: 5132c8c59affe4c4db420315430bd3a4, type: 2}
+  - {fileID: 11400000, guid: 02ce6e1c1ae5beb42bb820cf9dd40b53, type: 2}
+  - {fileID: 11400000, guid: c5ab95d488a6c4da1a3dc0e96cef8e6e, type: 2}
+  _swipeSettings:
+    _swipeMode: 1
+    _useShortSwipes: 0
+    _baseSwipeForce: 0.1
+    _accelSwipeForce: 0.2
+    _tileSpeed: 7
+    _tileAcceleration: 10
+    _dragInsensitivity: 5
+    _dragMinSpeed: 1
+  _cameraSettings:
+    _cameraSize: 8.15
+    _moveCamera: 1
+    _moveEase: 9
+    _moveTime: 0.3
+  _localizationSettings:
+  - {fileID: 11400000, guid: f3ca042bc304f164d9edf7f42564e776, type: 2}

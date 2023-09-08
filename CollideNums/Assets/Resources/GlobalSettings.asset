@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FileName: GlobalSettings
   _usesUnityLogs: 1
-  _gameSettings: {fileID: 11400000, guid: b1ec2744e342b6e43b0e3b3e2d4c5a4a, type: 2}
+  _gameSettings: {fileID: 11400000, guid: e2399644590304d56a7f6c030c83a540, type: 2}
   _soundSettings: {fileID: 11400000, guid: 8854b9002b2db7f40974ced0ba854d93, type: 2}
   _analyticsSettings: {fileID: 11400000, guid: ea2b9cb537ee6f34e81c27fe3f54c017, type: 2}
