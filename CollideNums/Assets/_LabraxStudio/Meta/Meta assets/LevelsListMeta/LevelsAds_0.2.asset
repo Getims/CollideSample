@@ -10,12 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fdcb5f4c920c4071a0f401bb129addc4, type: 3}
-  m_Name: LevelsAds
+  m_Name: LevelsAds_0.2
   m_EditorClassIdentifier: 
-  FileName: LevelsAds
+  FileName: LevelsAds_0.2
   _tutorialSettingsMeta: {fileID: 0}
   _levelsMetaList:
-  - {fileID: 11400000, guid: 8b854c5d41cf6499d8aa1244af3bc625, type: 2}
-  - {fileID: 11400000, guid: 0edee3ab5839a4c278be518524472251, type: 2}
-  - {fileID: 11400000, guid: 4a28a1c31c9594eedb5f26329a187fc6, type: 2}
-  - {fileID: 11400000, guid: f1336595bb7164a1fbccdf73b35928fe, type: 2}
+  - {fileID: 11400000, guid: 1e579eefd4146489f8ee201fe0aa992a, type: 2}
+  - {fileID: 11400000, guid: 82ee4e67385fb408cae17736051f28b4, type: 2}
+  - {fileID: 11400000, guid: 7982d3cfc737a4bd2a58dadc6ecf0b4d, type: 2}
