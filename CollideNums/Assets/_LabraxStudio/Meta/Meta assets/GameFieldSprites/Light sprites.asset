@@ -80,8 +80,20 @@ MonoBehaviour:
   _gatesSprites:
     _gateVerticalBackground: {fileID: 21300000, guid: dd93e56f55971d04e95f4701d1b3628b, type: 3}
     _gateHorizontalBackground: {fileID: 21300000, guid: 2b021ac2aef7c544b980d8773ccf1d16, type: 3}
+    _useColor: 1
     _unlockedColor: {r: 0.3254902, g: 0.8627451, b: 0.37254903, a: 1}
     _lockedColor: {r: 0.9529412, g: 0.47058824, b: 0.45490196, a: 1}
+    _horizontalOpenLine: {fileID: 0}
+    _verticalOpenLine: {fileID: 0}
+    _gateHorizontal: {fileID: 21300000, guid: b1ec999b4e26f0c408aa4213c567e571, type: 3}
+    _gateHorizontalBottom1: {fileID: 21300000, guid: 54c3baf0ba197c74caea9f3e63a80dd7, type: 3}
+    _gateHorizontalBottom2: {fileID: 21300000, guid: 3920f1ec4b92769488bd622c7f4be86d, type: 3}
+    _gateHorizontalBottom3: {fileID: 21300000, guid: a53fa41886410894da0c1a07915094bf, type: 3}
+    _gateHorizontalBottom4: {fileID: 21300000, guid: 8e764d83d7e4bef41b7ba8b8d77d526c, type: 3}
+    _gateVertical: {fileID: 21300000, guid: 53bc4e1ba9fc57d45861193fbf113c51, type: 3}
+    _gateVerticalTop: {fileID: 21300000, guid: 3c09a394592f11a4588cbcbdec8a5afa, type: 3}
+    _gateVerticalBottom: {fileID: 21300000, guid: 642ef5203d7408d429c39086832ed4fb, type: 3}
+    _gateVerticalCut: {fileID: 21300000, guid: aa6f98a91fdb633498e0951051802e96, type: 3}
     _numberBaseColor: {r: 0.5254902, g: 0.6431373, b: 0.7176471, a: 1}
     _numberGlowColor: {r: 0.7738519, g: 0.84299916, b: 0.8867924, a: 1}
     _gatesNumbers:
@@ -118,7 +130,24 @@ MonoBehaviour:
   - {fileID: 21300000, guid: fb8baef7af7fe024180544e99631d48d, type: 3}
   - {fileID: 21300000, guid: a1fae4860a4239241905161a4c0e6df4, type: 3}
   - {fileID: 21300000, guid: 7dcfd7b766bebc746a638288feb7736b, type: 3}
-  _tilesHighlights: []
+  _tilesHighlights:
+  - {fileID: 21300000, guid: 83b602e71f901524c984944491060c5d, type: 3}
+  - {fileID: 21300000, guid: 1eff755852787644fa0563b8ef40cdc0, type: 3}
+  - {fileID: 21300000, guid: d7c20e629197aff43be24409cac569d1, type: 3}
+  - {fileID: 21300000, guid: a7dd76fed6c58ce438c33b8cbf647256, type: 3}
+  - {fileID: 21300000, guid: f2dd089a7f0320642a3949ab7247fea2, type: 3}
+  - {fileID: 21300000, guid: 80fa80e7f659ca04685b79a38e49ec08, type: 3}
+  - {fileID: 21300000, guid: 7af58a3696b81e2418c8e2c355c27943, type: 3}
+  - {fileID: 21300000, guid: e79db4d68a7a54849a8745b96d4e241f, type: 3}
+  - {fileID: 21300000, guid: 39a46b59a144b294a9582b0ff3bdbc52, type: 3}
+  - {fileID: 21300000, guid: ad31d25bfb7ca7e4bbb19f139f7249e2, type: 3}
+  - {fileID: 21300000, guid: 47e9ee0ad099ddd42b8a9f93f7c5ecfe, type: 3}
+  - {fileID: 21300000, guid: 5907c105c5b8ae844870d3586a5e9207, type: 3}
+  - {fileID: 21300000, guid: 5c0e6fcfc04aadc4bbd80d9d70ddff0a, type: 3}
+  - {fileID: 21300000, guid: 86a41ad501cd18f42a3a3381fe942e7a, type: 3}
+  - {fileID: 21300000, guid: 9400927c8bca94a4eae16e2021b0e7c3, type: 3}
+  - {fileID: 21300000, guid: cde09280155dd94408a4cb634fe9f98b, type: 3}
+  _tileShadow: {fileID: 21300000, guid: 0659092f1f575804b92948157293ed69, type: 3}
   _tasksSprites:
   - {fileID: 21300000, guid: 1423787801e40e24c8bd756a186a2636, type: 3}
   - {fileID: 21300000, guid: 8762a33890491354481622dc45ade361, type: 3}
@@ -151,7 +180,7 @@ MonoBehaviour:
     - {r: 0.41960785, g: 0.5686275, b: 0.8901961, a: 1}
     - {r: 1, g: 0.6627451, b: 0.34509805, a: 1}
     - {r: 1, g: 0.58431375, b: 0.78431374, a: 1}
-    - {r: 0.2, g: 0.7882353, b: 0.5882353, a: 1}
+    - {r: 0.227451, g: 0.62352943, b: 0.5372549, a: 1}
     - {r: 0.9019608, g: 0.92156863, b: 0.38039216, a: 1}
     - {r: 0.50980395, g: 0.45490196, b: 0.8862745, a: 1}
     - {r: 0.93333334, g: 0.5137255, b: 0.60784316, a: 1}
@@ -160,11 +189,11 @@ MonoBehaviour:
     - {r: 0.8784314, g: 0.48235294, b: 0.88235295, a: 1}
     _holeMain: {fileID: 21300000, guid: 35c20093d9a253541a8d2d03aebad68b, type: 3}
     _pushMetal: {fileID: 21300000, guid: 060c663bc5511484b85b2135426298ed, type: 3}
-    _pushUpButton: {fileID: 0}
-    _pushUpMain: {fileID: 0}
-    _pushHorizontalMetal: {fileID: 0}
-    _pushHorizontalButton: {fileID: 0}
-    _pushHorizontalMain: {fileID: 0}
-    _pushDownButton: {fileID: 0}
-    _pushDownMain: {fileID: 0}
-    _stopperMain: {fileID: 21300000, guid: 86278126bb72e0b46bf6a575d82bb390, type: 3}
+    _pushUpButton: {fileID: 21300000, guid: 4be9db5df8d211240aaa0f5cb304c7c8, type: 3}
+    _pushUpMain: {fileID: 21300000, guid: 569bf5cb13dfbc64f8e3897e4d143d41, type: 3}
+    _pushHorizontalMetal: {fileID: 21300000, guid: 03d8ca0579e0707408dc7b1b705efd39, type: 3}
+    _pushHorizontalButton: {fileID: 21300000, guid: 90ad817a79b173b4ca34319fad5907a2, type: 3}
+    _pushHorizontalMain: {fileID: 21300000, guid: 436e131dc7bd09746be96bf802f3a4e6, type: 3}
+    _pushDownButton: {fileID: 21300000, guid: f1e6a72525b5473499bb8ed69b0f102d, type: 3}
+    _pushDownMain: {fileID: 21300000, guid: dd01d0ea1ea4c994c91dc0616690231b, type: 3}
+    _stopperMain: {fileID: 21300000, guid: 6f1a0372bd798b041984538fbd73d2de, type: 3}
